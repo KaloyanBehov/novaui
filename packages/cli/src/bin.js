@@ -64,13 +64,13 @@ const GLOBAL_CSS_CONTENT = `@tailwind base;
 // ─── Tailwind Config ────────────────────────────────────────────────────────
 
 const TAILWIND_CONFIG_CONTENT = `/** @type {import('tailwindcss').Config} */
-const novaui = require("@novaui/components/tailwind");
+const novaui = require("novaui-components/tailwind");
 
 module.exports = {
   content: [
     "./App.{js,jsx,ts,tsx}",
     "./src/**/*.{js,jsx,ts,tsx}",
-    "./node_modules/@novaui/components/src/**/*.{js,jsx,ts,tsx}",
+    "./node_modules/novaui-components/src/**/*.{js,jsx,ts,tsx}",
   ],
   presets: [require("nativewind/preset"), novaui],
   theme: {
@@ -149,7 +149,7 @@ async function init() {
 
   const installCmd = detectPackageManager()
   const deps = [
-    "@novaui/components",
+    "novaui-components",
     "nativewind",
     "tailwindcss",
     "clsx",
@@ -266,9 +266,9 @@ function showHelp() {
   console.log("    novaui add <component>   Add a component to your project")
   console.log("")
   console.log("  Examples:")
-  console.log("    npx @novaui/cli init")
-  console.log("    npx @novaui/cli add button")
-  console.log("    npx @novaui/cli add card")
+  console.log("    npx novaui-cli init")
+  console.log("    npx novaui-cli add button")
+  console.log("    npx novaui-cli add card")
   console.log("")
 }
 

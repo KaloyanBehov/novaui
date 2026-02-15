@@ -3,14 +3,14 @@
  *
  * Usage in your tailwind.config.js:
  *
- *   const novaui = require("@novaui/components/tailwind")
+ *   const novaui = require("novaui-components/tailwind")
  *
  *   module.exports = {
  *     presets: [require("nativewind/preset"), novaui],
  *     content: [
  *       "./App.{js,jsx,ts,tsx}",
  *       "./src/**\/*.{js,jsx,ts,tsx}",
- *       "./node_modules/@novaui/components/src/**\/*.{js,jsx,ts,tsx}",
+ *       "./node_modules/novaui-components/src/**\/*.{js,jsx,ts,tsx}",
  *     ],
  *     // ...
  *   }
