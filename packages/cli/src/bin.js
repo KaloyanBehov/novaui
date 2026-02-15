@@ -2,10 +2,44 @@
 
 import fs from "node:fs"
 import path from "node:path"
+import readline from "node:readline"
 import { execSync } from "node:child_process"
 
 const BASE_URL =
   "https://raw.githubusercontent.com/KaloyanBehov/native-ui/main"
+
+const CONFIG_FILENAME = "components.json"
+
+const DEFAULT_CONFIG = {
+  globalCss: "src/global.css",
+  componentsUi: "src/components/ui",
+  lib: "src/lib",
+}
+
+// ─── ANSI styles (no dependency, TTY-safe) ──────────────────────────────────
+
+const isTty = process.stdout.isTTY === true
+const c = {
+  reset: "\x1b[0m",
+  bold: "\x1b[1m",
+  dim: "\x1b[2m",
+  cyan: "\x1b[36m",
+  green: "\x1b[32m",
+  yellow: "\x1b[33m",
+  blue: "\x1b[34m",
+  magenta: "\x1b[35m",
+}
+function style(use, text) {
+  return isTty && use ? use + text + c.reset : text
+}
+
+const ASCII_BANNER = `
+${style(c.cyan, "   _   __     __    ____ ___   __")}
+${style(c.cyan, "  / | / /__  / /   /  _//   | / /")}
+${style(c.cyan, " /  |/ / _ \\/ /    / / / /| |/ / ")}
+${style(c.cyan, "/_/|_/ \\___/_/   /___/_/ |_/_/  ")}
+${style(c.dim, "   React Native + NativeWind UI")}
+`
 
 // ─── CSS Variables (global.css) ─────────────────────────────────────────────
 
@@ -63,11 +97,16 @@ const GLOBAL_CSS_CONTENT = `@tailwind base;
 
 // ─── Tailwind Config ────────────────────────────────────────────────────────
 
-const TAILWIND_CONFIG_CONTENT = `/** @type {import('tailwindcss').Config} */
+function getTailwindConfigContent(config) {
+  const contentPaths = [
+    '"./App.{js,jsx,ts,tsx}"',
+    '"./src/**/*.{js,jsx,ts,tsx}"',
+    `"./${config.componentsUi}/**/*.{js,jsx,ts,tsx}"`,
+  ]
+  return `/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./App.{js,jsx,ts,tsx}",
-    "./src/**/*.{js,jsx,ts,tsx}",
+    ${contentPaths.join(",\n    ")},
   ],
   presets: [require("nativewind/preset")],
   theme: {
@@ -146,46 +185,126 @@ function ensureDir(dir) {
 
 function writeIfNotExists(filePath, content, label) {
   if (fs.existsSync(filePath)) {
-    console.log(`ℹ  ${label} already exists, skipping.`)
+    console.log(style(c.dim, `   ℹ  ${label} already exists, skipping.`))
     return false
   }
   fs.writeFileSync(filePath, content)
-  console.log(`✓  Created ${label}`)
+  console.log(style(c.green, `   ✓  Created ${label}`))
   return true
+}
+
+/** Returns which of the requested deps are not listed in package.json (dependencies or devDependencies). */
+function getMissingDeps(cwd, deps) {
+  const pkgPath = path.join(cwd, "package.json")
+  if (!fs.existsSync(pkgPath)) {
+    return [...deps]
+  }
+  const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf8"))
+  const installed = new Set([
+    ...Object.keys(pkg.dependencies || {}),
+    ...Object.keys(pkg.devDependencies || {}),
+  ])
+  return deps.filter((d) => !installed.has(d))
+}
+
+/** Ask user a question; returns trimmed answer or default. */
+function ask(question, defaultAnswer = "") {
+  const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
+  const defaultPart = defaultAnswer ? style(c.dim, ` (${defaultAnswer})`) : ""
+  const prompt = style(c.cyan, "   ? ") + question + defaultPart + style(c.dim, " ")
+  return new Promise((resolve) => {
+    rl.question(prompt, (answer) => {
+      rl.close()
+      const trimmed = answer.trim()
+      resolve(trimmed !== "" ? trimmed : defaultAnswer)
+    })
+  })
+}
+
+/** Load components.json from cwd; returns null if missing or invalid. */
+function loadConfig(cwd) {
+  const configPath = path.join(cwd, CONFIG_FILENAME)
+  if (!fs.existsSync(configPath)) return null
+  try {
+    const raw = JSON.parse(fs.readFileSync(configPath, "utf8"))
+    return { ...DEFAULT_CONFIG, ...raw }
+  } catch {
+    return null
+  }
+}
+
+/** Write components.json to cwd. */
+function writeConfig(cwd, config) {
+  const configPath = path.join(cwd, CONFIG_FILENAME)
+  fs.writeFileSync(configPath, JSON.stringify(config, null, 2))
 }
 
 // ─── Commands ───────────────────────────────────────────────────────────────
 
 async function init() {
-  console.log("")
-  console.log("  ◆  NovaUI – Initializing project...")
-  console.log("")
-
   const cwd = process.cwd()
+  const existingConfig = loadConfig(cwd)
 
-  // 1. Create src/lib/utils.ts
-  const utilsDir = path.join(cwd, "src", "lib")
+  // ─── Banner ───────────────────────────────────────────────────────────────
+  console.log(ASCII_BANNER)
+  console.log(style(c.bold, "   Welcome to NovaUI"))
+  console.log(style(c.dim, "   Let's set up your project in a few steps."))
+  console.log("")
+
+  let config
+  if (existingConfig) {
+    console.log(style(c.blue, "   ⚙  Config"))
+    console.log(style(c.dim, "   components.json found in this directory."))
+    console.log("")
+    const reconfig = await ask("Re-configure paths? (y/N)", "n")
+    if (reconfig.toLowerCase() === "y" || reconfig.toLowerCase() === "yes") {
+      config = {
+        globalCss: (await ask("Where should global.css be placed?", DEFAULT_CONFIG.globalCss)).replace(/\\/g, "/"),
+        componentsUi: (await ask("Where should UI components be placed?", DEFAULT_CONFIG.componentsUi)).replace(/\\/g, "/"),
+        lib: (await ask("Where should lib (e.g. utils) be placed?", DEFAULT_CONFIG.lib)).replace(/\\/g, "/"),
+      }
+      writeConfig(cwd, config)
+      console.log("")
+      console.log(style(c.green, "   ✓  Updated components.json"))
+    } else {
+      config = existingConfig
+    }
+  } else {
+    console.log(style(c.blue, "   ⚙  Configure paths"))
+    console.log(style(c.dim, "   Where should NovaUI put its files? Press Enter for defaults."))
+    console.log("")
+    config = {
+      globalCss: (await ask("Path for global.css?", DEFAULT_CONFIG.globalCss)).replace(/\\/g, "/"),
+      componentsUi: (await ask("Path for UI components?", DEFAULT_CONFIG.componentsUi)).replace(/\\/g, "/"),
+      lib: (await ask("Path for lib (utils)?", DEFAULT_CONFIG.lib)).replace(/\\/g, "/"),
+    }
+    writeConfig(cwd, config)
+    console.log("")
+    console.log(style(c.green, "   ✓  Created components.json"))
+  }
+
+  // ─── Setup files ──────────────────────────────────────────────────────────
+  console.log("")
+  console.log(style(c.blue, "   📁 Setting up project"))
+  console.log("")
+
+  const utilsDir = path.join(cwd, config.lib)
   ensureDir(utilsDir)
-  writeIfNotExists(path.join(utilsDir, "utils.ts"), UTILS_CONTENT, "src/lib/utils.ts")
+  const utilsPath = path.join(utilsDir, "utils.ts")
+  writeIfNotExists(utilsPath, UTILS_CONTENT, `${config.lib}/utils.ts`)
 
-  // 2. Create src/global.css
-  const srcDir = path.join(cwd, "src")
-  ensureDir(srcDir)
-  writeIfNotExists(path.join(srcDir, "global.css"), GLOBAL_CSS_CONTENT, "src/global.css")
+  const globalCssDir = path.dirname(path.join(cwd, config.globalCss))
+  ensureDir(globalCssDir)
+  writeIfNotExists(path.join(cwd, config.globalCss), GLOBAL_CSS_CONTENT, config.globalCss)
 
-  // 3. Create tailwind.config.js
+  const tailwindContent = getTailwindConfigContent(config)
   writeIfNotExists(
     path.join(cwd, "tailwind.config.js"),
-    TAILWIND_CONFIG_CONTENT,
+    tailwindContent,
     "tailwind.config.js"
   )
 
-  // 4. Install core dependencies
-  console.log("")
-  console.log("  ◆  Installing dependencies...")
-  console.log("")
-
-  const installCmd = detectPackageManager()
+  // ─── Dependencies ─────────────────────────────────────────────────────────
   const deps = [
     "nativewind",
     "tailwindcss",
@@ -193,22 +312,41 @@ async function init() {
     "tailwind-merge",
     "class-variance-authority",
   ]
+  const missingDeps = getMissingDeps(cwd, deps)
 
-  try {
-    execSync(`${installCmd} ${deps.join(" ")}`, { stdio: "inherit" })
-  } catch {
-    console.error("")
-    console.error("  ✗  Failed to install dependencies. Please install manually:")
-    console.error(`     ${installCmd} ${deps.join(" ")}`)
+  console.log("")
+  console.log(style(c.blue, "   📦 Dependencies"))
+  console.log("")
+
+  if (missingDeps.length === 0) {
+    console.log(style(c.dim, "   ✓  All required packages already in package.json, skipping install."))
+  } else {
+    console.log(style(c.dim, `   Installing: ${missingDeps.join(", ")}`))
+    console.log("")
+    const installCmd = detectPackageManager()
+    try {
+      execSync(`${installCmd} ${missingDeps.join(" ")}`, { stdio: "inherit" })
+    } catch {
+      console.error("")
+      console.error(style(c.yellow, "   ✗  Install failed. Run manually:"))
+      console.error(style(c.dim, `     ${installCmd} ${missingDeps.join(" ")}`))
+    }
   }
 
+  // ─── Success ───────────────────────────────────────────────────────────────
   console.log("")
-  console.log("  ✓  Project initialized!")
+  console.log(style(c.green, "   ┌─────────────────────────────────────────┐"))
+  console.log(style(c.green, "   │  ✓  NovaUI is ready!                     │"))
+  console.log(style(c.green, "   └─────────────────────────────────────────┘"))
   console.log("")
-  console.log("  Next steps:")
-  console.log('    1. Import "src/global.css" in your root layout/entry file')
-  console.log("    2. Start adding components:")
-  console.log("       npx novaui add button")
+  console.log(style(c.bold, "   Next steps:"))
+  console.log("")
+  console.log(style(c.dim, "   1. Import global CSS in your root entry (e.g. App.tsx):"))
+  console.log(style(c.cyan, `      import "${config.globalCss}"`))
+  console.log("")
+  console.log(style(c.dim, "   2. Add components:"))
+  console.log(style(c.cyan, "      npx novaui add button"))
+  console.log(style(c.cyan, "      npx novaui add card"))
   console.log("")
 }
 
@@ -242,22 +380,29 @@ async function add(componentName) {
     process.exit(1)
   }
 
-  const config = registry[componentName]
-  const targetBaseDir = path.join(cwd, "src", "components", "ui")
+  const componentConfig = registry[componentName]
+  const projectConfig = loadConfig(cwd) || DEFAULT_CONFIG
+  const targetBaseDir = path.join(cwd, projectConfig.componentsUi)
   ensureDir(targetBaseDir)
 
-  // 2. Ensure utils.ts exists
-  const utilsDir = path.join(cwd, "src", "lib")
+  // 2. Ensure utils.ts exists (in configured lib dir)
+  const utilsDir = path.join(cwd, projectConfig.lib)
   const utilsPath = path.join(utilsDir, "utils.ts")
 
   if (!fs.existsSync(utilsPath)) {
     ensureDir(utilsDir)
     fs.writeFileSync(utilsPath, UTILS_CONTENT)
-    console.log("  ✓  Created src/lib/utils.ts")
+    console.log(`  ✓  Created ${projectConfig.lib}/utils.ts`)
+  }
+
+  if (!loadConfig(cwd)) {
+    console.log("")
+    console.log("  ℹ  No components.json found. Using default paths. Run 'npx novaui init' to customize.")
+    console.log("")
   }
 
   // 3. Fetch and write component files
-  for (const file of config.files) {
+  for (const file of componentConfig.files) {
     const fileUrl = `${BASE_URL}/${file}`
     const fileName = path.basename(file)
     const destPath = path.join(targetBaseDir, fileName)
@@ -275,17 +420,23 @@ async function add(componentName) {
     console.log(`  ✓  Added ${fileName}`)
   }
 
-  // 4. Install component dependencies
-  if (config.dependencies && config.dependencies.length > 0) {
-    console.log("")
-    console.log(`  Installing dependencies: ${config.dependencies.join(", ")}...`)
-    try {
-      const installCmd = detectPackageManager()
-      execSync(`${installCmd} ${config.dependencies.join(" ")}`, {
-        stdio: "inherit",
-      })
-    } catch {
-      console.error("  ✗  Failed to install dependencies automatically.")
+  // 4. Install component dependencies (only those not already in package.json)
+  if (componentConfig.dependencies && componentConfig.dependencies.length > 0) {
+    const missingDeps = getMissingDeps(cwd, componentConfig.dependencies)
+    if (missingDeps.length === 0) {
+      console.log("")
+      console.log("  ✓  Component dependencies already in package.json, skipping install.")
+    } else {
+      console.log("")
+      console.log(`  Installing dependencies: ${missingDeps.join(", ")}...`)
+      try {
+        const installCmd = detectPackageManager()
+        execSync(`${installCmd} ${missingDeps.join(" ")}`, {
+          stdio: "inherit",
+        })
+      } catch {
+        console.error("  ✗  Failed to install dependencies automatically.")
+      }
     }
   }
 
@@ -295,17 +446,15 @@ async function add(componentName) {
 }
 
 function showHelp() {
+  console.log(ASCII_BANNER)
+  console.log(style(c.bold, "   Usage"))
+  console.log(style(c.dim, "   novaui init              Set up NovaUI (config, Tailwind, global.css, utils)"))
+  console.log(style(c.dim, "   novaui add <component>  Add a component (e.g. button, card)"))
   console.log("")
-  console.log("  NovaUI CLI")
-  console.log("")
-  console.log("  Usage:")
-  console.log("    novaui init              Initialize project with Tailwind config, global.css, and utils")
-  console.log("    novaui add <component>   Add a component to your project")
-  console.log("")
-  console.log("  Examples:")
-  console.log("    npx novaui-cli init")
-  console.log("    npx novaui-cli add button")
-  console.log("    npx novaui-cli add card")
+  console.log(style(c.bold, "   Examples"))
+  console.log(style(c.cyan, "   npx novaui init"))
+  console.log(style(c.cyan, "   npx novaui add button"))
+  console.log(style(c.cyan, "   npx novaui add card"))
   console.log("")
 }
 
