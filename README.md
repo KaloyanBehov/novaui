@@ -14,15 +14,24 @@ A comprehensive React Native UI component library built with [NativeWind](https:
 npx novaui-cli init
 ```
 
+The interactive setup will ask you where to place files (or press Enter for defaults):
+
+```
+   ? Path for global.css? (src/global.css)
+   ? Path for UI components? (src/components/ui)
+   ? Path for lib (utils)? (src/lib)
+```
+
 This will:
+- Create a `components.json` config file with your chosen paths
 - Create `tailwind.config.js` with the NovaUI theme (colors, border radius, etc.)
-- Create `src/global.css` with light/dark theme CSS variables
-- Create `src/lib/utils.ts` with the `cn()` helper
-- Install required dependencies (`nativewind`, `tailwindcss`, `clsx`, `tailwind-merge`, `class-variance-authority`)
+- Create `global.css` with light/dark theme CSS variables
+- Create `lib/utils.ts` with the `cn()` helper
+- Install required dependencies (`nativewind`, `tailwindcss`, `clsx`, `tailwind-merge`, `class-variance-authority`) -- skips any already installed
 
 ### 2. Import global.css
 
-Add this to your root layout or entry file:
+Add this to your root layout or entry file (e.g. `App.tsx`):
 
 ```tsx
 import "./src/global.css"
@@ -36,7 +45,7 @@ npx novaui-cli add card
 npx novaui-cli add dialog
 ```
 
-Components are copied into `src/components/ui/` in your project.
+Components are copied into your configured UI components directory (default: `src/components/ui/`).
 
 ### 4. Use them
 
@@ -66,9 +75,26 @@ export default function App() {
 
 | Command | Description |
 |---|---|
-| `npx novaui-cli init` | Initialize project (tailwind config, global.css, utils) |
-| `npx novaui-cli add <component>` | Add a component to `src/components/ui/` |
-| `npx novaui-cli --help` | Show help |
+| `npx novaui-cli init` | Interactive setup -- config, Tailwind, global.css, utils |
+| `npx novaui-cli add <component>` | Add a component to your project |
+| `npx novaui-cli --version` | Show CLI version |
+| `npx novaui-cli --help` | Show help with ASCII banner |
+
+### `components.json`
+
+Running `init` creates a `components.json` in your project root that stores your configured paths:
+
+```json
+{
+  "globalCss": "src/global.css",
+  "componentsUi": "src/components/ui",
+  "lib": "src/lib"
+}
+```
+
+The `add` command reads this config to know where to place components. If `components.json` is missing, default paths are used.
+
+Running `init` again will detect the existing config and ask if you want to re-configure.
 
 ---
 
@@ -277,7 +303,19 @@ For example: `npx novaui-cli add button`, `npx novaui-cli add card`, `npx novaui
 
 ### Theming
 
-NovaUI uses CSS custom properties for theming. Edit the variables in `src/global.css` to customize colors, border radius, and more. Both light and dark themes are supported out of the box.
+NovaUI uses CSS custom properties for theming. Edit the variables in your `global.css` to customize colors, border radius, and more. Both light and dark themes are supported out of the box.
+
+### Custom paths
+
+All file paths are configurable. Run `npx novaui-cli init` again to re-configure, or edit `components.json` directly:
+
+```json
+{
+  "globalCss": "app/styles/global.css",
+  "componentsUi": "app/components/ui",
+  "lib": "app/lib"
+}
+```
 
 ### The `cn()` utility
 
