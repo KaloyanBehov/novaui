@@ -2,31 +2,25 @@
 
 A comprehensive React Native UI component library built with [NativeWind](https://www.nativewind.dev/) (Tailwind CSS for React Native). Inspired by shadcn/ui, adapted for mobile.
 
-50+ beautifully crafted, accessible components ready to use in your Expo and React Native projects.
+50+ beautifully crafted, accessible components. The CLI copies components directly into your project -- you own the code, customize anything.
 
 ---
 
 ## Quick Start
 
-### 1. Install the package
-
-```bash
-npm install novaui-components
-```
-
-### 2. Initialize your project with the CLI
+### 1. Initialize your project
 
 ```bash
 npx novaui-cli init
 ```
 
 This will:
-- Create `tailwind.config.js` with the NovaUI preset
+- Create `tailwind.config.js` with the NovaUI theme (colors, border radius, etc.)
 - Create `src/global.css` with light/dark theme CSS variables
 - Create `src/lib/utils.ts` with the `cn()` helper
-- Install required peer dependencies
+- Install required dependencies (`nativewind`, `tailwindcss`, `clsx`, `tailwind-merge`, `class-variance-authority`)
 
-### 3. Import global.css
+### 2. Import global.css
 
 Add this to your root layout or entry file:
 
@@ -34,10 +28,21 @@ Add this to your root layout or entry file:
 import "./src/global.css"
 ```
 
-### 4. Start using components
+### 3. Add components
+
+```bash
+npx novaui-cli add button
+npx novaui-cli add card
+npx novaui-cli add dialog
+```
+
+Components are copied into `src/components/ui/` in your project.
+
+### 4. Use them
 
 ```tsx
-import { Button, Card, CardHeader, CardTitle, CardContent } from "novaui-components"
+import { Button } from "./src/components/ui/button"
+import { Card, CardHeader, CardTitle, CardContent } from "./src/components/ui/card"
 
 export default function App() {
   return (
@@ -57,27 +62,13 @@ export default function App() {
 
 ---
 
-## CLI Usage
+## CLI Commands
 
-### Initialize a project
-
-```bash
-npx novaui-cli init
-```
-
-### Add individual components (from registry)
-
-```bash
-npx novaui-cli add button
-npx novaui-cli add card
-npx novaui-cli add dialog
-```
-
-### Help
-
-```bash
-npx novaui-cli --help
-```
+| Command | Description |
+|---|---|
+| `npx novaui-cli init` | Initialize project (tailwind config, global.css, utils) |
+| `npx novaui-cli add <component>` | Add a component to `src/components/ui/` |
+| `npx novaui-cli --help` | Show help |
 
 ---
 
@@ -88,24 +79,62 @@ If you prefer to set things up yourself instead of using the CLI:
 ### 1. Install dependencies
 
 ```bash
-npm install novaui-components nativewind tailwindcss clsx tailwind-merge class-variance-authority
+npm install nativewind tailwindcss clsx tailwind-merge class-variance-authority
 ```
 
 ### 2. Create `tailwind.config.js`
 
 ```js
 /** @type {import('tailwindcss').Config} */
-const novaui = require("novaui-components/tailwind");
-
 module.exports = {
   content: [
     "./App.{js,jsx,ts,tsx}",
     "./src/**/*.{js,jsx,ts,tsx}",
-    "./node_modules/novaui-components/src/**/*.{js,jsx,ts,tsx}",
   ],
-  presets: [require("nativewind/preset"), novaui],
+  presets: [require("nativewind/preset")],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+    },
   },
   plugins: [],
 };
@@ -179,77 +208,68 @@ export function cn(...inputs: ClassValue[]) {
 
 ---
 
-## Components
+## Available Components
 
-| Component | Import |
-|---|---|
-| Accordion | `Accordion, AccordionItem, AccordionTrigger, AccordionContent` |
-| Alert | `Alert, AlertTitle, AlertDescription` |
-| Alert Dialog | `AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogFooter, AlertDialogTitle, AlertDialogDescription, AlertDialogAction, AlertDialogCancel` |
-| Aspect Ratio | `AspectRatio` |
-| Avatar | `Avatar, AvatarImage, AvatarFallback` |
-| Badge | `Badge, badgeVariants` |
-| Breadcrumb | `Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator, BreadcrumbEllipsis` |
-| Button | `Button, buttonVariants, buttonTextVariants` |
-| Button Group | `ButtonGroup, ButtonGroupText` |
-| Calendar | `Calendar` |
-| Card | `Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent` |
-| Carousel | `Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext` |
-| Chart | `ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent` |
-| Checkbox | `Checkbox` |
-| Collapsible | `Collapsible, CollapsibleTrigger, CollapsibleContent` |
-| Combobox | `Combobox, ComboboxTrigger, ComboboxContent, ComboboxInput, ComboboxList, ComboboxEmpty, ComboboxGroup, ComboboxItem, ComboboxSeparator` |
-| Command | `Command, CommandDialog, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem, CommandShortcut, CommandSeparator` |
-| Context Menu | `ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem, ContextMenuCheckboxItem, ContextMenuRadioItem, ContextMenuLabel, ContextMenuSeparator, ContextMenuShortcut, ContextMenuGroup, ContextMenuPortal, ContextMenuSub, ContextMenuSubContent, ContextMenuSubTrigger, ContextMenuRadioGroup` |
-| Dialog | `Dialog, DialogTrigger, DialogPortal, DialogOverlay, DialogClose, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription` |
-| Drawer | `Drawer, DrawerPortal, DrawerOverlay, DrawerTrigger, DrawerClose, DrawerContent, DrawerHeader, DrawerFooter, DrawerTitle, DrawerDescription` |
-| Dropdown Menu | `DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuCheckboxItem, DropdownMenuRadioItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuGroup, DropdownMenuPortal, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuRadioGroup` |
-| Empty | `Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle` |
-| Field | `Field, FieldLabel, FieldDescription, FieldError, FieldGroup, FieldLegend, FieldSeparator, FieldSet, FieldContent, FieldTitle` |
-| Hover Card | `HoverCard, HoverCardTrigger, HoverCardContent` |
-| Input | `Input` |
-| Input Group | `InputGroup, InputGroupAddon, InputGroupButton, InputGroupText, InputGroupInput, InputGroupTextarea` |
-| Input OTP | `InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator` |
-| Item | `Item, ItemMedia, ItemContent, ItemActions, ItemGroup, ItemSeparator, ItemTitle, ItemDescription, ItemHeader, ItemFooter` |
-| Label | `Label` |
-| Menubar | `Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem, MenubarCheckboxItem, MenubarRadioItem, MenubarLabel, MenubarSeparator, MenubarShortcut, MenubarGroup, MenubarPortal, MenubarSub, MenubarSubContent, MenubarSubTrigger, MenubarRadioGroup` |
-| Navigation Menu | `NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuContent, NavigationMenuTrigger, NavigationMenuLink, NavigationMenuIndicator, NavigationMenuViewport` |
-| Pagination | `Pagination, PaginationContent, PaginationLink, PaginationItem, PaginationPrevious, PaginationNext, PaginationEllipsis` |
-| Popover | `Popover, PopoverTrigger, PopoverContent, PopoverAnchor, PopoverHeader, PopoverTitle, PopoverDescription` |
-| Progress | `Progress` |
-| Radio Group | `RadioGroup, RadioGroupItem` |
-| Resizable | `ResizablePanelGroup, ResizablePanel, ResizableHandle` |
-| Scroll Area | `ScrollArea, ScrollBar` |
-| Select | `Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue` |
-| Separator | `Separator` |
-| Sheet | `Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetOverlay, SheetPortal, SheetTitle, SheetTrigger` |
-| Skeleton | `Skeleton` |
-| Spinner | `Spinner` |
-| Switch | `Switch` |
-| Table | `Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption` |
-| Tabs | `Tabs, TabsList, TabsTrigger, TabsContent` |
-| Text | `Text, textVariants` |
-| Textarea | `Textarea` |
-| Toggle | `Toggle, toggleVariants` |
-| Toggle Group | `ToggleGroup, ToggleGroupItem` |
-| Typography | `H1, H2, H3, H4, H5, P, typographyVariants` |
+| Component | File | Key Exports |
+|---|---|---|
+| Accordion | `accordion.tsx` | `Accordion, AccordionItem, AccordionTrigger, AccordionContent` |
+| Alert | `alert.tsx` | `Alert, AlertTitle, AlertDescription` |
+| Alert Dialog | `alert-dialog.tsx` | `AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogFooter, AlertDialogTitle, AlertDialogDescription, AlertDialogAction, AlertDialogCancel` |
+| Aspect Ratio | `aspect-ratio.tsx` | `AspectRatio` |
+| Avatar | `avatar.tsx` | `Avatar, AvatarImage, AvatarFallback` |
+| Badge | `badge.tsx` | `Badge, badgeVariants` |
+| Breadcrumb | `breadcrumb.tsx` | `Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator, BreadcrumbEllipsis` |
+| Button | `button.tsx` | `Button, buttonVariants, buttonTextVariants` |
+| Button Group | `button-group.tsx` | `ButtonGroup, ButtonGroupText` |
+| Calendar | `calendar.tsx` | `Calendar` |
+| Card | `card.tsx` | `Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent` |
+| Carousel | `carousel.tsx` | `Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext` |
+| Chart | `chart.tsx` | `ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent` |
+| Checkbox | `checkbox.tsx` | `Checkbox` |
+| Collapsible | `collapsible.tsx` | `Collapsible, CollapsibleTrigger, CollapsibleContent` |
+| Combobox | `combobox.tsx` | `Combobox, ComboboxTrigger, ComboboxContent, ComboboxInput, ComboboxList, ComboboxEmpty, ComboboxGroup, ComboboxItem, ComboboxSeparator` |
+| Command | `command.tsx` | `Command, CommandDialog, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem, CommandShortcut, CommandSeparator` |
+| Context Menu | `context-menu.tsx` | `ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem, ...` |
+| Dialog | `dialog.tsx` | `Dialog, DialogTrigger, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription, ...` |
+| Drawer | `drawer.tsx` | `Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerFooter, DrawerTitle, DrawerDescription, ...` |
+| Dropdown Menu | `dropdown-menu.tsx` | `DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, ...` |
+| Empty | `empty.tsx` | `Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle` |
+| Field | `field.tsx` | `Field, FieldLabel, FieldDescription, FieldError, FieldGroup, ...` |
+| Hover Card | `hover-card.tsx` | `HoverCard, HoverCardTrigger, HoverCardContent` |
+| Input | `input.tsx` | `Input` |
+| Input Group | `input-group.tsx` | `InputGroup, InputGroupAddon, InputGroupButton, InputGroupText, InputGroupInput, InputGroupTextarea` |
+| Input OTP | `input-otp.tsx` | `InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator` |
+| Item | `item.tsx` | `Item, ItemMedia, ItemContent, ItemActions, ItemGroup, ...` |
+| Label | `label.tsx` | `Label` |
+| Menubar | `menubar.tsx` | `Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem, ...` |
+| Navigation Menu | `navigation-menu.tsx` | `NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, ...` |
+| Pagination | `pagination.tsx` | `Pagination, PaginationContent, PaginationLink, PaginationItem, PaginationPrevious, PaginationNext, PaginationEllipsis` |
+| Popover | `popover.tsx` | `Popover, PopoverTrigger, PopoverContent, PopoverAnchor, PopoverHeader, PopoverTitle, PopoverDescription` |
+| Progress | `progress.tsx` | `Progress` |
+| Radio Group | `radio-group.tsx` | `RadioGroup, RadioGroupItem` |
+| Resizable | `resizable.tsx` | `ResizablePanelGroup, ResizablePanel, ResizableHandle` |
+| Scroll Area | `scroll-area.tsx` | `ScrollArea, ScrollBar` |
+| Select | `select.tsx` | `Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue, ...` |
+| Separator | `separator.tsx` | `Separator` |
+| Sheet | `sheet.tsx` | `Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, ...` |
+| Skeleton | `skeleton.tsx` | `Skeleton` |
+| Spinner | `spinner.tsx` | `Spinner` |
+| Switch | `switch.tsx` | `Switch` |
+| Table | `table.tsx` | `Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption` |
+| Tabs | `tabs.tsx` | `Tabs, TabsList, TabsTrigger, TabsContent` |
+| Text | `text.tsx` | `Text, textVariants` |
+| Textarea | `textarea.tsx` | `Textarea` |
+| Toggle | `toggle.tsx` | `Toggle, toggleVariants` |
+| Toggle Group | `toggle-group.tsx` | `ToggleGroup, ToggleGroupItem` |
+| Typography | `typography.tsx` | `H1, H2, H3, H4, H5, P, typographyVariants` |
 
-All components are imported from `novaui-components`:
+Add any component with:
 
-```tsx
-import { Button, Card, Input, Dialog } from "novaui-components"
+```bash
+npx novaui-cli add <name>
 ```
 
----
-
-## Peer Dependencies
-
-| Package | Version |
-|---|---|
-| react | >= 18 |
-| react-native | >= 0.72 |
-| nativewind | >= 4 |
-| tailwindcss | >= 3 |
+For example: `npx novaui-cli add button`, `npx novaui-cli add card`, `npx novaui-cli add dialog`
 
 ---
 
@@ -259,29 +279,12 @@ import { Button, Card, Input, Dialog } from "novaui-components"
 
 NovaUI uses CSS custom properties for theming. Edit the variables in `src/global.css` to customize colors, border radius, and more. Both light and dark themes are supported out of the box.
 
-### Tailwind Config
-
-The NovaUI Tailwind preset adds all the design tokens your components need. You can extend it further in your `tailwind.config.js`:
-
-```js
-const novaui = require("novaui-components/tailwind");
-
-module.exports = {
-  presets: [require("nativewind/preset"), novaui],
-  theme: {
-    extend: {
-      // your custom extensions here
-    },
-  },
-};
-```
-
 ### The `cn()` utility
 
-All components use the `cn()` helper to merge Tailwind classes. You can use it in your own components too:
+All components use the `cn()` helper to merge Tailwind classes. Use it in your own components:
 
 ```tsx
-import { cn } from "novaui-components"
+import { cn } from "../lib/utils"
 
 function MyComponent({ className, ...props }) {
   return (
@@ -289,6 +292,17 @@ function MyComponent({ className, ...props }) {
   )
 }
 ```
+
+---
+
+## Requirements
+
+| Package | Version |
+|---|---|
+| react | >= 18 |
+| react-native | >= 0.72 |
+| nativewind | >= 4 |
+| tailwindcss | >= 3 |
 
 ---
 
