@@ -1,46 +1,78 @@
 {
-    "name": "@repo/components",
-    "type": "module",
-    "version": "1.0.0",
+  "name": "@novaui/components",
+  "version": "1.0.0",
+  "type": "module",
   "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-    "scripts": {
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./tailwind": {
+      "types": "./dist/tailwind.d.ts",
+      "import": "./dist/tailwind.mjs",
+      "require": "./dist/tailwind.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "lib",
+    "tailwind.ts"
+  ],
+  "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
     "clean": "rm -rf dist"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-native": ">=0.72",
+    "nativewind": ">=4",
+    "tailwindcss": ">=3"
+  },
+  "peerDependenciesMeta": {
+    "react-native": {
+      "optional": false
     },
-    "exports": {
-      "./add": {
-        "types": "./src/add.ts",
-        "default": "./dist/add.js"
-      },
-      "./subtract": {
-        "types": "./src/subtract.ts",
-        "default": "./dist/subtract.js"
-      }
+    "nativewind": {
+      "optional": false
     },
-    
-      "devDependencies": {
-        "@repo/typescript-config": "*",
-        "@types/react": "^18.2.14",
-        "tsup": "^8.0.1",
-        "typescript": "5.5.4"
-      },
-      "dependencies": {
-        "class-variance-authority": "^0.7.1",
-        "clsx": "^2.1.1",
-        "date-fns": "^4.1.0",
-        "expo-linear-gradient": "^15.0.8",
-        "expo-system-ui": "~6.0.9",
-        "lucide-react-native": "^0.563.0",
-        "nativewind": "^4.2.1",
-        "react": "^19.2.4",
-        "react-native": "^0.83.1",
-        "react-native-gesture-handler": "^2.30.0",
-        "react-native-gifted-charts": "^1.4.74",
-        "react-native-reanimated": "~4.1.1",
-        "react-native-worklets": "^0.5.1",
-        "tailwind-merge": "^3.4.0",
-        "tailwindcss": "^3.4.19"
-      }
+    "tailwindcss": {
+      "optional": false
+    }
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "*",
+    "@types/react": "^18.2.14",
+    "tsup": "^8.0.1",
+    "typescript": "5.5.4"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "expo-linear-gradient": "^15.0.8",
+    "lucide-react-native": "^0.563.0",
+    "react-native-gesture-handler": "^2.30.0",
+    "react-native-gifted-charts": "^1.4.74",
+    "react-native-reanimated": "~4.1.1",
+    "tailwind-merge": "^3.4.0"
+  },
+  "keywords": [
+    "react-native",
+    "ui",
+    "components",
+    "nativewind",
+    "tailwindcss",
+    "novaui"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KaloyanBehov/native-ui"
   }
+}

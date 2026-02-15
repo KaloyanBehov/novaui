@@ -14,7 +14,7 @@
   "engines": {
     "node": ">=18"
   },
-  "name": "with-react-native-web",
+  "name": "novaui",
   "packageManager": "npm@11.9.0",
   "workspaces": [
     "apps/*",

@@ -1,15 +1,24 @@
 {
-  "name": "@novaui/c;i",
+  "name": "@novaui/cli",
+  "version": "1.0.0",
+  "description": "CLI for NovaUI - React Native component library with NativeWind",
   "type": "module",
-  "scripts": {
-    "dev": "tsc --watch",
-    "build": "tsc"
+  "bin": {
+    "novaui": "./src/bin.js"
   },
-  "exports": {
-   
-  },
-  "devDependencies": {
-    "@repo/typescript-config": "*",
-    "typescript": "latest"
+  "files": [
+    "src"
+  ],
+  "keywords": [
+    "novaui",
+    "react-native",
+    "cli",
+    "nativewind",
+    "ui-components"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KaloyanBehov/native-ui"
   }
 }
