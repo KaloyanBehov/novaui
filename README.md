@@ -11,7 +11,7 @@ A comprehensive React Native UI component library built with [NativeWind](https:
 ### 1. Initialize your project
 
 ```bash
-npx novaui-cli init
+npx novaui init
 ```
 
 This will:
@@ -31,9 +31,9 @@ import "./src/global.css"
 ### 3. Add components
 
 ```bash
-npx novaui-cli add button
-npx novaui-cli add card
-npx novaui-cli add dialog
+npx novaui add button
+npx novaui add card
+npx novaui add dialog
 ```
 
 Components are copied into `src/components/ui/` in your project.
@@ -66,9 +66,9 @@ export default function App() {
 
 | Command | Description |
 |---|---|
-| `npx novaui-cli init` | Initialize project (tailwind config, global.css, utils) |
-| `npx novaui-cli add <component>` | Add a component to `src/components/ui/` |
-| `npx novaui-cli --help` | Show help |
+| `npx novaui init` | Initialize project (tailwind config, global.css, utils) |
+| `npx novaui add <component>` | Add a component to `src/components/ui/` |
+| `npx novaui --help` | Show help |
 
 ---
 
@@ -266,10 +266,10 @@ export function cn(...inputs: ClassValue[]) {
 Add any component with:
 
 ```bash
-npx novaui-cli add <name>
+npx novaui add <name>
 ```
 
-For example: `npx novaui-cli add button`, `npx novaui-cli add card`, `npx novaui-cli add dialog`
+For example: `npx novaui add button`, `npx novaui add card`, `npx novaui add dialog`
 
 ---
 
