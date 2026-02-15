@@ -1,5 +1,5 @@
 {
-  "name": "novaui",
+  "name": "novaui-cli",
   "version": "1.0.2",
   "description": "CLI for NovaUI - React Native component library with NativeWind",
   "type": "module",

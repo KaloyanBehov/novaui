@@ -303,9 +303,9 @@ function showHelp() {
   console.log("    novaui add <component>   Add a component to your project")
   console.log("")
   console.log("  Examples:")
-  console.log("    npx novaui init")
-  console.log("    npx novaui add button")
-  console.log("    npx novaui add card")
+  console.log("    npx novaui-cli init")
+  console.log("    npx novaui-cli add button")
+  console.log("    npx novaui-cli add card")
   console.log("")
 }
 
