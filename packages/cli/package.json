@@ -7,7 +7,8 @@
     "novaui": "./src/bin.js"
   },
   "files": [
-    "src"
+    "src",
+    "README.md"
   ],
   "keywords": [
     "novaui",
