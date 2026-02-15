@@ -34,7 +34,7 @@ const Accordion = React.forwardRef<
     defaultValue?: string | string[]
     onValueChange?: (value: string | string[]) => void
   }
->(({ className, type = "single", collapsible = false, defaultValue, onValueChange, children, ...props }, ref) => {
+>(({ className, type = "single", collapsible = true, defaultValue, onValueChange, children, ...props }, ref) => {
   const [value, setValue] = React.useState<string | string[]>(defaultValue || (type === "multiple" ? [] : ""))
 
   const handleValueChange = (itemValue: string) => {
