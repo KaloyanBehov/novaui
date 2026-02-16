@@ -59,73 +59,127 @@ The Button component supports six visual variants, each designed for different u
 
 The primary button variant, perfect for main actions:
 
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
 <ComponentPreview>
   <button className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">Default Button</button>
 </ComponentPreview>
+
+</Tab>
+<Tab value="Code">
 
 ```tsx
 <Button variant="default" label="Default Button" />
 ```
 
+</Tab>
+</Tabs>
+
 ### Destructive
 
 Use for dangerous or destructive actions like delete or remove:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
 
 <ComponentPreview>
   <button className="inline-flex items-center justify-center rounded-md bg-destructive px-4 py-2 text-sm font-medium text-white hover:bg-destructive/90">Delete</button>
 </ComponentPreview>
 
+</Tab>
+<Tab value="Code">
+
 ```tsx
 <Button variant="destructive" label="Delete" />
 ```
+
+</Tab>
+</Tabs>
 
 ### Outline
 
 A button with an outlined border, great for secondary actions:
 
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
 <ComponentPreview>
   <button className="inline-flex items-center justify-center rounded-md border bg-background px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">Outline Button</button>
 </ComponentPreview>
+
+</Tab>
+<Tab value="Code">
 
 ```tsx
 <Button variant="outline" label="Outline Button" />
 ```
 
+</Tab>
+</Tabs>
+
 ### Secondary
 
 A secondary button variant with a subtle background:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
 
 <ComponentPreview>
   <button className="inline-flex items-center justify-center rounded-md bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground hover:bg-secondary/80">Secondary Button</button>
 </ComponentPreview>
 
+</Tab>
+<Tab value="Code">
+
 ```tsx
 <Button variant="secondary" label="Secondary Button" />
 ```
+
+</Tab>
+</Tabs>
 
 ### Ghost
 
 A minimal button with no background, ideal for subtle actions:
 
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
 <ComponentPreview>
   <button className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">Ghost Button</button>
 </ComponentPreview>
+
+</Tab>
+<Tab value="Code">
 
 ```tsx
 <Button variant="ghost" label="Ghost Button" />
 ```
 
+</Tab>
+</Tabs>
+
 ### Link
 
 A text-only button styled like a link:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
 
 <ComponentPreview>
   <button className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-primary underline-offset-4 hover:underline">Link Button</button>
 </ComponentPreview>
 
+</Tab>
+<Tab value="Code">
+
 ```tsx
 <Button variant="link" label="Link Button" />
 ```
+
+</Tab>
+</Tabs>
 
 ## Sizes
 
@@ -135,49 +189,85 @@ Control the button size with the `size` prop:
 
 The standard button size:
 
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
 <ComponentPreview>
   <button className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">Default Size</button>
 </ComponentPreview>
+
+</Tab>
+<Tab value="Code">
 
 ```tsx
 <Button size="default" label="Default Size" />
 ```
 
+</Tab>
+</Tabs>
+
 ### Small
 
 Compact size for tight spaces:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
 
 <ComponentPreview>
   <button className="inline-flex items-center justify-center rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground hover:bg-primary/90">Small Button</button>
 </ComponentPreview>
 
+</Tab>
+<Tab value="Code">
+
 ```tsx
 <Button size="sm" label="Small Button" />
 ```
+
+</Tab>
+</Tabs>
 
 ### Large
 
 Larger size for prominent actions:
 
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
 <ComponentPreview>
   <button className="inline-flex items-center justify-center rounded-md bg-primary px-6 py-2.5 text-base font-medium text-primary-foreground hover:bg-primary/90">Large Button</button>
 </ComponentPreview>
+
+</Tab>
+<Tab value="Code">
 
 ```tsx
 <Button size="lg" label="Large Button" />
 ```
 
+</Tab>
+</Tabs>
+
 ### Icon
 
 Square button perfect for icon-only buttons:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
 
 <ComponentPreview>
   <button className="inline-flex size-9 items-center justify-center rounded-md bg-primary text-sm font-medium text-primary-foreground hover:bg-primary/90">🚀</button>
 </ComponentPreview>
 
+</Tab>
+<Tab value="Code">
+
 ```tsx
 <Button size="icon" label="🚀" />
 ```
+
+</Tab>
+</Tabs>
 
 ## Border Radius
 
