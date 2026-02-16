@@ -5,6 +5,19 @@ description: A versatile button component built for React Native with web suppor
 
 The Button component is a flexible and accessible button built with React Native's `Pressable` component. It supports multiple visual variants, sizes, border radius options, loading states, and is fully compatible with both React Native and web platforms.
 
+## Preview
+
+<ComponentPreview>
+  <div className="flex flex-wrap items-center gap-3">
+    <button className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">Default</button>
+    <button className="inline-flex items-center justify-center rounded-md bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground hover:bg-secondary/80">Secondary</button>
+    <button className="inline-flex items-center justify-center rounded-md border bg-background px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">Outline</button>
+    <button className="inline-flex items-center justify-center rounded-md bg-destructive px-4 py-2 text-sm font-medium text-white hover:bg-destructive/90">Destructive</button>
+    <button className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">Ghost</button>
+    <button className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-primary underline-offset-4 hover:underline">Link</button>
+  </div>
+</ComponentPreview>
+
 ## Installation
 
 The Button component is part of the `novaui-components` package. Make sure you have the required peer dependencies installed:
@@ -46,6 +59,10 @@ The Button component supports six visual variants, each designed for different u
 
 The primary button variant, perfect for main actions:
 
+<ComponentPreview>
+  <button className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">Default Button</button>
+</ComponentPreview>
+
 ```tsx
 <Button variant="default" label="Default Button" />
 ```
@@ -53,6 +70,10 @@ The primary button variant, perfect for main actions:
 ### Destructive
 
 Use for dangerous or destructive actions like delete or remove:
+
+<ComponentPreview>
+  <button className="inline-flex items-center justify-center rounded-md bg-destructive px-4 py-2 text-sm font-medium text-white hover:bg-destructive/90">Delete</button>
+</ComponentPreview>
 
 ```tsx
 <Button variant="destructive" label="Delete" />
@@ -62,6 +83,10 @@ Use for dangerous or destructive actions like delete or remove:
 
 A button with an outlined border, great for secondary actions:
 
+<ComponentPreview>
+  <button className="inline-flex items-center justify-center rounded-md border bg-background px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">Outline Button</button>
+</ComponentPreview>
+
 ```tsx
 <Button variant="outline" label="Outline Button" />
 ```
@@ -69,6 +94,10 @@ A button with an outlined border, great for secondary actions:
 ### Secondary
 
 A secondary button variant with a subtle background:
+
+<ComponentPreview>
+  <button className="inline-flex items-center justify-center rounded-md bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground hover:bg-secondary/80">Secondary Button</button>
+</ComponentPreview>
 
 ```tsx
 <Button variant="secondary" label="Secondary Button" />
@@ -78,6 +107,10 @@ A secondary button variant with a subtle background:
 
 A minimal button with no background, ideal for subtle actions:
 
+<ComponentPreview>
+  <button className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">Ghost Button</button>
+</ComponentPreview>
+
 ```tsx
 <Button variant="ghost" label="Ghost Button" />
 ```
@@ -85,6 +118,10 @@ A minimal button with no background, ideal for subtle actions:
 ### Link
 
 A text-only button styled like a link:
+
+<ComponentPreview>
+  <button className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-primary underline-offset-4 hover:underline">Link Button</button>
+</ComponentPreview>
 
 ```tsx
 <Button variant="link" label="Link Button" />
@@ -98,6 +135,10 @@ Control the button size with the `size` prop:
 
 The standard button size:
 
+<ComponentPreview>
+  <button className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">Default Size</button>
+</ComponentPreview>
+
 ```tsx
 <Button size="default" label="Default Size" />
 ```
@@ -105,6 +146,10 @@ The standard button size:
 ### Small
 
 Compact size for tight spaces:
+
+<ComponentPreview>
+  <button className="inline-flex items-center justify-center rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground hover:bg-primary/90">Small Button</button>
+</ComponentPreview>
 
 ```tsx
 <Button size="sm" label="Small Button" />
@@ -114,6 +159,10 @@ Compact size for tight spaces:
 
 Larger size for prominent actions:
 
+<ComponentPreview>
+  <button className="inline-flex items-center justify-center rounded-md bg-primary px-6 py-2.5 text-base font-medium text-primary-foreground hover:bg-primary/90">Large Button</button>
+</ComponentPreview>
+
 ```tsx
 <Button size="lg" label="Large Button" />
 ```
@@ -121,6 +170,10 @@ Larger size for prominent actions:
 ### Icon
 
 Square button perfect for icon-only buttons:
+
+<ComponentPreview>
+  <button className="inline-flex size-9 items-center justify-center rounded-md bg-primary text-sm font-medium text-primary-foreground hover:bg-primary/90">🚀</button>
+</ComponentPreview>
 
 ```tsx
 <Button size="icon" label="🚀" />
