@@ -1,0 +1,353 @@
+---
+title: Accordion
+description: A vertically stacked set of interactive headings that each reveal an associated section of content.
+---
+
+The Accordion component is a vertically stacked set of collapsible sections. It supports single and multiple expanded items, animated open/close transitions using React Native Reanimated, and is fully customizable with NativeWind classes.
+
+## Preview
+
+<ComponentPreview>
+  <AccordionPreview
+    defaultValue="item-0"
+    items={[
+      { trigger: "Is it accessible?", content: "Yes. It adheres to the WAI-ARIA design pattern and supports keyboard navigation." },
+      { trigger: "Is it styled?", content: "Yes. It comes with default styles using NativeWind that match your theme." },
+      { trigger: "Is it animated?", content: "Yes. It uses React Native Reanimated for smooth height and rotation animations." }
+    ]}
+  />
+</ComponentPreview>
+
+## Installation
+
+The Accordion component is part of the `novaui-components` package. Make sure you have the required peer dependencies installed:
+
+```bash
+npx novaui-cli add accordion
+```
+
+### Dependencies
+
+The Accordion requires the following peer dependencies:
+
+- `react-native-reanimated` >= 3
+- `lucide-react-native` >= 0.300
+
+## Import
+
+```tsx
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from 'novaui-components'
+```
+
+## Basic Usage
+
+The Accordion is a compound component consisting of four parts:
+
+- `Accordion` - The root container
+- `AccordionItem` - An individual collapsible section
+- `AccordionTrigger` - The clickable header that toggles the content
+- `AccordionContent` - The collapsible body content
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <AccordionPreview
+    defaultValue="item-0"
+    items={[
+      { trigger: "Is it accessible?", content: "Yes. It adheres to the WAI-ARIA design pattern and supports keyboard navigation." },
+      { trigger: "Is it styled?", content: "Yes. It comes with default styles using NativeWind that match your theme." }
+    ]}
+  />
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from 'novaui-components'
+
+export function BasicAccordion() {
+  return (
+    <Accordion type="single" collapsible defaultValue="item-1">
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Is it accessible?</AccordionTrigger>
+        <AccordionContent>
+          <Text>Yes. It adheres to the WAI-ARIA design pattern and supports keyboard navigation.</Text>
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>Is it styled?</AccordionTrigger>
+        <AccordionContent>
+          <Text>Yes. It comes with default styles using NativeWind that match your theme.</Text>
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Single Mode
+
+By default, only one item can be expanded at a time. When a new item is opened, the previously open item closes:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <AccordionPreview
+    type="single"
+    defaultValue="item-0"
+    items={[
+      { trigger: "Section One", content: "Only one section is open at a time in single mode." },
+      { trigger: "Section Two", content: "Opening this will close the other section." }
+    ]}
+  />
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Accordion type="single" collapsible defaultValue="item-1">
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Section One</AccordionTrigger>
+    <AccordionContent>
+      <Text>Only one section is open at a time in single mode.</Text>
+    </AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2">
+    <AccordionTrigger>Section Two</AccordionTrigger>
+    <AccordionContent>
+      <Text>Opening this will close the other section.</Text>
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+</Tab>
+</Tabs>
+
+## Multiple Mode
+
+Allow multiple items to be expanded simultaneously:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <AccordionPreview
+    type="multiple"
+    defaultValue={["item-0", "item-1"]}
+    items={[
+      { trigger: "Section One", content: "This section is expanded." },
+      { trigger: "Section Two", content: "This section is also expanded at the same time." },
+      { trigger: "Section Three", content: "Each section can be toggled independently." }
+    ]}
+  />
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Accordion type="multiple" defaultValue={["item-1", "item-2"]}>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Section One</AccordionTrigger>
+    <AccordionContent>
+      <Text>This section is expanded.</Text>
+    </AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2">
+    <AccordionTrigger>Section Two</AccordionTrigger>
+    <AccordionContent>
+      <Text>This section is also expanded at the same time.</Text>
+    </AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-3">
+    <AccordionTrigger>Section Three</AccordionTrigger>
+    <AccordionContent>
+      <Text>Each section can be toggled independently.</Text>
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+</Tab>
+</Tabs>
+
+## Collapsible
+
+When `collapsible` is `true` (default), clicking an open item in single mode will close it. Set it to `false` to keep one item always open:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <AccordionPreview
+    type="single"
+    collapsible={false}
+    defaultValue="item-0"
+    items={[
+      { trigger: "Always One Open", content: "This item cannot be collapsed — one item is always open." },
+      { trigger: "Another Item", content: "Clicking this will close the other item." }
+    ]}
+  />
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Accordion type="single" collapsible={false} defaultValue="item-1">
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Always One Open</AccordionTrigger>
+    <AccordionContent>
+      <Text>This item cannot be collapsed — one item is always open.</Text>
+    </AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2">
+    <AccordionTrigger>Another Item</AccordionTrigger>
+    <AccordionContent>
+      <Text>Clicking this will close the other item.</Text>
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+</Tab>
+</Tabs>
+
+## Advanced Examples
+
+### FAQ Section
+
+Build an FAQ section with the Accordion:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <AccordionPreview
+    defaultValue="item-0"
+    items={[
+      { trigger: "What is NovaUI?", content: "NovaUI is a React Native UI component library built on NativeWind with 50+ customizable components." },
+      { trigger: "Is it free to use?", content: "Yes, NovaUI is open source and free to use in any project." },
+      { trigger: "Can I customize the components?", content: "Absolutely! Components are copied into your project — you own the code and can modify anything." }
+    ]}
+  />
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from 'novaui-components'
+import { Text } from 'react-native'
+
+export function FAQ() {
+  return (
+    <Accordion type="single" collapsible defaultValue="faq-1">
+      <AccordionItem value="faq-1">
+        <AccordionTrigger>What is NovaUI?</AccordionTrigger>
+        <AccordionContent>
+          <Text>NovaUI is a React Native UI component library built on NativeWind with 50+ customizable components.</Text>
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="faq-2">
+        <AccordionTrigger>Is it free to use?</AccordionTrigger>
+        <AccordionContent>
+          <Text>Yes, NovaUI is open source and free to use in any project.</Text>
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="faq-3">
+        <AccordionTrigger>Can I customize the components?</AccordionTrigger>
+        <AccordionContent>
+          <Text>Absolutely! Components are copied into your project — you own the code and can modify anything.</Text>
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Props API
+
+### Accordion Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `'single' \| 'multiple'` | `'single'` | Whether one or multiple items can be expanded at once |
+| `collapsible` | `boolean` | `true` | Whether the open item can be collapsed in single mode |
+| `defaultValue` | `string \| string[]` | - | The initially expanded item(s) |
+| `onValueChange` | `(value: string \| string[]) => void` | - | Callback when the expanded state changes |
+| `className` | `string` | - | Additional CSS classes for the container |
+
+### AccordionItem Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | required | A unique identifier for this accordion item |
+| `className` | `string` | - | Additional CSS classes for the item |
+
+### AccordionTrigger Props
+
+Extends `React.ComponentPropsWithoutRef<typeof Pressable>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode \| string` | - | Trigger content. Strings are auto-wrapped in styled `Text` |
+| `className` | `string` | - | Additional CSS classes for the trigger |
+
+### AccordionContent Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | The collapsible content |
+| `className` | `string` | - | Additional CSS classes for the content wrapper |
+
+## Animation
+
+The Accordion uses `react-native-reanimated` for smooth open/close animations:
+
+- **Chevron rotation**: The chevron icon rotates 180 degrees when expanded
+- **Height animation**: Content height animates smoothly from 0 to full height
+- **Opacity**: Content fades in/out during the transition
+
+## Accessibility
+
+The Accordion component is built with accessibility in mind:
+
+- Uses `Pressable` for proper touch handling
+- Supports keyboard navigation on web
+- Each trigger is focusable and activatable via tap or keyboard
+
+## Best Practices
+
+1. **Use meaningful headings**: Each trigger should clearly describe the content it reveals
+
+2. **Keep content concise**: Accordion content should be scannable and not overly long
+
+3. **Choose the right type**: Use `single` for FAQs or settings, `multiple` for checklists or filters
+
+4. **Default expanded**: Consider setting `defaultValue` for the most important item so users see content immediately
+
+5. **Collapsible behavior**: Keep `collapsible={true}` (default) to let users close all items if needed
+
+## Related Components
+
+- Use with `Text` for content inside `AccordionContent`
+- Combine with `Card` for grouped accordion sections
+- Works well inside `ScrollArea` for long lists
