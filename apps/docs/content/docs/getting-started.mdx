@@ -1,0 +1,268 @@
+---
+title: Getting Started
+description: Get started with NovaUI - a React Native UI component library built on NativeWind. Learn how to set up your project and add your first components.
+---
+
+NovaUI is a React Native UI component library with 50+ components built on [NativeWind](https://www.nativewind.dev/) (Tailwind CSS for React Native). Inspired by [shadcn/ui](https://ui.shadcn.com), adapted for mobile. Components are copied directly into your project — you own the code and can customize anything.
+
+## Prerequisites
+
+Before getting started with NovaUI, ensure you have the following requirements:
+
+| Package | Minimum Version |
+|---------|----------------|
+| React | >= 18 |
+| React Native | >= 0.72 |
+| NativeWind | >= 4 |
+| Tailwind CSS | >= 3 |
+
+## Step 1: Set Up NativeWind
+
+**Important**: NovaUI requires NativeWind to be properly configured in your project. If you haven't set up NativeWind yet, please follow the [NativeWind installation guide](https://www.nativewind.dev/docs/getting-started/installation) first.
+
+### Quick NativeWind Setup Checklist
+
+1. **Install NativeWind**:
+   ```bash
+   npm install nativewind
+   # or
+   yarn add nativewind
+   ```
+
+2. **Install Tailwind CSS**:
+   ```bash
+   npm install -D tailwindcss
+   # or
+   yarn add -D tailwindcss
+   ```
+
+3. **Initialize Tailwind Config**:
+   ```bash
+   npx tailwindcss init
+   ```
+
+4. **Configure NativeWind** in your `tailwind.config.js`:
+   ```js
+   /** @type {import('tailwindcss').Config} */
+   module.exports = {
+     content: [
+       "./App.{js,jsx,ts,tsx}",
+       "./src/**/*.{js,jsx,ts,tsx}",
+     ],
+     presets: [require("nativewind/preset")],
+     theme: {
+       extend: {},
+     },
+     plugins: [],
+   }
+   ```
+
+5. **Set up Babel** (if not already configured):
+   ```js
+   // babel.config.js
+   module.exports = {
+     plugins: [
+       "nativewind/babel",
+     ],
+   }
+   ```
+
+6. **Import CSS** in your root file (e.g., `App.tsx`):
+   ```tsx
+   import "./global.css"
+   ```
+
+For complete NativeWind setup instructions, including platform-specific configurations, visit the [NativeWind documentation](https://www.nativewind.dev/docs/getting-started/installation).
+
+## Step 2: Initialize NovaUI
+
+Once NativeWind is set up, initialize NovaUI in your project:
+
+```bash
+npx novaui-cli init
+```
+
+This interactive command will guide you through the setup process and ask you to configure file paths:
+
+```
+? Path for global.css? (src/global.css)
+? Path for UI components? (src/components/ui)
+? Path for lib (utils)? (src/lib)
+```
+
+### What Gets Created
+
+The `init` command creates the following files and configurations:
+
+- **`components.json`** — Stores your configured paths for future component additions
+- **`tailwind.config.js`** — NovaUI theme configuration with colors, border radius, and NativeWind preset
+- **`global.css`** — Light and dark theme CSS variables
+- **`lib/utils.ts`** — The `cn()` utility function for merging Tailwind classes
+
+### Dependencies Installed
+
+The CLI automatically installs the required dependencies:
+
+- `nativewind` — Tailwind CSS for React Native
+- `tailwindcss` — Tailwind CSS framework
+- `clsx` — Utility for constructing className strings
+- `tailwind-merge` — Utility to merge Tailwind CSS classes without style conflicts
+- `class-variance-authority` — Utility for creating type-safe component variants
+
+## Step 3: Import Global Styles
+
+Make sure to import the `global.css` file in your root entry file (typically `App.tsx` or `index.js`):
+
+```tsx
+import "./src/global.css"
+// or wherever your global.css is located
+
+export default function App() {
+  return (
+    // Your app content
+  )
+}
+```
+
+This ensures that NovaUI's theme variables and styles are available throughout your application.
+
+## Step 4: Add Your First Component
+
+Add components to your project using the `add` command:
+
+```bash
+npx novaui-cli add button
+npx novaui-cli add card
+npx novaui-cli add avatar
+```
+
+Components are copied directly into your configured directory (default: `src/components/ui/`). Each component's dependencies are automatically installed.
+
+### Component Naming
+
+Use the component filename without the extension:
+- ✅ `button` (not `button.tsx`)
+- ✅ `alert-dialog` (not `alert-dialog.tsx`)
+- ✅ `dropdown-menu` (not `dropdown-menu.tsx`)
+
+## Step 5: Use Components
+
+Import and use components in your React Native app:
+
+```tsx
+import { Button } from "./src/components/ui/button"
+import { Card, CardHeader, CardTitle, CardContent } from "./src/components/ui/card"
+
+export default function App() {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Welcome to NovaUI</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Button onPress={() => console.log("Pressed!")}>
+          Get Started
+        </Button>
+      </CardContent>
+    </Card>
+  )
+}
+```
+
+## Available Components
+
+NovaUI includes 50+ components ready to use:
+
+**Layout & Structure**: Accordion, Alert, Alert Dialog, Aspect Ratio, Card, Collapsible, Dialog, Drawer, Separator, Sheet
+
+**Navigation**: Breadcrumb, Command, Context Menu, Dropdown Menu, Menubar, Navigation Menu, Tabs
+
+**Forms & Input**: Button, Button Group, Checkbox, Combobox, Field, Input, Input Group, Input OTP, Label, Radio Group, Select, Switch, Textarea, Toggle, Toggle Group
+
+**Data Display**: Avatar, Badge, Calendar, Carousel, Chart, Empty, Pagination, Progress, Skeleton, Spinner, Table, Typography
+
+**Overlays**: Hover Card, Popover, Resizable, Scroll Area
+
+**Text**: Text
+
+Add any component with:
+
+```bash
+npx novaui-cli add <component-name>
+```
+
+## Configuration
+
+### Customizing Paths
+
+The `components.json` file stores your project configuration:
+
+```json
+{
+  "globalCss": "src/global.css",
+  "componentsUi": "src/components/ui",
+  "lib": "src/lib"
+}
+```
+
+To change these paths, either:
+- Edit `components.json` directly, or
+- Run `npx novaui-cli init` again to reconfigure
+
+### Customizing Themes
+
+NovaUI components use CSS variables for theming. Customize colors, spacing, and other design tokens in your `global.css` file:
+
+```css
+@theme {
+  --color-primary: 222.2 47.4% 11.2%;
+  --color-primary-foreground: 210 40% 98%;
+  /* ... more theme variables */
+}
+```
+
+The `tailwind.config.js` generated by NovaUI includes a comprehensive theme configuration that you can customize to match your brand.
+
+## CLI Commands Reference
+
+| Command | Description |
+|---------|-------------|
+| `npx novaui-cli init` | Interactive setup — creates config, Tailwind config, global CSS, and utils |
+| `npx novaui-cli add <name>` | Add a component to your project |
+| `npx novaui-cli --version` | Show CLI version |
+| `npx novaui-cli --help` | Show help and available commands |
+
+## Next Steps
+
+Now that you're set up, here are some recommended next steps:
+
+1. **Explore Components**: Browse the [component documentation](/docs/components/button) to see all available components
+2. **Customize Themes**: Adjust colors and styles in `global.css` to match your brand
+3. **Read Best Practices**: Learn about component composition and customization patterns
+4. **Join the Community**: Check out the [GitHub repository](https://github.com/KaloyanBehov/native-ui) for updates and contributions
+
+## Troubleshooting
+
+### Components Not Styling Correctly
+
+- Ensure `global.css` is imported in your root file
+- Verify NativeWind is properly configured in `babel.config.js`
+- Check that `tailwind.config.js` includes the NativeWind preset
+- Make sure your content paths in `tailwind.config.js` include your component directories
+
+### TypeScript Errors
+
+- Ensure you have `@types/react` and `@types/react-native` installed
+- Check that your `tsconfig.json` includes the component paths
+
+### Build Issues
+
+- Clear your build cache: `npx react-native start --reset-cache`
+- Reinstall dependencies: `rm -rf node_modules && npm install`
+- Verify all peer dependencies are installed
+
+## Need Help?
+
+- 📖 [NativeWind Documentation](https://www.nativewind.dev/docs) — Learn more about NativeWind
+- 🐛 [GitHub Issues](https://github.com/KaloyanBehov/native-ui/issues) — Report bugs or request features
+- 💬 [GitHub Discussions](https://github.com/KaloyanBehov/native-ui/discussions) — Ask questions and share ideas

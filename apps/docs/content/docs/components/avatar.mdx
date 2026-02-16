@@ -1,0 +1,425 @@
+---
+title: Avatar
+description: A flexible avatar component for displaying user profile pictures with fallback support, multiple sizes, and automatic error handling.
+---
+
+The Avatar component is a compound component system for displaying user profile pictures or initials. It gracefully handles image loading errors by automatically falling back to a customizable fallback component. The component uses React Context to share size information between its sub-components, ensuring consistent styling.
+
+## Installation
+
+The Avatar component is part of the `novaui-components` package. Make sure you have the required peer dependencies installed:
+
+```bash
+npm install novaui-components
+# or
+yarn add novaui-components
+```
+
+## Import
+
+```tsx
+import { Avatar, AvatarImage, AvatarFallback } from 'novaui-components'
+```
+
+## Basic Usage
+
+The Avatar component is a compound component that consists of three parts:
+
+- `Avatar` - The container component
+- `AvatarImage` - Displays the user's profile image
+- `AvatarFallback` - Shows fallback content when image fails to load or isn't available
+
+```tsx
+import { Avatar, AvatarImage, AvatarFallback } from 'novaui-components'
+
+export function BasicAvatar() {
+  return (
+    <Avatar>
+      <AvatarImage src="https://example.com/avatar.jpg" />
+      <AvatarFallback>JD</AvatarFallback>
+    </Avatar>
+  )
+}
+```
+
+## Sizes
+
+The Avatar component supports three size variants:
+
+### Default
+
+The standard avatar size (40x40):
+
+```tsx
+<Avatar size="default">
+  <AvatarImage src="https://example.com/avatar.jpg" />
+  <AvatarFallback>JD</AvatarFallback>
+</Avatar>
+```
+
+### Small
+
+Compact size (24x24), perfect for lists or compact layouts:
+
+```tsx
+<Avatar size="sm">
+  <AvatarImage src="https://example.com/avatar.jpg" />
+  <AvatarFallback>JD</AvatarFallback>
+</Avatar>
+```
+
+### Large
+
+Larger size (56x56), ideal for profile pages or prominent displays:
+
+```tsx
+<Avatar size="lg">
+  <AvatarImage src="https://example.com/avatar.jpg" />
+  <AvatarFallback>JD</AvatarFallback>
+</Avatar>
+```
+
+## Image Sources
+
+The `AvatarImage` component accepts image sources in multiple formats:
+
+### Using `src` Prop
+
+The simplest way to provide an image URL:
+
+```tsx
+<Avatar>
+  <AvatarImage src="https://example.com/user-avatar.jpg" />
+  <AvatarFallback>AB</AvatarFallback>
+</Avatar>
+```
+
+### Using React Native `source` Prop
+
+For more control, use the standard React Native `source` prop:
+
+```tsx
+<Avatar>
+  <AvatarImage source={{ uri: 'https://example.com/avatar.jpg' }} />
+  <AvatarFallback>AB</AvatarFallback>
+</Avatar>
+```
+
+### Local Images
+
+You can also use local image assets:
+
+```tsx
+import { Avatar, AvatarImage, AvatarFallback } from 'novaui-components'
+import avatarImage from './assets/avatar.png'
+
+<Avatar>
+  <AvatarImage source={avatarImage} />
+  <AvatarFallback>AB</AvatarFallback>
+</Avatar>
+```
+
+## Fallback Content
+
+The `AvatarFallback` component automatically displays when:
+- The image fails to load
+- The image URL is invalid
+- No image source is provided
+
+### Text Fallback
+
+The most common use case - display user initials:
+
+```tsx
+<Avatar>
+  <AvatarImage src="https://example.com/avatar.jpg" />
+  <AvatarFallback>JD</AvatarFallback>
+</Avatar>
+```
+
+The text size automatically adjusts based on the Avatar's size:
+- `sm` → `text-xs`
+- `default` → `text-base`
+- `lg` → `text-xl`
+
+### Custom Fallback Content
+
+You can use any React component as fallback content:
+
+```tsx
+import { Avatar, AvatarImage, AvatarFallback } from 'novaui-components'
+import { User } from 'lucide-react-native'
+
+<Avatar>
+  <AvatarImage src="https://example.com/avatar.jpg" />
+  <AvatarFallback>
+    <User size={20} color="#666" />
+  </AvatarFallback>
+</Avatar>
+```
+
+### Icon Fallback
+
+Use icons from lucide-react-native or other icon libraries:
+
+```tsx
+import { Avatar, AvatarImage, AvatarFallback } from 'novaui-components'
+import { UserCircle } from 'lucide-react-native'
+
+<Avatar size="lg">
+  <AvatarImage src="https://example.com/avatar.jpg" />
+  <AvatarFallback>
+    <UserCircle size={32} color="#999" />
+  </AvatarFallback>
+</Avatar>
+```
+
+## Error Handling
+
+The Avatar component includes built-in error handling. When an image fails to load, `AvatarImage` automatically hides itself and the `AvatarFallback` becomes visible:
+
+```tsx
+// If the image URL is invalid or fails to load,
+// the fallback will automatically be shown
+<Avatar>
+  <AvatarImage src="https://invalid-url.com/image.jpg" />
+  <AvatarFallback>Error</AvatarFallback>
+</Avatar>
+```
+
+## Custom Styling
+
+### Custom Avatar Container
+
+Apply custom styles to the Avatar container:
+
+```tsx
+<Avatar className="border-2 border-primary">
+  <AvatarImage src="https://example.com/avatar.jpg" />
+  <AvatarFallback>JD</AvatarFallback>
+</Avatar>
+```
+
+### Custom Image Styling
+
+Style the image component:
+
+```tsx
+<Avatar>
+  <AvatarImage 
+    src="https://example.com/avatar.jpg"
+    className="opacity-90"
+  />
+  <AvatarFallback>JD</AvatarFallback>
+</Avatar>
+```
+
+### Custom Fallback Styling
+
+Customize the fallback appearance:
+
+```tsx
+<Avatar>
+  <AvatarImage src="https://example.com/avatar.jpg" />
+  <AvatarFallback className="bg-primary text-primary-foreground">
+    JD
+  </AvatarFallback>
+</Avatar>
+```
+
+## Advanced Examples
+
+### User List with Avatars
+
+Display avatars in a user list:
+
+```tsx
+import { Avatar, AvatarImage, AvatarFallback } from 'novaui-components'
+import { View, Text } from 'react-native'
+
+const users = [
+  { id: 1, name: 'John Doe', avatar: 'https://example.com/john.jpg' },
+  { id: 2, name: 'Jane Smith', avatar: 'https://example.com/jane.jpg' },
+  { id: 3, name: 'Bob Johnson', avatar: null },
+]
+
+export function UserList() {
+  return (
+    <View className="gap-4">
+      {users.map(user => (
+        <View key={user.id} className="flex-row items-center gap-3">
+          <Avatar>
+            {user.avatar && <AvatarImage src={user.avatar} />}
+            <AvatarFallback>
+              {user.name.split(' ').map(n => n[0]).join('')}
+            </AvatarFallback>
+          </Avatar>
+          <Text>{user.name}</Text>
+        </View>
+      ))}
+    </View>
+  )
+}
+```
+
+### Avatar with Badge
+
+Combine Avatar with badges or status indicators:
+
+```tsx
+import { Avatar, AvatarImage, AvatarFallback } from 'novaui-components'
+import { View } from 'react-native'
+
+export function AvatarWithBadge() {
+  return (
+    <View className="relative">
+      <Avatar size="lg">
+        <AvatarImage src="https://example.com/avatar.jpg" />
+        <AvatarFallback>JD</AvatarFallback>
+      </Avatar>
+      {/* Online status badge */}
+      <View className="absolute bottom-0 right-0 h-4 w-4 rounded-full bg-green-500 border-2 border-white" />
+    </View>
+  )
+}
+```
+
+### Avatar Group
+
+Create a group of avatars:
+
+```tsx
+import { Avatar, AvatarImage, AvatarFallback } from 'novaui-components'
+import { View } from 'react-native'
+
+export function AvatarGroup() {
+  return (
+    <View className="flex-row -space-x-2">
+      <Avatar size="sm" className="border-2 border-background">
+        <AvatarImage src="https://example.com/user1.jpg" />
+        <AvatarFallback>U1</AvatarFallback>
+      </Avatar>
+      <Avatar size="sm" className="border-2 border-background">
+        <AvatarImage src="https://example.com/user2.jpg" />
+        <AvatarFallback>U2</AvatarFallback>
+      </Avatar>
+      <Avatar size="sm" className="border-2 border-background">
+        <AvatarImage src="https://example.com/user3.jpg" />
+        <AvatarFallback>U3</AvatarFallback>
+      </Avatar>
+      <Avatar size="sm" className="border-2 border-background">
+        <AvatarFallback>+5</AvatarFallback>
+      </Avatar>
+    </View>
+  )
+}
+```
+
+### Profile Header
+
+Use Avatar in a profile header layout:
+
+```tsx
+import { Avatar, AvatarImage, AvatarFallback } from 'novaui-components'
+import { View, Text } from 'react-native'
+
+export function ProfileHeader() {
+  return (
+    <View className="items-center gap-4 p-6">
+      <Avatar size="lg" className="border-4 border-primary">
+        <AvatarImage src="https://example.com/profile.jpg" />
+        <AvatarFallback>JD</AvatarFallback>
+      </Avatar>
+      <View className="items-center">
+        <Text className="text-2xl font-bold">John Doe</Text>
+        <Text className="text-muted-foreground">@johndoe</Text>
+      </View>
+    </View>
+  )
+}
+```
+
+## Props API
+
+### Avatar Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `size` | `'default' \| 'sm' \| 'lg'` | `'default'` | The size of the avatar. Affects both image and fallback sizing |
+| `className` | `string` | - | Additional CSS classes for the avatar container |
+
+All standard React Native `View` props are also supported.
+
+### AvatarImage Props
+
+Extends `React.ComponentPropsWithoutRef<typeof Image>` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `src` | `string` | - | URL string for the image source (alternative to `source` prop) |
+| `source` | `ImageSource` | - | React Native Image source object |
+| `className` | `string` | - | Additional CSS classes for the image |
+
+**Note**: If both `src` and `source` are provided, `src` takes precedence.
+
+The component automatically handles image loading errors and hides itself when an error occurs, allowing the fallback to be displayed.
+
+### AvatarFallback Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | Fallback content. If a string, it will be rendered as text with automatic sizing based on Avatar size |
+| `className` | `string` | - | Additional CSS classes for the fallback container |
+
+**Automatic Text Sizing**: When `children` is a string, the text size automatically adjusts:
+- `sm` → `text-xs`
+- `default` → `text-base`  
+- `lg` → `text-xl`
+
+## Context API
+
+The Avatar component uses React Context internally to share size information between `Avatar` and `AvatarFallback`. This ensures that the fallback text size automatically matches the avatar size without requiring explicit prop passing.
+
+## Accessibility
+
+For better accessibility, consider adding:
+
+```tsx
+<Avatar 
+  accessibilityLabel="User avatar"
+  accessibilityRole="image"
+>
+  <AvatarImage 
+    src="https://example.com/avatar.jpg"
+    accessibilityLabel="John Doe's profile picture"
+  />
+  <AvatarFallback>JD</AvatarFallback>
+</Avatar>
+```
+
+## Best Practices
+
+1. **Always provide a fallback**: Always include `AvatarFallback` to handle cases where images fail to load or aren't available
+
+2. **Use meaningful initials**: When using text fallbacks, use user initials (typically first letter of first and last name)
+
+3. **Handle missing images**: The component automatically handles image errors, but ensure your fallback provides a good user experience
+
+4. **Consistent sizing**: Use consistent avatar sizes throughout your app for better visual hierarchy
+
+5. **Performance**: For lists with many avatars, consider lazy loading images or using lower resolution thumbnails
+
+6. **Image optimization**: Use appropriately sized images for each avatar size to improve performance:
+   - `sm` → 24x24px images
+   - `default` → 40x40px images
+   - `lg` → 56x56px images
+
+## Related Components
+
+- Use Avatar with other UI components like Cards, Lists, or Navigation components
+- Combine with Badge components for status indicators
+- Use in combination with Text components for user information displays
