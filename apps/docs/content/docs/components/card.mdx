@@ -1,0 +1,432 @@
+---
+title: Card
+description: A container component for grouping related content with header, body, and footer sections.
+---
+
+The Card component is a versatile container for grouping related content. It features a compound component API with header, title, description, content, and footer parts for flexible layouts. Built with NativeWind for consistent styling across platforms.
+
+## Preview
+
+<ComponentPreview>
+  <div className="w-full max-w-sm rounded-xl border border-border bg-card shadow-sm shadow-black/5">
+    <div className="flex flex-col space-y-1.5 p-6">
+      <span className="text-2xl font-semibold leading-none tracking-tight text-foreground">Card Title</span>
+      <span className="text-sm text-muted-foreground">Card description goes here.</span>
+    </div>
+    <div className="p-6 pt-0">
+      <span className="text-sm text-foreground">This is the card content area where you can place any content.</span>
+    </div>
+    <div className="flex flex-row items-center p-6 pt-0">
+      <button className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">Action</button>
+    </div>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add card
+```
+
+## Import
+
+```tsx
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from 'novaui-components'
+```
+
+## Basic Usage
+
+The Card is a compound component with six parts:
+
+- `Card` - The outer container
+- `CardHeader` - Groups the title and description
+- `CardTitle` - The card heading
+- `CardDescription` - Subtitle or description text
+- `CardContent` - The main body area
+- `CardFooter` - Bottom section for actions
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-sm rounded-xl border border-border bg-card shadow-sm shadow-black/5">
+    <div className="flex flex-col space-y-1.5 p-6">
+      <span className="text-2xl font-semibold leading-none tracking-tight text-foreground">Card Title</span>
+      <span className="text-sm text-muted-foreground">Card description goes here.</span>
+    </div>
+    <div className="p-6 pt-0">
+      <span className="text-sm text-foreground">This is the card content area where you can place any content.</span>
+    </div>
+    <div className="flex flex-row items-center p-6 pt-0">
+      <button className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">Action</button>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from 'novaui-components'
+import { Button } from 'novaui-components'
+import { Text } from 'react-native'
+
+export function BasicCard() {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Card Title</CardTitle>
+        <CardDescription>Card description goes here.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Text>This is the card content area where you can place any content.</Text>
+      </CardContent>
+      <CardFooter>
+        <Button label="Action" />
+      </CardFooter>
+    </Card>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Header Only
+
+A simple card with just a header:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-sm rounded-xl border border-border bg-card shadow-sm shadow-black/5">
+    <div className="flex flex-col space-y-1.5 p-6">
+      <span className="text-2xl font-semibold leading-none tracking-tight text-foreground">Notifications</span>
+      <span className="text-sm text-muted-foreground">You have 3 unread messages.</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Card>
+  <CardHeader>
+    <CardTitle>Notifications</CardTitle>
+    <CardDescription>You have 3 unread messages.</CardDescription>
+  </CardHeader>
+</Card>
+```
+
+</Tab>
+</Tabs>
+
+## With Content
+
+A card with header and content sections:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-sm rounded-xl border border-border bg-card shadow-sm shadow-black/5">
+    <div className="flex flex-col space-y-1.5 p-6">
+      <span className="text-2xl font-semibold leading-none tracking-tight text-foreground">Account</span>
+      <span className="text-sm text-muted-foreground">Manage your account settings and preferences.</span>
+    </div>
+    <div className="p-6 pt-0 flex flex-col gap-3">
+      <div className="flex flex-row items-center justify-between">
+        <span className="text-sm text-foreground">Email</span>
+        <span className="text-sm text-muted-foreground">john@example.com</span>
+      </div>
+      <div className="flex flex-row items-center justify-between">
+        <span className="text-sm text-foreground">Plan</span>
+        <span className="text-sm text-muted-foreground">Pro</span>
+      </div>
+      <div className="flex flex-row items-center justify-between">
+        <span className="text-sm text-foreground">Status</span>
+        <span className="text-sm text-muted-foreground">Active</span>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from 'novaui-components'
+import { View, Text } from 'react-native'
+
+export function AccountCard() {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Account</CardTitle>
+        <CardDescription>Manage your account settings and preferences.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <View className="gap-3">
+          <View className="flex-row items-center justify-between">
+            <Text>Email</Text>
+            <Text className="text-muted-foreground">john@example.com</Text>
+          </View>
+          <View className="flex-row items-center justify-between">
+            <Text>Plan</Text>
+            <Text className="text-muted-foreground">Pro</Text>
+          </View>
+          <View className="flex-row items-center justify-between">
+            <Text>Status</Text>
+            <Text className="text-muted-foreground">Active</Text>
+          </View>
+        </View>
+      </CardContent>
+    </Card>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## With Footer Actions
+
+A card with action buttons in the footer:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-sm rounded-xl border border-border bg-card shadow-sm shadow-black/5">
+    <div className="flex flex-col space-y-1.5 p-6">
+      <span className="text-2xl font-semibold leading-none tracking-tight text-foreground">Create Project</span>
+      <span className="text-sm text-muted-foreground">Deploy your new project in one click.</span>
+    </div>
+    <div className="p-6 pt-0">
+      <div className="flex flex-col gap-2">
+        <span className="text-sm font-medium text-foreground">Name</span>
+        <div className="h-10 w-full rounded-md border border-input bg-background px-3 flex items-center">
+          <span className="text-sm text-muted-foreground">My Project</span>
+        </div>
+      </div>
+    </div>
+    <div className="flex flex-row items-center justify-between p-6 pt-0 gap-2">
+      <button className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">Cancel</button>
+      <button className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">Deploy</button>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from 'novaui-components'
+import { Button } from 'novaui-components'
+import { View, Text, TextInput } from 'react-native'
+
+export function CreateProjectCard() {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Create Project</CardTitle>
+        <CardDescription>Deploy your new project in one click.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <View className="gap-2">
+          <Text className="text-sm font-medium">Name</Text>
+          <TextInput
+            placeholder="My Project"
+            className="h-10 w-full rounded-md border border-input bg-background px-3"
+          />
+        </View>
+      </CardContent>
+      <CardFooter className="justify-between">
+        <Button variant="outline" label="Cancel" />
+        <Button label="Deploy" />
+      </CardFooter>
+    </Card>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Custom Styling
+
+Apply custom classes to any part of the Card:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-sm rounded-xl border-2 border-primary bg-primary/5 shadow-sm shadow-black/5">
+    <div className="flex flex-col space-y-1.5 p-6">
+      <span className="text-2xl font-semibold leading-none tracking-tight text-primary">Featured</span>
+      <span className="text-sm text-primary/70">A card with custom primary styling.</span>
+    </div>
+    <div className="p-6 pt-0">
+      <span className="text-sm text-foreground">Custom borders and background colors using className overrides.</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Card className="border-2 border-primary bg-primary/5">
+  <CardHeader>
+    <CardTitle className="text-primary">Featured</CardTitle>
+    <CardDescription className="text-primary/70">
+      A card with custom primary styling.
+    </CardDescription>
+  </CardHeader>
+  <CardContent>
+    <Text>Custom borders and background colors using className overrides.</Text>
+  </CardContent>
+</Card>
+```
+
+</Tab>
+</Tabs>
+
+## Card Grid
+
+Display multiple cards in a grid layout:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview className="items-start">
+  <div className="grid w-full max-w-lg grid-cols-2 gap-4">
+    <div className="rounded-xl border border-border bg-card shadow-sm shadow-black/5">
+      <div className="flex flex-col space-y-1.5 p-6">
+        <span className="text-2xl font-semibold leading-none tracking-tight text-foreground">128</span>
+        <span className="text-sm text-muted-foreground">Total Users</span>
+      </div>
+    </div>
+    <div className="rounded-xl border border-border bg-card shadow-sm shadow-black/5">
+      <div className="flex flex-col space-y-1.5 p-6">
+        <span className="text-2xl font-semibold leading-none tracking-tight text-foreground">$4,250</span>
+        <span className="text-sm text-muted-foreground">Revenue</span>
+      </div>
+    </div>
+    <div className="rounded-xl border border-border bg-card shadow-sm shadow-black/5">
+      <div className="flex flex-col space-y-1.5 p-6">
+        <span className="text-2xl font-semibold leading-none tracking-tight text-foreground">98%</span>
+        <span className="text-sm text-muted-foreground">Uptime</span>
+      </div>
+    </div>
+    <div className="rounded-xl border border-border bg-card shadow-sm shadow-black/5">
+      <div className="flex flex-col space-y-1.5 p-6">
+        <span className="text-2xl font-semibold leading-none tracking-tight text-foreground">42</span>
+        <span className="text-sm text-muted-foreground">Active Now</span>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { Card, CardHeader, CardTitle, CardDescription } from 'novaui-components'
+import { View } from 'react-native'
+
+const stats = [
+  { value: '128', label: 'Total Users' },
+  { value: '$4,250', label: 'Revenue' },
+  { value: '98%', label: 'Uptime' },
+  { value: '42', label: 'Active Now' },
+]
+
+export function StatsGrid() {
+  return (
+    <View className="flex-row flex-wrap gap-4">
+      {stats.map((stat) => (
+        <Card key={stat.label} className="flex-1 min-w-[140px]">
+          <CardHeader>
+            <CardTitle>{stat.value}</CardTitle>
+            <CardDescription>{stat.label}</CardDescription>
+          </CardHeader>
+        </Card>
+      ))}
+    </View>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Props API
+
+### Card Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### CardHeader Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### CardTitle Props
+
+Extends `React.ComponentPropsWithoutRef<typeof Text>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### CardDescription Props
+
+Extends `React.ComponentPropsWithoutRef<typeof Text>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### CardContent Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### CardFooter Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+## Best Practices
+
+1. **Consistent structure**: Always use `CardHeader` for title/description and `CardContent` for body
+
+2. **Footer for actions**: Place buttons and links in `CardFooter` for consistent alignment
+
+3. **Don't nest cards**: Avoid placing cards inside cards — use sections instead
+
+4. **Responsive layouts**: Use flex or grid wrappers to create responsive card grids
+
+5. **Shadow usage**: The default shadow is subtle — increase it with `className` for elevated cards
+
+## Related Components
+
+- Combine with `Button` for card actions
+- Use `Avatar` inside cards for user profiles
+- Use `Badge` for status indicators on cards
