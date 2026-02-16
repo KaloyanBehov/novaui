@@ -17,9 +17,7 @@
     "incremental": true,
     "paths": {
       "@/*": ["./*"],
-      "fumadocs-mdx:collections/*": [".source/*"],
-      "@packages/components/*": ["../../packages/components/src/*"],
-      "novaui-components": ["../../packages/components/src/index.ts"]
+      "fumadocs-mdx:collections/*": [".source/*"]
     },
     "plugins": [
       {

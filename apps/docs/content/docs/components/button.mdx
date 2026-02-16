@@ -38,10 +38,6 @@ export function MyComponent() {
 }
 ```
 
-<ComponentPreview title="Basic Button">
-  <Button label="Click me" />
-</ComponentPreview>
-
 ## Variants
 
 The Button component supports six visual variants, each designed for different use cases:
@@ -54,10 +50,6 @@ The primary button variant, perfect for main actions:
 <Button variant="default" label="Default Button" />
 ```
 
-<ComponentPreview>
-  <Button variant="default" label="Default Button" />
-</ComponentPreview>
-
 ### Destructive
 
 Use for dangerous or destructive actions like delete or remove:
@@ -65,10 +57,6 @@ Use for dangerous or destructive actions like delete or remove:
 ```tsx
 <Button variant="destructive" label="Delete" />
 ```
-
-<ComponentPreview>
-  <Button variant="destructive" label="Delete" />
-</ComponentPreview>
 
 ### Outline
 
@@ -78,10 +66,6 @@ A button with an outlined border, great for secondary actions:
 <Button variant="outline" label="Outline Button" />
 ```
 
-<ComponentPreview>
-  <Button variant="outline" label="Outline Button" />
-</ComponentPreview>
-
 ### Secondary
 
 A secondary button variant with a subtle background:
@@ -89,10 +73,6 @@ A secondary button variant with a subtle background:
 ```tsx
 <Button variant="secondary" label="Secondary Button" />
 ```
-
-<ComponentPreview>
-  <Button variant="secondary" label="Secondary Button" />
-</ComponentPreview>
 
 ### Ghost
 
@@ -102,10 +82,6 @@ A minimal button with no background, ideal for subtle actions:
 <Button variant="ghost" label="Ghost Button" />
 ```
 
-<ComponentPreview>
-  <Button variant="ghost" label="Ghost Button" />
-</ComponentPreview>
-
 ### Link
 
 A text-only button styled like a link:
@@ -113,10 +89,6 @@ A text-only button styled like a link:
 ```tsx
 <Button variant="link" label="Link Button" />
 ```
-
-<ComponentPreview>
-  <Button variant="link" label="Link Button" />
-</ComponentPreview>
 
 ## Sizes
 
@@ -138,10 +110,6 @@ Compact size for tight spaces:
 <Button size="sm" label="Small Button" />
 ```
 
-<ComponentPreview>
-  <Button size="sm" label="Small Button" />
-</ComponentPreview>
-
 ### Large
 
 Larger size for prominent actions:
@@ -150,10 +118,6 @@ Larger size for prominent actions:
 <Button size="lg" label="Large Button" />
 ```
 
-<ComponentPreview>
-  <Button size="lg" label="Large Button" />
-</ComponentPreview>
-
 ### Icon
 
 Square button perfect for icon-only buttons:
@@ -161,10 +125,6 @@ Square button perfect for icon-only buttons:
 ```tsx
 <Button size="icon" label="🚀" />
 ```
-
-<ComponentPreview>
-  <Button size="icon" label="🚀" />
-</ComponentPreview>
 
 ## Border Radius
 
@@ -208,10 +168,6 @@ export function LoadingButton() {
 }
 ```
 
-<ComponentPreview title="Loading State">
-  <Button label="Loading..." isLoading />
-</ComponentPreview>
-
 When `isLoading` is `true`, the button automatically:
 - Shows an `ActivityIndicator` spinner
 - Disables interaction
@@ -224,10 +180,6 @@ Disable the button to prevent user interaction:
 ```tsx
 <Button label="Disabled Button" disabled />
 ```
-
-<ComponentPreview title="Disabled State">
-  <Button label="Disabled Button" disabled />
-</ComponentPreview>
 
 The button will be visually dimmed and non-interactive when disabled.
 
