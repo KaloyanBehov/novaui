@@ -32,35 +32,28 @@
     "react": ">=18",
     "react-native": ">=0.72",
     "nativewind": ">=4",
-    "tailwindcss": ">=3"
+    "tailwindcss": ">=3",
+    "class-variance-authority": ">=0.7",
+    "clsx": ">=2",
+    "tailwind-merge": ">=3",
+    "date-fns": ">=4",
+    "expo-linear-gradient": ">=13",
+    "lucide-react-native": ">=0.300",
+    "react-native-gesture-handler": ">=2",
+    "react-native-gifted-charts": ">=1",
+    "react-native-reanimated": ">=3"
   },
   "peerDependenciesMeta": {
-    "react-native": {
-      "optional": false
-    },
-    "nativewind": {
-      "optional": false
-    },
-    "tailwindcss": {
-      "optional": false
-    }
+    "expo-linear-gradient": { "optional": true },
+    "lucide-react-native": { "optional": true },
+    "react-native-gifted-charts": { "optional": true },
+    "date-fns": { "optional": true }
   },
   "devDependencies": {
     "@repo/typescript-config": "*",
     "@types/react": "^18.2.14",
     "tsup": "^8.0.1",
     "typescript": "5.5.4"
-  },
-  "dependencies": {
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "date-fns": "^4.1.0",
-    "expo-linear-gradient": "^15.0.8",
-    "lucide-react-native": "^0.563.0",
-    "react-native-gesture-handler": "^2.30.0",
-    "react-native-gifted-charts": "^1.4.74",
-    "react-native-reanimated": "~4.1.1",
-    "tailwind-merge": "^3.4.0"
   },
   "keywords": [
     "react-native",

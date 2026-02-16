@@ -534,42 +534,70 @@ function showVersion() {
   console.log(getCliVersion())
 }
 
-// ─── Main ───────────────────────────────────────────────────────────────────
+// ─── Exports (for testing) ──────────────────────────────────────────────────
 
-const command = process.argv[2]
-const arg = process.argv[3]
-
-async function main() {
-  try {
-    switch (command) {
-      case "init":
-        await init()
-        break
-      case "add":
-        await add(arg)
-        break
-      case "--help":
-      case "-h":
-        showHelp()
-        break
-      case "--version":
-      case "-v":
-        showVersion()
-        break
-      default:
-        if (command) {
-          // Backwards compatible: treat unknown command as component name
-          await add(command)
-        } else {
-          showHelp()
-        }
-        break
-    }
-  } catch (error) {
-    console.error("")
-    console.error(`  ✗  Error: ${formatError(error)}`)
-    process.exit(1)
-  }
+export {
+  DEFAULT_CONFIG,
+  CONFIG_FILENAME,
+  GLOBAL_CSS_CONTENT,
+  UTILS_CONTENT,
+  getTailwindConfigContent,
+  detectPackageManager,
+  ensureDir,
+  writeIfNotExists,
+  getMissingDeps,
+  loadConfig,
+  writeConfig,
+  assertValidComponentConfig,
+  fetchWithTimeout,
+  formatError,
+  getCliVersion,
+  init,
+  add,
 }
 
-main()
+// ─── Main ───────────────────────────────────────────────────────────────────
+
+const isDirectRun =
+  process.argv[1] &&
+  (process.argv[1] === fileURLToPath(import.meta.url) ||
+    process.argv[1].endsWith("/bin.js"))
+
+if (isDirectRun) {
+  const command = process.argv[2]
+  const arg = process.argv[3]
+
+  async function main() {
+    try {
+      switch (command) {
+        case "init":
+          await init()
+          break
+        case "add":
+          await add(arg)
+          break
+        case "--help":
+        case "-h":
+          showHelp()
+          break
+        case "--version":
+        case "-v":
+          showVersion()
+          break
+        default:
+          if (command) {
+            await add(command)
+          } else {
+            showHelp()
+          }
+          break
+      }
+    } catch (error) {
+      console.error("")
+      console.error(`  ✗  Error: ${formatError(error)}`)
+      process.exit(1)
+    }
+  }
+
+  main()
+}
