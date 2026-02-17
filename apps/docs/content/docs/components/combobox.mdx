@@ -1,0 +1,273 @@
+---
+title: Combobox
+description: A searchable dropdown selector that combines a text input with a filterable list of options.
+---
+
+The Combobox component combines a trigger button with a searchable popup list. It supports single selection, search filtering, groups with headings, and customizable items with check indicators. Built with React Native's `Modal`, `TextInput`, and `ScrollView`.
+
+## Preview
+
+<ComponentPreview>
+  <div className="w-full max-w-sm">
+    <button className="flex w-full flex-row items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm">
+      <span className="text-sm text-muted-foreground">Select a framework...</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-2 h-4 w-4 shrink-0 opacity-50 text-foreground"><polyline points="7 15 12 20 17 15"></polyline><polyline points="7 9 12 4 17 9"></polyline></svg>
+    </button>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add combobox
+```
+
+## Import
+
+```tsx
+import {
+  Combobox,
+  ComboboxTrigger,
+  ComboboxContent,
+  ComboboxInput,
+  ComboboxList,
+  ComboboxEmpty,
+  ComboboxGroup,
+  ComboboxItem,
+  ComboboxSeparator,
+} from 'novaui-components'
+```
+
+## Basic Usage
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-col gap-4 w-full max-w-sm">
+    <button className="flex w-full flex-row items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm">
+      <span className="text-sm text-muted-foreground">Select a framework...</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-2 h-4 w-4 shrink-0 opacity-50 text-foreground"><polyline points="7 15 12 20 17 15"></polyline><polyline points="7 9 12 4 17 9"></polyline></svg>
+    </button>
+    <div className="w-full rounded-md border border-border bg-popover p-0 shadow-md">
+      <div className="flex flex-row items-center border-b border-input px-3">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 h-4 w-4 shrink-0 opacity-50 text-foreground"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <span className="flex h-11 w-full py-3 text-sm text-muted-foreground">Search framework...</span>
+      </div>
+      <div className="max-h-[300px] p-1">
+        <div className="relative flex flex-row w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 bg-accent">
+          <span className="text-sm font-medium text-foreground">React</span>
+          <span className="absolute right-2 flex h-3.5 w-3.5 items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 text-foreground"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </span>
+        </div>
+        <div className="relative flex flex-row w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8">
+          <span className="text-sm text-foreground">Vue</span>
+        </div>
+        <div className="relative flex flex-row w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8">
+          <span className="text-sm text-foreground">Angular</span>
+        </div>
+        <div className="relative flex flex-row w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8">
+          <span className="text-sm text-foreground">Svelte</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { useState } from 'react'
+import {
+  Combobox,
+  ComboboxTrigger,
+  ComboboxContent,
+  ComboboxInput,
+  ComboboxList,
+  ComboboxEmpty,
+  ComboboxItem,
+} from 'novaui-components'
+import { Text } from 'react-native'
+
+const frameworks = [
+  { value: 'react', label: 'React' },
+  { value: 'vue', label: 'Vue' },
+  { value: 'angular', label: 'Angular' },
+  { value: 'svelte', label: 'Svelte' },
+]
+
+export function BasicCombobox() {
+  const [value, setValue] = useState<string>('react')
+
+  return (
+    <Combobox value={value} onValueChange={setValue}>
+      <ComboboxTrigger>
+        <Text className="text-sm text-foreground">
+          {frameworks.find((f) => f.value === value)?.label ?? 'Select a framework...'}
+        </Text>
+      </ComboboxTrigger>
+      <ComboboxContent>
+        <ComboboxInput placeholder="Search framework..." />
+        <ComboboxList>
+          <ComboboxEmpty>No framework found.</ComboboxEmpty>
+          {frameworks.map((f) => (
+            <ComboboxItem key={f.value} value={f.value} label={f.label}>
+              {f.label}
+            </ComboboxItem>
+          ))}
+        </ComboboxList>
+      </ComboboxContent>
+    </Combobox>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## With Groups
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-sm rounded-md border border-border bg-popover p-0 shadow-md">
+    <div className="flex flex-row items-center border-b border-input px-3">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 h-4 w-4 shrink-0 opacity-50 text-foreground"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <span className="flex h-11 w-full py-3 text-sm text-muted-foreground">Search...</span>
+    </div>
+    <div className="max-h-[300px] p-1">
+      <div className="overflow-hidden">
+        <span className="px-2 py-1.5 text-xs font-medium text-muted-foreground">Frontend</span>
+        <div className="relative flex flex-row w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8">
+          <span className="text-sm text-foreground">React</span>
+        </div>
+        <div className="relative flex flex-row w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8">
+          <span className="text-sm text-foreground">Vue</span>
+        </div>
+      </div>
+      <div className="-mx-1 my-1 h-px bg-muted" />
+      <div className="overflow-hidden">
+        <span className="px-2 py-1.5 text-xs font-medium text-muted-foreground">Backend</span>
+        <div className="relative flex flex-row w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8">
+          <span className="text-sm text-foreground">Express</span>
+        </div>
+        <div className="relative flex flex-row w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8">
+          <span className="text-sm text-foreground">Fastify</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Combobox value={value} onValueChange={setValue}>
+  <ComboboxTrigger>
+    <Text className="text-sm text-foreground">
+      {selectedLabel ?? 'Select...'}
+    </Text>
+  </ComboboxTrigger>
+  <ComboboxContent>
+    <ComboboxInput placeholder="Search..." />
+    <ComboboxList>
+      <ComboboxEmpty>No results found.</ComboboxEmpty>
+      <ComboboxGroup heading="Frontend">
+        <ComboboxItem value="react" label="React">React</ComboboxItem>
+        <ComboboxItem value="vue" label="Vue">Vue</ComboboxItem>
+      </ComboboxGroup>
+      <ComboboxSeparator />
+      <ComboboxGroup heading="Backend">
+        <ComboboxItem value="express" label="Express">Express</ComboboxItem>
+        <ComboboxItem value="fastify" label="Fastify">Fastify</ComboboxItem>
+      </ComboboxGroup>
+    </ComboboxList>
+  </ComboboxContent>
+</Combobox>
+```
+
+</Tab>
+</Tabs>
+
+## Props API
+
+### Combobox
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string \| string[]` | - | The selected value(s) |
+| `onValueChange` | `(value: string \| string[]) => void` | - | Callback when the selection changes |
+| `defaultOpen` | `boolean` | `false` | Whether the content is initially open |
+| `open` | `boolean` | - | Controlled open state |
+| `onOpenChange` | `(open: boolean) => void` | - | Callback when open state changes |
+| `className` | `string` | - | Additional CSS classes |
+
+### ComboboxTrigger
+
+Extends `React.ComponentPropsWithoutRef<typeof Pressable>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Render as the child element |
+| `className` | `string` | - | Additional CSS classes |
+
+### ComboboxContent
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### ComboboxInput
+
+Extends `React.ComponentPropsWithoutRef<typeof TextInput>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### ComboboxList
+
+Extends `React.ComponentPropsWithoutRef<typeof ScrollView>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### ComboboxGroup
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `heading` | `string` | - | Group heading text |
+| `className` | `string` | - | Additional CSS classes |
+
+### ComboboxItem
+
+Extends `React.ComponentPropsWithoutRef<typeof Pressable>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | **required** | The value of the item |
+| `label` | `string` | **required** | Label used for search filtering |
+| `className` | `string` | - | Additional CSS classes |
+
+## Best Practices
+
+1. **Always include search**: The search input is the core advantage over a plain Select
+2. **Provide an empty state**: Use `ComboboxEmpty` to show a message when no items match the search
+3. **Use groups for large lists**: Organize items into `ComboboxGroup` with headings
+4. **Set label for filtering**: The `label` prop on `ComboboxItem` controls search matching
+5. **Close on select**: Items automatically close the combobox and clear the search on selection
+
+## Related Components
+
+- [Select](/docs/components/select) - For simple dropdown selection without search
+- [Command](/docs/components/command) - For a command palette with broader action support
+- [Input](/docs/components/input) - For free-text entry

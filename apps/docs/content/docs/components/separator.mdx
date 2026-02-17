@@ -1,0 +1,228 @@
+---
+title: Separator
+description: A visual divider to separate content sections horizontally or vertically.
+---
+
+The Separator component renders a thin line to visually divide content. It supports both horizontal and vertical orientations and can be set as decorative or semantically meaningful for accessibility.
+
+## Preview
+
+<ComponentPreview>
+  <div className="flex flex-col gap-4 w-full max-w-md">
+    <div className="space-y-1">
+      <h4 className="text-sm font-medium leading-none text-foreground">NovaUI</h4>
+      <p className="text-sm text-muted-foreground">An open-source UI component library.</p>
+    </div>
+    <div className="shrink-0 bg-border h-[1px] w-full" />
+    <div className="flex h-5 items-center gap-4 text-sm">
+      <span className="text-foreground">Blog</span>
+      <div className="shrink-0 bg-border h-full w-[1px]" />
+      <span className="text-foreground">Docs</span>
+      <div className="shrink-0 bg-border h-full w-[1px]" />
+      <span className="text-foreground">Source</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add separator
+```
+
+## Import
+
+```tsx
+import { Separator } from 'novaui-components'
+```
+
+## Basic Usage
+
+By default, the Separator renders a horizontal line:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-md">
+    <div className="shrink-0 bg-border h-[1px] w-full" />
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { Separator } from 'novaui-components'
+
+export function BasicSeparator() {
+  return <Separator />
+}
+```
+
+</Tab>
+</Tabs>
+
+## Orientation
+
+### Horizontal
+
+The default orientation, spanning the full width:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-col gap-3 w-full max-w-md">
+    <span className="text-sm text-foreground">Content above</span>
+    <div className="shrink-0 bg-border h-[1px] w-full" />
+    <span className="text-sm text-foreground">Content below</span>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { View, Text } from 'react-native'
+import { Separator } from 'novaui-components'
+
+export function HorizontalSeparator() {
+  return (
+    <View className="gap-3">
+      <Text>Content above</Text>
+      <Separator orientation="horizontal" />
+      <Text>Content below</Text>
+    </View>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+### Vertical
+
+A vertical separator for side-by-side content:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex h-5 items-center gap-4 text-sm">
+    <span className="text-foreground">Item 1</span>
+    <div className="shrink-0 bg-border h-full w-[1px]" />
+    <span className="text-foreground">Item 2</span>
+    <div className="shrink-0 bg-border h-full w-[1px]" />
+    <span className="text-foreground">Item 3</span>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { View, Text } from 'react-native'
+import { Separator } from 'novaui-components'
+
+export function VerticalSeparator() {
+  return (
+    <View className="flex-row h-5 items-center gap-4">
+      <Text>Item 1</Text>
+      <Separator orientation="vertical" />
+      <Text>Item 2</Text>
+      <Separator orientation="vertical" />
+      <Text>Item 3</Text>
+    </View>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## With Content Sections
+
+Use Separator to divide content within a card or layout:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-sm rounded-lg border border-border p-4">
+    <div className="space-y-1">
+      <h4 className="text-sm font-medium leading-none text-foreground">Settings</h4>
+      <p className="text-sm text-muted-foreground">Manage your account settings.</p>
+    </div>
+    <div className="shrink-0 bg-border h-[1px] w-full my-4" />
+    <div className="space-y-1">
+      <h4 className="text-sm font-medium leading-none text-foreground">Notifications</h4>
+      <p className="text-sm text-muted-foreground">Configure your notification preferences.</p>
+    </div>
+    <div className="shrink-0 bg-border h-[1px] w-full my-4" />
+    <div className="space-y-1">
+      <h4 className="text-sm font-medium leading-none text-foreground">Privacy</h4>
+      <p className="text-sm text-muted-foreground">Control your privacy settings.</p>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { View, Text } from 'react-native'
+import { Separator } from 'novaui-components'
+
+export function SectionedContent() {
+  return (
+    <View className="rounded-lg border border-border p-4">
+      <View className="gap-1">
+        <Text className="text-sm font-medium text-foreground">Settings</Text>
+        <Text className="text-sm text-muted-foreground">Manage your account settings.</Text>
+      </View>
+      <Separator className="my-4" />
+      <View className="gap-1">
+        <Text className="text-sm font-medium text-foreground">Notifications</Text>
+        <Text className="text-sm text-muted-foreground">Configure your notification preferences.</Text>
+      </View>
+      <Separator className="my-4" />
+      <View className="gap-1">
+        <Text className="text-sm font-medium text-foreground">Privacy</Text>
+        <Text className="text-sm text-muted-foreground">Control your privacy settings.</Text>
+      </View>
+    </View>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Props API
+
+### SeparatorProps
+
+Extends `React.ComponentPropsWithoutRef<typeof View>` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | The direction of the separator line |
+| `decorative` | `boolean` | `true` | When true, sets `role="none"` for screen readers. Set to false when the separator has semantic meaning |
+| `className` | `string` | - | Additional CSS classes for custom styling |
+
+## Best Practices
+
+1. **Use sparingly**: Don't overuse separators — whitespace and layout grouping are often enough to divide content.
+
+2. **Decorative vs semantic**: Keep `decorative={true}` (the default) for purely visual dividers. Set it to `false` when the separator represents a meaningful boundary between content sections.
+
+3. **Vertical separators**: When using vertical separators, ensure the parent container has a defined height (e.g., `h-5`) so the separator can render properly.
+
+4. **Consistent spacing**: Apply consistent margin or gap around separators for visual rhythm.
+
+## Related Components
+
+- Use Separator within `Card` to divide card sections
+- Combine with navigation items for menu dividers
+- Pair with `DropdownMenu` or `ContextMenu` for item group separation

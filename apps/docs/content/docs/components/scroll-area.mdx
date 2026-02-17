@@ -1,0 +1,325 @@
+---
+title: ScrollArea
+description: A custom scrollable container with styled scrollbars for vertical and horizontal overflow.
+---
+
+The ScrollArea component wraps React Native's `ScrollView` with custom-styled scrollbar indicators. It tracks scroll position, content size, and viewport dimensions via context, and renders a `ScrollBar` thumb that reflects the current scroll state.
+
+## Preview
+
+<ComponentPreview>
+  <div className="relative flex-1 w-full max-w-sm" style={{ height: '200px' }}>
+    <div className="flex-1 rounded-[inherit] overflow-auto" style={{ height: '200px' }}>
+      <div className="p-4">
+        <h4 className="mb-4 text-sm font-medium leading-none text-foreground">Tags</h4>
+        <div className="flex flex-col gap-2">
+          <div className="text-sm text-foreground">v1.0.0-beta.1</div>
+          <div className="shrink-0 bg-border h-[1px] w-full" />
+          <div className="text-sm text-foreground">v1.0.0-beta.2</div>
+          <div className="shrink-0 bg-border h-[1px] w-full" />
+          <div className="text-sm text-foreground">v1.0.0-beta.3</div>
+          <div className="shrink-0 bg-border h-[1px] w-full" />
+          <div className="text-sm text-foreground">v1.0.0-rc.1</div>
+          <div className="shrink-0 bg-border h-[1px] w-full" />
+          <div className="text-sm text-foreground">v1.0.0-rc.2</div>
+          <div className="shrink-0 bg-border h-[1px] w-full" />
+          <div className="text-sm text-foreground">v1.0.0</div>
+          <div className="shrink-0 bg-border h-[1px] w-full" />
+          <div className="text-sm text-foreground">v1.1.0</div>
+          <div className="shrink-0 bg-border h-[1px] w-full" />
+          <div className="text-sm text-foreground">v1.2.0</div>
+          <div className="shrink-0 bg-border h-[1px] w-full" />
+          <div className="text-sm text-foreground">v1.3.0</div>
+          <div className="shrink-0 bg-border h-[1px] w-full" />
+          <div className="text-sm text-foreground">v2.0.0</div>
+        </div>
+      </div>
+    </div>
+    <div className="absolute right-0 top-0 h-full w-2.5 border-l border-l-transparent p-0.5">
+      <div className="bg-border rounded-full w-full" style={{ height: '40%', marginTop: '4px' }} />
+    </div>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add scroll-area
+```
+
+## Import
+
+```tsx
+import { ScrollArea, ScrollBar } from 'novaui-components'
+```
+
+## Basic Usage
+
+The ScrollArea is a compound component with these parts:
+
+- `ScrollArea` — Root container with `relative flex-1` styling that wraps a `ScrollView` with `flex-1 rounded-[inherit]`
+- `ScrollBar` — Custom scrollbar thumb indicator positioned absolutely with `absolute touch-none p-0.5`
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="relative flex-1 w-full max-w-sm rounded-md border border-border" style={{ height: '200px' }}>
+    <div className="flex-1 rounded-[inherit] overflow-auto" style={{ height: '200px' }}>
+      <div className="p-4">
+        <h4 className="mb-4 text-sm font-medium leading-none text-foreground">Tags</h4>
+        <div className="flex flex-col gap-2">
+          <div className="text-sm text-foreground">v1.0.0-beta.1</div>
+          <div className="shrink-0 bg-border h-[1px] w-full" />
+          <div className="text-sm text-foreground">v1.0.0-beta.2</div>
+          <div className="shrink-0 bg-border h-[1px] w-full" />
+          <div className="text-sm text-foreground">v1.0.0-beta.3</div>
+          <div className="shrink-0 bg-border h-[1px] w-full" />
+          <div className="text-sm text-foreground">v1.0.0-rc.1</div>
+          <div className="shrink-0 bg-border h-[1px] w-full" />
+          <div className="text-sm text-foreground">v1.0.0-rc.2</div>
+          <div className="shrink-0 bg-border h-[1px] w-full" />
+          <div className="text-sm text-foreground">v1.0.0</div>
+          <div className="shrink-0 bg-border h-[1px] w-full" />
+          <div className="text-sm text-foreground">v1.1.0</div>
+          <div className="shrink-0 bg-border h-[1px] w-full" />
+          <div className="text-sm text-foreground">v1.2.0</div>
+          <div className="shrink-0 bg-border h-[1px] w-full" />
+          <div className="text-sm text-foreground">v1.3.0</div>
+          <div className="shrink-0 bg-border h-[1px] w-full" />
+          <div className="text-sm text-foreground">v2.0.0</div>
+        </div>
+      </div>
+    </div>
+    <div className="absolute right-0 top-0 h-full w-2.5 border-l border-l-transparent p-0.5">
+      <div className="bg-border rounded-full w-full" style={{ height: '40%', marginTop: '4px' }} />
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { View, Text } from 'react-native'
+import { ScrollArea } from 'novaui-components'
+import { Separator } from 'novaui-components'
+
+const tags = [
+  'v1.0.0-beta.1',
+  'v1.0.0-beta.2',
+  'v1.0.0-beta.3',
+  'v1.0.0-rc.1',
+  'v1.0.0-rc.2',
+  'v1.0.0',
+  'v1.1.0',
+  'v1.2.0',
+  'v1.3.0',
+  'v2.0.0',
+]
+
+export function BasicScrollArea() {
+  return (
+    <ScrollArea className="h-48 w-full max-w-sm rounded-md border border-border">
+      <View className="p-4">
+        <Text className="mb-4 text-sm font-medium leading-none text-foreground">
+          Tags
+        </Text>
+        {tags.map((tag) => (
+          <View key={tag}>
+            <Text className="text-sm text-foreground">{tag}</Text>
+            <Separator className="my-2" />
+          </View>
+        ))}
+      </View>
+    </ScrollArea>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Horizontal Scrolling
+
+Use `horizontal` on the `ScrollArea` and add a horizontal `ScrollBar`:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="relative w-full max-w-md" style={{ height: '120px' }}>
+    <div className="flex-1 rounded-md border border-border overflow-auto" style={{ height: '120px' }}>
+      <div className="flex flex-row gap-4 p-4" style={{ width: '800px' }}>
+        <div className="flex h-20 w-36 shrink-0 items-center justify-center rounded-md bg-muted">
+          <span className="text-sm text-foreground">Item 1</span>
+        </div>
+        <div className="flex h-20 w-36 shrink-0 items-center justify-center rounded-md bg-muted">
+          <span className="text-sm text-foreground">Item 2</span>
+        </div>
+        <div className="flex h-20 w-36 shrink-0 items-center justify-center rounded-md bg-muted">
+          <span className="text-sm text-foreground">Item 3</span>
+        </div>
+        <div className="flex h-20 w-36 shrink-0 items-center justify-center rounded-md bg-muted">
+          <span className="text-sm text-foreground">Item 4</span>
+        </div>
+        <div className="flex h-20 w-36 shrink-0 items-center justify-center rounded-md bg-muted">
+          <span className="text-sm text-foreground">Item 5</span>
+        </div>
+        <div className="flex h-20 w-36 shrink-0 items-center justify-center rounded-md bg-muted">
+          <span className="text-sm text-foreground">Item 6</span>
+        </div>
+      </div>
+    </div>
+    <div className="absolute bottom-0 left-0 h-2.5 w-full flex-row border-t border-t-transparent p-0.5">
+      <div className="bg-border rounded-full h-full" style={{ width: '40%', marginLeft: '4px' }} />
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { View, Text } from 'react-native'
+import { ScrollArea, ScrollBar } from 'novaui-components'
+
+const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']
+
+export function HorizontalScrollArea() {
+  return (
+    <ScrollArea className="w-full max-w-md rounded-md border border-border" horizontal>
+      <View className="flex-row gap-4 p-4">
+        {items.map((item) => (
+          <View
+            key={item}
+            className="h-20 w-36 shrink-0 items-center justify-center rounded-md bg-muted"
+          >
+            <Text className="text-sm text-foreground">{item}</Text>
+          </View>
+        ))}
+      </View>
+      <ScrollBar orientation="horizontal" />
+    </ScrollArea>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## With Custom Content
+
+Use ScrollArea for any overflowing content such as a chat log or settings list:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="relative w-full max-w-sm rounded-lg border border-border" style={{ height: '220px' }}>
+    <div className="flex-1 rounded-[inherit] overflow-auto" style={{ height: '220px' }}>
+      <div className="flex flex-col gap-3 p-4">
+        <div className="flex flex-col gap-1 rounded-md bg-muted p-3">
+          <span className="text-xs font-medium text-foreground">Alice</span>
+          <span className="text-sm text-muted-foreground">Hey, how's it going?</span>
+        </div>
+        <div className="flex flex-col gap-1 rounded-md bg-primary/10 p-3 self-end">
+          <span className="text-xs font-medium text-foreground">You</span>
+          <span className="text-sm text-muted-foreground">Pretty good! Working on the UI.</span>
+        </div>
+        <div className="flex flex-col gap-1 rounded-md bg-muted p-3">
+          <span className="text-xs font-medium text-foreground">Alice</span>
+          <span className="text-sm text-muted-foreground">Nice! Let me know if you need help.</span>
+        </div>
+        <div className="flex flex-col gap-1 rounded-md bg-primary/10 p-3 self-end">
+          <span className="text-xs font-medium text-foreground">You</span>
+          <span className="text-sm text-muted-foreground">Will do, thanks!</span>
+        </div>
+        <div className="flex flex-col gap-1 rounded-md bg-muted p-3">
+          <span className="text-xs font-medium text-foreground">Alice</span>
+          <span className="text-sm text-muted-foreground">Also, did you see the new design specs?</span>
+        </div>
+        <div className="flex flex-col gap-1 rounded-md bg-primary/10 p-3 self-end">
+          <span className="text-xs font-medium text-foreground">You</span>
+          <span className="text-sm text-muted-foreground">Not yet, sending them over?</span>
+        </div>
+      </div>
+    </div>
+    <div className="absolute right-0 top-0 h-full w-2.5 border-l border-l-transparent p-0.5">
+      <div className="bg-border rounded-full w-full" style={{ height: '35%', marginTop: '4px' }} />
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { View, Text } from 'react-native'
+import { ScrollArea } from 'novaui-components'
+
+export function ChatScrollArea() {
+  return (
+    <ScrollArea className="h-56 w-full max-w-sm rounded-lg border border-border">
+      <View className="flex-col gap-3 p-4">
+        <View className="gap-1 rounded-md bg-muted p-3">
+          <Text className="text-xs font-medium text-foreground">Alice</Text>
+          <Text className="text-sm text-muted-foreground">
+            Hey, how's it going?
+          </Text>
+        </View>
+        <View className="gap-1 rounded-md bg-primary/10 p-3 self-end">
+          <Text className="text-xs font-medium text-foreground">You</Text>
+          <Text className="text-sm text-muted-foreground">
+            Pretty good! Working on the UI.
+          </Text>
+        </View>
+        {/* ... more messages */}
+      </View>
+    </ScrollArea>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Props API
+
+### ScrollArea Props
+
+Extends `React.ComponentPropsWithoutRef<typeof ScrollView>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes for the outer container (base: `relative flex-1`) |
+| `viewportClassName` | `string` | - | Additional CSS classes for the inner `ScrollView` (base: `flex-1 rounded-[inherit]`) |
+| `horizontal` | `boolean` | `false` | Enable horizontal scrolling |
+| `children` | `ReactNode` | - | Content and optional `ScrollBar` components |
+
+### ScrollBar Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | Direction of the scrollbar |
+| `className` | `string` | - | Additional CSS classes (vertical base: `right-0 top-0 h-full w-2.5 border-l border-l-transparent`, horizontal base: `bottom-0 left-0 h-2.5 w-full flex-row border-t border-t-transparent`) |
+
+## Best Practices
+
+1. **Set a fixed height**: The `ScrollArea` needs a constrained height (or width for horizontal) to enable scrolling. Use `className="h-48"` or similar.
+
+2. **Default scrollbar**: If no `ScrollBar` child is provided, a vertical `ScrollBar` is rendered automatically.
+
+3. **Hide native indicators**: The component sets `showsVerticalScrollIndicator={false}` and `showsHorizontalScrollIndicator={false}` by default to avoid double scrollbars.
+
+4. **Horizontal scroll**: Pass `horizontal` to `ScrollArea` and add `<ScrollBar orientation="horizontal" />` as a child.
+
+5. **Performance**: The scroll event throttle is set to 16ms (60fps). For lists with many items, consider using `FlatList` instead.
+
+## Related Components
+
+- Use `Separator` to divide items within a scrollable list
+- Combine with `Card` to create scrollable card content
+- Use `Table` for scrollable tabular data

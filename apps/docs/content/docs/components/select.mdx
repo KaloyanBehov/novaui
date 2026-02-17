@@ -1,0 +1,291 @@
+---
+title: Select
+description: A dropdown select control for choosing a single option from a list.
+---
+
+The Select component provides a native-friendly dropdown picker built with React Native's `Pressable`, `Modal`, and `ScrollView`. It includes a trigger button with a chevron indicator, a positioned dropdown content panel, selectable items with check marks, and support for groups, labels, and separators.
+
+## Preview
+
+<ComponentPreview>
+  <div className="w-full max-w-sm">
+    <button className="border-input flex w-fit items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs h-9">
+      <span className="text-sm text-muted-foreground">Select a fruit...</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-50 text-muted-foreground shrink-0"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add select
+```
+
+## Import
+
+```tsx
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+  SelectGroup,
+  SelectLabel,
+  SelectSeparator,
+} from 'novaui-components'
+```
+
+## Basic Usage
+
+A select dropdown with a placeholder and selectable items:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-sm">
+    <button className="border-input flex w-fit items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs h-9">
+      <span className="text-sm text-muted-foreground">Select a fruit...</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-50 text-muted-foreground shrink-0"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { useState } from 'react'
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from 'novaui-components'
+
+export function BasicSelect() {
+  const [value, setValue] = useState<string>()
+
+  return (
+    <Select value={value} onValueChange={setValue}>
+      <SelectTrigger>
+        <SelectValue placeholder="Select a fruit..." />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="apple">Apple</SelectItem>
+        <SelectItem value="banana">Banana</SelectItem>
+        <SelectItem value="cherry">Cherry</SelectItem>
+        <SelectItem value="grape">Grape</SelectItem>
+      </SelectContent>
+    </Select>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Examples
+
+### With Selected Value
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-sm">
+    <button className="border-input flex w-fit items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs h-9">
+      <span className="text-sm text-foreground">Cherry</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-50 text-muted-foreground shrink-0"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Select value="Cherry" onValueChange={setValue}>
+  <SelectTrigger>
+    <SelectValue placeholder="Select a fruit..." />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="Apple">Apple</SelectItem>
+    <SelectItem value="Banana">Banana</SelectItem>
+    <SelectItem value="Cherry">Cherry</SelectItem>
+  </SelectContent>
+</Select>
+```
+
+</Tab>
+</Tabs>
+
+### With Groups and Labels
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-sm">
+    <button className="border-input flex w-fit items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs h-9">
+      <span className="text-sm text-muted-foreground">Select a timezone...</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-50 text-muted-foreground shrink-0"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Select value={value} onValueChange={setValue}>
+  <SelectTrigger>
+    <SelectValue placeholder="Select a timezone..." />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectGroup>
+      <SelectLabel>North America</SelectLabel>
+      <SelectItem value="est">Eastern (EST)</SelectItem>
+      <SelectItem value="cst">Central (CST)</SelectItem>
+      <SelectItem value="pst">Pacific (PST)</SelectItem>
+    </SelectGroup>
+    <SelectSeparator />
+    <SelectGroup>
+      <SelectLabel>Europe</SelectLabel>
+      <SelectItem value="gmt">Greenwich (GMT)</SelectItem>
+      <SelectItem value="cet">Central European (CET)</SelectItem>
+    </SelectGroup>
+  </SelectContent>
+</Select>
+```
+
+</Tab>
+</Tabs>
+
+### Small Size
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-sm">
+    <button className="border-input flex w-fit items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs h-8">
+      <span className="text-sm text-muted-foreground">Size...</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-50 text-muted-foreground shrink-0"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Select value={value} onValueChange={setValue}>
+  <SelectTrigger size="sm">
+    <SelectValue placeholder="Size..." />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="sm">Small</SelectItem>
+    <SelectItem value="md">Medium</SelectItem>
+    <SelectItem value="lg">Large</SelectItem>
+  </SelectContent>
+</Select>
+```
+
+</Tab>
+</Tabs>
+
+### Disabled Item
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-sm">
+    <button className="border-input flex w-fit items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs h-9">
+      <span className="text-sm text-muted-foreground">Select a plan...</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-50 text-muted-foreground shrink-0"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Select value={value} onValueChange={setValue}>
+  <SelectTrigger>
+    <SelectValue placeholder="Select a plan..." />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="free">Free</SelectItem>
+    <SelectItem value="pro">Pro</SelectItem>
+    <SelectItem value="enterprise" disabled>Enterprise (coming soon)</SelectItem>
+  </SelectContent>
+</Select>
+```
+
+</Tab>
+</Tabs>
+
+## Props API
+
+### SelectProps
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | - | The currently selected value |
+| `onValueChange` | `(value: string) => void` | - | Callback fired when a selection is made |
+| `children` | `React.ReactNode` | - | SelectTrigger and SelectContent |
+
+### SelectTriggerProps
+
+Extends `React.ComponentPropsWithoutRef<typeof Pressable>` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `size` | `'default' \| 'sm'` | `'default'` | The size of the trigger button (`h-9` or `h-8`) |
+| `className` | `string` | - | Additional CSS classes for the trigger |
+
+### SelectValueProps
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `placeholder` | `string` | - | Text displayed when no value is selected |
+| `className` | `string` | - | Additional CSS classes |
+
+### SelectContentProps
+
+Extends `React.ComponentPropsWithoutRef<typeof View>` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `position` | `'item-aligned' \| 'popper'` | `'item-aligned'` | Positioning strategy for the dropdown |
+| `align` | `'start' \| 'center' \| 'end'` | `'center'` | Horizontal alignment of the dropdown |
+| `className` | `string` | - | Additional CSS classes for the content panel |
+
+### SelectItemProps
+
+Extends `React.ComponentPropsWithoutRef<typeof Pressable>` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | **required** | The value this item represents |
+| `disabled` | `boolean` | `false` | When `true`, the item cannot be selected |
+| `className` | `string` | - | Additional CSS classes |
+
+## Best Practices
+
+1. **Always include a placeholder**: Use `SelectValue` with a `placeholder` so users know what to choose
+2. **Group related items**: Use `SelectGroup` and `SelectLabel` to organize long option lists
+3. **Keep lists manageable**: For very long lists, consider adding search functionality or using `Combobox` instead
+4. **Use for 5+ options**: For fewer options, `RadioGroup` provides a more visible choice
+
+## Related Components
+
+- Use `RadioGroup` when all options should be visible at once
+- Use `Combobox` for searchable/filterable selection
+- Pair with `Field` and `FieldLabel` for accessible labeled form controls

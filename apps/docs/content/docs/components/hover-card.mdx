@@ -1,0 +1,230 @@
+---
+title: Hover Card
+description: A floating card that appears when pressing or hovering over a trigger element, used for previewing content.
+---
+
+The Hover Card component displays a floating preview card anchored to a trigger element. On React Native it activates on press (since hover isn't available on touch devices). It supports configurable alignment, side offset, and auto-positioning to stay within screen bounds.
+
+## Preview
+
+<ComponentPreview>
+  <div className="flex flex-col items-center gap-4">
+    <div className="z-50 w-64 rounded-md border border-border bg-popover p-4 shadow-md">
+      <div className="flex flex-row items-center gap-3">
+        <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center">
+          <span className="text-xs font-medium text-muted-foreground">RN</span>
+        </div>
+        <div className="flex flex-col gap-1">
+          <span className="text-sm font-semibold text-foreground">@react-native</span>
+          <span className="text-xs text-muted-foreground">The React Native framework</span>
+        </div>
+      </div>
+      <span className="text-sm text-muted-foreground mt-3 block">
+        A framework for building native apps using React. Open source and maintained by Meta.
+      </span>
+      <div className="flex flex-row gap-4 mt-3">
+        <span className="text-xs text-muted-foreground"><strong className="text-foreground">120k</strong> followers</span>
+        <span className="text-xs text-muted-foreground"><strong className="text-foreground">2.4k</strong> following</span>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add hover-card
+```
+
+## Import
+
+```tsx
+import { HoverCard, HoverCardTrigger, HoverCardContent } from 'novaui-components'
+```
+
+## Basic Usage
+
+The HoverCard is a compound component with three parts:
+
+- `HoverCard` - Root container with open/close state and position tracking
+- `HoverCardTrigger` - The element that activates the card on press
+- `HoverCardContent` - The floating card content
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="z-50 w-64 rounded-md border border-border bg-popover p-4 shadow-md">
+    <div className="flex flex-row items-center gap-3">
+      <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center">
+        <span className="text-xs font-medium text-muted-foreground">RN</span>
+      </div>
+      <div className="flex flex-col gap-1">
+        <span className="text-sm font-semibold text-foreground">@react-native</span>
+        <span className="text-xs text-muted-foreground">The React Native framework</span>
+      </div>
+    </div>
+    <span className="text-sm text-muted-foreground mt-3 block">
+      A framework for building native apps using React.
+    </span>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { HoverCard, HoverCardTrigger, HoverCardContent } from 'novaui-components'
+import { View, Text } from 'react-native'
+import { Avatar, AvatarFallback } from 'novaui-components'
+
+export function BasicHoverCard() {
+  return (
+    <HoverCard>
+      <HoverCardTrigger>
+        <Text className="text-sm font-medium underline text-foreground">
+          @react-native
+        </Text>
+      </HoverCardTrigger>
+      <HoverCardContent>
+        <View className="flex-row items-center gap-3">
+          <Avatar>
+            <AvatarFallback>RN</AvatarFallback>
+          </Avatar>
+          <View className="gap-1">
+            <Text className="text-sm font-semibold">@react-native</Text>
+            <Text className="text-xs text-muted-foreground">
+              The React Native framework
+            </Text>
+          </View>
+        </View>
+        <Text className="text-sm text-muted-foreground mt-3">
+          A framework for building native apps using React.
+        </Text>
+      </HoverCardContent>
+    </HoverCard>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## With Rich Content
+
+Display richer preview information in the hover card:
+
+```tsx
+export function RichHoverCard() {
+  return (
+    <HoverCard>
+      <HoverCardTrigger>
+        <Text className="text-sm font-medium underline text-primary">
+          @shadcn
+        </Text>
+      </HoverCardTrigger>
+      <HoverCardContent>
+        <View className="flex-row items-center gap-3">
+          <Avatar>
+            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarFallback>SC</AvatarFallback>
+          </Avatar>
+          <View className="gap-1">
+            <Text className="text-sm font-semibold">@shadcn</Text>
+            <Text className="text-xs text-muted-foreground">Creator of shadcn/ui</Text>
+          </View>
+        </View>
+        <Text className="text-sm text-muted-foreground mt-3">
+          Building tools for developers. Creator of shadcn/ui and taxonomy.
+        </Text>
+        <View className="flex-row gap-4 mt-3">
+          <Text className="text-xs text-muted-foreground">
+            <Text className="font-semibold text-foreground">120k</Text> followers
+          </Text>
+          <Text className="text-xs text-muted-foreground">
+            <Text className="font-semibold text-foreground">500</Text> following
+          </Text>
+        </View>
+      </HoverCardContent>
+    </HoverCard>
+  )
+}
+```
+
+## Controlled State
+
+Control the hover card programmatically:
+
+```tsx
+import { useState } from 'react'
+
+export function ControlledHoverCard() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <HoverCard open={open} onOpenChange={setOpen}>
+      <HoverCardTrigger>
+        <Text className="text-sm underline">Hover me</Text>
+      </HoverCardTrigger>
+      <HoverCardContent>
+        <Text className="text-sm text-foreground">Controlled content</Text>
+      </HoverCardContent>
+    </HoverCard>
+  )
+}
+```
+
+## Props API
+
+### HoverCard Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | - | Controlled open state |
+| `onOpenChange` | `(open: boolean) => void` | - | Callback when open state changes |
+| `defaultOpen` | `boolean` | `false` | Initial open state (uncontrolled) |
+
+### HoverCardTrigger Props
+
+Extends `React.ComponentPropsWithoutRef<typeof Pressable>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Render as the child element instead of a Pressable |
+
+### HoverCardContent Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `align` | `'start' \| 'center' \| 'end'` | `'center'` | Horizontal alignment relative to the trigger |
+| `sideOffset` | `number` | `4` | Distance in pixels between the trigger and content |
+| `className` | `string` | - | Additional CSS classes |
+
+## Positioning
+
+The HoverCard automatically positions itself:
+
+- Measures the trigger element's position on screen using `measure()`
+- Places content below the trigger with the configured `sideOffset`
+- Adjusts horizontal position based on `align` prop
+- Clamps to screen bounds so content doesn't overflow off-screen
+
+## Best Practices
+
+1. **Use for previews**: Hover cards are ideal for showing user profiles, link previews, or summary information
+
+2. **Keep content read-only**: Don't put interactive forms inside hover cards — use `Popover` instead
+
+3. **Concise content**: Show a quick preview, not a full details page
+
+4. **Touch-friendly**: On React Native (touch devices), the card activates on press since hover isn't available
+
+5. **Width sizing**: Default width is `w-64` — keep it narrow for preview content
+
+## Related Components
+
+- Use `Popover` for interactive floating content with forms
+- Use `Tooltip` for simple text-only hints
+- Use `Card` for static preview content that doesn't float

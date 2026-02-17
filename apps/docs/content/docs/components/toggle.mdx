@@ -1,0 +1,255 @@
+---
+title: Toggle
+description: A pressable button that toggles between on and off states.
+---
+
+The Toggle component is a two-state button that visually indicates whether it is pressed or not. Built with React Native's `Pressable` and styled via class-variance-authority, it supports multiple size and variant options with accessible state management.
+
+## Preview
+
+<ComponentPreview>
+  <div className="flex items-center gap-3">
+    <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-10 px-3 bg-accent text-accent-foreground">
+      Pressed
+    </button>
+    <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-10 px-3 bg-transparent hover:bg-muted hover:text-muted-foreground">
+      Unpressed
+    </button>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add toggle
+```
+
+## Import
+
+```tsx
+import { Toggle } from 'novaui-components'
+```
+
+## Basic Usage
+
+A simple toggle button with pressed/unpressed states:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-10 px-3 bg-transparent hover:bg-muted hover:text-muted-foreground">
+    Bold
+  </button>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { useState } from 'react'
+import { Toggle } from 'novaui-components'
+
+export function BasicToggle() {
+  const [pressed, setPressed] = useState(false)
+
+  return (
+    <Toggle pressed={pressed} onPressedChange={setPressed}>
+      Bold
+    </Toggle>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Variants
+
+### Default
+
+The default variant with transparent background that highlights on press:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex items-center gap-3">
+    <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-10 px-3 bg-accent text-accent-foreground">
+      On
+    </button>
+    <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-10 px-3 bg-transparent hover:bg-muted hover:text-muted-foreground">
+      Off
+    </button>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Toggle variant="default" pressed={true} onPressedChange={setPressed}>
+  On
+</Toggle>
+<Toggle variant="default" pressed={false} onPressedChange={setPressed}>
+  Off
+</Toggle>
+```
+
+</Tab>
+</Tabs>
+
+### Outline
+
+A bordered variant for more prominent toggle buttons:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex items-center gap-3">
+    <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-10 px-3 border border-input bg-accent text-accent-foreground">
+      On
+    </button>
+    <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-10 px-3 border border-input bg-transparent hover:bg-accent hover:text-accent-foreground">
+      Off
+    </button>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Toggle variant="outline" pressed={true} onPressedChange={setPressed}>
+  On
+</Toggle>
+<Toggle variant="outline" pressed={false} onPressedChange={setPressed}>
+  Off
+</Toggle>
+```
+
+</Tab>
+</Tabs>
+
+## Sizes
+
+### Default (h-10)
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-10 px-3 bg-accent text-accent-foreground">
+    Default
+  </button>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Toggle size="default" pressed={true} onPressedChange={setPressed}>
+  Default
+</Toggle>
+```
+
+</Tab>
+</Tabs>
+
+### Small (h-9)
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-9 px-2.5 bg-accent text-accent-foreground">
+    Small
+  </button>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Toggle size="sm" pressed={true} onPressedChange={setPressed}>
+  Small
+</Toggle>
+```
+
+</Tab>
+</Tabs>
+
+### Large (h-11)
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-11 px-5 bg-accent text-accent-foreground">
+    Large
+  </button>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Toggle size="lg" pressed={true} onPressedChange={setPressed}>
+  Large
+</Toggle>
+```
+
+</Tab>
+</Tabs>
+
+## Disabled State
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <button disabled className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-10 px-3 bg-transparent opacity-50 pointer-events-none cursor-not-allowed">
+    Disabled
+  </button>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Toggle pressed={false} disabled>
+  Disabled
+</Toggle>
+```
+
+</Tab>
+</Tabs>
+
+## Props API
+
+### ToggleProps
+
+Extends `React.ComponentPropsWithoutRef<typeof Pressable>` and `VariantProps<typeof toggleVariants>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `pressed` | `boolean` | - | Whether the toggle is currently pressed/active |
+| `onPressedChange` | `(pressed: boolean) => void` | - | Callback fired when the toggle state changes |
+| `variant` | `'default' \| 'outline'` | `'default'` | The visual style variant |
+| `size` | `'default' \| 'sm' \| 'lg'` | `'default'` | The size of the toggle button |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `React.ReactNode` | - | Button content (text or icon) |
+
+## Best Practices
+
+1. **Use clear labels**: Toggle text should describe the action or setting being toggled
+2. **Visual feedback**: The pressed state should be clearly distinguishable from the unpressed state
+3. **Use for formatting controls**: Toggles work great for text formatting (bold, italic, underline) or view modes
+4. **Consider ToggleGroup**: When you have multiple related toggles, use `ToggleGroup` for managed state
+
+## Related Components
+
+- Use `ToggleGroup` for a set of related toggle buttons with managed selection
+- Use `Switch` for on/off settings that take immediate effect
+- Use `Button` for actions that are not toggleable

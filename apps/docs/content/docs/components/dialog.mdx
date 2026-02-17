@@ -1,0 +1,372 @@
+---
+title: Dialog
+description: A general-purpose modal dialog that overlays the screen and focuses user attention on content or actions.
+---
+
+The Dialog component is a general-purpose modal overlay built with React Native's `Modal` API. It supports controlled and uncontrolled state, a compound component API with header, footer, title, description, and close button parts, and a backdrop overlay that dismisses on press.
+
+## Preview
+
+<ComponentPreview>
+  <DialogPreview
+    triggerLabel="Open Dialog"
+    title="Edit Profile"
+    description="Make changes to your profile here. Click save when you're done."
+    footerButtons={[
+      { label: "Cancel", variant: "outline" },
+      { label: "Save changes" }
+    ]}
+  />
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add dialog
+```
+
+## Import
+
+```tsx
+import {
+  Dialog,
+  DialogTrigger,
+  DialogPortal,
+  DialogOverlay,
+  DialogClose,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+} from 'novaui-components'
+```
+
+## Basic Usage
+
+The Dialog is a compound component with these parts:
+
+- `Dialog` - Root container with open/close state
+- `DialogTrigger` - Button that opens the dialog
+- `DialogPortal` - Renders content in a React Native Modal
+- `DialogOverlay` - Semi-transparent backdrop
+- `DialogContent` - The modal content container with close button
+- `DialogHeader` - Groups the title and description
+- `DialogFooter` - Groups the action buttons
+- `DialogTitle` - The dialog heading
+- `DialogDescription` - The dialog body text
+- `DialogClose` - A button that closes the dialog
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <DialogPreview
+    triggerLabel="Open Dialog"
+    title="Edit Profile"
+    description="Make changes to your profile here. Click save when you're done."
+    footerButtons={[
+      { label: "Cancel", variant: "outline" },
+      { label: "Save changes" }
+    ]}
+  />
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+  DialogClose,
+} from 'novaui-components'
+import { Button } from 'novaui-components'
+import { Text } from 'react-native'
+
+export function BasicDialog() {
+  return (
+    <Dialog>
+      <DialogTrigger>
+        <Button variant="outline" label="Open Dialog" />
+      </DialogTrigger>
+      <DialogPortal>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Edit Profile</DialogTitle>
+            <DialogDescription>
+              Make changes to your profile here. Click save when you're done.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <DialogClose>
+              <Button variant="outline" label="Cancel" />
+            </DialogClose>
+            <Button label="Save changes" />
+          </DialogFooter>
+        </DialogContent>
+      </DialogPortal>
+    </Dialog>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Without Close Button
+
+Hide the built-in close icon with `showCloseButton={false}`:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <DialogPreview
+    triggerLabel="No Close Icon"
+    title="Terms of Service"
+    description="Please read and accept the terms of service before continuing."
+    showCloseButton={false}
+    footerButtons={[
+      { label: "Decline", variant: "outline" },
+      { label: "Accept" }
+    ]}
+  />
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Dialog>
+  <DialogTrigger>
+    <Button variant="outline" label="No Close Icon" />
+  </DialogTrigger>
+  <DialogPortal>
+    <DialogContent showCloseButton={false}>
+      <DialogHeader>
+        <DialogTitle>Terms of Service</DialogTitle>
+        <DialogDescription>
+          Please read and accept the terms of service before continuing.
+        </DialogDescription>
+      </DialogHeader>
+      <DialogFooter>
+        <DialogClose>
+          <Button variant="outline" label="Decline" />
+        </DialogClose>
+        <Button label="Accept" />
+      </DialogFooter>
+    </DialogContent>
+  </DialogPortal>
+</Dialog>
+```
+
+</Tab>
+</Tabs>
+
+## Controlled State
+
+Control the dialog open/close state programmatically:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <DialogPreview
+    triggerLabel="Controlled Dialog"
+    title="Controlled State"
+    description="This dialog's state is managed externally via the open and onOpenChange props."
+    footerButtons={[
+      { label: "Close", variant: "outline" }
+    ]}
+  />
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { useState } from 'react'
+
+export function ControlledDialog() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger>
+        <Button variant="outline" label="Controlled Dialog" />
+      </DialogTrigger>
+      <DialogPortal>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Controlled State</DialogTitle>
+            <DialogDescription>
+              This dialog's state is managed externally via the open and onOpenChange props.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <DialogClose>
+              <Button variant="outline" label="Close" />
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </DialogPortal>
+    </Dialog>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## With Form Content
+
+Use the dialog for forms or interactive content:
+
+```tsx
+import { useState } from 'react'
+import { View, TextInput } from 'react-native'
+
+export function FormDialog() {
+  const [open, setOpen] = useState(false)
+
+  const handleSubmit = () => {
+    // Process form data
+    setOpen(false)
+  }
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger>
+        <Button variant="outline" label="Edit Profile" />
+      </DialogTrigger>
+      <DialogPortal>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Edit Profile</DialogTitle>
+            <DialogDescription>
+              Update your profile information below.
+            </DialogDescription>
+          </DialogHeader>
+          <View className="gap-4 py-4">
+            <View className="gap-2">
+              <Text className="text-sm font-medium">Name</Text>
+              <TextInput
+                className="h-10 w-full rounded-md border border-input bg-background px-3"
+                placeholder="Your name"
+              />
+            </View>
+            <View className="gap-2">
+              <Text className="text-sm font-medium">Email</Text>
+              <TextInput
+                className="h-10 w-full rounded-md border border-input bg-background px-3"
+                placeholder="your@email.com"
+              />
+            </View>
+          </View>
+          <DialogFooter>
+            <DialogClose>
+              <Button variant="outline" label="Cancel" />
+            </DialogClose>
+            <Button label="Save" onPress={handleSubmit} />
+          </DialogFooter>
+        </DialogContent>
+      </DialogPortal>
+    </Dialog>
+  )
+}
+```
+
+## Props API
+
+### Dialog Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | - | Controlled open state |
+| `onOpenChange` | `(open: boolean) => void` | - | Callback when open state changes |
+
+### DialogTrigger Props
+
+Extends `React.ComponentPropsWithoutRef<typeof Pressable>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Render as the child element instead of a Pressable |
+
+### DialogContent Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `showCloseButton` | `boolean` | `true` | Whether to show the close (X) button |
+| `className` | `string` | - | Additional CSS classes |
+
+### DialogHeader Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### DialogFooter Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### DialogTitle Props
+
+Extends `React.ComponentPropsWithoutRef<typeof Text>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### DialogDescription Props
+
+Extends `React.ComponentPropsWithoutRef<typeof Text>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### DialogClose Props
+
+Extends `React.ComponentPropsWithoutRef<typeof Pressable>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Render as the child element instead of a Pressable |
+
+## Accessibility
+
+- Uses React Native `Modal` for proper overlay behavior
+- `onRequestClose` handles the Android back button
+- Backdrop press dismisses the dialog
+- Close button is provided by default for easy dismissal
+
+## Best Practices
+
+1. **Use for general content**: Dialogs are for forms, settings, confirmations, and any focused content — use `AlertDialog` for destructive confirmations
+
+2. **Keep it focused**: Each dialog should serve a single purpose
+
+3. **Provide a clear exit**: Always include a close button or cancel action
+
+4. **Responsive sizing**: Content uses `max-w-lg` by default — override with `className` for wider dialogs
+
+5. **Don't nest dialogs**: Avoid opening a dialog from within another dialog
+
+## Related Components
+
+- Use `AlertDialog` for destructive confirmation prompts
+- Use `Sheet` for side panels or bottom sheets
+- Use `Drawer` for mobile-friendly bottom drawers

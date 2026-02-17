@@ -6,6 +6,9 @@ import { ComponentPreview } from '@/components/ui/component-preview'
 import { AccordionPreview } from '@/components/previews/accordion-preview'
 import { AlertDialogPreview } from '@/components/previews/alert-dialog-preview'
 import { DrawerPreview } from '@/components/previews/drawer-preview'
+import { DialogPreview } from '@/components/previews/dialog-preview'
+import { SheetPreview } from '@/components/previews/sheet-preview'
+import { CollapsiblePreview } from '@/components/previews/collapsible-preview'
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
@@ -16,6 +19,9 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     AccordionPreview,
     AlertDialogPreview,
     DrawerPreview,
+    DialogPreview,
+    SheetPreview,
+    CollapsiblePreview,
     ...components,
   }
 }

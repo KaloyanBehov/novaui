@@ -1,0 +1,337 @@
+---
+title: Breadcrumb
+description: A navigational aid that displays the current page's location within a site hierarchy.
+---
+
+The Breadcrumb component displays a hierarchical navigation trail showing the user's current position within an app. It supports links, separators, ellipsis for truncated paths, and a compound component API for flexible customization.
+
+## Preview
+
+<ComponentPreview>
+  <nav aria-label="breadcrumb">
+    <div className="flex flex-row flex-wrap items-center gap-1.5 sm:gap-2.5">
+      <div className="inline-flex flex-row items-center gap-1.5">
+        <span className="text-sm font-medium text-muted-foreground hover:text-foreground cursor-pointer transition-colors">Home</span>
+      </div>
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground"><path d="m9 18 6-6-6-6"/></svg>
+      </div>
+      <div className="inline-flex flex-row items-center gap-1.5">
+        <span className="text-sm font-medium text-muted-foreground hover:text-foreground cursor-pointer transition-colors">Components</span>
+      </div>
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground"><path d="m9 18 6-6-6-6"/></svg>
+      </div>
+      <div className="inline-flex flex-row items-center gap-1.5">
+        <span className="text-sm font-normal text-foreground">Breadcrumb</span>
+      </div>
+    </div>
+  </nav>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add breadcrumb
+```
+
+### Dependencies
+
+- `lucide-react-native` >= 0.300
+
+## Import
+
+```tsx
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+  BreadcrumbEllipsis,
+} from 'novaui-components'
+```
+
+## Basic Usage
+
+The Breadcrumb is a compound component with these parts:
+
+- `Breadcrumb` - Root `nav` container with accessibility role
+- `BreadcrumbList` - Horizontal list of breadcrumb items
+- `BreadcrumbItem` - Individual item container
+- `BreadcrumbLink` - Clickable link for navigable items
+- `BreadcrumbPage` - Non-clickable current page indicator
+- `BreadcrumbSeparator` - Chevron separator between items
+- `BreadcrumbEllipsis` - Ellipsis indicator for collapsed paths
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <nav aria-label="breadcrumb">
+    <div className="flex flex-row flex-wrap items-center gap-1.5 sm:gap-2.5">
+      <div className="inline-flex flex-row items-center gap-1.5">
+        <span className="text-sm font-medium text-muted-foreground hover:text-foreground cursor-pointer transition-colors">Home</span>
+      </div>
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground"><path d="m9 18 6-6-6-6"/></svg>
+      </div>
+      <div className="inline-flex flex-row items-center gap-1.5">
+        <span className="text-sm font-medium text-muted-foreground hover:text-foreground cursor-pointer transition-colors">Components</span>
+      </div>
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground"><path d="m9 18 6-6-6-6"/></svg>
+      </div>
+      <div className="inline-flex flex-row items-center gap-1.5">
+        <span className="text-sm font-normal text-foreground">Breadcrumb</span>
+      </div>
+    </div>
+  </nav>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from 'novaui-components'
+
+export function BasicBreadcrumb() {
+  return (
+    <Breadcrumb>
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink onPress={() => navigation.navigate('Home')}>
+            Home
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbLink onPress={() => navigation.navigate('Components')}>
+            Components
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## With Ellipsis
+
+Use `BreadcrumbEllipsis` to truncate long navigation paths:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <nav aria-label="breadcrumb">
+    <div className="flex flex-row flex-wrap items-center gap-1.5 sm:gap-2.5">
+      <div className="inline-flex flex-row items-center gap-1.5">
+        <span className="text-sm font-medium text-muted-foreground hover:text-foreground cursor-pointer transition-colors">Home</span>
+      </div>
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground"><path d="m9 18 6-6-6-6"/></svg>
+      </div>
+      <div className="inline-flex flex-row items-center gap-1.5">
+        <div className="flex h-9 w-9 items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+        </div>
+      </div>
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground"><path d="m9 18 6-6-6-6"/></svg>
+      </div>
+      <div className="inline-flex flex-row items-center gap-1.5">
+        <span className="text-sm font-medium text-muted-foreground hover:text-foreground cursor-pointer transition-colors">Components</span>
+      </div>
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground"><path d="m9 18 6-6-6-6"/></svg>
+      </div>
+      <div className="inline-flex flex-row items-center gap-1.5">
+        <span className="text-sm font-normal text-foreground">Breadcrumb</span>
+      </div>
+    </div>
+  </nav>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink>Home</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbEllipsis />
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbLink>Components</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>
+```
+
+</Tab>
+</Tabs>
+
+## Custom Separator
+
+Override the default chevron separator with a custom element:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <nav aria-label="breadcrumb">
+    <div className="flex flex-row flex-wrap items-center gap-1.5 sm:gap-2.5">
+      <div className="inline-flex flex-row items-center gap-1.5">
+        <span className="text-sm font-medium text-muted-foreground">Home</span>
+      </div>
+      <div>
+        <span className="text-muted-foreground">/</span>
+      </div>
+      <div className="inline-flex flex-row items-center gap-1.5">
+        <span className="text-sm font-medium text-muted-foreground">Components</span>
+      </div>
+      <div>
+        <span className="text-muted-foreground">/</span>
+      </div>
+      <div className="inline-flex flex-row items-center gap-1.5">
+        <span className="text-sm font-normal text-foreground">Breadcrumb</span>
+      </div>
+    </div>
+  </nav>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink>Home</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator>
+      <Text className="text-muted-foreground">/</Text>
+    </BreadcrumbSeparator>
+    <BreadcrumbItem>
+      <BreadcrumbLink>Components</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator>
+      <Text className="text-muted-foreground">/</Text>
+    </BreadcrumbSeparator>
+    <BreadcrumbItem>
+      <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>
+```
+
+</Tab>
+</Tabs>
+
+## Props API
+
+### Breadcrumb Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### BreadcrumbList Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### BreadcrumbItem Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### BreadcrumbLink Props
+
+Extends `React.ComponentPropsWithoutRef<typeof Pressable>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Render as the child element instead of a Pressable |
+| `className` | `string` | - | Additional CSS classes |
+
+### BreadcrumbPage Props
+
+Extends `React.ComponentPropsWithoutRef<typeof Text>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### BreadcrumbSeparator Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | `<ChevronRight />` | Custom separator element (default is a chevron icon) |
+| `className` | `string` | - | Additional CSS classes |
+
+### BreadcrumbEllipsis Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+## Accessibility
+
+- Root element uses `role="navigation"` with `aria-label="breadcrumb"`
+- Separators use `role="presentation"` and `aria-hidden={true}`
+- Current page uses `aria-current="page"` and `aria-disabled={true}`
+
+## Best Practices
+
+1. **Show the full path**: Include the root page (Home) and the current page in the trail
+
+2. **Use ellipsis for deep paths**: If the path exceeds 4-5 levels, collapse middle items with `BreadcrumbEllipsis`
+
+3. **Current page is not a link**: Use `BreadcrumbPage` for the current page — it's non-interactive and styled differently
+
+4. **Consistent separators**: Stick with one separator style throughout the app — chevron is the standard
+
+5. **Don't use for primary navigation**: Breadcrumbs supplement, not replace, your main navigation
+
+## Related Components
+
+- Use with `Button` or `Pressable` for link actions within breadcrumb items
+- Combine with page headers for contextual navigation

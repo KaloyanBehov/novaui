@@ -1,0 +1,329 @@
+---
+title: Resizable
+description: Draggable resizable panel groups for building adjustable split-view layouts.
+---
+
+The Resizable component provides a panel group system for building split-view layouts with draggable handles. Built on `react-native-gesture-handler` and `react-native-reanimated`, it supports horizontal and vertical directions, percentage-based sizing, and an optional grip handle indicator.
+
+## Preview
+
+<ComponentPreview>
+  <div className="flex flex-row flex-1 w-full h-48 overflow-hidden rounded-lg border border-border">
+    <div className="overflow-hidden flex items-center justify-center bg-muted/50" style={{ width: '50%' }}>
+      <span className="text-sm font-medium text-foreground">Panel One</span>
+    </div>
+    <div className="relative flex items-center justify-center z-10 bg-transparent" style={{ width: '32px' }}>
+      <div className="bg-border absolute left-1/2 top-0 bottom-0" style={{ width: '1px', marginLeft: '-0.5px' }} />
+      <div className="absolute bg-muted border border-border flex h-6 w-5 items-center justify-center rounded z-20">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-foreground"><circle cx="9" cy="12" r="1"/><circle cx="9" cy="5" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="19" r="1"/></svg>
+      </div>
+    </div>
+    <div className="overflow-hidden flex items-center justify-center bg-muted/50" style={{ width: '50%' }}>
+      <span className="text-sm font-medium text-foreground">Panel Two</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add resizable
+```
+
+## Import
+
+```tsx
+import {
+  ResizablePanelGroup,
+  ResizablePanel,
+  ResizableHandle,
+} from 'novaui-components'
+```
+
+## Basic Usage
+
+The Resizable is a compound component with these parts:
+
+- `ResizablePanelGroup` — Root container with `flex-1 w-full h-full overflow-hidden` and direction-based flex (`flex-row` or `flex-col`)
+- `ResizablePanel` — Individual panel with `overflow-hidden` and percentage-based width/height
+- `ResizableHandle` — Draggable divider with `relative flex items-center justify-center z-10 bg-transparent` and an optional grip icon
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-row flex-1 w-full h-48 overflow-hidden rounded-lg border border-border">
+    <div className="overflow-hidden flex items-center justify-center bg-muted/50" style={{ width: '50%' }}>
+      <span className="text-sm font-medium text-foreground">Panel One</span>
+    </div>
+    <div className="relative flex items-center justify-center z-10 bg-transparent" style={{ width: '32px' }}>
+      <div className="bg-border absolute left-1/2 top-0 bottom-0" style={{ width: '1px', marginLeft: '-0.5px' }} />
+      <div className="absolute bg-muted border border-border flex h-6 w-5 items-center justify-center rounded z-20">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-foreground"><circle cx="9" cy="12" r="1"/><circle cx="9" cy="5" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="19" r="1"/></svg>
+      </div>
+    </div>
+    <div className="overflow-hidden flex items-center justify-center bg-muted/50" style={{ width: '50%' }}>
+      <span className="text-sm font-medium text-foreground">Panel Two</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { View, Text } from 'react-native'
+import {
+  ResizablePanelGroup,
+  ResizablePanel,
+  ResizableHandle,
+} from 'novaui-components'
+
+export function BasicResizable() {
+  return (
+    <ResizablePanelGroup
+      direction="horizontal"
+      className="h-48 w-full rounded-lg border border-border"
+    >
+      <ResizablePanel defaultSize={50}>
+        <View className="flex-1 items-center justify-center">
+          <Text className="text-sm font-medium text-foreground">Panel One</Text>
+        </View>
+      </ResizablePanel>
+      <ResizableHandle withHandle />
+      <ResizablePanel defaultSize={50}>
+        <View className="flex-1 items-center justify-center">
+          <Text className="text-sm font-medium text-foreground">Panel Two</Text>
+        </View>
+      </ResizablePanel>
+    </ResizablePanelGroup>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Vertical Direction
+
+Set `direction="vertical"` for a top-and-bottom split layout:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-col flex-1 w-full h-64 overflow-hidden rounded-lg border border-border">
+    <div className="overflow-hidden flex items-center justify-center bg-muted/50" style={{ height: '40%' }}>
+      <span className="text-sm font-medium text-foreground">Top Panel</span>
+    </div>
+    <div className="relative flex items-center justify-center z-10 bg-transparent" style={{ height: '32px', width: '100%' }}>
+      <div className="bg-border absolute top-1/2 left-0 right-0" style={{ height: '1px', marginTop: '-0.5px' }} />
+      <div className="absolute bg-muted border border-border flex h-5 w-6 items-center justify-center rounded z-20">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-foreground"><circle cx="12" cy="9" r="1"/><circle cx="19" cy="9" r="1"/><circle cx="5" cy="9" r="1"/><circle cx="12" cy="15" r="1"/><circle cx="19" cy="15" r="1"/><circle cx="5" cy="15" r="1"/></svg>
+      </div>
+    </div>
+    <div className="overflow-hidden flex items-center justify-center bg-muted/50" style={{ height: '60%' }}>
+      <span className="text-sm font-medium text-foreground">Bottom Panel</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { View, Text } from 'react-native'
+import {
+  ResizablePanelGroup,
+  ResizablePanel,
+  ResizableHandle,
+} from 'novaui-components'
+
+export function VerticalResizable() {
+  return (
+    <ResizablePanelGroup
+      direction="vertical"
+      className="h-64 w-full rounded-lg border border-border"
+    >
+      <ResizablePanel defaultSize={40}>
+        <View className="flex-1 items-center justify-center">
+          <Text className="text-sm font-medium text-foreground">Top Panel</Text>
+        </View>
+      </ResizablePanel>
+      <ResizableHandle withHandle />
+      <ResizablePanel defaultSize={60}>
+        <View className="flex-1 items-center justify-center">
+          <Text className="text-sm font-medium text-foreground">Bottom Panel</Text>
+        </View>
+      </ResizablePanel>
+    </ResizablePanelGroup>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Three-Panel Layout
+
+Create multi-panel layouts by adding more panels and handles:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-row flex-1 w-full h-48 overflow-hidden rounded-lg border border-border">
+    <div className="overflow-hidden flex items-center justify-center bg-muted/50" style={{ width: '25%' }}>
+      <span className="text-sm font-medium text-foreground">Sidebar</span>
+    </div>
+    <div className="relative flex items-center justify-center z-10 bg-transparent" style={{ width: '32px' }}>
+      <div className="bg-border absolute left-1/2 top-0 bottom-0" style={{ width: '1px', marginLeft: '-0.5px' }} />
+    </div>
+    <div className="overflow-hidden flex items-center justify-center bg-muted/50" style={{ width: '50%' }}>
+      <span className="text-sm font-medium text-foreground">Content</span>
+    </div>
+    <div className="relative flex items-center justify-center z-10 bg-transparent" style={{ width: '32px' }}>
+      <div className="bg-border absolute left-1/2 top-0 bottom-0" style={{ width: '1px', marginLeft: '-0.5px' }} />
+    </div>
+    <div className="overflow-hidden flex items-center justify-center bg-muted/50" style={{ width: '25%' }}>
+      <span className="text-sm font-medium text-foreground">Details</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { View, Text } from 'react-native'
+import {
+  ResizablePanelGroup,
+  ResizablePanel,
+  ResizableHandle,
+} from 'novaui-components'
+
+export function ThreePanelLayout() {
+  return (
+    <ResizablePanelGroup
+      direction="horizontal"
+      className="h-48 w-full rounded-lg border border-border"
+    >
+      <ResizablePanel defaultSize={25}>
+        <View className="flex-1 items-center justify-center">
+          <Text className="text-sm font-medium text-foreground">Sidebar</Text>
+        </View>
+      </ResizablePanel>
+      <ResizableHandle />
+      <ResizablePanel defaultSize={50}>
+        <View className="flex-1 items-center justify-center">
+          <Text className="text-sm font-medium text-foreground">Content</Text>
+        </View>
+      </ResizablePanel>
+      <ResizableHandle />
+      <ResizablePanel defaultSize={25}>
+        <View className="flex-1 items-center justify-center">
+          <Text className="text-sm font-medium text-foreground">Details</Text>
+        </View>
+      </ResizablePanel>
+    </ResizablePanelGroup>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Without Handle Grip
+
+Omit the `withHandle` prop for a minimal divider line:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-row flex-1 w-full h-48 overflow-hidden rounded-lg border border-border">
+    <div className="overflow-hidden flex items-center justify-center bg-muted/50" style={{ width: '50%' }}>
+      <span className="text-sm font-medium text-foreground">Left</span>
+    </div>
+    <div className="relative flex items-center justify-center z-10 bg-transparent" style={{ width: '32px' }}>
+      <div className="bg-border absolute left-1/2 top-0 bottom-0" style={{ width: '1px', marginLeft: '-0.5px' }} />
+    </div>
+    <div className="overflow-hidden flex items-center justify-center bg-muted/50" style={{ width: '50%' }}>
+      <span className="text-sm font-medium text-foreground">Right</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<ResizablePanelGroup
+  direction="horizontal"
+  className="h-48 w-full rounded-lg border border-border"
+>
+  <ResizablePanel defaultSize={50}>
+    <View className="flex-1 items-center justify-center">
+      <Text className="text-sm font-medium text-foreground">Left</Text>
+    </View>
+  </ResizablePanel>
+  <ResizableHandle />
+  <ResizablePanel defaultSize={50}>
+    <View className="flex-1 items-center justify-center">
+      <Text className="text-sm font-medium text-foreground">Right</Text>
+    </View>
+  </ResizablePanel>
+</ResizablePanelGroup>
+```
+
+</Tab>
+</Tabs>
+
+## Props API
+
+### ResizablePanelGroup Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `direction` | `'horizontal' \| 'vertical'` | `'horizontal'` | Layout direction of the panels (`flex-row` or `flex-col`) |
+| `className` | `string` | - | Additional CSS classes (base: `flex-1 w-full h-full overflow-hidden`) |
+
+### ResizablePanel Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `defaultSize` | `number` | Auto-distributed | Initial panel size as a percentage (0–100). Undefined sizes split the remaining space equally |
+| `minSize` | `number` | `0` | Minimum panel size as a percentage |
+| `maxSize` | `number` | `100` | Maximum panel size as a percentage |
+| `className` | `string` | - | Additional CSS classes (base: `overflow-hidden`) |
+
+### ResizableHandle Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `withHandle` | `boolean` | `false` | Show a grip icon indicator on the handle (uses `GripVertical` or `GripHorizontal` from lucide) |
+| `className` | `string` | - | Additional CSS classes (horizontal base: `w-8 h-full -mx-4`, vertical base: `h-8 w-full -my-4`) |
+
+## Best Practices
+
+1. **Sizes should sum to 100**: Panel `defaultSize` values should add up to 100. If they don't, the component normalizes them proportionally.
+
+2. **Use `withHandle` for discoverability**: The grip icon signals to users that the divider is draggable. Omit it only in minimal or advanced layouts.
+
+3. **Set min/max constraints**: Use `minSize` and `maxSize` on panels to prevent them from collapsing to zero or taking over the entire layout.
+
+4. **Gesture handler setup**: This component requires `react-native-gesture-handler` and `react-native-reanimated`. Ensure your app is wrapped in a `GestureHandlerRootView`.
+
+5. **Negative margins on handles**: The handle uses `-mx-4` (horizontal) or `-my-4` (vertical) for a larger touch target. Keep this in mind when styling adjacent content.
+
+## Related Components
+
+- Use `ScrollArea` for scrollable content within panels
+- Combine with `Card` to place structured content in each panel
+- Use `Separator` for non-interactive visual dividers

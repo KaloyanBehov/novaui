@@ -1,0 +1,280 @@
+---
+title: Input Group
+description: A container for grouping inputs with addons, buttons, and text elements.
+---
+
+The Input Group component provides a way to visually and structurally group an input field with addon elements, buttons, and text labels. It supports inline addons (start/end) and integrates with the Input, Textarea, and Button components.
+
+## Preview
+
+<ComponentPreview>
+  <div className="w-full max-w-sm">
+    <div className="flex flex-row items-center rounded-md border border-input bg-background overflow-hidden">
+      <div className="flex items-center justify-center px-3 bg-muted border-r border-input">
+        <span className="text-sm text-muted-foreground font-medium">https://</span>
+      </div>
+      <div className="flex-1 h-10 px-3 flex items-center">
+        <span className="text-sm text-muted-foreground">example.com</span>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add input-group
+```
+
+## Import
+
+```tsx
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupText,
+  InputGroupInput,
+  InputGroupTextarea,
+} from 'novaui-components'
+```
+
+## Basic Usage
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-sm">
+    <div className="flex flex-row items-center rounded-md border border-input bg-background overflow-hidden">
+      <div className="flex items-center justify-center px-3 bg-muted border-r border-input">
+        <span className="text-sm text-muted-foreground font-medium">https://</span>
+      </div>
+      <div className="flex-1 h-10 px-3 flex items-center">
+        <span className="text-sm text-muted-foreground">example.com</span>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from 'novaui-components'
+
+export function BasicInputGroup() {
+  return (
+    <InputGroup>
+      <InputGroupAddon align="inline-start">https://</InputGroupAddon>
+      <InputGroupInput placeholder="example.com" />
+    </InputGroup>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## With End Addon
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-sm">
+    <div className="flex flex-row items-center rounded-md border border-input bg-background overflow-hidden">
+      <div className="flex-1 h-10 px-3 flex items-center">
+        <span className="text-sm text-muted-foreground">0.00</span>
+      </div>
+      <div className="flex items-center justify-center px-3 bg-muted border-l border-input">
+        <span className="text-sm text-muted-foreground font-medium">USD</span>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<InputGroup>
+  <InputGroupInput placeholder="0.00" />
+  <InputGroupAddon align="inline-end">USD</InputGroupAddon>
+</InputGroup>
+```
+
+</Tab>
+</Tabs>
+
+## With Button
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-sm">
+    <div className="flex flex-row items-center rounded-md border border-input bg-background overflow-hidden">
+      <div className="flex-1 h-10 px-3 flex items-center">
+        <span className="text-sm text-muted-foreground">Search...</span>
+      </div>
+      <button className="rounded-none bg-transparent h-8 px-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { Search } from 'lucide-react-native'
+
+<InputGroup>
+  <InputGroupInput placeholder="Search..." />
+  <InputGroupButton size="icon-xs">
+    <Search size={16} />
+  </InputGroupButton>
+</InputGroup>
+```
+
+</Tab>
+</Tabs>
+
+## With Text Element
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-sm">
+    <div className="flex flex-row items-center rounded-md border border-input bg-background overflow-hidden">
+      <div className="flex items-center justify-center px-3">
+        <span className="text-sm text-muted-foreground">@</span>
+      </div>
+      <div className="flex-1 h-10 px-3 flex items-center">
+        <span className="text-sm text-muted-foreground">username</span>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<InputGroup>
+  <InputGroupText>@</InputGroupText>
+  <InputGroupInput placeholder="username" />
+</InputGroup>
+```
+
+</Tab>
+</Tabs>
+
+## Both Sides
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-sm">
+    <div className="flex flex-row items-center rounded-md border border-input bg-background overflow-hidden">
+      <div className="flex items-center justify-center px-3 bg-muted border-r border-input">
+        <span className="text-sm text-muted-foreground font-medium">$</span>
+      </div>
+      <div className="flex-1 h-10 px-3 flex items-center">
+        <span className="text-sm text-muted-foreground">0.00</span>
+      </div>
+      <div className="flex items-center justify-center px-3 bg-muted border-l border-input">
+        <span className="text-sm text-muted-foreground font-medium">.00</span>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<InputGroup>
+  <InputGroupAddon align="inline-start">$</InputGroupAddon>
+  <InputGroupInput placeholder="0.00" />
+  <InputGroupAddon align="inline-end">.00</InputGroupAddon>
+</InputGroup>
+```
+
+</Tab>
+</Tabs>
+
+## Props API
+
+### InputGroup
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### InputGroupAddon
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `align` | `'inline-start' \| 'inline-end' \| 'block-start' \| 'block-end'` | `'inline-start'` | Position of the addon |
+| `className` | `string` | - | Additional CSS classes |
+
+### InputGroupButton
+
+Extends `Button` props:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `size` | `'xs' \| 'sm' \| 'icon-xs' \| 'icon-sm'` | `'xs'` | Size of the button |
+| `variant` | `string` | `'ghost'` | Button variant |
+| `className` | `string` | - | Additional CSS classes |
+
+### InputGroupText
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### InputGroupInput
+
+Extends `Input` props:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### InputGroupTextarea
+
+Extends `Textarea` props:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+## Best Practices
+
+1. **Use addons for context**: Show units, currency symbols, or URL prefixes as addons
+2. **Keep addons simple**: Addons should be short text or small icons
+3. **Pair with Field**: Wrap `InputGroup` in a `Field` for labels and error messages
+4. **Use buttons for actions**: Use `InputGroupButton` for inline search or clear actions
+5. **Don't overload**: Avoid using both addons and buttons simultaneously — pick the pattern that fits
+
+## Related Components
+
+- [Input](/docs/components/input) - Standalone text input
+- [Textarea](/docs/components/textarea) - Multi-line text input
+- [Field](/docs/components/field) - Form field wrapper with labels and errors

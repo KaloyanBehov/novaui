@@ -1,0 +1,334 @@
+---
+title: Empty
+description: A compound component to display empty states with icons, titles, descriptions, and actions.
+---
+
+The Empty component is a flexible compound component system for displaying empty states in your application. It provides a structured layout for icons, titles, descriptions, and action buttons when there is no content to show. The component supports multiple layouts, padding options, and media variants for a polished empty state experience.
+
+## Preview
+
+<ComponentPreview>
+  <div className="flex min-w-0 w-full flex-col gap-6 flex-1 items-center justify-center px-6 py-6">
+    <div className="w-full max-w-sm flex-col items-center gap-3 flex">
+      <div className="relative items-center justify-center flex">
+        <div className="flex shrink-0 items-center justify-center rounded-lg bg-transparent text-foreground size-14">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-muted-foreground"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+      </div>
+      <span className="text-center text-xl font-semibold leading-tight text-foreground">No results found</span>
+      <span className="text-center text-sm leading-relaxed text-muted-foreground max-w-xs">Try adjusting your search or filters to find what you're looking for.</span>
+    </div>
+    <div className="w-full min-w-0 max-w-sm flex-col items-center gap-3 mt-2 flex">
+      <button className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">Clear filters</button>
+    </div>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add empty
+```
+
+## Import
+
+```tsx
+import { Empty, EmptyHeader, EmptyMedia, EmptyTitle, EmptyDescription, EmptyContent } from 'novaui-components'
+```
+
+## Basic Usage
+
+Compose the compound components to build an empty state:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex min-w-0 w-full flex-col gap-6 flex-1 items-center justify-center px-6 py-6">
+    <div className="w-full max-w-sm flex-col items-center gap-3 flex">
+      <span className="text-center text-xl font-semibold leading-tight text-foreground">No items yet</span>
+      <span className="text-center text-sm leading-relaxed text-muted-foreground max-w-xs">Get started by creating your first item.</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { Empty, EmptyHeader, EmptyTitle, EmptyDescription } from 'novaui-components'
+
+export function BasicEmpty() {
+  return (
+    <Empty>
+      <EmptyHeader>
+        <EmptyTitle>No items yet</EmptyTitle>
+        <EmptyDescription>Get started by creating your first item.</EmptyDescription>
+      </EmptyHeader>
+    </Empty>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Layout
+
+### Screen Layout
+
+The default layout centers content in the available space, ideal for full-screen empty states:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex min-w-0 w-full flex-col gap-6 flex-1 items-center justify-center px-6 py-6" style={{ minHeight: '200px' }}>
+    <div className="w-full max-w-sm flex-col items-center gap-3 flex">
+      <span className="text-center text-xl font-semibold leading-tight text-foreground">Nothing here</span>
+      <span className="text-center text-sm leading-relaxed text-muted-foreground max-w-xs">This page is empty. Add some content to get started.</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Empty layout="screen">
+  <EmptyHeader>
+    <EmptyTitle>Nothing here</EmptyTitle>
+    <EmptyDescription>This page is empty. Add some content to get started.</EmptyDescription>
+  </EmptyHeader>
+</Empty>
+```
+
+</Tab>
+</Tabs>
+
+### Inline Layout
+
+For embedding empty states within sections or cards:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex min-w-0 w-full flex-col gap-6 items-center justify-start px-6 py-6">
+    <div className="w-full max-w-sm flex-col items-center gap-3 flex">
+      <span className="text-center text-xl font-semibold leading-tight text-foreground">No messages</span>
+      <span className="text-center text-sm leading-relaxed text-muted-foreground max-w-xs">Your inbox is empty.</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Empty layout="inline">
+  <EmptyHeader>
+    <EmptyTitle>No messages</EmptyTitle>
+    <EmptyDescription>Your inbox is empty.</EmptyDescription>
+  </EmptyHeader>
+</Empty>
+```
+
+</Tab>
+</Tabs>
+
+## Media Variants
+
+### Default Media
+
+A simple icon container with no background:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex min-w-0 w-full flex-col gap-6 flex-1 items-center justify-center px-6 py-6">
+    <div className="w-full max-w-sm flex-col items-center gap-3 flex">
+      <div className="relative items-center justify-center flex">
+        <div className="flex shrink-0 items-center justify-center rounded-lg bg-transparent text-foreground size-14">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-muted-foreground"><path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
+        </div>
+      </div>
+      <span className="text-center text-xl font-semibold leading-tight text-foreground">No translations</span>
+      <span className="text-center text-sm leading-relaxed text-muted-foreground max-w-xs">Add your first translation to get started.</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { Languages } from 'lucide-react-native'
+
+<Empty>
+  <EmptyHeader>
+    <EmptyMedia variant="default">
+      <Languages className="text-muted-foreground" />
+    </EmptyMedia>
+    <EmptyTitle>No translations</EmptyTitle>
+    <EmptyDescription>Add your first translation to get started.</EmptyDescription>
+  </EmptyHeader>
+</Empty>
+```
+
+</Tab>
+</Tabs>
+
+### Icon Media
+
+A styled container with background, border, and decorative shadow cards:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex min-w-0 w-full flex-col gap-6 flex-1 items-center justify-center px-6 py-6">
+    <div className="w-full max-w-sm flex-col items-center gap-3 flex">
+      <div className="relative items-center justify-center flex">
+        <div className="flex shrink-0 items-center justify-center rounded-lg border border-border bg-muted shadow-sm shadow-black/5 size-14 absolute bottom-0 -translate-x-6 -rotate-12 scale-90 bg-muted/60 border-border/90" />
+        <div className="flex shrink-0 items-center justify-center rounded-lg border border-border bg-muted shadow-sm shadow-black/5 size-14 absolute bottom-0 translate-x-6 rotate-12 scale-90 bg-muted/60 border-border/90" />
+        <div className="flex shrink-0 items-center justify-center rounded-lg border border-border bg-muted shadow-sm shadow-black/5 text-foreground size-14">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+        </div>
+      </div>
+      <span className="text-center text-xl font-semibold leading-tight text-foreground">No documents</span>
+      <span className="text-center text-sm leading-relaxed text-muted-foreground max-w-xs">Upload your first document to get started.</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { FileText } from 'lucide-react-native'
+
+<Empty>
+  <EmptyHeader>
+    <EmptyMedia variant="icon">
+      <FileText />
+    </EmptyMedia>
+    <EmptyTitle>No documents</EmptyTitle>
+    <EmptyDescription>Upload your first document to get started.</EmptyDescription>
+  </EmptyHeader>
+</Empty>
+```
+
+</Tab>
+</Tabs>
+
+## With Actions
+
+Add action buttons using `EmptyContent`:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex min-w-0 w-full flex-col gap-6 flex-1 items-center justify-center px-6 py-6">
+    <div className="w-full max-w-sm flex-col items-center gap-3 flex">
+      <span className="text-center text-xl font-semibold leading-tight text-foreground">No projects</span>
+      <span className="text-center text-sm leading-relaxed text-muted-foreground max-w-xs">Create your first project to organize your work.</span>
+    </div>
+    <div className="w-full min-w-0 max-w-sm flex-col items-center gap-3 mt-2 flex">
+      <button className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">Create Project</button>
+      <button className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">Browse Templates</button>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { Button } from 'novaui-components'
+
+<Empty>
+  <EmptyHeader>
+    <EmptyTitle>No projects</EmptyTitle>
+    <EmptyDescription>Create your first project to organize your work.</EmptyDescription>
+  </EmptyHeader>
+  <EmptyContent>
+    <Button label="Create Project" />
+    <Button variant="ghost" label="Browse Templates" />
+  </EmptyContent>
+</Empty>
+```
+
+</Tab>
+</Tabs>
+
+## Padding
+
+Control the internal spacing with the `padding` prop:
+
+```tsx
+<Empty padding="none">...</Empty>  {/* No padding */}
+<Empty padding="sm">...</Empty>    {/* px-4 py-4 */}
+<Empty padding="md">...</Empty>    {/* px-6 py-6 (default) */}
+<Empty padding="lg">...</Empty>    {/* px-6 py-10 */}
+```
+
+## Props API
+
+### EmptyProps
+
+Extends `React.ComponentPropsWithoutRef<typeof View>` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `layout` | `'screen' \| 'inline'` | `'screen'` | Layout mode. `screen` centers content vertically, `inline` aligns to top |
+| `padding` | `'none' \| 'sm' \| 'md' \| 'lg'` | `'md'` | Internal padding of the empty state container |
+| `className` | `string` | - | Additional CSS classes |
+
+### EmptyHeaderProps
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `spacing` | `'sm' \| 'md' \| 'lg'` | `'md'` | Gap between header child elements |
+| `className` | `string` | - | Additional CSS classes |
+
+### EmptyMediaProps
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'default' \| 'icon'` | `'default'` | `default` shows a plain icon, `icon` adds background, border, and decorative cards |
+| `size` | `'sm' \| 'icon' \| 'lg' \| 'xl'` | `'icon'` | Size of the media container |
+| `iconSize` | `number` | - | Override the auto-calculated icon size |
+| `className` | `string` | - | Additional CSS classes |
+
+### EmptyTitleProps
+
+Extends `React.ComponentPropsWithoutRef<typeof Text>`. Applies `text-center text-xl font-semibold leading-tight text-foreground` classes.
+
+### EmptyDescriptionProps
+
+Extends `React.ComponentPropsWithoutRef<typeof Text>`. Applies `text-center text-sm leading-relaxed text-muted-foreground max-w-xs` classes.
+
+### EmptyContentProps
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`. Applies `w-full min-w-0 max-w-sm flex-col items-center gap-3 mt-2` classes.
+
+## Best Practices
+
+1. **Be helpful**: Always provide actionable guidance — tell users what they can do to resolve the empty state.
+
+2. **Use icons**: Add an icon that relates to the content type for faster visual recognition.
+
+3. **Keep it concise**: Titles should be short and descriptions should be one or two sentences at most.
+
+4. **Provide actions**: Include primary and secondary actions to guide users forward.
+
+5. **Choose the right layout**: Use `screen` for full-page empty states and `inline` for sections within a page.
+
+## Related Components
+
+- Use `Button` inside `EmptyContent` for call-to-action buttons
+- Combine with `Spinner` for loading-to-empty transitions
+- Pair with conditional rendering to swap between content and empty states

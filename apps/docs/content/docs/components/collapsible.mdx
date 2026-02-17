@@ -1,0 +1,242 @@
+---
+title: Collapsible
+description: An expandable section that reveals or hides content with smooth animated transitions.
+---
+
+The Collapsible component is an expandable/collapsible section that smoothly reveals or hides its content. It uses React Native Reanimated for animated height transitions and supports controlled and uncontrolled state with a compound component API.
+
+## Preview
+
+<ComponentPreview>
+  <CollapsiblePreview
+    title="@peduarte starred 3 repositories"
+    defaultOpen={true}
+    items={[
+      "@radix-ui/primitives",
+      "@radix-ui/colors",
+      "@stitches/react"
+    ]}
+  />
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add collapsible
+```
+
+### Dependencies
+
+The Collapsible requires the following peer dependencies:
+
+- `react-native-reanimated` >= 3
+
+## Import
+
+```tsx
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from 'novaui-components'
+```
+
+## Basic Usage
+
+The Collapsible is a compound component with three parts:
+
+- `Collapsible` - Root container with open/close state
+- `CollapsibleTrigger` - The clickable element that toggles visibility
+- `CollapsibleContent` - The content that expands/collapses with animation
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <CollapsiblePreview
+    title="@peduarte starred 3 repositories"
+    defaultOpen={false}
+    items={[
+      "@radix-ui/primitives",
+      "@radix-ui/colors",
+      "@stitches/react"
+    ]}
+  />
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from 'novaui-components'
+import { View, Text, Pressable } from 'react-native'
+import { ChevronsUpDown } from 'lucide-react-native'
+
+export function BasicCollapsible() {
+  return (
+    <Collapsible>
+      <View className="flex-row items-center justify-between space-x-4 px-4">
+        <Text className="text-sm font-semibold">
+          @peduarte starred 3 repositories
+        </Text>
+        <CollapsibleTrigger>
+          <Pressable className="p-2 rounded-md border border-input">
+            <ChevronsUpDown size={16} />
+          </Pressable>
+        </CollapsibleTrigger>
+      </View>
+
+      <View className="rounded-md border border-border px-4 py-3 mt-2">
+        <Text className="text-sm">@radix-ui/primitives</Text>
+      </View>
+
+      <CollapsibleContent>
+        <View className="flex flex-col gap-2 mt-2">
+          <View className="rounded-md border border-border px-4 py-3">
+            <Text className="text-sm">@radix-ui/colors</Text>
+          </View>
+          <View className="rounded-md border border-border px-4 py-3">
+            <Text className="text-sm">@stitches/react</Text>
+          </View>
+        </View>
+      </CollapsibleContent>
+    </Collapsible>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Default Open
+
+Start with content already visible using `defaultOpen`:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <CollapsiblePreview
+    title="3 items available"
+    defaultOpen={true}
+    items={[
+      "First item (always visible)",
+      "Second item (collapsible)",
+      "Third item (collapsible)"
+    ]}
+  />
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Collapsible defaultOpen>
+  <View className="flex-row items-center justify-between space-x-4 px-4">
+    <Text className="text-sm font-semibold">3 items available</Text>
+    <CollapsibleTrigger>
+      <Pressable className="p-2 rounded-md border border-input">
+        <ChevronsUpDown size={16} />
+      </Pressable>
+    </CollapsibleTrigger>
+  </View>
+  <View className="rounded-md border border-border px-4 py-3 mt-2">
+    <Text className="text-sm">First item (always visible)</Text>
+  </View>
+  <CollapsibleContent>
+    <View className="flex flex-col gap-2 mt-2">
+      <View className="rounded-md border border-border px-4 py-3">
+        <Text className="text-sm">Second item (collapsible)</Text>
+      </View>
+      <View className="rounded-md border border-border px-4 py-3">
+        <Text className="text-sm">Third item (collapsible)</Text>
+      </View>
+    </View>
+  </CollapsibleContent>
+</Collapsible>
+```
+
+</Tab>
+</Tabs>
+
+## Controlled State
+
+Control the collapsible state programmatically:
+
+```tsx
+import { useState } from 'react'
+
+export function ControlledCollapsible() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <View>
+      <Button
+        label={open ? 'Hide Details' : 'Show Details'}
+        variant="outline"
+        onPress={() => setOpen(!open)}
+      />
+      <Collapsible open={open} onOpenChange={setOpen}>
+        <CollapsibleContent>
+          <View className="rounded-md border border-border px-4 py-3 mt-2">
+            <Text className="text-sm">
+              These are the details that can be toggled externally.
+            </Text>
+          </View>
+        </CollapsibleContent>
+      </Collapsible>
+    </View>
+  )
+}
+```
+
+## Props API
+
+### Collapsible Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | - | Controlled open state |
+| `onOpenChange` | `(open: boolean) => void` | - | Callback when open state changes |
+| `defaultOpen` | `boolean` | `false` | Initial open state (uncontrolled) |
+| `disabled` | `boolean` | `false` | Disable toggling |
+
+### CollapsibleTrigger Props
+
+Extends `React.ComponentPropsWithoutRef<typeof Pressable>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Render as the child element instead of a Pressable |
+
+### CollapsibleContent Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes for the content wrapper |
+
+## Animation
+
+The Collapsible uses `react-native-reanimated` for smooth height transitions:
+
+- **Height animation**: Content height animates from 0 to measured height using `withTiming`
+- **Opacity**: Content fades in/out during the transition
+- **Overflow hidden**: The animated wrapper clips content during transitions
+
+## Best Practices
+
+1. **Always-visible item**: Place one item outside `CollapsibleContent` as a preview, then put the rest inside the collapsible area
+
+2. **Clear trigger**: Make the toggle button obvious — use icons like `ChevronsUpDown` or descriptive text
+
+3. **Smooth transitions**: The Reanimated-powered animation measures content height automatically — no fixed heights needed
+
+4. **Don't nest collapsibles**: Avoid deeply nested collapsible sections — use `Accordion` for multiple collapsible items
+
+5. **Accessible labels**: Use `asChild` on `CollapsibleTrigger` for custom trigger elements
+
+## Related Components
+
+- Use `Accordion` for multiple collapsible sections with single/multi expand
+- Use `Tabs` for switching between different content views
+- Use `Card` to wrap collapsible sections for visual grouping

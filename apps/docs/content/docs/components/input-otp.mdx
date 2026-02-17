@@ -1,0 +1,287 @@
+---
+title: Input OTP
+description: A one-time password input with individual character slots and focus indicators.
+---
+
+The Input OTP component provides a set of individual character slots for entering one-time passwords or verification codes. It features automatic focus management, a hidden text input for keyboard capture, and a visual caret indicator for the active slot.
+
+## Preview
+
+<ComponentPreview>
+  <div className="flex flex-row items-center gap-2">
+    <div className="flex flex-row items-center">
+      <div className="relative flex h-10 w-10 items-center justify-center border border-input bg-background text-sm">
+        <span className="text-sm">1</span>
+      </div>
+      <div className="relative flex h-10 w-10 items-center justify-center border border-input bg-background text-sm">
+        <span className="text-sm">2</span>
+      </div>
+      <div className="relative flex h-10 w-10 items-center justify-center border border-input bg-background text-sm">
+        <span className="text-sm">3</span>
+      </div>
+    </div>
+    <div className="flex items-center justify-center">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+    </div>
+    <div className="flex flex-row items-center">
+      <div className="relative flex h-10 w-10 items-center justify-center border border-input bg-background text-sm border-primary border-2">
+        <span className="text-sm"></span>
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+          <div className="h-4 w-px bg-foreground" />
+        </div>
+      </div>
+      <div className="relative flex h-10 w-10 items-center justify-center border border-input bg-background text-sm">
+        <span className="text-sm"></span>
+      </div>
+      <div className="relative flex h-10 w-10 items-center justify-center border border-input bg-background text-sm">
+        <span className="text-sm"></span>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add input-otp
+```
+
+## Import
+
+```tsx
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+  InputOTPSeparator,
+} from 'novaui-components'
+```
+
+## Basic Usage
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-row items-center gap-2">
+    <div className="flex flex-row items-center">
+      <div className="relative flex h-10 w-10 items-center justify-center border border-input bg-background text-sm">
+        <span className="text-sm"></span>
+      </div>
+      <div className="relative flex h-10 w-10 items-center justify-center border border-input bg-background text-sm">
+        <span className="text-sm"></span>
+      </div>
+      <div className="relative flex h-10 w-10 items-center justify-center border border-input bg-background text-sm">
+        <span className="text-sm"></span>
+      </div>
+      <div className="relative flex h-10 w-10 items-center justify-center border border-input bg-background text-sm">
+        <span className="text-sm"></span>
+      </div>
+      <div className="relative flex h-10 w-10 items-center justify-center border border-input bg-background text-sm">
+        <span className="text-sm"></span>
+      </div>
+      <div className="relative flex h-10 w-10 items-center justify-center border border-input bg-background text-sm">
+        <span className="text-sm"></span>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { useState } from 'react'
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from 'novaui-components'
+
+export function BasicOTP() {
+  const [value, setValue] = useState('')
+
+  return (
+    <InputOTP maxLength={6} value={value} onChangeText={setValue}>
+      <InputOTPGroup>
+        <InputOTPSlot index={0} />
+        <InputOTPSlot index={1} />
+        <InputOTPSlot index={2} />
+        <InputOTPSlot index={3} />
+        <InputOTPSlot index={4} />
+        <InputOTPSlot index={5} />
+      </InputOTPGroup>
+    </InputOTP>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## With Separator
+
+Split the OTP input into groups with a visual separator:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-row items-center gap-2">
+    <div className="flex flex-row items-center">
+      <div className="relative flex h-10 w-10 items-center justify-center border border-input bg-background text-sm">
+        <span className="text-sm"></span>
+      </div>
+      <div className="relative flex h-10 w-10 items-center justify-center border border-input bg-background text-sm">
+        <span className="text-sm"></span>
+      </div>
+      <div className="relative flex h-10 w-10 items-center justify-center border border-input bg-background text-sm">
+        <span className="text-sm"></span>
+      </div>
+    </div>
+    <div className="flex items-center justify-center">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+    </div>
+    <div className="flex flex-row items-center">
+      <div className="relative flex h-10 w-10 items-center justify-center border border-input bg-background text-sm">
+        <span className="text-sm"></span>
+      </div>
+      <div className="relative flex h-10 w-10 items-center justify-center border border-input bg-background text-sm">
+        <span className="text-sm"></span>
+      </div>
+      <div className="relative flex h-10 w-10 items-center justify-center border border-input bg-background text-sm">
+        <span className="text-sm"></span>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { useState } from 'react'
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+  InputOTPSeparator,
+} from 'novaui-components'
+
+export function OTPWithSeparator() {
+  const [value, setValue] = useState('')
+
+  return (
+    <InputOTP maxLength={6} value={value} onChangeText={setValue}>
+      <InputOTPGroup>
+        <InputOTPSlot index={0} />
+        <InputOTPSlot index={1} />
+        <InputOTPSlot index={2} />
+      </InputOTPGroup>
+      <InputOTPSeparator />
+      <InputOTPGroup>
+        <InputOTPSlot index={3} />
+        <InputOTPSlot index={4} />
+        <InputOTPSlot index={5} />
+      </InputOTPGroup>
+    </InputOTP>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Four Digit PIN
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-row items-center">
+    <div className="flex flex-row items-center">
+      <div className="relative flex h-10 w-10 items-center justify-center border border-input bg-background text-sm">
+        <span className="text-sm"></span>
+      </div>
+      <div className="relative flex h-10 w-10 items-center justify-center border border-input bg-background text-sm">
+        <span className="text-sm"></span>
+      </div>
+      <div className="relative flex h-10 w-10 items-center justify-center border border-input bg-background text-sm">
+        <span className="text-sm"></span>
+      </div>
+      <div className="relative flex h-10 w-10 items-center justify-center border border-input bg-background text-sm">
+        <span className="text-sm"></span>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+const [pin, setPin] = useState('')
+
+<InputOTP maxLength={4} value={pin} onChangeText={setPin} keyboardType="numeric">
+  <InputOTPGroup>
+    <InputOTPSlot index={0} />
+    <InputOTPSlot index={1} />
+    <InputOTPSlot index={2} />
+    <InputOTPSlot index={3} />
+  </InputOTPGroup>
+</InputOTP>
+```
+
+</Tab>
+</Tabs>
+
+## Props API
+
+### InputOTP
+
+Extends `React.ComponentPropsWithoutRef<typeof TextInput>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `maxLength` | `number` | **required** | Total number of OTP characters |
+| `value` | `string` | - | The current OTP value |
+| `onChangeText` | `(text: string) => void` | - | Callback when the value changes |
+| `containerClassName` | `string` | - | CSS classes for the outer container |
+
+### InputOTPGroup
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### InputOTPSlot
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `index` | `number` | **required** | The slot position (0-based) |
+| `className` | `string` | - | Additional CSS classes |
+
+### InputOTPSeparator
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+## Best Practices
+
+1. **Set appropriate maxLength**: Match the expected code length (typically 4 or 6)
+2. **Use numeric keyboard**: Set `keyboardType="numeric"` for numeric-only codes
+3. **Group with separators**: Split long codes into groups of 3 for readability
+4. **Auto-submit**: Consider calling a submit function when all slots are filled
+5. **Pair with Field**: Wrap in a `Field` component for labels and validation messages
+
+## Related Components
+
+- [Input](/docs/components/input) - Standard text input
+- [Field](/docs/components/field) - Form field wrapper with labels
