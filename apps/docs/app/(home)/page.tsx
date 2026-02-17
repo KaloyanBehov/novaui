@@ -9,6 +9,7 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import { AnimateIn } from '@/components/animate-in'
+import { LandingShowcase } from '@/components/landing-showcase'
 
 export default function HomePage() {
   return (
@@ -130,141 +131,20 @@ export default function HomePage() {
 
       {/* ─── Component Showcase ─── */}
       <section className="px-6 py-24">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <AnimateIn className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">Components at a Glance</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Real previews using the exact same styling as the React Native
-              components.
+              Interactive examples using the exact same styling as the React
+              Native components. Try them out.
             </p>
           </AnimateIn>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            <AnimateIn delay={0}>
-              <ShowcaseCard title="Button">
-                <div className="flex flex-wrap gap-2">
-                  <button className="inline-flex items-center justify-center rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground">
-                    Default
-                  </button>
-                  <button className="inline-flex items-center justify-center rounded-md bg-secondary px-3 py-1.5 text-xs font-medium text-secondary-foreground">
-                    Secondary
-                  </button>
-                  <button className="inline-flex items-center justify-center rounded-md border bg-background px-3 py-1.5 text-xs font-medium">
-                    Outline
-                  </button>
-                  <button className="inline-flex items-center justify-center rounded-md bg-destructive px-3 py-1.5 text-xs font-medium text-white">
-                    Destructive
-                  </button>
-                </div>
-              </ShowcaseCard>
-            </AnimateIn>
+          <AnimateIn>
+            <LandingShowcase />
+          </AnimateIn>
 
-            <AnimateIn delay={80}>
-              <ShowcaseCard title="Avatar">
-                <div className="flex items-center -space-x-2">
-                  <div className="relative flex h-9 w-9 shrink-0 overflow-hidden rounded-full border-2 border-background">
-                    <img src="https://github.com/shadcn.png" alt="" className="aspect-square h-full w-full" />
-                  </div>
-                  <div className="relative flex h-9 w-9 shrink-0 overflow-hidden rounded-full border-2 border-background">
-                    <div className="flex h-full w-full items-center justify-center rounded-full bg-muted">
-                      <span className="text-xs font-medium text-muted-foreground">AB</span>
-                    </div>
-                  </div>
-                  <div className="relative flex h-9 w-9 shrink-0 overflow-hidden rounded-full border-2 border-background">
-                    <div className="flex h-full w-full items-center justify-center rounded-full bg-muted">
-                      <span className="text-xs font-medium text-muted-foreground">CD</span>
-                    </div>
-                  </div>
-                  <div className="relative flex h-9 w-9 shrink-0 overflow-hidden rounded-full border-2 border-background">
-                    <div className="flex h-full w-full items-center justify-center rounded-full bg-muted">
-                      <span className="text-xs font-medium text-muted-foreground">+3</span>
-                    </div>
-                  </div>
-                </div>
-              </ShowcaseCard>
-            </AnimateIn>
-
-            <AnimateIn delay={160}>
-              <ShowcaseCard title="Badge">
-                <div className="flex flex-wrap gap-2">
-                  <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold bg-primary text-primary-foreground">
-                    Default
-                  </span>
-                  <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold bg-secondary text-secondary-foreground">
-                    Secondary
-                  </span>
-                  <span className="inline-flex items-center rounded-full border border-destructive/50 px-2.5 py-0.5 text-xs font-semibold text-destructive">
-                    Destructive
-                  </span>
-                  <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold">
-                    Outline
-                  </span>
-                </div>
-              </ShowcaseCard>
-            </AnimateIn>
-
-            <AnimateIn delay={240}>
-              <ShowcaseCard title="Card">
-                <div className="rounded-xl border border-border bg-card shadow-sm shadow-black/5 w-full">
-                  <div className="flex flex-col space-y-1 p-3">
-                    <span className="text-sm font-semibold leading-none tracking-tight text-foreground">
-                      Project Alpha
-                    </span>
-                    <span className="text-xs text-muted-foreground">Last updated 2h ago</span>
-                  </div>
-                </div>
-              </ShowcaseCard>
-            </AnimateIn>
-
-            <AnimateIn delay={300}>
-              <ShowcaseCard title="Input">
-                <div className="w-full flex flex-col gap-1.5">
-                  <span className="text-xs font-medium text-foreground">Email</span>
-                  <div className="h-9 w-full rounded-md border border-input bg-background px-3 flex items-center">
-                    <span className="text-xs text-muted-foreground">you@example.com</span>
-                  </div>
-                </div>
-              </ShowcaseCard>
-            </AnimateIn>
-
-            <AnimateIn delay={380}>
-              <ShowcaseCard title="Switch">
-                <div className="flex items-center gap-3">
-                  <div className="relative h-6 w-11 rounded-full bg-primary p-0.5">
-                    <div className="h-5 w-5 rounded-full bg-primary-foreground shadow-sm translate-x-5 transition-transform" />
-                  </div>
-                  <span className="text-xs text-foreground">Enabled</span>
-                </div>
-              </ShowcaseCard>
-            </AnimateIn>
-
-            <AnimateIn delay={460}>
-              <ShowcaseCard title="Skeleton">
-                <div className="flex items-center gap-3 w-full">
-                  <div className="h-9 w-9 shrink-0 animate-pulse rounded-full bg-muted" />
-                  <div className="flex flex-col gap-1.5 flex-1">
-                    <div className="h-3 w-3/4 animate-pulse rounded-md bg-muted" />
-                    <div className="h-3 w-1/2 animate-pulse rounded-md bg-muted" />
-                  </div>
-                </div>
-              </ShowcaseCard>
-            </AnimateIn>
-
-            <AnimateIn delay={540}>
-              <ShowcaseCard title="Alert">
-                <div className="relative w-full rounded-lg border border-border bg-background text-foreground p-3">
-                  <span className="text-xs font-medium leading-none tracking-tight text-foreground">
-                    Heads up!
-                  </span>
-                  <p className="text-[11px] text-muted-foreground leading-relaxed mt-0.5">
-                    You can add components using the CLI.
-                  </p>
-                </div>
-              </ShowcaseCard>
-            </AnimateIn>
-          </div>
-
-          <AnimateIn delay={600} className="text-center mt-10">
+          <AnimateIn delay={200} className="text-center mt-10">
             <Link
               href="/docs/components/button"
               className="text-sm font-medium text-primary hover:underline underline-offset-4"
@@ -429,17 +309,6 @@ function FeatureCard({
       </div>
       <h3 className="text-lg font-semibold mb-2">{title}</h3>
       <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
-    </div>
-  )
-}
-
-function ShowcaseCard({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div className="h-full rounded-xl border border-border bg-card p-5 flex flex-col gap-3 shadow-sm hover:border-primary/30 transition-colors">
-      <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-        {title}
-      </span>
-      <div className="flex items-center justify-center min-h-[60px]">{children}</div>
     </div>
   )
 }
