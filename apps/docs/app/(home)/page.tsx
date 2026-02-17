@@ -5,11 +5,11 @@ import {
   Moon,
   Paintbrush,
   ShieldCheck,
-  Terminal,
 } from 'lucide-react'
 import Link from 'next/link'
 import { AnimateIn } from '@/components/animate-in'
 import { LandingShowcase } from '@/components/landing-showcase'
+import { TypingTerminal } from '@/components/typing-terminal'
 
 export default function HomePage() {
   return (
@@ -53,22 +53,7 @@ export default function HomePage() {
 
       {/* ─── CLI Banner ─── */}
       <section className="px-6 pb-20">
-        <AnimateIn className="max-w-2xl mx-auto rounded-xl border border-border bg-card shadow-lg overflow-hidden">
-          <div className="flex items-center gap-2 px-4 py-2.5 border-b border-border bg-muted/40">
-            <Terminal className="w-4 h-4 text-muted-foreground" />
-            <span className="text-xs text-muted-foreground font-medium">Terminal</span>
-          </div>
-          <div className="p-5 font-mono text-sm space-y-2">
-            <div className="flex items-center gap-2">
-              <span className="text-muted-foreground select-none">$</span>
-              <span className="text-foreground">npx novaui-cli init</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-muted-foreground select-none">$</span>
-              <span className="text-foreground">npx novaui-cli add button</span>
-            </div>
-          </div>
-        </AnimateIn>
+        <TypingTerminal />
       </section>
 
       {/* ─── Features Grid ─── */}
