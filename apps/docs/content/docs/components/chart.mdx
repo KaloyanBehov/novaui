@@ -1,0 +1,407 @@
+---
+title: Chart
+description: A composable chart container with tooltip and legend primitives for building data visualizations.
+---
+
+The Chart component provides a context-driven container for building custom charts in React Native. It includes a `ChartContainer` that distributes config via context, along with `ChartTooltip`, `ChartLegend`, and their content sub-components for consistent styling.
+
+## Preview
+
+<ComponentPreview>
+  <div className="flex-1 justify-center w-full max-w-md">
+    <div className="flex flex-row items-end justify-between gap-2 h-48 px-4">
+      <div className="flex flex-col items-center gap-1 flex-1">
+        <div className="w-full rounded-t-md" style={{ height: '60%', backgroundColor: '#3b82f6' }} />
+        <span className="text-xs text-muted-foreground">Jan</span>
+      </div>
+      <div className="flex flex-col items-center gap-1 flex-1">
+        <div className="w-full rounded-t-md" style={{ height: '80%', backgroundColor: '#3b82f6' }} />
+        <span className="text-xs text-muted-foreground">Feb</span>
+      </div>
+      <div className="flex flex-col items-center gap-1 flex-1">
+        <div className="w-full rounded-t-md" style={{ height: '45%', backgroundColor: '#3b82f6' }} />
+        <span className="text-xs text-muted-foreground">Mar</span>
+      </div>
+      <div className="flex flex-col items-center gap-1 flex-1">
+        <div className="w-full rounded-t-md" style={{ height: '90%', backgroundColor: '#3b82f6' }} />
+        <span className="text-xs text-muted-foreground">Apr</span>
+      </div>
+      <div className="flex flex-col items-center gap-1 flex-1">
+        <div className="w-full rounded-t-md" style={{ height: '55%', backgroundColor: '#3b82f6' }} />
+        <span className="text-xs text-muted-foreground">May</span>
+      </div>
+      <div className="flex flex-col items-center gap-1 flex-1">
+        <div className="w-full rounded-t-md" style={{ height: '70%', backgroundColor: '#3b82f6' }} />
+        <span className="text-xs text-muted-foreground">Jun</span>
+      </div>
+    </div>
+    <div className="flex flex-row items-center justify-center gap-4 mt-4">
+      <div className="flex flex-row items-center gap-2">
+        <div className="h-3 w-3 rounded-sm" style={{ backgroundColor: '#3b82f6' }} />
+        <span className="text-sm text-muted-foreground">Revenue</span>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add chart
+```
+
+## Import
+
+```tsx
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+  ChartLegend,
+  ChartLegendContent,
+  useChart,
+} from 'novaui-components'
+```
+
+## Basic Usage
+
+The Chart is a compound component with these parts:
+
+- `ChartContainer` — Root wrapper that provides `ChartConfig` context and applies `flex-1 justify-center`
+- `ChartTooltip` — Styled tooltip overlay with `border border-border bg-background shadow-sm px-3 py-2 rounded-lg`
+- `ChartTooltipContent` — Inner tooltip layout with `flex-col gap-1`
+- `ChartLegend` — Legend row with `flex-row items-center justify-center gap-4 mt-4`
+- `ChartLegendContent` — Individual legend item with `flex-row items-center gap-2`
+- `useChart` — Hook to access the current `ChartConfig` from context
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex-1 justify-center w-full max-w-md">
+    <div className="flex flex-row items-end justify-between gap-2 h-48 px-4">
+      <div className="flex flex-col items-center gap-1 flex-1">
+        <div className="w-full rounded-t-md" style={{ height: '60%', backgroundColor: '#3b82f6' }} />
+        <span className="text-xs text-muted-foreground">Jan</span>
+      </div>
+      <div className="flex flex-col items-center gap-1 flex-1">
+        <div className="w-full rounded-t-md" style={{ height: '80%', backgroundColor: '#3b82f6' }} />
+        <span className="text-xs text-muted-foreground">Feb</span>
+      </div>
+      <div className="flex flex-col items-center gap-1 flex-1">
+        <div className="w-full rounded-t-md" style={{ height: '45%', backgroundColor: '#3b82f6' }} />
+        <span className="text-xs text-muted-foreground">Mar</span>
+      </div>
+      <div className="flex flex-col items-center gap-1 flex-1">
+        <div className="w-full rounded-t-md" style={{ height: '90%', backgroundColor: '#3b82f6' }} />
+        <span className="text-xs text-muted-foreground">Apr</span>
+      </div>
+      <div className="flex flex-col items-center gap-1 flex-1">
+        <div className="w-full rounded-t-md" style={{ height: '55%', backgroundColor: '#3b82f6' }} />
+        <span className="text-xs text-muted-foreground">May</span>
+      </div>
+      <div className="flex flex-col items-center gap-1 flex-1">
+        <div className="w-full rounded-t-md" style={{ height: '70%', backgroundColor: '#3b82f6' }} />
+        <span className="text-xs text-muted-foreground">Jun</span>
+      </div>
+    </div>
+    <div className="flex flex-row items-center justify-center gap-4 mt-4">
+      <div className="flex flex-row items-center gap-2">
+        <div className="h-3 w-3 rounded-sm" style={{ backgroundColor: '#3b82f6' }} />
+        <span className="text-sm text-muted-foreground">Revenue</span>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { View, Text } from 'react-native'
+import {
+  ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
+} from 'novaui-components'
+
+const config = {
+  revenue: {
+    label: 'Revenue',
+    color: '#3b82f6',
+  },
+}
+
+const data = [
+  { month: 'Jan', value: 60 },
+  { month: 'Feb', value: 80 },
+  { month: 'Mar', value: 45 },
+  { month: 'Apr', value: 90 },
+  { month: 'May', value: 55 },
+  { month: 'Jun', value: 70 },
+]
+
+export function BasicChart() {
+  return (
+    <ChartContainer config={config}>
+      <View className="flex-row items-end justify-between gap-2 h-48 px-4">
+        {data.map((item) => (
+          <View key={item.month} className="flex-col items-center gap-1 flex-1">
+            <View
+              className="w-full rounded-t-md"
+              style={{
+                height: `${item.value}%`,
+                backgroundColor: config.revenue.color,
+              }}
+            />
+            <Text className="text-xs text-muted-foreground">{item.month}</Text>
+          </View>
+        ))}
+      </View>
+      <ChartLegend>
+        <ChartLegendContent>
+          <View
+            className="h-3 w-3 rounded-sm"
+            style={{ backgroundColor: config.revenue.color }}
+          />
+          <Text className="text-sm text-muted-foreground">Revenue</Text>
+        </ChartLegendContent>
+      </ChartLegend>
+    </ChartContainer>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## With Tooltip
+
+Display contextual data using the tooltip primitives:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-col items-center w-full max-w-md gap-2">
+    <div className="border border-border bg-background shadow-sm px-3 py-2 rounded-lg">
+      <div className="flex flex-col gap-1">
+        <span className="text-sm font-medium text-foreground">April</span>
+        <div className="flex flex-row items-center gap-2">
+          <div className="h-3 w-3 rounded-sm" style={{ backgroundColor: '#3b82f6' }} />
+          <span className="text-sm text-muted-foreground">Revenue: $9,000</span>
+        </div>
+      </div>
+    </div>
+    <span className="text-xs text-muted-foreground">Example tooltip rendered statically</span>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { View, Text } from 'react-native'
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from 'novaui-components'
+
+export function ChartWithTooltip() {
+  return (
+    <ChartContainer config={config}>
+      {/* ... chart bars ... */}
+      <ChartTooltip>
+        <ChartTooltipContent>
+          <Text className="text-sm font-medium text-foreground">April</Text>
+          <View className="flex-row items-center gap-2">
+            <View
+              className="h-3 w-3 rounded-sm"
+              style={{ backgroundColor: config.revenue.color }}
+            />
+            <Text className="text-sm text-muted-foreground">
+              Revenue: $9,000
+            </Text>
+          </View>
+        </ChartTooltipContent>
+      </ChartTooltip>
+    </ChartContainer>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Multi-Series Chart
+
+Show multiple data series with separate colors in the legend:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex-1 justify-center w-full max-w-md">
+    <div className="flex flex-row items-end justify-between gap-3 h-48 px-4">
+      <div className="flex flex-col items-center gap-1 flex-1">
+        <div className="flex flex-row gap-0.5 w-full items-end h-full">
+          <div className="flex-1 rounded-t-md" style={{ height: '60%', backgroundColor: '#3b82f6' }} />
+          <div className="flex-1 rounded-t-md" style={{ height: '40%', backgroundColor: '#f97316' }} />
+        </div>
+        <span className="text-xs text-muted-foreground">Q1</span>
+      </div>
+      <div className="flex flex-col items-center gap-1 flex-1">
+        <div className="flex flex-row gap-0.5 w-full items-end h-full">
+          <div className="flex-1 rounded-t-md" style={{ height: '80%', backgroundColor: '#3b82f6' }} />
+          <div className="flex-1 rounded-t-md" style={{ height: '55%', backgroundColor: '#f97316' }} />
+        </div>
+        <span className="text-xs text-muted-foreground">Q2</span>
+      </div>
+      <div className="flex flex-col items-center gap-1 flex-1">
+        <div className="flex flex-row gap-0.5 w-full items-end h-full">
+          <div className="flex-1 rounded-t-md" style={{ height: '50%', backgroundColor: '#3b82f6' }} />
+          <div className="flex-1 rounded-t-md" style={{ height: '75%', backgroundColor: '#f97316' }} />
+        </div>
+        <span className="text-xs text-muted-foreground">Q3</span>
+      </div>
+      <div className="flex flex-col items-center gap-1 flex-1">
+        <div className="flex flex-row gap-0.5 w-full items-end h-full">
+          <div className="flex-1 rounded-t-md" style={{ height: '90%', backgroundColor: '#3b82f6' }} />
+          <div className="flex-1 rounded-t-md" style={{ height: '65%', backgroundColor: '#f97316' }} />
+        </div>
+        <span className="text-xs text-muted-foreground">Q4</span>
+      </div>
+    </div>
+    <div className="flex flex-row items-center justify-center gap-4 mt-4">
+      <div className="flex flex-row items-center gap-2">
+        <div className="h-3 w-3 rounded-sm" style={{ backgroundColor: '#3b82f6' }} />
+        <span className="text-sm text-muted-foreground">Revenue</span>
+      </div>
+      <div className="flex flex-row items-center gap-2">
+        <div className="h-3 w-3 rounded-sm" style={{ backgroundColor: '#f97316' }} />
+        <span className="text-sm text-muted-foreground">Expenses</span>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { View, Text } from 'react-native'
+import {
+  ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
+} from 'novaui-components'
+
+const config = {
+  revenue: { label: 'Revenue', color: '#3b82f6' },
+  expenses: { label: 'Expenses', color: '#f97316' },
+}
+
+export function MultiSeriesChart() {
+  return (
+    <ChartContainer config={config}>
+      <View className="flex-row items-end justify-between gap-3 h-48 px-4">
+        {/* Render grouped bars per quarter */}
+      </View>
+      <ChartLegend>
+        <ChartLegendContent>
+          <View className="h-3 w-3 rounded-sm" style={{ backgroundColor: '#3b82f6' }} />
+          <Text className="text-sm text-muted-foreground">Revenue</Text>
+        </ChartLegendContent>
+        <ChartLegendContent>
+          <View className="h-3 w-3 rounded-sm" style={{ backgroundColor: '#f97316' }} />
+          <Text className="text-sm text-muted-foreground">Expenses</Text>
+        </ChartLegendContent>
+      </ChartLegend>
+    </ChartContainer>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Props API
+
+### ChartConfig
+
+The configuration object passed to `ChartContainer`:
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| `[key]` | `object` | - | Keyed by series name |
+| `[key].label` | `string` | - | Human-readable label for the series |
+| `[key].color` | `string` | - | Color used for bars, lines, or legend indicators |
+| `[key].theme` | `Record<string, string>` | - | Optional theme-aware color overrides |
+
+### ChartContainer Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `config` | `ChartConfig` | **required** | Chart configuration defining series labels and colors |
+| `className` | `string` | - | Additional CSS classes (base: `flex-1 justify-center`) |
+
+### ChartTooltip Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes (base: `border border-border bg-background shadow-sm px-3 py-2 rounded-lg`) |
+
+### ChartTooltipContent Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes (base: `flex-col gap-1`) |
+
+### ChartLegend Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes (base: `flex-row items-center justify-center gap-4 mt-4`) |
+
+### ChartLegendContent Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes (base: `flex-row items-center gap-2`) |
+
+### useChart Hook
+
+Returns the current `ChartConfig` from context. Must be used within a `ChartContainer`.
+
+```tsx
+const { config } = useChart()
+```
+
+## Best Practices
+
+1. **Define a clear config**: Always provide a `ChartConfig` with descriptive labels and distinct colors per series for readability and accessibility.
+
+2. **Use the context hook**: Access chart config via `useChart()` in custom chart elements rather than prop-drilling colors and labels.
+
+3. **Keep tooltips concise**: Show only the most relevant data point information — avoid cluttering with too many fields.
+
+4. **Legend placement**: The `ChartLegend` defaults to `mt-4` below the chart. Override with `className` if you need a different layout.
+
+5. **Compose freely**: These are low-level primitives — combine them with any charting library or custom bar/line views to build the visualization you need.
+
+## Related Components
+
+- Use `Card` to wrap charts in a bordered container with a title
+- Use `Separator` to divide multiple charts in a dashboard
+- Use `Text` for axis labels and data annotations

@@ -1,0 +1,391 @@
+---
+title: Field
+description: A structured layout system for building accessible, labeled form fields.
+---
+
+The Field component system provides a comprehensive set of building blocks for creating consistent form layouts. It includes containers for field sets, groups, labels, descriptions, errors, and separators — all with proper spacing and typography. Built with React Native's `View` and `Text` components and class-variance-authority.
+
+## Preview
+
+<ComponentPreview>
+  <div className="flex w-full max-w-sm flex-col gap-3">
+    <label className="flex w-fit gap-2 leading-snug text-sm font-medium text-foreground">Email address</label>
+    <div className="flex flex-1 flex-col gap-1.5">
+      <input
+        type="email"
+        placeholder="you@example.com"
+        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base lg:text-sm text-foreground placeholder:text-muted-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      />
+      <span className="text-muted-foreground text-sm leading-normal font-normal">We'll never share your email.</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add field
+```
+
+## Import
+
+```tsx
+import {
+  Field,
+  FieldLabel,
+  FieldTitle,
+  FieldContent,
+  FieldDescription,
+  FieldError,
+  FieldGroup,
+  FieldSet,
+  FieldLegend,
+  FieldSeparator,
+} from 'novaui-components'
+```
+
+## Basic Usage
+
+A simple labeled field with an input and description:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex w-full max-w-sm flex-col gap-3">
+    <label className="flex w-fit gap-2 leading-snug text-sm font-medium text-foreground">Username</label>
+    <div className="flex flex-1 flex-col gap-1.5">
+      <input
+        type="text"
+        placeholder="Enter your username"
+        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base lg:text-sm text-foreground placeholder:text-muted-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      />
+      <span className="text-muted-foreground text-sm leading-normal font-normal">This will be your public display name.</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { Field, FieldLabel, FieldContent, FieldDescription } from 'novaui-components'
+import { Input } from 'novaui-components'
+
+export function BasicField() {
+  return (
+    <Field>
+      <FieldLabel>Username</FieldLabel>
+      <FieldContent>
+        <Input placeholder="Enter your username" />
+        <FieldDescription>This will be your public display name.</FieldDescription>
+      </FieldContent>
+    </Field>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Orientation
+
+### Vertical (Default)
+
+Fields stack the label above the input:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex w-full max-w-sm flex-col gap-3">
+    <label className="flex w-fit gap-2 leading-snug text-sm font-medium text-foreground">Full name</label>
+    <div className="flex flex-1 flex-col gap-1.5">
+      <input
+        type="text"
+        placeholder="John Doe"
+        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base lg:text-sm text-foreground placeholder:text-muted-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      />
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Field orientation="vertical">
+  <FieldLabel>Full name</FieldLabel>
+  <FieldContent>
+    <Input placeholder="John Doe" />
+  </FieldContent>
+</Field>
+```
+
+</Tab>
+</Tabs>
+
+### Horizontal
+
+The label sits beside the input in a row layout:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex w-full max-w-md flex-row items-center gap-3">
+    <label className="flex w-fit gap-2 leading-snug text-sm font-medium text-foreground whitespace-nowrap">Full name</label>
+    <div className="flex flex-1 flex-col gap-1.5">
+      <input
+        type="text"
+        placeholder="John Doe"
+        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base lg:text-sm text-foreground placeholder:text-muted-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      />
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Field orientation="horizontal">
+  <FieldLabel>Full name</FieldLabel>
+  <FieldContent>
+    <Input placeholder="John Doe" />
+  </FieldContent>
+</Field>
+```
+
+</Tab>
+</Tabs>
+
+## With Error
+
+Display validation errors below the input:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex w-full max-w-sm flex-col gap-3">
+    <label className="flex w-fit gap-2 leading-snug text-sm font-medium text-foreground">Email</label>
+    <div className="flex flex-1 flex-col gap-1.5">
+      <input
+        type="email"
+        value="invalid-email"
+        readOnly
+        className="flex h-10 w-full rounded-md border border-destructive bg-background px-3 py-2 text-base lg:text-sm text-foreground placeholder:text-muted-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      />
+      <span className="text-destructive text-sm font-normal">Please enter a valid email address.</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Field>
+  <FieldLabel>Email</FieldLabel>
+  <FieldContent>
+    <Input placeholder="you@example.com" value={email} onChangeText={setEmail} />
+    <FieldError errors={[{ message: 'Please enter a valid email address.' }]} />
+  </FieldContent>
+</Field>
+```
+
+</Tab>
+</Tabs>
+
+## FieldSet and FieldGroup
+
+Organize multiple fields into logical groups:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-col gap-6 w-full max-w-sm">
+    <span className="mb-3 font-medium text-foreground text-base">Personal Information</span>
+    <div className="flex w-full flex-col gap-7">
+      <div className="flex w-full flex-col gap-3">
+        <label className="flex w-fit gap-2 leading-snug text-sm font-medium text-foreground">First name</label>
+        <div className="flex flex-1 flex-col gap-1.5">
+          <input type="text" placeholder="John" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base lg:text-sm text-foreground placeholder:text-muted-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" />
+        </div>
+      </div>
+      <div className="flex w-full flex-col gap-3">
+        <label className="flex w-fit gap-2 leading-snug text-sm font-medium text-foreground">Last name</label>
+        <div className="flex flex-1 flex-col gap-1.5">
+          <input type="text" placeholder="Doe" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base lg:text-sm text-foreground placeholder:text-muted-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" />
+        </div>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import {
+  FieldSet, FieldLegend, FieldGroup,
+  Field, FieldLabel, FieldContent,
+} from 'novaui-components'
+import { Input } from 'novaui-components'
+
+export function FieldSetExample() {
+  return (
+    <FieldSet>
+      <FieldLegend>Personal Information</FieldLegend>
+      <FieldGroup>
+        <Field>
+          <FieldLabel>First name</FieldLabel>
+          <FieldContent>
+            <Input placeholder="John" />
+          </FieldContent>
+        </Field>
+        <Field>
+          <FieldLabel>Last name</FieldLabel>
+          <FieldContent>
+            <Input placeholder="Doe" />
+          </FieldContent>
+        </Field>
+      </FieldGroup>
+    </FieldSet>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## FieldSeparator
+
+Add a visual divider between form sections, optionally with a label:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-col w-full max-w-sm">
+    <div className="flex w-full flex-col gap-3">
+      <label className="flex w-fit gap-2 leading-snug text-sm font-medium text-foreground">Email</label>
+      <input type="email" placeholder="you@example.com" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base lg:text-sm text-foreground placeholder:text-muted-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" />
+    </div>
+    <div className="relative flex items-center justify-center my-4 h-5">
+      <div className="absolute w-full shrink-0 bg-border h-[1px]" />
+      <div className="bg-background px-2 z-10">
+        <span className="text-sm text-muted-foreground font-medium">or</span>
+      </div>
+    </div>
+    <div className="flex w-full flex-col gap-3">
+      <label className="flex w-fit gap-2 leading-snug text-sm font-medium text-foreground">Phone</label>
+      <input type="tel" placeholder="+1 (555) 000-0000" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base lg:text-sm text-foreground placeholder:text-muted-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" />
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<View>
+  <Field>
+    <FieldLabel>Email</FieldLabel>
+    <FieldContent>
+      <Input placeholder="you@example.com" />
+    </FieldContent>
+  </Field>
+  <FieldSeparator>or</FieldSeparator>
+  <Field>
+    <FieldLabel>Phone</FieldLabel>
+    <FieldContent>
+      <Input placeholder="+1 (555) 000-0000" />
+    </FieldContent>
+  </Field>
+</View>
+```
+
+</Tab>
+</Tabs>
+
+## Props API
+
+### FieldProps
+
+Extends `React.ComponentPropsWithoutRef<typeof View>` and `VariantProps<typeof fieldVariants>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | Layout direction of label and input |
+| `className` | `string` | - | Additional CSS classes |
+
+### FieldLabelProps
+
+Extends `React.ComponentProps<typeof Label>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes for the label |
+
+### FieldTitleProps
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### FieldDescriptionProps
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### FieldErrorProps
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `errors` | `Array<{ message?: string }>` | - | Array of error objects to display |
+| `children` | `React.ReactNode` | - | Custom error content (overrides `errors`) |
+| `className` | `string` | - | Additional CSS classes |
+
+### FieldSetProps
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes for the field set container |
+
+### FieldLegendProps
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'legend' \| 'label'` | `'legend'` | Typography size — `legend` uses `text-base`, `label` uses `text-sm` |
+| `className` | `string` | - | Additional CSS classes |
+
+### FieldGroupProps
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes for the group container |
+
+### FieldSeparatorProps
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | Optional label text displayed over the divider line |
+| `className` | `string` | - | Additional CSS classes |
+
+## Best Practices
+
+1. **Always use labels**: Every form input should have a `FieldLabel` for accessibility
+2. **Add descriptions for complex fields**: Use `FieldDescription` to provide helpful context or formatting hints
+3. **Show errors inline**: Place `FieldError` directly below the input for immediate feedback
+4. **Group related fields**: Use `FieldSet` and `FieldLegend` to organize forms into logical sections
+5. **Consistent orientation**: Use the same `orientation` across a form section for visual consistency
+
+## Related Components
+
+- Use with `Input`, `Textarea`, `Select`, `Checkbox`, and `Switch` for form controls
+- Combine with `Button` for form submission
+- Use `Separator` independently for non-form content dividers

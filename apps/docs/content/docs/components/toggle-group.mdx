@@ -1,0 +1,296 @@
+---
+title: ToggleGroup
+description: A group of toggle buttons for single or multiple selection.
+---
+
+The ToggleGroup component manages a set of related toggles with coordinated selection state. It supports both single-select (like a radio group) and multi-select modes. Built on top of the `Toggle` component with shared variant and size context via React Context.
+
+## Preview
+
+<ComponentPreview>
+  <div className="flex flex-row items-center justify-center gap-1">
+    <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-10 px-3 bg-accent text-accent-foreground">
+      Left
+    </button>
+    <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-10 px-3 bg-transparent hover:bg-muted hover:text-muted-foreground">
+      Center
+    </button>
+    <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-10 px-3 bg-transparent hover:bg-muted hover:text-muted-foreground">
+      Right
+    </button>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add toggle-group
+```
+
+## Import
+
+```tsx
+import { ToggleGroup, ToggleGroupItem } from 'novaui-components'
+```
+
+## Basic Usage
+
+A single-select toggle group where only one item can be active:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-row items-center justify-center gap-1">
+    <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-10 px-3 bg-accent text-accent-foreground">
+      Left
+    </button>
+    <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-10 px-3 bg-transparent hover:bg-muted hover:text-muted-foreground">
+      Center
+    </button>
+    <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-10 px-3 bg-transparent hover:bg-muted hover:text-muted-foreground">
+      Right
+    </button>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { useState } from 'react'
+import { ToggleGroup, ToggleGroupItem } from 'novaui-components'
+
+export function BasicToggleGroup() {
+  const [value, setValue] = useState('left')
+
+  return (
+    <ToggleGroup type="single" value={value} onValueChange={setValue}>
+      <ToggleGroupItem value="left">Left</ToggleGroupItem>
+      <ToggleGroupItem value="center">Center</ToggleGroupItem>
+      <ToggleGroupItem value="right">Right</ToggleGroupItem>
+    </ToggleGroup>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Selection Types
+
+### Single Selection
+
+Only one item can be active at a time. Selecting a new item deselects the previous one:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-row items-center justify-center gap-1">
+    <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-10 px-3 bg-transparent hover:bg-muted hover:text-muted-foreground">
+      Grid
+    </button>
+    <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-10 px-3 bg-accent text-accent-foreground">
+      List
+    </button>
+    <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-10 px-3 bg-transparent hover:bg-muted hover:text-muted-foreground">
+      Table
+    </button>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<ToggleGroup type="single" value="list" onValueChange={setValue}>
+  <ToggleGroupItem value="grid">Grid</ToggleGroupItem>
+  <ToggleGroupItem value="list">List</ToggleGroupItem>
+  <ToggleGroupItem value="table">Table</ToggleGroupItem>
+</ToggleGroup>
+```
+
+</Tab>
+</Tabs>
+
+### Multiple Selection
+
+Multiple items can be active simultaneously:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-row items-center justify-center gap-1">
+    <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-10 px-3 bg-accent text-accent-foreground font-bold">
+      B
+    </button>
+    <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-10 px-3 bg-accent text-accent-foreground italic">
+      I
+    </button>
+    <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-10 px-3 bg-transparent hover:bg-muted hover:text-muted-foreground underline">
+      U
+    </button>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { useState } from 'react'
+import { ToggleGroup, ToggleGroupItem } from 'novaui-components'
+
+export function MultipleToggleGroup() {
+  const [values, setValues] = useState(['bold', 'italic'])
+
+  return (
+    <ToggleGroup type="multiple" value={values} onValueChange={setValues}>
+      <ToggleGroupItem value="bold">B</ToggleGroupItem>
+      <ToggleGroupItem value="italic">I</ToggleGroupItem>
+      <ToggleGroupItem value="underline">U</ToggleGroupItem>
+    </ToggleGroup>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Variants
+
+### Outline
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-row items-center justify-center gap-1">
+    <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-10 px-3 border border-input bg-accent text-accent-foreground">
+      Day
+    </button>
+    <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-10 px-3 border border-input bg-transparent hover:bg-accent hover:text-accent-foreground">
+      Week
+    </button>
+    <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-10 px-3 border border-input bg-transparent hover:bg-accent hover:text-accent-foreground">
+      Month
+    </button>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<ToggleGroup type="single" variant="outline" value="day" onValueChange={setValue}>
+  <ToggleGroupItem value="day">Day</ToggleGroupItem>
+  <ToggleGroupItem value="week">Week</ToggleGroupItem>
+  <ToggleGroupItem value="month">Month</ToggleGroupItem>
+</ToggleGroup>
+```
+
+</Tab>
+</Tabs>
+
+## Sizes
+
+### Small
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-row items-center justify-center gap-1">
+    <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-9 px-2.5 bg-accent text-accent-foreground">
+      S
+    </button>
+    <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-9 px-2.5 bg-transparent hover:bg-muted hover:text-muted-foreground">
+      M
+    </button>
+    <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-9 px-2.5 bg-transparent hover:bg-muted hover:text-muted-foreground">
+      L
+    </button>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<ToggleGroup type="single" size="sm" value="s" onValueChange={setValue}>
+  <ToggleGroupItem value="s">S</ToggleGroupItem>
+  <ToggleGroupItem value="m">M</ToggleGroupItem>
+  <ToggleGroupItem value="l">L</ToggleGroupItem>
+</ToggleGroup>
+```
+
+</Tab>
+</Tabs>
+
+### Large
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-row items-center justify-center gap-1">
+    <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-11 px-5 bg-accent text-accent-foreground">
+      Option A
+    </button>
+    <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background h-11 px-5 bg-transparent hover:bg-muted hover:text-muted-foreground">
+      Option B
+    </button>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<ToggleGroup type="single" size="lg" value="a" onValueChange={setValue}>
+  <ToggleGroupItem value="a">Option A</ToggleGroupItem>
+  <ToggleGroupItem value="b">Option B</ToggleGroupItem>
+</ToggleGroup>
+```
+
+</Tab>
+</Tabs>
+
+## Props API
+
+### ToggleGroupProps
+
+Extends `React.ComponentPropsWithoutRef<typeof View>` and `VariantProps<typeof toggleVariants>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `'single' \| 'multiple'` | **required** | Whether one or many items can be active |
+| `value` | `string \| string[]` | - | The currently active value(s) |
+| `onValueChange` | `(value: string \| string[]) => void` | - | Callback fired when the selection changes |
+| `variant` | `'default' \| 'outline'` | `'default'` | Visual style variant applied to all items |
+| `size` | `'default' \| 'sm' \| 'lg'` | `'default'` | Size applied to all items |
+| `className` | `string` | - | Additional CSS classes for the group container |
+
+### ToggleGroupItemProps
+
+Extends `React.ComponentPropsWithoutRef<typeof Toggle>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | **required** | The value this item represents |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `React.ReactNode` | - | Item content (text or icon) |
+
+## Best Practices
+
+1. **Choose the right type**: Use `single` for mutually exclusive options (view modes) and `multiple` for combinable options (text formatting)
+2. **Keep items concise**: Toggle labels should be short — single words or icons work best
+3. **Consistent sizing**: Use the group's `size` prop rather than sizing individual items
+4. **Default selection**: For `single` type, always provide an initial `value` so one item is active
+
+## Related Components
+
+- Use `Toggle` for standalone toggle buttons not part of a group
+- Use `RadioGroup` for single selection with radio button styling
+- Use `ButtonGroup` for grouped action buttons that are not toggleable

@@ -1,0 +1,270 @@
+---
+title: Popover
+description: A floating overlay anchored to a trigger element, used for contextual content and forms.
+---
+
+The Popover component is a floating overlay that appears below (or near) a trigger element. It supports configurable alignment, side offset, controlled/uncontrolled state, and auto-positioning to stay within screen bounds. Built with React Native's `Modal` API and a compound component pattern.
+
+## Preview
+
+<ComponentPreview>
+  <div className="flex flex-col items-center gap-4">
+    <div className="z-50 w-72 rounded-md border border-border bg-popover p-4 shadow-md">
+      <div className="flex-col gap-1.5 mb-2">
+        <span className="font-semibold leading-none tracking-tight text-foreground">Dimensions</span>
+        <span className="text-sm text-muted-foreground">Set the dimensions for the layer.</span>
+      </div>
+      <div className="flex flex-col gap-2">
+        <div className="flex items-center justify-between">
+          <span className="text-sm text-foreground">Width</span>
+          <div className="h-8 w-20 rounded-md border border-input bg-background px-2 flex items-center">
+            <span className="text-sm text-muted-foreground">100%</span>
+          </div>
+        </div>
+        <div className="flex items-center justify-between">
+          <span className="text-sm text-foreground">Height</span>
+          <div className="h-8 w-20 rounded-md border border-input bg-background px-2 flex items-center">
+            <span className="text-sm text-muted-foreground">25px</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add popover
+```
+
+## Import
+
+```tsx
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverAnchor,
+  PopoverHeader,
+  PopoverTitle,
+  PopoverDescription,
+} from 'novaui-components'
+```
+
+## Basic Usage
+
+The Popover is a compound component with these parts:
+
+- `Popover` - Root container with open/close state and position tracking
+- `PopoverTrigger` - The element that toggles the popover on press
+- `PopoverContent` - The floating content panel
+- `PopoverAnchor` - Optional custom anchor element for positioning
+- `PopoverHeader` - Groups the title and description
+- `PopoverTitle` - The popover heading
+- `PopoverDescription` - Subtitle or description text
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="z-50 w-72 rounded-md border border-border bg-popover p-4 shadow-md">
+    <div className="flex-col gap-1.5 mb-2">
+      <span className="font-semibold leading-none tracking-tight text-foreground">Dimensions</span>
+      <span className="text-sm text-muted-foreground">Set the dimensions for the layer.</span>
+    </div>
+    <div className="flex flex-col gap-2">
+      <div className="flex items-center justify-between">
+        <span className="text-sm text-foreground">Width</span>
+        <div className="h-8 w-20 rounded-md border border-input bg-background px-2 flex items-center">
+          <span className="text-sm text-muted-foreground">100%</span>
+        </div>
+      </div>
+      <div className="flex items-center justify-between">
+        <span className="text-sm text-foreground">Max. width</span>
+        <div className="h-8 w-20 rounded-md border border-input bg-background px-2 flex items-center">
+          <span className="text-sm text-muted-foreground">300px</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverTitle,
+  PopoverDescription,
+} from 'novaui-components'
+import { Button } from 'novaui-components'
+import { View, Text, TextInput } from 'react-native'
+
+export function BasicPopover() {
+  return (
+    <Popover>
+      <PopoverTrigger>
+        <Button variant="outline" label="Open Popover" />
+      </PopoverTrigger>
+      <PopoverContent>
+        <PopoverHeader>
+          <PopoverTitle>Dimensions</PopoverTitle>
+          <PopoverDescription>Set the dimensions for the layer.</PopoverDescription>
+        </PopoverHeader>
+        <View className="gap-2">
+          <View className="flex-row items-center justify-between">
+            <Text className="text-sm">Width</Text>
+            <TextInput
+              className="h-8 w-20 rounded-md border border-input bg-background px-2"
+              defaultValue="100%"
+            />
+          </View>
+          <View className="flex-row items-center justify-between">
+            <Text className="text-sm">Max. width</Text>
+            <TextInput
+              className="h-8 w-20 rounded-md border border-input bg-background px-2"
+              defaultValue="300px"
+            />
+          </View>
+        </View>
+      </PopoverContent>
+    </Popover>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Alignment
+
+Control how the popover aligns relative to the trigger:
+
+```tsx
+// Start-aligned (left edge of trigger)
+<PopoverContent align="start">...</PopoverContent>
+
+// Center-aligned (default)
+<PopoverContent align="center">...</PopoverContent>
+
+// End-aligned (right edge of trigger)
+<PopoverContent align="end">...</PopoverContent>
+```
+
+## Controlled State
+
+Control the popover programmatically:
+
+```tsx
+import { useState } from 'react'
+
+export function ControlledPopover() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger>
+        <Button variant="outline" label="Toggle" />
+      </PopoverTrigger>
+      <PopoverContent>
+        <PopoverHeader>
+          <PopoverTitle>Controlled</PopoverTitle>
+          <PopoverDescription>
+            This popover is controlled externally.
+          </PopoverDescription>
+        </PopoverHeader>
+      </PopoverContent>
+    </Popover>
+  )
+}
+```
+
+## Props API
+
+### Popover Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | - | Controlled open state |
+| `onOpenChange` | `(open: boolean) => void` | - | Callback when open state changes |
+| `defaultOpen` | `boolean` | `false` | Initial open state (uncontrolled) |
+
+### PopoverTrigger Props
+
+Extends `React.ComponentPropsWithoutRef<typeof Pressable>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Render as the child element instead of a Pressable |
+
+### PopoverContent Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `align` | `'start' \| 'center' \| 'end'` | `'center'` | Horizontal alignment relative to the trigger |
+| `sideOffset` | `number` | `4` | Distance in pixels between the trigger and content |
+| `className` | `string` | - | Additional CSS classes |
+
+### PopoverAnchor Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### PopoverHeader Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### PopoverTitle Props
+
+Extends `React.ComponentPropsWithoutRef<typeof Text>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### PopoverDescription Props
+
+Extends `React.ComponentPropsWithoutRef<typeof Text>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+## Positioning
+
+The Popover automatically positions itself:
+
+- Measures the trigger element's position on screen using `measure()`
+- Places content below the trigger with the configured `sideOffset`
+- Adjusts horizontal position based on `align` prop
+- Clamps to screen bounds so content doesn't overflow off-screen
+
+## Best Practices
+
+1. **Keep content concise**: Popovers should contain small forms, settings, or quick info — not full pages
+
+2. **Use appropriate alignment**: Align to the trigger edge that makes sense for the content layout
+
+3. **Dismiss on outside press**: The built-in backdrop press handles this automatically
+
+4. **Don't overuse**: Reserve popovers for contextual actions — use `Dialog` for focused tasks
+
+5. **Width control**: Default width is `w-72` — override with `className` for wider or narrower content
+
+## Related Components
+
+- Use `HoverCard` for preview content that appears on hover/press
+- Use `Dialog` for larger, centered modal content
+- Use `Tooltip` for simple text hints (if available)

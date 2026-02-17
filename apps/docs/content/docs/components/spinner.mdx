@@ -1,0 +1,237 @@
+---
+title: Spinner
+description: A loading spinner component to indicate ongoing activity or processing.
+---
+
+The Spinner component wraps React Native's `ActivityIndicator` with consistent styling via NativeWind. It provides a simple, accessible way to communicate loading states to users.
+
+## Preview
+
+<ComponentPreview>
+  <div className="flex items-center gap-6">
+    <div className="flex items-center justify-center">
+      <svg className="animate-spin h-5 w-5 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+    </div>
+    <div className="flex items-center justify-center">
+      <svg className="animate-spin h-8 w-8 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+    </div>
+    <div className="flex items-center justify-center">
+      <svg className="animate-spin h-10 w-10 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+    </div>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add spinner
+```
+
+## Import
+
+```tsx
+import { Spinner } from 'novaui-components'
+```
+
+## Basic Usage
+
+The Spinner renders a spinning activity indicator with the primary theme color:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex items-center justify-center">
+    <svg className="animate-spin h-5 w-5 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+    </svg>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { Spinner } from 'novaui-components'
+
+export function BasicSpinner() {
+  return <Spinner />
+}
+```
+
+</Tab>
+</Tabs>
+
+## Sizes
+
+Control the spinner size using React Native's `size` prop:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex items-center gap-6">
+    <div className="flex flex-col items-center gap-2">
+      <svg className="animate-spin h-5 w-5 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+      <span className="text-xs text-muted-foreground">small</span>
+    </div>
+    <div className="flex flex-col items-center gap-2">
+      <svg className="animate-spin h-9 w-9 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+      <span className="text-xs text-muted-foreground">large</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { Spinner } from 'novaui-components'
+import { View } from 'react-native'
+
+export function SpinnerSizes() {
+  return (
+    <View className="flex-row items-center gap-6">
+      <Spinner size="small" />
+      <Spinner size="large" />
+    </View>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Custom Colors
+
+Override the default primary color with the `color` prop:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex items-center gap-6">
+    <svg className="animate-spin h-5 w-5 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+    </svg>
+    <svg className="animate-spin h-5 w-5 text-destructive" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+    </svg>
+    <svg className="animate-spin h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+    </svg>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { Spinner } from 'novaui-components'
+import { View } from 'react-native'
+
+export function ColoredSpinners() {
+  return (
+    <View className="flex-row items-center gap-6">
+      <Spinner />
+      <Spinner color="red" />
+      <Spinner color="green" />
+    </View>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Loading State Pattern
+
+Combine Spinner with conditional rendering for loading states:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-col items-center justify-center gap-3 p-8">
+    <svg className="animate-spin h-8 w-8 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+    </svg>
+    <span className="text-sm text-muted-foreground">Loading content...</span>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { View, Text } from 'react-native'
+import { Spinner } from 'novaui-components'
+
+export function LoadingState({ isLoading, children }) {
+  if (isLoading) {
+    return (
+      <View className="flex-1 items-center justify-center gap-3 p-8">
+        <Spinner size="large" />
+        <Text className="text-sm text-muted-foreground">Loading content...</Text>
+      </View>
+    )
+  }
+
+  return children
+}
+```
+
+</Tab>
+</Tabs>
+
+## Props API
+
+### SpinnerProps
+
+Extends `React.ComponentPropsWithoutRef<typeof ActivityIndicator>` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `color` | `string` | - | Override the spinner color. Defaults to the `text-primary` theme color |
+| `size` | `'small' \| 'large'` | `'small'` | The size of the activity indicator (React Native built-in) |
+| `className` | `string` | - | Additional CSS classes for custom styling |
+
+All standard React Native `ActivityIndicator` props are also supported.
+
+## Best Practices
+
+1. **Provide context**: Pair Spinner with descriptive text so users know what is loading.
+
+2. **Appropriate sizing**: Use `small` for inline indicators (e.g., inside buttons) and `large` for full-screen or section loading states.
+
+3. **Avoid blocking UI**: Use Spinner for non-blocking loading states. For blocking operations, consider an overlay pattern.
+
+4. **Consistent placement**: Center the spinner within its loading container for a polished look.
+
+5. **Accessibility**: React Native's `ActivityIndicator` is automatically accessible to screen readers.
+
+## Related Components
+
+- Use Spinner inside `Button` with the `isLoading` prop for button loading states
+- Combine with `Skeleton` for content placeholder loading patterns
+- Pair with `Empty` for loading-to-empty-state transitions

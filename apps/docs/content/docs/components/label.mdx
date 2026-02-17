@@ -1,0 +1,159 @@
+---
+title: Label
+description: A text label component for form controls and input fields.
+---
+
+The Label component renders accessible text labels for form controls. It uses React Native's `Text` component with built-in styling for consistent typography and supports press interactions to focus associated inputs.
+
+## Preview
+
+<ComponentPreview>
+  <div className="flex flex-col gap-4">
+    <span className="text-sm font-medium leading-none text-foreground">Email address</span>
+    <span className="text-sm font-medium leading-none text-foreground">Password</span>
+    <span className="text-sm font-medium leading-none text-foreground opacity-70">Disabled label</span>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add label
+```
+
+## Import
+
+```tsx
+import { Label } from 'novaui-components'
+```
+
+## Basic Usage
+
+The Label component renders styled text suitable for form field labels:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <span className="text-sm font-medium leading-none text-foreground">Username</span>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { Label } from 'novaui-components'
+
+export function BasicLabel() {
+  return <Label>Username</Label>
+}
+```
+
+</Tab>
+</Tabs>
+
+## With Form Controls
+
+### With Input
+
+Pair Label with an input field for an accessible form experience:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-col gap-2 w-full max-w-sm">
+    <span className="text-sm font-medium leading-none text-foreground">Email</span>
+    <input type="email" placeholder="Enter your email" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" />
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { View } from 'react-native'
+import { Label } from 'novaui-components'
+import { Input } from 'novaui-components'
+
+export function LabelWithInput() {
+  return (
+    <View className="gap-2">
+      <Label>Email</Label>
+      <Input placeholder="Enter your email" />
+    </View>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+### With Press Handler
+
+Use the `onPress` prop to focus an associated input when the label is tapped:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-col gap-2 w-full max-w-sm">
+    <span className="text-sm font-medium leading-none text-foreground cursor-pointer">Click me to focus input</span>
+    <input type="text" placeholder="I get focused" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" />
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { useRef } from 'react'
+import { View, TextInput } from 'react-native'
+import { Label } from 'novaui-components'
+import { Input } from 'novaui-components'
+
+export function LabelWithPress() {
+  const inputRef = useRef<TextInput>(null)
+
+  return (
+    <View className="gap-2">
+      <Label onPress={() => inputRef.current?.focus()}>
+        Click me to focus input
+      </Label>
+      <Input ref={inputRef} placeholder="I get focused" />
+    </View>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Props API
+
+### LabelProps
+
+Extends `React.ComponentPropsWithoutRef<typeof Text>` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `onPress` | `() => void` | - | Callback when the label is pressed, typically used to focus an associated input |
+| `className` | `string` | - | Additional CSS classes for custom styling |
+| `children` | `React.ReactNode` | - | The label text content |
+
+## Best Practices
+
+1. **Always pair with inputs**: Use Label alongside form controls like Input, Textarea, Select, and Checkbox for accessibility.
+
+2. **Keep labels concise**: Labels should clearly describe the associated field in a few words.
+
+3. **Use press handlers**: Connect `onPress` to focus the associated input for a better mobile experience.
+
+4. **Disabled states**: When a form field is disabled, the label automatically reduces opacity via the `peer-disabled:opacity-70` class on web.
+
+## Related Components
+
+- Use Label with `Input` and `Textarea` for form fields
+- Combine with `Checkbox` and `Switch` for toggle labels
+- Pair with `RadioGroup` items for radio button labels
+- Use within `Field` for structured form layouts

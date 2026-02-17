@@ -1,0 +1,257 @@
+---
+title: RadioGroup
+description: A group of radio buttons for selecting a single option from a list.
+---
+
+The RadioGroup component provides a set of mutually exclusive radio options. Built with React Native's `View` and `Pressable`, it manages selection state and renders circular indicators with a filled dot for the selected item.
+
+## Preview
+
+<ComponentPreview>
+  <div className="flex flex-col gap-2">
+    <div className="flex items-center gap-2">
+      <div className="aspect-square h-4 w-4 rounded-full border border-primary text-primary ring-offset-background flex items-center justify-center">
+        <div className="h-2.5 w-2.5 rounded-full bg-primary" />
+      </div>
+      <span className="text-sm text-foreground">Option A</span>
+    </div>
+    <div className="flex items-center gap-2">
+      <div className="aspect-square h-4 w-4 rounded-full border border-primary text-primary ring-offset-background flex items-center justify-center" />
+      <span className="text-sm text-foreground">Option B</span>
+    </div>
+    <div className="flex items-center gap-2">
+      <div className="aspect-square h-4 w-4 rounded-full border border-primary text-primary ring-offset-background flex items-center justify-center" />
+      <span className="text-sm text-foreground">Option C</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add radio-group
+```
+
+## Import
+
+```tsx
+import { RadioGroup, RadioGroupItem } from 'novaui-components'
+```
+
+## Basic Usage
+
+A radio group with multiple options where only one can be selected:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-col gap-2">
+    <div className="flex items-center gap-2">
+      <div className="aspect-square h-4 w-4 rounded-full border border-primary text-primary ring-offset-background flex items-center justify-center">
+        <div className="h-2.5 w-2.5 rounded-full bg-primary" />
+      </div>
+      <span className="text-sm text-foreground">Default</span>
+    </div>
+    <div className="flex items-center gap-2">
+      <div className="aspect-square h-4 w-4 rounded-full border border-primary text-primary ring-offset-background flex items-center justify-center" />
+      <span className="text-sm text-foreground">Comfortable</span>
+    </div>
+    <div className="flex items-center gap-2">
+      <div className="aspect-square h-4 w-4 rounded-full border border-primary text-primary ring-offset-background flex items-center justify-center" />
+      <span className="text-sm text-foreground">Compact</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { useState } from 'react'
+import { RadioGroup, RadioGroupItem } from 'novaui-components'
+import { Text, View } from 'react-native'
+
+export function BasicRadioGroup() {
+  const [value, setValue] = useState('default')
+
+  return (
+    <RadioGroup value={value} onValueChange={setValue}>
+      <View className="flex-row items-center gap-2">
+        <RadioGroupItem value="default" />
+        <Text className="text-sm text-foreground">Default</Text>
+      </View>
+      <View className="flex-row items-center gap-2">
+        <RadioGroupItem value="comfortable" />
+        <Text className="text-sm text-foreground">Comfortable</Text>
+      </View>
+      <View className="flex-row items-center gap-2">
+        <RadioGroupItem value="compact" />
+        <Text className="text-sm text-foreground">Compact</Text>
+      </View>
+    </RadioGroup>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Examples
+
+### With Descriptions
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-col gap-4">
+    <div className="flex items-start gap-2">
+      <div className="aspect-square h-4 w-4 rounded-full border border-primary text-primary ring-offset-background flex items-center justify-center mt-0.5">
+        <div className="h-2.5 w-2.5 rounded-full bg-primary" />
+      </div>
+      <div className="flex flex-col">
+        <span className="text-sm font-medium text-foreground">Free</span>
+        <span className="text-sm text-muted-foreground">Basic features for personal use</span>
+      </div>
+    </div>
+    <div className="flex items-start gap-2">
+      <div className="aspect-square h-4 w-4 rounded-full border border-primary text-primary ring-offset-background flex items-center justify-center mt-0.5" />
+      <div className="flex flex-col">
+        <span className="text-sm font-medium text-foreground">Pro</span>
+        <span className="text-sm text-muted-foreground">Advanced features for professionals</span>
+      </div>
+    </div>
+    <div className="flex items-start gap-2">
+      <div className="aspect-square h-4 w-4 rounded-full border border-primary text-primary ring-offset-background flex items-center justify-center mt-0.5" />
+      <div className="flex flex-col">
+        <span className="text-sm font-medium text-foreground">Enterprise</span>
+        <span className="text-sm text-muted-foreground">Full suite for teams and organizations</span>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { useState } from 'react'
+import { RadioGroup, RadioGroupItem } from 'novaui-components'
+import { Text, View } from 'react-native'
+
+export function RadioGroupWithDescriptions() {
+  const [plan, setPlan] = useState('free')
+
+  return (
+    <RadioGroup value={plan} onValueChange={setPlan} className="gap-4">
+      <View className="flex-row items-start gap-2">
+        <RadioGroupItem value="free" />
+        <View>
+          <Text className="text-sm font-medium text-foreground">Free</Text>
+          <Text className="text-sm text-muted-foreground">Basic features for personal use</Text>
+        </View>
+      </View>
+      <View className="flex-row items-start gap-2">
+        <RadioGroupItem value="pro" />
+        <View>
+          <Text className="text-sm font-medium text-foreground">Pro</Text>
+          <Text className="text-sm text-muted-foreground">Advanced features for professionals</Text>
+        </View>
+      </View>
+      <View className="flex-row items-start gap-2">
+        <RadioGroupItem value="enterprise" />
+        <View>
+          <Text className="text-sm font-medium text-foreground">Enterprise</Text>
+          <Text className="text-sm text-muted-foreground">Full suite for teams and organizations</Text>
+        </View>
+      </View>
+    </RadioGroup>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+### Disabled Item
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-col gap-2">
+    <div className="flex items-center gap-2">
+      <div className="aspect-square h-4 w-4 rounded-full border border-primary text-primary ring-offset-background flex items-center justify-center">
+        <div className="h-2.5 w-2.5 rounded-full bg-primary" />
+      </div>
+      <span className="text-sm text-foreground">Light</span>
+    </div>
+    <div className="flex items-center gap-2">
+      <div className="aspect-square h-4 w-4 rounded-full border border-primary text-primary ring-offset-background flex items-center justify-center" />
+      <span className="text-sm text-foreground">Dark</span>
+    </div>
+    <div className="flex items-center gap-2">
+      <div className="aspect-square h-4 w-4 rounded-full border border-primary text-primary ring-offset-background flex items-center justify-center opacity-50 cursor-not-allowed" />
+      <span className="text-sm text-muted-foreground">System (unavailable)</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<RadioGroup value="light" onValueChange={setValue}>
+  <View className="flex-row items-center gap-2">
+    <RadioGroupItem value="light" />
+    <Text className="text-sm text-foreground">Light</Text>
+  </View>
+  <View className="flex-row items-center gap-2">
+    <RadioGroupItem value="dark" />
+    <Text className="text-sm text-foreground">Dark</Text>
+  </View>
+  <View className="flex-row items-center gap-2">
+    <RadioGroupItem value="system" disabled />
+    <Text className="text-sm text-muted-foreground">System (unavailable)</Text>
+  </View>
+</RadioGroup>
+```
+
+</Tab>
+</Tabs>
+
+## Props API
+
+### RadioGroupProps
+
+Extends `React.ComponentPropsWithoutRef<typeof View>` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | - | The currently selected value |
+| `onValueChange` | `(value: string) => void` | - | Callback fired when a radio item is selected |
+| `className` | `string` | - | Additional CSS classes for the group container |
+
+### RadioGroupItemProps
+
+Extends `React.ComponentPropsWithoutRef<typeof Pressable>` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | **required** | The value this item represents |
+| `checked` | `boolean` | - | Whether this item is selected (managed by RadioGroup) |
+| `className` | `string` | - | Additional CSS classes for custom styling |
+
+## Best Practices
+
+1. **Use for mutually exclusive choices**: Radio groups enforce single selection — use when only one option is valid
+2. **Pre-select a default**: Always set an initial `value` to avoid empty form submissions
+3. **Keep options visible**: Show all options at once; if there are too many, consider using a `Select` instead
+4. **Label each option**: Always pair each `RadioGroupItem` with descriptive text
+
+## Related Components
+
+- Use `Checkbox` when multiple selections are allowed
+- Use `Select` when the list of options is long and should be collapsed
+- Pair with `Field` and `FieldLabel` for accessible labeled groups

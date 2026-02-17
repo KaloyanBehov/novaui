@@ -1,0 +1,249 @@
+---
+title: Text
+description: A versatile text component with multiple semantic variants for consistent typography.
+---
+
+The Text component is a foundational typography primitive built on React Native's `Text` component with NativeWind styling. It supports multiple semantic variants — from headings to body text, blockquotes, and muted labels — providing a consistent typographic system across your application.
+
+## Preview
+
+<ComponentPreview>
+  <div className="flex flex-col gap-3">
+    <span className="text-foreground text-4xl font-extrabold tracking-tight">Heading 1</span>
+    <span className="text-foreground text-3xl font-semibold tracking-tight">Heading 2</span>
+    <span className="text-foreground text-2xl font-semibold tracking-tight">Heading 3</span>
+    <span className="text-foreground text-xl font-semibold tracking-tight">Heading 4</span>
+    <span className="text-foreground leading-7">Paragraph text with comfortable line height for reading.</span>
+    <span className="text-foreground text-xl text-muted-foreground">Lead text for introductions.</span>
+    <span className="text-foreground text-sm text-muted-foreground">Muted text for secondary information.</span>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add text
+```
+
+## Import
+
+```tsx
+import { Text } from 'novaui-components'
+```
+
+## Basic Usage
+
+By default, the Text component renders with `text-base text-foreground`:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <span className="text-foreground text-base">This is default text content.</span>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { Text } from 'novaui-components'
+
+export function BasicText() {
+  return <Text>This is default text content.</Text>
+}
+```
+
+</Tab>
+</Tabs>
+
+## Variants
+
+### Headings
+
+Use heading variants for titles and section headers:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-col gap-4">
+    <span className="text-foreground text-4xl font-extrabold tracking-tight">Heading 1</span>
+    <span className="text-foreground text-3xl font-semibold tracking-tight">Heading 2</span>
+    <span className="text-foreground text-2xl font-semibold tracking-tight">Heading 3</span>
+    <span className="text-foreground text-xl font-semibold tracking-tight">Heading 4</span>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Text variant="h1">Heading 1</Text>
+<Text variant="h2">Heading 2</Text>
+<Text variant="h3">Heading 3</Text>
+<Text variant="h4">Heading 4</Text>
+```
+
+</Tab>
+</Tabs>
+
+### Paragraph
+
+Optimized for body text with comfortable leading:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <span className="text-foreground leading-7">The quick brown fox jumps over the lazy dog. This paragraph text uses a relaxed line height for comfortable reading across multiple lines of content.</span>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Text variant="p">
+  The quick brown fox jumps over the lazy dog. This paragraph text uses a relaxed
+  line height for comfortable reading across multiple lines of content.
+</Text>
+```
+
+</Tab>
+</Tabs>
+
+### Lead
+
+Larger, muted text for introductions or subtitles:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <span className="text-foreground text-xl text-muted-foreground">A beautiful component library for React Native with web support.</span>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Text variant="lead">A beautiful component library for React Native with web support.</Text>
+```
+
+</Tab>
+</Tabs>
+
+### Large
+
+Semibold larger text for emphasis:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <span className="text-foreground text-lg font-semibold">Important notice</span>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Text variant="large">Important notice</Text>
+```
+
+</Tab>
+</Tabs>
+
+### Small
+
+Compact, medium-weight text for fine print:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <span className="text-foreground text-sm font-medium leading-none">Small caption text</span>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Text variant="small">Small caption text</Text>
+```
+
+</Tab>
+</Tabs>
+
+### Muted
+
+Subdued text for secondary or supporting information:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <span className="text-foreground text-sm text-muted-foreground">Last updated 3 days ago</span>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Text variant="muted">Last updated 3 days ago</Text>
+```
+
+</Tab>
+</Tabs>
+
+### Blockquote
+
+Styled text for quotes with a left border and italic formatting:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <span className="text-foreground mt-6 border-l-2 pl-6 italic">"The best way to predict the future is to create it."</span>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Text variant="blockquote">
+  "The best way to predict the future is to create it."
+</Text>
+```
+
+</Tab>
+</Tabs>
+
+## Props API
+
+### TextProps
+
+Extends `React.ComponentPropsWithoutRef<typeof Text>` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'default' \| 'h1' \| 'h2' \| 'h3' \| 'h4' \| 'p' \| 'blockquote' \| 'lead' \| 'large' \| 'small' \| 'muted'` | `'default'` | The typographic style variant |
+| `className` | `string` | - | Additional CSS classes for custom styling |
+| `children` | `React.ReactNode` | - | The text content |
+
+## Best Practices
+
+1. **Use semantic variants**: Choose variants that match the content's purpose — `h1`-`h4` for headings, `p` for body text, `muted` for secondary info.
+
+2. **Maintain hierarchy**: Use heading variants in order (h1 > h2 > h3 > h4) to create a clear visual hierarchy.
+
+3. **Consistent usage**: Use the same variant for the same type of content throughout your app.
+
+4. **Accessibility**: Heading variants don't automatically set accessibility roles on native — consider adding `accessibilityRole="header"` when needed.
+
+5. **Don't nest Text**: In React Native, nested `Text` components inherit styles. Use a single `Text` with the appropriate variant instead.
+
+## Related Components
+
+- Use `Typography` (H1-H5, P) for components with built-in accessibility roles
+- Combine with `Label` for form field labels
+- Pair with `Badge` for labeled content

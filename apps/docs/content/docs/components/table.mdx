@@ -1,0 +1,381 @@
+---
+title: Table
+description: A structured data display component with rows, columns, headers, and optional footer and caption.
+---
+
+The Table component displays structured data in rows and columns. It supports horizontal scrolling for wide tables, a compound component API with header, body, footer, and caption parts, and is styled with NativeWind for consistent appearance across platforms.
+
+## Preview
+
+<ComponentPreview>
+  <div className="w-full max-w-lg">
+    <div className="w-full">
+      <div className="border-b border-border">
+        <div className="flex flex-row border-b border-border">
+          <div className="h-12 px-4 flex items-center flex-1">
+            <span className="text-sm font-medium text-muted-foreground">Invoice</span>
+          </div>
+          <div className="h-12 px-4 flex items-center flex-1">
+            <span className="text-sm font-medium text-muted-foreground">Status</span>
+          </div>
+          <div className="h-12 px-4 flex items-center flex-1 justify-end">
+            <span className="text-sm font-medium text-muted-foreground text-right">Amount</span>
+          </div>
+        </div>
+      </div>
+      <div className="flex-1">
+        <div className="flex flex-row border-b border-border transition-colors hover:bg-muted/50">
+          <div className="p-4 flex items-center flex-1">
+            <span className="text-sm font-medium text-foreground">INV001</span>
+          </div>
+          <div className="p-4 flex items-center flex-1">
+            <span className="text-sm text-foreground">Paid</span>
+          </div>
+          <div className="p-4 flex items-center flex-1 justify-end">
+            <span className="text-sm text-foreground text-right">$250.00</span>
+          </div>
+        </div>
+        <div className="flex flex-row border-b border-border transition-colors hover:bg-muted/50">
+          <div className="p-4 flex items-center flex-1">
+            <span className="text-sm font-medium text-foreground">INV002</span>
+          </div>
+          <div className="p-4 flex items-center flex-1">
+            <span className="text-sm text-foreground">Pending</span>
+          </div>
+          <div className="p-4 flex items-center flex-1 justify-end">
+            <span className="text-sm text-foreground text-right">$150.00</span>
+          </div>
+        </div>
+        <div className="flex flex-row border-b border-border transition-colors hover:bg-muted/50">
+          <div className="p-4 flex items-center flex-1">
+            <span className="text-sm font-medium text-foreground">INV003</span>
+          </div>
+          <div className="p-4 flex items-center flex-1">
+            <span className="text-sm text-foreground">Unpaid</span>
+          </div>
+          <div className="p-4 flex items-center flex-1 justify-end">
+            <span className="text-sm text-foreground text-right">$350.00</span>
+          </div>
+        </div>
+      </div>
+      <div className="bg-muted/50 border-t border-border">
+        <div className="flex flex-row">
+          <div className="p-4 flex items-center flex-1">
+            <span className="text-sm font-medium text-foreground">Total</span>
+          </div>
+          <div className="p-4 flex items-center flex-1"></div>
+          <div className="p-4 flex items-center flex-1 justify-end">
+            <span className="text-sm font-medium text-foreground text-right">$750.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add table
+```
+
+## Import
+
+```tsx
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableCaption,
+} from 'novaui-components'
+```
+
+## Basic Usage
+
+The Table is a compound component with these parts:
+
+- `Table` - Root container with horizontal scroll support
+- `TableHeader` - Container for header rows
+- `TableBody` - Container for data rows
+- `TableFooter` - Optional footer row (e.g. totals)
+- `TableRow` - A single row
+- `TableHead` - Header cell with muted styling
+- `TableCell` - Data cell
+- `TableCaption` - Optional caption below the table
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-lg">
+    <div className="w-full">
+      <div className="border-b border-border">
+        <div className="flex flex-row border-b border-border">
+          <div className="h-12 px-4 flex items-center flex-1">
+            <span className="text-sm font-medium text-muted-foreground">Invoice</span>
+          </div>
+          <div className="h-12 px-4 flex items-center flex-1">
+            <span className="text-sm font-medium text-muted-foreground">Status</span>
+          </div>
+          <div className="h-12 px-4 flex items-center flex-1 justify-end">
+            <span className="text-sm font-medium text-muted-foreground text-right">Amount</span>
+          </div>
+        </div>
+      </div>
+      <div className="flex-1">
+        <div className="flex flex-row border-b border-border transition-colors hover:bg-muted/50">
+          <div className="p-4 flex items-center flex-1">
+            <span className="text-sm font-medium text-foreground">INV001</span>
+          </div>
+          <div className="p-4 flex items-center flex-1">
+            <span className="text-sm text-foreground">Paid</span>
+          </div>
+          <div className="p-4 flex items-center flex-1 justify-end">
+            <span className="text-sm text-foreground text-right">$250.00</span>
+          </div>
+        </div>
+        <div className="flex flex-row border-b border-border transition-colors hover:bg-muted/50">
+          <div className="p-4 flex items-center flex-1">
+            <span className="text-sm font-medium text-foreground">INV002</span>
+          </div>
+          <div className="p-4 flex items-center flex-1">
+            <span className="text-sm text-foreground">Pending</span>
+          </div>
+          <div className="p-4 flex items-center flex-1 justify-end">
+            <span className="text-sm text-foreground text-right">$150.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from 'novaui-components'
+
+const invoices = [
+  { id: 'INV001', status: 'Paid', amount: '$250.00' },
+  { id: 'INV002', status: 'Pending', amount: '$150.00' },
+]
+
+export function BasicTable() {
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Invoice</TableHead>
+          <TableHead>Status</TableHead>
+          <TableHead className="text-right">Amount</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {invoices.map((invoice) => (
+          <TableRow key={invoice.id}>
+            <TableCell className="font-medium">{invoice.id}</TableCell>
+            <TableCell>{invoice.status}</TableCell>
+            <TableCell className="text-right">{invoice.amount}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## With Footer
+
+Add a footer row for totals or summaries:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-lg">
+    <div className="w-full">
+      <div className="border-b border-border">
+        <div className="flex flex-row border-b border-border">
+          <div className="h-12 px-4 flex items-center flex-1"><span className="text-sm font-medium text-muted-foreground">Item</span></div>
+          <div className="h-12 px-4 flex items-center flex-1 justify-end"><span className="text-sm font-medium text-muted-foreground text-right">Price</span></div>
+        </div>
+      </div>
+      <div className="flex-1">
+        <div className="flex flex-row border-b border-border hover:bg-muted/50">
+          <div className="p-4 flex items-center flex-1"><span className="text-sm text-foreground">Design System</span></div>
+          <div className="p-4 flex items-center flex-1 justify-end"><span className="text-sm text-foreground text-right">$99.00</span></div>
+        </div>
+        <div className="flex flex-row border-b border-border hover:bg-muted/50">
+          <div className="p-4 flex items-center flex-1"><span className="text-sm text-foreground">Component Library</span></div>
+          <div className="p-4 flex items-center flex-1 justify-end"><span className="text-sm text-foreground text-right">$149.00</span></div>
+        </div>
+      </div>
+      <div className="bg-muted/50 border-t border-border">
+        <div className="flex flex-row">
+          <div className="p-4 flex items-center flex-1"><span className="text-sm font-medium text-foreground">Total</span></div>
+          <div className="p-4 flex items-center flex-1 justify-end"><span className="text-sm font-medium text-foreground text-right">$248.00</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Item</TableHead>
+      <TableHead className="text-right">Price</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>Design System</TableCell>
+      <TableCell className="text-right">$99.00</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Component Library</TableCell>
+      <TableCell className="text-right">$149.00</TableCell>
+    </TableRow>
+  </TableBody>
+  <TableFooter>
+    <TableRow>
+      <TableCell className="font-medium">Total</TableCell>
+      <TableCell className="text-right font-medium">$248.00</TableCell>
+    </TableRow>
+  </TableFooter>
+</Table>
+```
+
+</Tab>
+</Tabs>
+
+## With Caption
+
+Add a descriptive caption to the table:
+
+```tsx
+<Table>
+  <TableCaption>A list of recent invoices.</TableCaption>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Invoice</TableHead>
+      <TableHead>Status</TableHead>
+      <TableHead className="text-right">Amount</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell className="font-medium">INV001</TableCell>
+      <TableCell>Paid</TableCell>
+      <TableCell className="text-right">$250.00</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+```
+
+## Props API
+
+### Table Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+The Table wraps content in a horizontal `ScrollView` for wide table support.
+
+### TableHeader Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### TableBody Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### TableFooter Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### TableRow Props
+
+Extends `React.ComponentPropsWithoutRef<typeof Pressable>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+Rows use `Pressable` and support `active:bg-muted/50` for press feedback.
+
+### TableHead Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes. Use `text-right` or `text-center` for alignment. |
+
+### TableCell Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes. Use `text-right` or `text-center` for alignment. |
+
+### TableCaption Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+## Best Practices
+
+1. **Use flex-row for columns**: Each `TableRow` uses `flex-row` — give cells `flex-1` or fixed widths for consistent columns
+
+2. **Right-align numbers**: Use `className="text-right"` on `TableHead` and `TableCell` for numeric columns
+
+3. **Footer for totals**: Use `TableFooter` for sum rows — it has `bg-muted/50` background to distinguish from data
+
+4. **Horizontal scroll**: The `Table` component wraps in a horizontal `ScrollView` — wide tables scroll naturally on small screens
+
+5. **Caption for context**: Add `TableCaption` when the table needs a descriptive label
+
+## Related Components
+
+- Use `Card` to wrap tables for a bordered container look
+- Use `Pagination` below tables for paginated data sets
+- Use `Skeleton` for table loading states

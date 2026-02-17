@@ -1,0 +1,455 @@
+---
+title: Button
+description: A versatile button component built for React Native with web support, featuring multiple variants, sizes, and states.
+---
+
+The Button component is a flexible and accessible button built with React Native's `Pressable` component. It supports multiple visual variants, sizes, border radius options, loading states, and is fully compatible with both React Native and web platforms.
+
+## Preview
+
+<ComponentPreview>
+  <div className="flex flex-wrap items-center gap-3">
+    <button className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">Default</button>
+    <button className="inline-flex items-center justify-center rounded-md bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground hover:bg-secondary/80">Secondary</button>
+    <button className="inline-flex items-center justify-center rounded-md border bg-background px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">Outline</button>
+    <button className="inline-flex items-center justify-center rounded-md bg-destructive px-4 py-2 text-sm font-medium text-white hover:bg-destructive/90">Destructive</button>
+    <button className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">Ghost</button>
+    <button className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-primary underline-offset-4 hover:underline">Link</button>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+The Button component is part of the `novaui-components` package. Make sure you have the required peer dependencies installed:
+
+```bash
+npx novaui-cli add button
+```
+
+## Import
+
+```tsx
+import { Button } from 'novaui-components'
+```
+
+## Basic Usage
+
+The Button component accepts `label` prop or `children` for the button text:
+
+```tsx
+import { Button } from 'novaui-components'
+
+export function MyComponent() {
+  return (
+    <>
+      <Button label="Click me" />
+      <Button>Or use children</Button>
+    </>
+  )
+}
+```
+
+## Variants
+
+The Button component supports six visual variants, each designed for different use cases:
+
+### Default
+
+The primary button variant, perfect for main actions:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <button className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">Default Button</button>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Button variant="default" label="Default Button" />
+```
+
+</Tab>
+</Tabs>
+
+### Destructive
+
+Use for dangerous or destructive actions like delete or remove:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <button className="inline-flex items-center justify-center rounded-md bg-destructive px-4 py-2 text-sm font-medium text-white hover:bg-destructive/90">Delete</button>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Button variant="destructive" label="Delete" />
+```
+
+</Tab>
+</Tabs>
+
+### Outline
+
+A button with an outlined border, great for secondary actions:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <button className="inline-flex items-center justify-center rounded-md border bg-background px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">Outline Button</button>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Button variant="outline" label="Outline Button" />
+```
+
+</Tab>
+</Tabs>
+
+### Secondary
+
+A secondary button variant with a subtle background:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <button className="inline-flex items-center justify-center rounded-md bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground hover:bg-secondary/80">Secondary Button</button>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Button variant="secondary" label="Secondary Button" />
+```
+
+</Tab>
+</Tabs>
+
+### Ghost
+
+A minimal button with no background, ideal for subtle actions:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <button className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">Ghost Button</button>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Button variant="ghost" label="Ghost Button" />
+```
+
+</Tab>
+</Tabs>
+
+### Link
+
+A text-only button styled like a link:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <button className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-primary underline-offset-4 hover:underline">Link Button</button>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Button variant="link" label="Link Button" />
+```
+
+</Tab>
+</Tabs>
+
+## Sizes
+
+Control the button size with the `size` prop:
+
+### Default
+
+The standard button size:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <button className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">Default Size</button>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Button size="default" label="Default Size" />
+```
+
+</Tab>
+</Tabs>
+
+### Small
+
+Compact size for tight spaces:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <button className="inline-flex items-center justify-center rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground hover:bg-primary/90">Small Button</button>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Button size="sm" label="Small Button" />
+```
+
+</Tab>
+</Tabs>
+
+### Large
+
+Larger size for prominent actions:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <button className="inline-flex items-center justify-center rounded-md bg-primary px-6 py-2.5 text-base font-medium text-primary-foreground hover:bg-primary/90">Large Button</button>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Button size="lg" label="Large Button" />
+```
+
+</Tab>
+</Tabs>
+
+### Icon
+
+Square button perfect for icon-only buttons:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <button className="inline-flex size-9 items-center justify-center rounded-md bg-primary text-sm font-medium text-primary-foreground hover:bg-primary/90">🚀</button>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Button size="icon" label="🚀" />
+```
+
+</Tab>
+</Tabs>
+
+## Border Radius
+
+Customize the button's border radius with the `radius` prop:
+
+```tsx
+<Button radius="none" label="No Radius" />
+<Button radius="sm" label="Small Radius" />
+<Button radius="md" label="Medium Radius" />
+<Button radius="lg" label="Large Radius" />
+<Button radius="xl" label="Extra Large Radius" />
+<Button radius="2xl" label="2XL Radius" />
+<Button radius="full" label="Full Radius" />
+```
+
+## Loading State
+
+Display a loading indicator while an action is in progress:
+
+```tsx
+import { useState } from 'react'
+import { Button } from 'novaui-components'
+
+export function LoadingButton() {
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handlePress = async () => {
+    setIsLoading(true)
+    // Simulate async operation
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    setIsLoading(false)
+  }
+
+  return (
+    <Button
+      label="Submit"
+      isLoading={isLoading}
+      onPress={handlePress}
+    />
+  )
+}
+```
+
+When `isLoading` is `true`, the button automatically:
+- Shows an `ActivityIndicator` spinner
+- Disables interaction
+- Adjusts the spinner color based on the variant
+
+## Disabled State
+
+Disable the button to prevent user interaction:
+
+```tsx
+<Button label="Disabled Button" disabled />
+```
+
+The button will be visually dimmed and non-interactive when disabled.
+
+## Custom Styling
+
+### Custom Class Names
+
+Apply custom styles using the `className` prop:
+
+```tsx
+<Button
+  label="Custom Button"
+  className="bg-purple-500 active:bg-purple-600"
+/>
+```
+
+### Custom Label Styling
+
+Style the button label separately using `labelClasses`:
+
+```tsx
+<Button
+  label="Styled Label"
+  labelClasses="font-bold text-lg"
+/>
+```
+
+## Advanced Examples
+
+### Button with Icon
+
+Combine the Button with icons or other components:
+
+```tsx
+import { Button } from 'novaui-components'
+import { Heart } from 'lucide-react-native'
+
+export function IconButton() {
+  return (
+    <Button size="icon" className="bg-red-500">
+      <Heart size={20} color="white" />
+    </Button>
+  )
+}
+```
+
+### Full Width Button
+
+Make a button span the full width:
+
+```tsx
+<Button
+  label="Full Width Button"
+  className="w-full"
+/>
+```
+
+### Button Group
+
+Create a group of buttons:
+
+```tsx
+<View className="flex-row gap-2">
+  <Button variant="outline" label="Cancel" />
+  <Button variant="default" label="Confirm" />
+</View>
+```
+
+## Props API
+
+### ButtonProps
+
+Extends `React.ComponentPropsWithoutRef<typeof Pressable>` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'default' \| 'destructive' \| 'outline' \| 'secondary' \| 'ghost' \| 'link'` | `'default'` | The visual style variant of the button |
+| `size` | `'default' \| 'sm' \| 'lg' \| 'icon'` | `'default'` | The size of the button |
+| `radius` | `'none' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl' \| 'full'` | `'md'` | The border radius of the button |
+| `label` | `string` | - | The text content of the button (alternative to children) |
+| `labelClasses` | `string` | - | Additional CSS classes for the label text |
+| `isLoading` | `boolean` | `false` | Shows a loading spinner and disables the button |
+| `disabled` | `boolean` | `false` | Disables the button interaction |
+| `className` | `string` | - | Additional CSS classes for the button container |
+| `children` | `React.ReactNode` | - | Button content (alternative to label) |
+
+All standard `Pressable` props are also supported, including:
+- `onPress` - Callback when button is pressed
+- `onPressIn` - Callback when press starts
+- `onPressOut` - Callback when press ends
+- `onLongPress` - Callback for long press
+- `accessibilityLabel` - Accessibility label
+- And all other React Native `Pressable` props
+
+## Accessibility
+
+The Button component includes built-in accessibility features:
+
+- **Role**: Automatically sets `role="button"` for screen readers
+- **Hit Slop**: Includes default hit slop (10px on all sides) for easier tapping on small devices
+- **Disabled State**: Properly handles disabled state for accessibility
+- **Focus States**: Web-specific focus-visible states for keyboard navigation
+
+## Platform Support
+
+The Button component is designed to work seamlessly across platforms:
+
+- **React Native**: Full support with native touch interactions
+- **Web**: Enhanced with hover states, focus rings, and keyboard navigation
+- **Responsive**: Adapts sizing for different screen sizes (native vs web)
+
+## Best Practices
+
+1. **Use appropriate variants**: Choose variants that match the action's importance
+   - `default` for primary actions
+   - `outline` or `secondary` for secondary actions
+   - `destructive` for dangerous actions
+   - `ghost` or `link` for tertiary actions
+
+2. **Loading states**: Always use `isLoading` for async operations to provide user feedback
+
+3. **Accessibility**: Always provide meaningful labels and accessibility descriptions for icon-only buttons
+
+4. **Touch targets**: The component includes default hit slop, but ensure buttons are at least 44x44 points for optimal touch interaction
+
+5. **Consistent sizing**: Use consistent button sizes throughout your app for better UX
+
+## Related Components
+
+- Consider using Button in combination with other form components
+- Use Button groups for related actions
+- Combine with icons from `lucide-react-native` for enhanced visual communication

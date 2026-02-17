@@ -1,0 +1,375 @@
+---
+title: Sheet
+description: A panel that slides in from the edge of the screen, typically used for navigation or supplementary content.
+---
+
+The Sheet component is a slide-in panel that appears from any edge of the screen. It supports four sides (top, bottom, left, right), animated transitions with React Native Reanimated, a backdrop overlay, and a compound component API with header, footer, title, description, and close parts.
+
+## Preview
+
+<ComponentPreview>
+  <SheetPreview
+    triggerLabel="Open Sheet"
+    title="Sheet Title"
+    description="This is a sheet that slides in from the right side of the screen."
+    side="right"
+  />
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add sheet
+```
+
+### Dependencies
+
+The Sheet requires the following peer dependencies:
+
+- `react-native-reanimated` >= 3
+- `lucide-react-native` >= 0.300
+
+## Import
+
+```tsx
+import {
+  Sheet,
+  SheetTrigger,
+  SheetContent,
+  SheetHeader,
+  SheetFooter,
+  SheetTitle,
+  SheetDescription,
+  SheetClose,
+} from 'novaui-components'
+```
+
+## Basic Usage
+
+The Sheet is a compound component with these parts:
+
+- `Sheet` - Root container with open/close state
+- `SheetTrigger` - Button that opens the sheet
+- `SheetContent` - The sliding panel (includes portal and overlay)
+- `SheetHeader` - Groups the title and description
+- `SheetFooter` - Groups the action buttons
+- `SheetTitle` - The sheet heading
+- `SheetDescription` - The sheet body text
+- `SheetClose` - A button that closes the sheet
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <SheetPreview
+    triggerLabel="Open Sheet"
+    title="Sheet Title"
+    description="This is a sheet that slides in from the right side of the screen."
+    side="right"
+  />
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import {
+  Sheet,
+  SheetTrigger,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+} from 'novaui-components'
+import { Button } from 'novaui-components'
+
+export function BasicSheet() {
+  return (
+    <Sheet>
+      <SheetTrigger>
+        <Button variant="outline" label="Open Sheet" />
+      </SheetTrigger>
+      <SheetContent side="right">
+        <SheetHeader>
+          <SheetTitle>Sheet Title</SheetTitle>
+          <SheetDescription>
+            This is a sheet that slides in from the right side of the screen.
+          </SheetDescription>
+        </SheetHeader>
+      </SheetContent>
+    </Sheet>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Side Variants
+
+The sheet can slide in from any edge. Use the `side` prop on `SheetContent`:
+
+### Right (default)
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <SheetPreview
+    triggerLabel="Right Sheet"
+    title="Right Sheet"
+    description="Slides in from the right edge."
+    side="right"
+  />
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Sheet>
+  <SheetTrigger>
+    <Button variant="outline" label="Right Sheet" />
+  </SheetTrigger>
+  <SheetContent side="right">
+    <SheetHeader>
+      <SheetTitle>Right Sheet</SheetTitle>
+      <SheetDescription>Slides in from the right edge.</SheetDescription>
+    </SheetHeader>
+  </SheetContent>
+</Sheet>
+```
+
+</Tab>
+</Tabs>
+
+### Left
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <SheetPreview
+    triggerLabel="Left Sheet"
+    title="Left Sheet"
+    description="Slides in from the left edge."
+    side="left"
+  />
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Sheet>
+  <SheetTrigger>
+    <Button variant="outline" label="Left Sheet" />
+  </SheetTrigger>
+  <SheetContent side="left">
+    <SheetHeader>
+      <SheetTitle>Left Sheet</SheetTitle>
+      <SheetDescription>Slides in from the left edge.</SheetDescription>
+    </SheetHeader>
+  </SheetContent>
+</Sheet>
+```
+
+</Tab>
+</Tabs>
+
+### Bottom
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <SheetPreview
+    triggerLabel="Bottom Sheet"
+    title="Bottom Sheet"
+    description="Slides in from the bottom edge."
+    side="bottom"
+  />
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Sheet>
+  <SheetTrigger>
+    <Button variant="outline" label="Bottom Sheet" />
+  </SheetTrigger>
+  <SheetContent side="bottom">
+    <SheetHeader>
+      <SheetTitle>Bottom Sheet</SheetTitle>
+      <SheetDescription>Slides in from the bottom edge.</SheetDescription>
+    </SheetHeader>
+  </SheetContent>
+</Sheet>
+```
+
+</Tab>
+</Tabs>
+
+## Controlled State
+
+Control the sheet open/close state programmatically:
+
+```tsx
+import { useState } from 'react'
+
+export function ControlledSheet() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <Sheet open={open} onOpenChange={setOpen}>
+      <SheetTrigger>
+        <Button variant="outline" label="Controlled Sheet" />
+      </SheetTrigger>
+      <SheetContent side="right">
+        <SheetHeader>
+          <SheetTitle>Controlled</SheetTitle>
+          <SheetDescription>
+            This sheet's state is managed externally.
+          </SheetDescription>
+        </SheetHeader>
+        <SheetFooter>
+          <SheetClose>
+            <Button variant="outline" label="Close" />
+          </SheetClose>
+          <Button label="Save" onPress={() => setOpen(false)} />
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
+  )
+}
+```
+
+## Navigation Sheet
+
+Use a left-side sheet for mobile navigation:
+
+```tsx
+export function NavigationSheet() {
+  return (
+    <Sheet>
+      <SheetTrigger>
+        <Button variant="outline" label="Menu" />
+      </SheetTrigger>
+      <SheetContent side="left">
+        <SheetHeader>
+          <SheetTitle>Navigation</SheetTitle>
+        </SheetHeader>
+        <View className="flex flex-col gap-2 mt-4">
+          <Pressable className="px-3 py-2 rounded-md hover:bg-accent">
+            <Text className="text-sm font-medium text-foreground">Home</Text>
+          </Pressable>
+          <Pressable className="px-3 py-2 rounded-md hover:bg-accent">
+            <Text className="text-sm font-medium text-foreground">Settings</Text>
+          </Pressable>
+          <Pressable className="px-3 py-2 rounded-md hover:bg-accent">
+            <Text className="text-sm font-medium text-foreground">Profile</Text>
+          </Pressable>
+        </View>
+      </SheetContent>
+    </Sheet>
+  )
+}
+```
+
+## Props API
+
+### Sheet Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | - | Controlled open state |
+| `onOpenChange` | `(open: boolean) => void` | - | Callback when open state changes |
+
+### SheetTrigger Props
+
+Extends `React.ComponentPropsWithoutRef<typeof Pressable>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Render as the child element instead of a Pressable |
+
+### SheetContent Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `side` | `'top' \| 'bottom' \| 'left' \| 'right'` | `'right'` | Which edge the sheet slides in from |
+| `className` | `string` | - | Additional CSS classes |
+
+### SheetHeader Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### SheetFooter Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### SheetTitle Props
+
+Extends `React.ComponentPropsWithoutRef<typeof Text>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### SheetDescription Props
+
+Extends `React.ComponentPropsWithoutRef<typeof Text>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### SheetClose Props
+
+Extends `React.ComponentPropsWithoutRef<typeof Pressable>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Render as the child element instead of a Pressable |
+
+## Animation
+
+The Sheet uses `react-native-reanimated` for entrance/exit animations:
+
+- **Overlay**: Fades in with `FadeIn` / `FadeOut`
+- **Content**: Slides in/out based on the `side` prop (`SlideInRight`, `SlideOutRight`, etc.)
+- **Duration**: Controlled by Reanimated's default spring/timing configuration
+
+## Accessibility
+
+- Uses React Native `Modal` for proper overlay behavior
+- `onRequestClose` handles the Android back button
+- `statusBarTranslucent` ensures the overlay covers the full screen
+- Backdrop press dismisses the sheet
+
+## Best Practices
+
+1. **Choose the right side**: Use `right` for settings/details, `left` for navigation, `bottom` for actions on mobile
+
+2. **Keep width reasonable**: Left and right sheets default to `w-3/4 sm:max-w-sm` — don't make them too wide
+
+3. **Use header and footer**: Structure content with `SheetHeader` and `SheetFooter` for consistent layouts
+
+4. **Provide escape routes**: The backdrop close and X button are built in — add explicit close buttons in the footer too
+
+5. **Don't overload content**: Sheets are for focused tasks — use full-screen navigation for complex flows
+
+## Related Components
+
+- Use `Dialog` for centered modal content
+- Use `Drawer` for mobile-optimized bottom sheets with drag gestures
+- Use `AlertDialog` for confirmation prompts

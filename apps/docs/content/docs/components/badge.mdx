@@ -1,0 +1,222 @@
+---
+title: Badge
+description: A small status indicator component for displaying labels, counts, or categories.
+---
+
+The Badge component displays a small visual indicator, perfect for status labels, tags, categories, or notification counts. It supports multiple variants and can render text via the `label` prop or custom content via `children`.
+
+## Preview
+
+<ComponentPreview>
+  <div className="flex flex-wrap items-center gap-3">
+    <span className="inline-flex items-center rounded-full border border-transparent bg-primary px-2.5 py-0.5 shadow">
+      <span className="text-xs font-semibold text-primary-foreground">Default</span>
+    </span>
+    <span className="inline-flex items-center rounded-full border border-transparent bg-secondary px-2.5 py-0.5">
+      <span className="text-xs font-semibold text-secondary-foreground">Secondary</span>
+    </span>
+    <span className="inline-flex items-center rounded-full border border-transparent bg-destructive px-2.5 py-0.5 shadow">
+      <span className="text-xs font-semibold text-destructive-foreground">Destructive</span>
+    </span>
+    <span className="inline-flex items-center rounded-full border px-2.5 py-0.5">
+      <span className="text-xs font-semibold text-foreground">Outline</span>
+    </span>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add badge
+```
+
+## Import
+
+```tsx
+import { Badge } from 'novaui-components'
+```
+
+## Basic Usage
+
+The Badge component accepts a `label` prop for text content or `children` for custom content:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <span className="inline-flex items-center rounded-full border border-transparent bg-primary px-2.5 py-0.5 shadow">
+    <span className="text-xs font-semibold text-primary-foreground">Badge</span>
+  </span>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { Badge } from 'novaui-components'
+
+export function BasicBadge() {
+  return <Badge label="Badge" />
+}
+```
+
+</Tab>
+</Tabs>
+
+## Variants
+
+The Badge component supports four visual variants:
+
+### Default
+
+The primary badge variant with a solid background:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <span className="inline-flex items-center rounded-full border border-transparent bg-primary px-2.5 py-0.5 shadow">
+    <span className="text-xs font-semibold text-primary-foreground">Default</span>
+  </span>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Badge variant="default" label="Default" />
+```
+
+</Tab>
+</Tabs>
+
+### Secondary
+
+A subtle badge for less prominent labels:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <span className="inline-flex items-center rounded-full border border-transparent bg-secondary px-2.5 py-0.5">
+    <span className="text-xs font-semibold text-secondary-foreground">Secondary</span>
+  </span>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Badge variant="secondary" label="Secondary" />
+```
+
+</Tab>
+</Tabs>
+
+### Destructive
+
+For error states or critical information:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <span className="inline-flex items-center rounded-full border border-transparent bg-destructive px-2.5 py-0.5 shadow">
+    <span className="text-xs font-semibold text-destructive-foreground">Destructive</span>
+  </span>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Badge variant="destructive" label="Destructive" />
+```
+
+</Tab>
+</Tabs>
+
+### Outline
+
+A bordered badge with no background fill:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <span className="inline-flex items-center rounded-full border px-2.5 py-0.5">
+    <span className="text-xs font-semibold text-foreground">Outline</span>
+  </span>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Badge variant="outline" label="Outline" />
+```
+
+</Tab>
+</Tabs>
+
+## Custom Content
+
+Use `children` instead of `label` for custom badge content:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <span className="inline-flex items-center rounded-full border border-transparent bg-primary px-2.5 py-0.5 shadow">
+    <span className="text-xs font-semibold text-primary-foreground">🚀 New</span>
+  </span>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { Badge } from 'novaui-components'
+import { Text } from 'react-native'
+
+export function CustomBadge() {
+  return (
+    <Badge>
+      <Text className="text-xs font-semibold text-primary-foreground">🚀 New</Text>
+    </Badge>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Props API
+
+### BadgeProps
+
+Extends `React.ComponentPropsWithoutRef<typeof View>` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'default' \| 'secondary' \| 'destructive' \| 'outline'` | `'default'` | The visual style variant of the badge |
+| `label` | `string` | - | Text content for the badge (alternative to children) |
+| `labelClasses` | `string` | - | Additional CSS classes for the label text |
+| `className` | `string` | - | Additional CSS classes for the badge container |
+| `children` | `React.ReactNode` | - | Custom badge content (alternative to label) |
+
+## Best Practices
+
+1. **Use appropriate variants**: Choose variants that convey the right meaning — `default` for general labels, `destructive` for errors or warnings, `secondary` for supplementary info, and `outline` for subtle indicators.
+
+2. **Keep labels short**: Badges work best with concise text — one or two words, or small counts.
+
+3. **Consistent placement**: Position badges consistently throughout your app for predictable UX.
+
+4. **Accessibility**: When using badges for status, ensure the meaning is conveyed through text and not color alone.
+
+## Related Components
+
+- Use Badge alongside `Avatar` for user status indicators
+- Combine with `Button` for action counts or notifications
+- Pair with list items or cards for category labels

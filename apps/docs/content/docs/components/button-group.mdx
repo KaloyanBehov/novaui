@@ -1,0 +1,250 @@
+---
+title: ButtonGroup
+description: A container that groups related buttons with shared borders and rounded corners.
+---
+
+The ButtonGroup component visually groups related buttons by removing inner borders and radius, relying on the container's `overflow-hidden` and `rounded-md` for clean outer corners. It supports horizontal and vertical orientations and includes a `ButtonGroupText` component for static label segments.
+
+## Preview
+
+<ComponentPreview>
+  <div className="flex flex-row items-stretch overflow-hidden rounded-md">
+    <button className="inline-flex items-center justify-center rounded-none border border-input bg-background px-4 py-2 text-sm font-medium text-foreground hover:bg-accent hover:text-accent-foreground">
+      Left
+    </button>
+    <button className="inline-flex items-center justify-center rounded-none border border-input border-l-0 bg-background px-4 py-2 text-sm font-medium text-foreground hover:bg-accent hover:text-accent-foreground">
+      Center
+    </button>
+    <button className="inline-flex items-center justify-center rounded-none border border-input border-l-0 bg-background px-4 py-2 text-sm font-medium text-foreground hover:bg-accent hover:text-accent-foreground">
+      Right
+    </button>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add button-group
+```
+
+## Import
+
+```tsx
+import { ButtonGroup, ButtonGroupText } from 'novaui-components'
+```
+
+## Basic Usage
+
+Group related buttons together with a shared visual style:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-row items-stretch overflow-hidden rounded-md">
+    <button className="inline-flex items-center justify-center rounded-none border border-input bg-background px-4 py-2 text-sm font-medium text-foreground hover:bg-accent hover:text-accent-foreground">
+      Previous
+    </button>
+    <button className="inline-flex items-center justify-center rounded-none border border-input border-l-0 bg-background px-4 py-2 text-sm font-medium text-foreground hover:bg-accent hover:text-accent-foreground">
+      Next
+    </button>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { ButtonGroup, ButtonGroupText } from 'novaui-components'
+import { Button } from 'novaui-components'
+
+export function BasicButtonGroup() {
+  return (
+    <ButtonGroup>
+      <Button variant="outline">Previous</Button>
+      <Button variant="outline">Next</Button>
+    </ButtonGroup>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Orientation
+
+### Horizontal
+
+The default orientation, grouping buttons side by side:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-row items-stretch overflow-hidden rounded-md">
+    <button className="inline-flex items-center justify-center rounded-none border border-input bg-background px-4 py-2 text-sm font-medium text-foreground hover:bg-accent hover:text-accent-foreground">
+      Day
+    </button>
+    <button className="inline-flex items-center justify-center rounded-none border border-input border-l-0 bg-background px-4 py-2 text-sm font-medium text-foreground hover:bg-accent hover:text-accent-foreground">
+      Week
+    </button>
+    <button className="inline-flex items-center justify-center rounded-none border border-input border-l-0 bg-background px-4 py-2 text-sm font-medium text-foreground hover:bg-accent hover:text-accent-foreground">
+      Month
+    </button>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<ButtonGroup orientation="horizontal">
+  <Button variant="outline">Day</Button>
+  <Button variant="outline">Week</Button>
+  <Button variant="outline">Month</Button>
+</ButtonGroup>
+```
+
+</Tab>
+</Tabs>
+
+### Vertical
+
+Stack buttons vertically with shared borders:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-col items-stretch overflow-hidden rounded-md w-fit">
+    <button className="inline-flex items-center justify-center rounded-none border border-input bg-background px-4 py-2 text-sm font-medium text-foreground hover:bg-accent hover:text-accent-foreground">
+      Top
+    </button>
+    <button className="inline-flex items-center justify-center rounded-none border border-input border-t-0 bg-background px-4 py-2 text-sm font-medium text-foreground hover:bg-accent hover:text-accent-foreground">
+      Middle
+    </button>
+    <button className="inline-flex items-center justify-center rounded-none border border-input border-t-0 bg-background px-4 py-2 text-sm font-medium text-foreground hover:bg-accent hover:text-accent-foreground">
+      Bottom
+    </button>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<ButtonGroup orientation="vertical">
+  <Button variant="outline">Top</Button>
+  <Button variant="outline">Middle</Button>
+  <Button variant="outline">Bottom</Button>
+</ButtonGroup>
+```
+
+</Tab>
+</Tabs>
+
+## With Text Segment
+
+Use `ButtonGroupText` for a non-interactive label segment within the group:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-row items-stretch overflow-hidden rounded-md">
+    <div className="flex flex-row items-center justify-center rounded-none border border-input bg-muted px-4 py-2">
+      <span className="text-sm font-medium text-foreground">Page</span>
+    </div>
+    <button className="inline-flex items-center justify-center rounded-none border border-input border-l-0 bg-background px-4 py-2 text-sm font-medium text-foreground hover:bg-accent hover:text-accent-foreground">
+      1
+    </button>
+    <button className="inline-flex items-center justify-center rounded-none border border-input border-l-0 bg-background px-4 py-2 text-sm font-medium text-foreground hover:bg-accent hover:text-accent-foreground">
+      2
+    </button>
+    <button className="inline-flex items-center justify-center rounded-none border border-input border-l-0 bg-background px-4 py-2 text-sm font-medium text-foreground hover:bg-accent hover:text-accent-foreground">
+      3
+    </button>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<ButtonGroup>
+  <ButtonGroupText>Page</ButtonGroupText>
+  <Button variant="outline">1</Button>
+  <Button variant="outline">2</Button>
+  <Button variant="outline">3</Button>
+</ButtonGroup>
+```
+
+</Tab>
+</Tabs>
+
+## Multiple Variants
+
+Combine different button variants within a group:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-row items-stretch overflow-hidden rounded-md">
+    <button className="inline-flex items-center justify-center rounded-none border border-input bg-background px-4 py-2 text-sm font-medium text-foreground hover:bg-accent hover:text-accent-foreground">
+      Cancel
+    </button>
+    <button className="inline-flex items-center justify-center rounded-none border border-transparent border-l-0 bg-primary px-4 py-2 text-sm font-medium text-primary-foreground">
+      Save
+    </button>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<ButtonGroup>
+  <Button variant="outline">Cancel</Button>
+  <Button>Save</Button>
+</ButtonGroup>
+```
+
+</Tab>
+</Tabs>
+
+## Props API
+
+### ButtonGroupProps
+
+Extends `React.ComponentPropsWithoutRef<typeof View>` and `VariantProps<typeof buttonGroupVariants>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | Layout direction of the grouped buttons |
+| `className` | `string` | - | Additional CSS classes for the group container |
+| `children` | `React.ReactNode` | - | Button and ButtonGroupText children |
+
+### ButtonGroupTextProps
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `React.ReactNode` | - | Label text content |
+
+The container applies `flex-row items-stretch overflow-hidden rounded-md` and clones children with `rounded-none` and appropriate border removal (`border-l-0` for horizontal, `border-t-0` for vertical).
+
+## Best Practices
+
+1. **Use for related actions**: Group buttons that perform related operations (pagination, view modes, undo/redo)
+2. **Keep groups small**: 2-4 buttons per group works best for scannability
+3. **Consistent variants**: Use the same button variant within a group for visual consistency (except for primary action highlighting)
+4. **Use ButtonGroupText sparingly**: Label segments work well for context like "Page" or "Sort by"
+
+## Related Components
+
+- Use `ToggleGroup` when buttons represent toggleable states
+- Use individual `Button` components for standalone actions
+- Pair with `Separator` for additional visual grouping in toolbars

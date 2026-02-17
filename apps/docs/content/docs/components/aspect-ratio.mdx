@@ -1,0 +1,297 @@
+---
+title: AspectRatio
+description: A container component that maintains a consistent width-to-height aspect ratio.
+---
+
+The AspectRatio component constrains its children to a specified width-to-height ratio. It is built on React Native's `View` component and uses the native `aspectRatio` style property, making it perfect for images, videos, maps, and other media that need consistent proportions.
+
+## Preview
+
+<ComponentPreview>
+  <div className="flex flex-col gap-4 w-full max-w-sm">
+    <div className="w-full rounded-lg overflow-hidden bg-muted" style={{ aspectRatio: '16/9' }}>
+      <img src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80" alt="Landscape" className="h-full w-full object-cover" />
+    </div>
+    <div className="w-full rounded-lg overflow-hidden bg-muted" style={{ aspectRatio: '1/1' }}>
+      <img src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80" alt="Square" className="h-full w-full object-cover" />
+    </div>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add aspect-ratio
+```
+
+## Import
+
+```tsx
+import { AspectRatio } from 'novaui-components'
+```
+
+## Basic Usage
+
+Wrap content in AspectRatio and set the desired `ratio` prop:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-md rounded-lg overflow-hidden bg-muted" style={{ aspectRatio: '16/9' }}>
+    <img src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80" alt="Landscape" className="h-full w-full object-cover" />
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { Image } from 'react-native'
+import { AspectRatio } from 'novaui-components'
+
+export function BasicAspectRatio() {
+  return (
+    <AspectRatio ratio={16 / 9} className="rounded-lg overflow-hidden bg-muted">
+      <Image
+        source={{ uri: 'https://example.com/photo.jpg' }}
+        className="h-full w-full"
+        resizeMode="cover"
+      />
+    </AspectRatio>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Common Ratios
+
+### 16:9 — Widescreen
+
+Standard widescreen ratio for videos and hero images:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-md rounded-lg overflow-hidden bg-muted" style={{ aspectRatio: '16/9' }}>
+    <div className="flex h-full w-full items-center justify-center bg-muted">
+      <span className="text-sm text-muted-foreground">16:9</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<AspectRatio ratio={16 / 9} className="rounded-lg bg-muted">
+  <Image source={{ uri: 'https://example.com/video-thumb.jpg' }} className="h-full w-full" resizeMode="cover" />
+</AspectRatio>
+```
+
+</Tab>
+</Tabs>
+
+### 4:3 — Classic
+
+Traditional photo and document ratio:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-md rounded-lg overflow-hidden bg-muted" style={{ aspectRatio: '4/3' }}>
+    <div className="flex h-full w-full items-center justify-center bg-muted">
+      <span className="text-sm text-muted-foreground">4:3</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<AspectRatio ratio={4 / 3} className="rounded-lg bg-muted">
+  <Image source={{ uri: 'https://example.com/photo.jpg' }} className="h-full w-full" resizeMode="cover" />
+</AspectRatio>
+```
+
+</Tab>
+</Tabs>
+
+### 1:1 — Square
+
+Perfect for avatars, thumbnails, and profile images:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-[200px] rounded-lg overflow-hidden bg-muted" style={{ aspectRatio: '1/1' }}>
+    <div className="flex h-full w-full items-center justify-center bg-muted">
+      <span className="text-sm text-muted-foreground">1:1</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<AspectRatio ratio={1} className="rounded-lg bg-muted">
+  <Image source={{ uri: 'https://example.com/avatar.jpg' }} className="h-full w-full" resizeMode="cover" />
+</AspectRatio>
+```
+
+</Tab>
+</Tabs>
+
+### 21:9 — Ultra-wide
+
+For cinematic banners and panoramic content:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-lg rounded-lg overflow-hidden bg-muted" style={{ aspectRatio: '21/9' }}>
+    <div className="flex h-full w-full items-center justify-center bg-muted">
+      <span className="text-sm text-muted-foreground">21:9</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<AspectRatio ratio={21 / 9} className="rounded-lg bg-muted">
+  <Image source={{ uri: 'https://example.com/panorama.jpg' }} className="h-full w-full" resizeMode="cover" />
+</AspectRatio>
+```
+
+</Tab>
+</Tabs>
+
+## With Different Content
+
+### With Map Placeholder
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-md rounded-lg overflow-hidden border border-border" style={{ aspectRatio: '16/9' }}>
+    <div className="flex h-full w-full items-center justify-center bg-muted">
+      <div className="flex flex-col items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span className="text-sm text-muted-foreground">Map View</span>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { View, Text } from 'react-native'
+import { AspectRatio } from 'novaui-components'
+import { MapPin } from 'lucide-react-native'
+
+export function MapContainer() {
+  return (
+    <AspectRatio ratio={16 / 9} className="rounded-lg overflow-hidden border border-border">
+      <View className="flex-1 items-center justify-center bg-muted">
+        <MapPin className="text-muted-foreground" size={24} />
+        <Text className="text-sm text-muted-foreground">Map View</Text>
+      </View>
+    </AspectRatio>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+### Image Gallery Item
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="grid grid-cols-3 gap-2 w-full max-w-md">
+    <div className="w-full rounded-md overflow-hidden bg-muted" style={{ aspectRatio: '1/1' }}>
+      <img src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=400&dpr=2&q=80" alt="Gallery 1" className="h-full w-full object-cover" />
+    </div>
+    <div className="w-full rounded-md overflow-hidden bg-muted" style={{ aspectRatio: '1/1' }}>
+      <img src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=400&dpr=2&q=80" alt="Gallery 2" className="h-full w-full object-cover" />
+    </div>
+    <div className="w-full rounded-md overflow-hidden bg-muted" style={{ aspectRatio: '1/1' }}>
+      <img src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=400&dpr=2&q=80" alt="Gallery 3" className="h-full w-full object-cover" />
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { View, Image } from 'react-native'
+import { AspectRatio } from 'novaui-components'
+
+const images = [
+  'https://example.com/photo1.jpg',
+  'https://example.com/photo2.jpg',
+  'https://example.com/photo3.jpg',
+]
+
+export function ImageGallery() {
+  return (
+    <View className="flex-row gap-2">
+      {images.map((uri, i) => (
+        <AspectRatio key={i} ratio={1} className="flex-1 rounded-md overflow-hidden bg-muted">
+          <Image source={{ uri }} className="h-full w-full" resizeMode="cover" />
+        </AspectRatio>
+      ))}
+    </View>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Props API
+
+### AspectRatioProps
+
+Extends `React.ComponentPropsWithoutRef<typeof View>` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `ratio` | `number` | `1` | The width-to-height ratio (e.g., `16/9`, `4/3`, `1`) |
+| `className` | `string` | - | Additional CSS classes. Base class is `w-full` |
+| `style` | `ViewStyle` | - | Additional inline styles, merged with the aspect ratio style |
+| `children` | `React.ReactNode` | - | Content to render inside the ratio container |
+
+## Best Practices
+
+1. **Use for media**: AspectRatio is ideal for images, videos, and embeds where consistent proportions matter.
+
+2. **Set a background**: Add `bg-muted` as a placeholder background so the space is visible before content loads.
+
+3. **Combine with overflow-hidden**: Use `overflow-hidden` with `rounded-*` for clean clipped corners on child content.
+
+4. **Responsive widths**: The component uses `w-full` by default — control the width with a parent container or `max-w-*` classes.
+
+5. **Common ratios**: Use standard ratios for familiarity — `16/9` for video, `4/3` for photos, `1/1` for thumbnails, `21/9` for banners.
+
+## Related Components
+
+- Pair with `Image` for responsive image containers
+- Use inside `Card` for media-rich card layouts
+- Combine with `Skeleton` for loading placeholders with correct aspect ratios

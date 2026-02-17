@@ -1,0 +1,352 @@
+---
+title: Alert Dialog
+description: A modal dialog that interrupts the user with important content and expects a response.
+---
+
+The Alert Dialog component is a modal overlay that requires user acknowledgment before proceeding. It supports controlled and uncontrolled state, animated transitions with React Native Reanimated, and a compound component API for full flexibility.
+
+## Preview
+
+<ComponentPreview>
+  <AlertDialogPreview
+    triggerLabel="Show Dialog"
+    title="Are you absolutely sure?"
+    description="This action cannot be undone. This will permanently delete your account and remove your data from our servers."
+    cancelLabel="Cancel"
+    actionLabel="Continue"
+  />
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add alert-dialog
+```
+
+### Dependencies
+
+The Alert Dialog requires the following peer dependencies:
+
+- `react-native-reanimated` >= 3
+
+## Import
+
+```tsx
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogAction,
+  AlertDialogCancel,
+} from 'novaui-components'
+```
+
+## Basic Usage
+
+The Alert Dialog is a compound component with these parts:
+
+- `AlertDialog` - Root container with open/close state
+- `AlertDialogTrigger` - Button that opens the dialog
+- `AlertDialogContent` - The modal overlay and content container
+- `AlertDialogHeader` - Groups the title and description
+- `AlertDialogFooter` - Groups the action buttons
+- `AlertDialogTitle` - The dialog heading
+- `AlertDialogDescription` - The dialog body text
+- `AlertDialogAction` - Confirm button (closes on press)
+- `AlertDialogCancel` - Cancel button (closes on press)
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <AlertDialogPreview
+    triggerLabel="Show Dialog"
+    title="Are you absolutely sure?"
+    description="This action cannot be undone. This will permanently delete your account and remove your data from our servers."
+    cancelLabel="Cancel"
+    actionLabel="Continue"
+  />
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogAction,
+  AlertDialogCancel,
+} from 'novaui-components'
+
+export function BasicAlertDialog() {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger variant="outline" label="Show Dialog" />
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. This will permanently delete your
+            account and remove your data from our servers.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel label="Cancel" />
+          <AlertDialogAction label="Continue" />
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Destructive Action
+
+Use a destructive action button for dangerous operations:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <AlertDialogPreview
+    triggerLabel="Delete Account"
+    triggerVariant="destructive"
+    title="Delete Account"
+    description="Are you sure you want to delete your account? All of your data will be permanently removed. This action cannot be undone."
+    cancelLabel="Cancel"
+    actionLabel="Yes, delete account"
+    actionVariant="destructive"
+  />
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<AlertDialog>
+  <AlertDialogTrigger variant="destructive" label="Delete Account" />
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Delete Account</AlertDialogTitle>
+      <AlertDialogDescription>
+        Are you sure you want to delete your account? All of your data will
+        be permanently removed. This action cannot be undone.
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel label="Cancel" />
+      <AlertDialogAction variant="destructive" label="Yes, delete account" />
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+```
+
+</Tab>
+</Tabs>
+
+## Controlled State
+
+Control the dialog open/close state programmatically:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <AlertDialogPreview
+    triggerLabel="Controlled Dialog"
+    title="Controlled Alert"
+    description="This dialog's state is managed externally via the open and onOpenChange props."
+    cancelLabel="Dismiss"
+    actionLabel="Got it"
+  />
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { useState } from 'react'
+
+export function ControlledAlertDialog() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <AlertDialog open={open} onOpenChange={setOpen}>
+      <AlertDialogTrigger variant="outline" label="Controlled Dialog" />
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Controlled Alert</AlertDialogTitle>
+          <AlertDialogDescription>
+            This dialog's state is managed externally via the open and
+            onOpenChange props.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel label="Dismiss" />
+          <AlertDialogAction label="Got it" />
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## With Async Action
+
+Handle async operations (e.g. API calls) in the action button:
+
+```tsx
+import { useState } from 'react'
+
+export function AsyncAlertDialog() {
+  const [open, setOpen] = useState(false)
+
+  const handleDelete = async () => {
+    await fetch('/api/delete-account', { method: 'DELETE' })
+    setOpen(false)
+  }
+
+  return (
+    <AlertDialog open={open} onOpenChange={setOpen}>
+      <AlertDialogTrigger variant="destructive" label="Delete" />
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Confirm Deletion</AlertDialogTitle>
+          <AlertDialogDescription>
+            This will permanently delete the selected items.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel label="Cancel" />
+          <AlertDialogAction
+            variant="destructive"
+            label="Delete"
+            onPress={handleDelete}
+          />
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}
+```
+
+## Props API
+
+### AlertDialog Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | - | Controlled open state |
+| `onOpenChange` | `(open: boolean) => void` | - | Callback when open state changes |
+| `defaultOpen` | `boolean` | `false` | Initial open state (uncontrolled) |
+
+### AlertDialogTrigger Props
+
+Extends `ButtonProps` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Render as the child element instead of a Button |
+
+### AlertDialogContent Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes for the dialog content |
+
+### AlertDialogHeader Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### AlertDialogFooter Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### AlertDialogTitle Props
+
+Extends `React.ComponentPropsWithoutRef<typeof Text>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### AlertDialogDescription Props
+
+Extends `React.ComponentPropsWithoutRef<typeof Text>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### AlertDialogAction Props
+
+Extends `ButtonProps`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `onPress` | `(e: GestureResponderEvent) => void` | - | Called before the dialog closes |
+
+### AlertDialogCancel Props
+
+Extends `ButtonProps`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `ButtonVariant` | `'outline'` | Defaults to outline style |
+| `onPress` | `(e: GestureResponderEvent) => void` | - | Called before the dialog closes |
+
+## Animation
+
+The Alert Dialog uses `react-native-reanimated` for entrance/exit animations:
+
+- **Overlay**: Fades in with `FadeIn` / `FadeOut`
+- **Content**: Spring-based zoom with `FadeIn.springify().damping(20)`
+- **Dismissal**: Fades out when closed
+
+## Accessibility
+
+- Uses React Native `Modal` for proper overlay behavior
+- `onRequestClose` handles the Android back button
+- `statusBarTranslucent` ensures the overlay covers the full screen
+- Backdrop press dismisses the dialog
+
+## Best Practices
+
+1. **Use for destructive actions**: Alert dialogs are best for confirming irreversible actions (delete, discard, etc.)
+
+2. **Keep it focused**: Only one action + one cancel — don't add multiple choices
+
+3. **Clear copy**: The title should state the action, the description should explain the consequences
+
+4. **Appropriate button labels**: Use specific labels like "Delete" instead of generic "OK"
+
+5. **Don't overuse**: Reserve alert dialogs for truly important decisions — overuse causes dismissal fatigue
+
+## Related Components
+
+- Use `Alert` for non-blocking informational messages
+- Use `Dialog` for general-purpose modal content that doesn't require confirmation

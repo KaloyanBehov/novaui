@@ -1,0 +1,185 @@
+---
+title: Input
+description: A styled text input field for capturing user text data.
+---
+
+The Input component wraps React Native's `TextInput` with consistent styling, focus ring support, and placeholder theming. It integrates seamlessly with form layouts and supports disabled states.
+
+## Preview
+
+<ComponentPreview>
+  <div className="flex flex-col gap-4 w-full max-w-sm">
+    <input
+      type="text"
+      placeholder="Enter your email"
+      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base lg:text-sm text-foreground placeholder:text-muted-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+    />
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add input
+```
+
+## Import
+
+```tsx
+import { Input } from 'novaui-components'
+```
+
+## Basic Usage
+
+A simple text input with a placeholder:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-sm">
+    <input
+      type="text"
+      placeholder="Enter your name"
+      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base lg:text-sm text-foreground placeholder:text-muted-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+    />
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { Input } from 'novaui-components'
+
+export function BasicInput() {
+  return <Input placeholder="Enter your name" />
+}
+```
+
+</Tab>
+</Tabs>
+
+## Examples
+
+### Email Input
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-sm">
+    <input
+      type="email"
+      placeholder="you@example.com"
+      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base lg:text-sm text-foreground placeholder:text-muted-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+    />
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Input
+  placeholder="you@example.com"
+  keyboardType="email-address"
+  autoCapitalize="none"
+/>
+```
+
+</Tab>
+</Tabs>
+
+### Disabled State
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-sm">
+    <input
+      type="text"
+      placeholder="Cannot edit"
+      disabled
+      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base lg:text-sm text-foreground placeholder:text-muted-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 opacity-50 cursor-not-allowed"
+    />
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Input placeholder="Cannot edit" editable={false} />
+```
+
+</Tab>
+</Tabs>
+
+### With Value
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-sm">
+    <input
+      type="text"
+      value="John Doe"
+      readOnly
+      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base lg:text-sm text-foreground placeholder:text-muted-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+    />
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { useState } from 'react'
+import { Input } from 'novaui-components'
+
+export function ControlledInput() {
+  const [value, setValue] = useState('John Doe')
+
+  return (
+    <Input
+      value={value}
+      onChangeText={setValue}
+      placeholder="Full name"
+    />
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Props API
+
+### InputProps
+
+Extends `React.ComponentPropsWithoutRef<typeof TextInput>` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes for custom styling |
+| `placeholderTextColor` | `string` | `hsl(var(--muted-foreground))` | Color of the placeholder text |
+| `editable` | `boolean` | `true` | When `false`, the input is disabled with reduced opacity |
+
+All standard React Native `TextInput` props are also supported (`value`, `onChangeText`, `keyboardType`, `autoCapitalize`, etc.).
+
+## Best Practices
+
+1. **Always include a placeholder**: Provide clear placeholder text to indicate the expected input format
+2. **Use with Field**: Wrap inputs in a `Field` component with a label for accessible forms
+3. **Keyboard types**: Set appropriate `keyboardType` for the data type (email, phone, numeric)
+4. **Controlled inputs**: Use `value` and `onChangeText` for form state management
+
+## Related Components
+
+- Use with `Field` and `FieldLabel` for labeled form inputs
+- Combine with `InputGroup` for inputs with icons or addons
+- Pair with `Textarea` for multiline text entry
+- Use `InputOTP` for verification code inputs

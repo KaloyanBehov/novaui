@@ -1,0 +1,273 @@
+---
+title: Carousel
+description: A scrollable carousel component with navigation controls for cycling through content.
+---
+
+The Carousel component provides a scrollable container with navigation arrows for cycling through slides. It supports horizontal and vertical orientations, auto-sizing based on item dimensions, and exposes a `CarouselApi` for programmatic control.
+
+## Preview
+
+<ComponentPreview>
+  <div className="relative w-full max-w-sm mx-auto">
+    <div className="flex flex-row overflow-hidden">
+      <div className="min-w-0 shrink-0 grow-0 basis-full pl-4">
+        <div className="rounded-md border border-border bg-muted p-6 flex items-center justify-center">
+          <span className="text-3xl font-semibold text-foreground">1</span>
+        </div>
+      </div>
+      <div className="min-w-0 shrink-0 grow-0 basis-full pl-4">
+        <div className="rounded-md border border-border bg-muted p-6 flex items-center justify-center">
+          <span className="text-3xl font-semibold text-foreground">2</span>
+        </div>
+      </div>
+      <div className="min-w-0 shrink-0 grow-0 basis-full pl-4">
+        <div className="rounded-md border border-border bg-muted p-6 flex items-center justify-center">
+          <span className="text-3xl font-semibold text-foreground">3</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add carousel
+```
+
+## Import
+
+```tsx
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from 'novaui-components'
+```
+
+## Basic Usage
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="relative w-full max-w-xs mx-auto">
+    <div className="flex flex-row overflow-hidden">
+      <div className="flex -ml-4 flex-row">
+        <div className="min-w-0 shrink-0 grow-0 basis-full pl-4">
+          <div className="rounded-md border border-border bg-muted p-6 flex items-center justify-center">
+            <span className="text-3xl font-semibold text-foreground">1</span>
+          </div>
+        </div>
+        <div className="min-w-0 shrink-0 grow-0 basis-full pl-4">
+          <div className="rounded-md border border-border bg-muted p-6 flex items-center justify-center">
+            <span className="text-3xl font-semibold text-foreground">2</span>
+          </div>
+        </div>
+        <div className="min-w-0 shrink-0 grow-0 basis-full pl-4">
+          <div className="rounded-md border border-border bg-muted p-6 flex items-center justify-center">
+            <span className="text-3xl font-semibold text-foreground">3</span>
+          </div>
+        </div>
+        <div className="min-w-0 shrink-0 grow-0 basis-full pl-4">
+          <div className="rounded-md border border-border bg-muted p-6 flex items-center justify-center">
+            <span className="text-3xl font-semibold text-foreground">4</span>
+          </div>
+        </div>
+        <div className="min-w-0 shrink-0 grow-0 basis-full pl-4">
+          <div className="rounded-md border border-border bg-muted p-6 flex items-center justify-center">
+            <span className="text-3xl font-semibold text-foreground">5</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from 'novaui-components'
+import { View, Text } from 'react-native'
+
+export function BasicCarousel() {
+  return (
+    <Carousel className="w-full max-w-xs">
+      <CarouselContent>
+        {[1, 2, 3, 4, 5].map((item) => (
+          <CarouselItem key={item}>
+            <View className="p-1">
+              <View className="rounded-md border border-border bg-muted p-6 items-center justify-center">
+                <Text className="text-3xl font-semibold text-foreground">
+                  {item}
+                </Text>
+              </View>
+            </View>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious />
+      <CarouselNext />
+    </Carousel>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Vertical Orientation
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="relative w-full max-w-xs mx-auto">
+    <div className="flex flex-col overflow-hidden" style={{height: '200px'}}>
+      <div className="flex -mt-4 flex-col">
+        <div className="min-w-0 shrink-0 grow-0 basis-full pt-4">
+          <div className="rounded-md border border-border bg-muted p-6 flex items-center justify-center">
+            <span className="text-3xl font-semibold text-foreground">1</span>
+          </div>
+        </div>
+        <div className="min-w-0 shrink-0 grow-0 basis-full pt-4">
+          <div className="rounded-md border border-border bg-muted p-6 flex items-center justify-center">
+            <span className="text-3xl font-semibold text-foreground">2</span>
+          </div>
+        </div>
+        <div className="min-w-0 shrink-0 grow-0 basis-full pt-4">
+          <div className="rounded-md border border-border bg-muted p-6 flex items-center justify-center">
+            <span className="text-3xl font-semibold text-foreground">3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Carousel orientation="vertical" className="w-full max-w-xs">
+  <CarouselContent>
+    {[1, 2, 3].map((item) => (
+      <CarouselItem key={item}>
+        <View className="p-1">
+          <View className="rounded-md border border-border bg-muted p-6 items-center justify-center">
+            <Text className="text-3xl font-semibold">{item}</Text>
+          </View>
+        </View>
+      </CarouselItem>
+    ))}
+  </CarouselContent>
+  <CarouselPrevious />
+  <CarouselNext />
+</Carousel>
+```
+
+</Tab>
+</Tabs>
+
+## With API Control
+
+Use the `setApi` callback for programmatic carousel control:
+
+```tsx
+import { useState } from 'react'
+import { type CarouselApi } from 'novaui-components'
+
+export function ControlledCarousel() {
+  const [api, setApi] = useState<CarouselApi>()
+
+  return (
+    <View className="gap-4">
+      <Carousel setApi={setApi}>
+        <CarouselContent>
+          {[1, 2, 3].map((item) => (
+            <CarouselItem key={item}>
+              <View className="rounded-md border border-border bg-muted p-6 items-center justify-center">
+                <Text className="text-3xl font-semibold">{item}</Text>
+              </View>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
+      <View className="flex-row gap-2">
+        <Button label="Prev" onPress={() => api?.scrollPrev()} />
+        <Button label="Next" onPress={() => api?.scrollNext()} />
+      </View>
+    </View>
+  )
+}
+```
+
+## Props API
+
+### Carousel
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | Scroll direction |
+| `setApi` | `(api: CarouselApi) => void` | - | Callback to receive the carousel API |
+| `className` | `string` | - | Additional CSS classes |
+
+### CarouselApi
+
+| Method | Type | Description |
+|--------|------|-------------|
+| `scrollPrev` | `() => void` | Scroll to the previous slide |
+| `scrollNext` | `() => void` | Scroll to the next slide |
+| `scrollTo` | `(index: number) => void` | Scroll to a specific slide |
+| `canScrollPrev` | `boolean` | Whether there is a previous slide |
+| `canScrollNext` | `boolean` | Whether there is a next slide |
+
+### CarouselContent
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### CarouselItem
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### CarouselPrevious / CarouselNext
+
+Extends `Button` props:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `string` | `'outline'` | Button variant |
+| `size` | `string` | `'icon'` | Button size |
+| `className` | `string` | - | Additional CSS classes |
+
+## Best Practices
+
+1. **Provide navigation**: Always include `CarouselPrevious` and `CarouselNext` or a programmatic control
+2. **Keep slides consistent**: Use the same height and layout for all carousel items
+3. **Limit slide count**: Avoid too many slides — consider pagination for large datasets
+4. **Indicate position**: Show slide indicators or counts so users know their position
+5. **Use appropriate orientation**: Vertical carousels work well for card stacks and galleries
+
+## Related Components
+
+- [Scroll Area](/docs/components/scroll-area) - For generic scrollable containers
+- [Tabs](/docs/components/tabs) - For tabbed content switching

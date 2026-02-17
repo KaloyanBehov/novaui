@@ -1,0 +1,426 @@
+---
+title: Drawer
+description: A bottom sheet component that slides up from the bottom of the screen with gesture-based dismissal.
+---
+
+The Drawer component is a bottom sheet overlay that slides up from the bottom of the screen. It supports swipe-to-dismiss gestures, animated transitions with React Native Reanimated, a drag handle indicator, and a compound component API for full flexibility.
+
+## Preview
+
+<ComponentPreview>
+  <DrawerPreview
+    triggerLabel="Open Drawer"
+    title="Move Goal"
+    description="Set your daily activity goal."
+    footerButtons={[
+      { label: "Submit", variant: "default" },
+      { label: "Cancel", variant: "outline" }
+    ]}
+  />
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add drawer
+```
+
+### Dependencies
+
+The Drawer requires the following peer dependencies:
+
+- `react-native-reanimated` >= 3
+- `react-native-gesture-handler` >= 2
+- `lucide-react-native` >= 0.300
+
+## Import
+
+```tsx
+import {
+  Drawer,
+  DrawerTrigger,
+  DrawerContent,
+  DrawerHeader,
+  DrawerFooter,
+  DrawerTitle,
+  DrawerDescription,
+  DrawerClose,
+} from 'novaui-components'
+```
+
+## Basic Usage
+
+The Drawer is a compound component with these parts:
+
+- `Drawer` - Root container with open/close state
+- `DrawerTrigger` - Element that opens the drawer
+- `DrawerContent` - The sliding panel with overlay, drag handle, and content area
+- `DrawerHeader` - Groups the title and description
+- `DrawerFooter` - Bottom section for action buttons
+- `DrawerTitle` - The drawer heading
+- `DrawerDescription` - Subtitle text
+- `DrawerClose` - Element that closes the drawer
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <DrawerPreview
+    triggerLabel="Open Drawer"
+    title="Move Goal"
+    description="Set your daily activity goal."
+    footerButtons={[
+      { label: "Submit", variant: "default" },
+      { label: "Cancel", variant: "outline" }
+    ]}
+  />
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import {
+  Drawer, DrawerTrigger, DrawerContent,
+  DrawerHeader, DrawerFooter, DrawerTitle,
+  DrawerDescription, DrawerClose,
+} from 'novaui-components'
+import { Button } from 'novaui-components'
+
+export function BasicDrawer() {
+  return (
+    <Drawer>
+      <DrawerTrigger>
+        <Button variant="outline" label="Open Drawer" />
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Move Goal</DrawerTitle>
+          <DrawerDescription>Set your daily activity goal.</DrawerDescription>
+        </DrawerHeader>
+        <DrawerFooter>
+          <Button label="Submit" />
+          <DrawerClose asChild>
+            <Button variant="outline" label="Cancel" />
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## With Content
+
+Add any content inside the drawer body:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <DrawerPreview
+    triggerLabel="Edit Profile"
+    title="Edit Profile"
+    description="Make changes to your profile here."
+    footerButtons={[
+      { label: "Save changes", variant: "default" },
+      { label: "Cancel", variant: "outline" }
+    ]}
+  >
+    <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-1.5">
+        <span className="text-sm font-medium text-foreground">Name</span>
+        <div className="h-10 w-full rounded-md border border-input bg-background px-3 flex items-center">
+          <span className="text-sm text-muted-foreground">John Doe</span>
+        </div>
+      </div>
+      <div className="flex flex-col gap-1.5">
+        <span className="text-sm font-medium text-foreground">Username</span>
+        <div className="h-10 w-full rounded-md border border-input bg-background px-3 flex items-center">
+          <span className="text-sm text-muted-foreground">@johndoe</span>
+        </div>
+      </div>
+    </div>
+  </DrawerPreview>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import {
+  Drawer, DrawerTrigger, DrawerContent,
+  DrawerHeader, DrawerFooter, DrawerTitle,
+  DrawerDescription, DrawerClose,
+} from 'novaui-components'
+import { Button } from 'novaui-components'
+import { View, Text, TextInput } from 'react-native'
+
+export function ProfileDrawer() {
+  return (
+    <Drawer>
+      <DrawerTrigger>
+        <Button variant="outline" label="Edit Profile" />
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Edit Profile</DrawerTitle>
+          <DrawerDescription>Make changes to your profile here.</DrawerDescription>
+        </DrawerHeader>
+        <View className="p-4 gap-3">
+          <View className="gap-1.5">
+            <Text className="text-sm font-medium">Name</Text>
+            <TextInput
+              defaultValue="John Doe"
+              className="h-10 rounded-md border border-input bg-background px-3"
+            />
+          </View>
+          <View className="gap-1.5">
+            <Text className="text-sm font-medium">Username</Text>
+            <TextInput
+              defaultValue="@johndoe"
+              className="h-10 rounded-md border border-input bg-background px-3"
+            />
+          </View>
+        </View>
+        <DrawerFooter>
+          <Button label="Save changes" />
+          <DrawerClose asChild>
+            <Button variant="outline" label="Cancel" />
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Controlled State
+
+Control the drawer's open/close state programmatically:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <DrawerPreview
+    triggerLabel="Controlled Drawer"
+    title="Controlled"
+    description="This drawer's state is managed externally via the open and onOpenChange props."
+    footerButtons={[
+      { label: "Got it", variant: "default" }
+    ]}
+  />
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { useState } from 'react'
+
+export function ControlledDrawer() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <Drawer open={open} onOpenChange={setOpen}>
+      <DrawerTrigger>
+        <Button variant="outline" label="Controlled Drawer" />
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Controlled</DrawerTitle>
+          <DrawerDescription>
+            This drawer's state is managed externally via the open and onOpenChange props.
+          </DrawerDescription>
+        </DrawerHeader>
+        <DrawerFooter>
+          <Button label="Got it" onPress={() => setOpen(false)} />
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Action Sheet Style
+
+Use the drawer as an action sheet with a list of options:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <DrawerPreview
+    triggerLabel="Share"
+    title="Share"
+    description="Choose how you want to share this."
+  >
+    <div className="flex flex-col gap-1">
+      <button className="flex flex-row items-center gap-3 rounded-md px-3 py-2.5 hover:bg-accent text-left">
+        <span className="text-sm text-foreground">Copy Link</span>
+      </button>
+      <button className="flex flex-row items-center gap-3 rounded-md px-3 py-2.5 hover:bg-accent text-left">
+        <span className="text-sm text-foreground">Share to Twitter</span>
+      </button>
+      <button className="flex flex-row items-center gap-3 rounded-md px-3 py-2.5 hover:bg-accent text-left">
+        <span className="text-sm text-foreground">Share to Facebook</span>
+      </button>
+      <button className="flex flex-row items-center gap-3 rounded-md px-3 py-2.5 hover:bg-accent text-left">
+        <span className="text-sm text-foreground">Send via Email</span>
+      </button>
+    </div>
+  </DrawerPreview>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import {
+  Drawer, DrawerTrigger, DrawerContent,
+  DrawerHeader, DrawerTitle, DrawerDescription,
+} from 'novaui-components'
+import { Button } from 'novaui-components'
+import { View, Text, Pressable } from 'react-native'
+
+const options = ['Copy Link', 'Share to Twitter', 'Share to Facebook', 'Send via Email']
+
+export function ShareDrawer() {
+  return (
+    <Drawer>
+      <DrawerTrigger>
+        <Button variant="outline" label="Share" />
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Share</DrawerTitle>
+          <DrawerDescription>Choose how you want to share this.</DrawerDescription>
+        </DrawerHeader>
+        <View className="p-4 gap-1">
+          {options.map((option) => (
+            <Pressable
+              key={option}
+              className="flex-row items-center gap-3 rounded-md px-3 py-2.5 active:bg-accent"
+            >
+              <Text className="text-sm">{option}</Text>
+            </Pressable>
+          ))}
+        </View>
+      </DrawerContent>
+    </Drawer>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Props API
+
+### Drawer Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | - | Controlled open state |
+| `onOpenChange` | `(open: boolean) => void` | - | Callback when open state changes |
+| `shouldScaleBackground` | `boolean` | `true` | Whether to scale the background when open |
+
+### DrawerTrigger Props
+
+Extends `React.ComponentPropsWithoutRef<typeof Pressable>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Render as the child element instead of a Pressable |
+
+### DrawerContent Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes for the drawer panel |
+
+### DrawerHeader Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### DrawerFooter Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### DrawerTitle Props
+
+Extends `React.ComponentPropsWithoutRef<typeof Text>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### DrawerDescription Props
+
+Extends `React.ComponentPropsWithoutRef<typeof Text>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### DrawerClose Props
+
+Extends `React.ComponentPropsWithoutRef<typeof Pressable>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Render as the child element instead of a Pressable |
+
+## Gesture & Animation
+
+The Drawer uses `react-native-reanimated` and `react-native-gesture-handler`:
+
+- **Slide animation**: Content slides in from the bottom with `SlideInDown` / `SlideOutDown`
+- **Overlay fade**: Background fades in/out with `FadeIn` / `FadeOut`
+- **Swipe to dismiss**: Pan gesture detects swipe down — dismisses when dragged > 100px or velocity > 500
+- **Spring back**: If swipe is too small, content springs back to position
+- **Drag handle**: Visual indicator (`mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted`) for swipe affordance
+
+## Accessibility
+
+- Uses React Native `Modal` for proper overlay stacking
+- `onRequestClose` handles the Android back button
+- `statusBarTranslucent` for full-screen overlay
+- Backdrop press dismisses the drawer
+- Drag handle provides visual swipe affordance
+
+## Best Practices
+
+1. **Use for contextual actions**: Drawers work best for secondary actions, forms, or options that don't need a full screen
+
+2. **Keep it focused**: Don't overload drawers with too much content — use a full screen instead
+
+3. **Always provide a close mechanism**: Include a cancel button, backdrop press, or swipe-to-dismiss
+
+4. **Footer for actions**: Place primary action buttons in `DrawerFooter`
+
+5. **Mobile-first**: Drawers are primarily a mobile pattern — consider using `Dialog` on larger screens
+
+## Related Components
+
+- Use `Dialog` for centered modal content
+- Use `Sheet` for side-panel overlays
+- Use `AlertDialog` for confirmation dialogs

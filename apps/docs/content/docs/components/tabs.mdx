@@ -1,0 +1,261 @@
+---
+title: Tabs
+description: A set of layered panels of content, each associated with a tab trigger that displays one panel at a time.
+---
+
+The Tabs component organizes content into multiple panels, each associated with a tab trigger. It supports a context-based API for automatic state management, controlled/uncontrolled state, and is styled with NativeWind for consistent cross-platform appearance.
+
+## Preview
+
+<ComponentPreview>
+  <div className="w-full max-w-sm">
+    <div className="inline-flex h-10 w-full flex-row items-center justify-center rounded-md bg-muted p-1">
+      <button className="inline-flex flex-1 items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 bg-background text-foreground shadow-sm">
+        <span className="text-sm font-medium text-foreground">Account</span>
+      </button>
+      <button className="inline-flex flex-1 items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5">
+        <span className="text-sm font-medium text-muted-foreground">Password</span>
+      </button>
+    </div>
+    <div className="mt-2 rounded-md border border-border p-4">
+      <span className="text-sm text-foreground">Make changes to your account here. Update your display name and email address.</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add tabs
+```
+
+## Import
+
+```tsx
+import { Tabs, TabsList, TabsTrigger, TabsContent } from 'novaui-components'
+```
+
+## Basic Usage
+
+The Tabs component is a compound component with four parts:
+
+- `Tabs` - Root container with tab state management (context-based)
+- `TabsList` - Container for the tab triggers
+- `TabsTrigger` - Individual tab button with a `value` prop
+- `TabsContent` - Panel that shows when its `value` matches the active tab
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-sm">
+    <div className="inline-flex h-10 w-full flex-row items-center justify-center rounded-md bg-muted p-1">
+      <button className="inline-flex flex-1 items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 bg-background text-foreground shadow-sm">
+        <span className="text-sm font-medium text-foreground">Account</span>
+      </button>
+      <button className="inline-flex flex-1 items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5">
+        <span className="text-sm font-medium text-muted-foreground">Password</span>
+      </button>
+    </div>
+    <div className="mt-2 rounded-md border border-border p-4">
+      <span className="text-sm text-foreground">Make changes to your account here. Update your display name and email address.</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { Tabs, TabsList, TabsTrigger, TabsContent } from 'novaui-components'
+import { Text } from 'react-native'
+
+export function BasicTabs() {
+  return (
+    <Tabs defaultValue="account">
+      <TabsList>
+        <TabsTrigger value="account">Account</TabsTrigger>
+        <TabsTrigger value="password">Password</TabsTrigger>
+      </TabsList>
+      <TabsContent value="account">
+        <Text>Make changes to your account here. Update your display name and email address.</Text>
+      </TabsContent>
+      <TabsContent value="password">
+        <Text>Change your password here. Use a strong, unique password.</Text>
+      </TabsContent>
+    </Tabs>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Three Tabs
+
+Tabs with three panels:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="w-full max-w-md">
+    <div className="inline-flex h-10 w-full flex-row items-center justify-center rounded-md bg-muted p-1">
+      <button className="inline-flex flex-1 items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 bg-background text-foreground shadow-sm">
+        <span className="text-sm font-medium text-foreground">Overview</span>
+      </button>
+      <button className="inline-flex flex-1 items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5">
+        <span className="text-sm font-medium text-muted-foreground">Analytics</span>
+      </button>
+      <button className="inline-flex flex-1 items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5">
+        <span className="text-sm font-medium text-muted-foreground">Settings</span>
+      </button>
+    </div>
+    <div className="mt-2 rounded-md border border-border p-4">
+      <span className="text-sm text-foreground">Overview of your project with key metrics and recent activity.</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Tabs defaultValue="overview">
+  <TabsList>
+    <TabsTrigger value="overview">Overview</TabsTrigger>
+    <TabsTrigger value="analytics">Analytics</TabsTrigger>
+    <TabsTrigger value="settings">Settings</TabsTrigger>
+  </TabsList>
+  <TabsContent value="overview">
+    <Text>Overview of your project with key metrics and recent activity.</Text>
+  </TabsContent>
+  <TabsContent value="analytics">
+    <Text>Analytics data showing trends, charts, and performance metrics.</Text>
+  </TabsContent>
+  <TabsContent value="settings">
+    <Text>Configure your project settings and preferences.</Text>
+  </TabsContent>
+</Tabs>
+```
+
+</Tab>
+</Tabs>
+
+## With Cards
+
+Combine tabs with cards for richer content panels:
+
+```tsx
+import { Tabs, TabsList, TabsTrigger, TabsContent } from 'novaui-components'
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from 'novaui-components'
+import { View, Text, TextInput } from 'react-native'
+import { Button } from 'novaui-components'
+
+export function TabsWithCards() {
+  return (
+    <Tabs defaultValue="account">
+      <TabsList>
+        <TabsTrigger value="account">Account</TabsTrigger>
+        <TabsTrigger value="password">Password</TabsTrigger>
+      </TabsList>
+      <TabsContent value="account">
+        <Card>
+          <CardHeader>
+            <CardTitle>Account</CardTitle>
+            <CardDescription>
+              Make changes to your account here. Click save when you're done.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="gap-4">
+            <View className="gap-2">
+              <Text className="text-sm font-medium">Name</Text>
+              <TextInput
+                className="h-10 rounded-md border border-input bg-background px-3"
+                defaultValue="Pedro Duarte"
+              />
+            </View>
+            <Button label="Save changes" />
+          </CardContent>
+        </Card>
+      </TabsContent>
+      <TabsContent value="password">
+        <Card>
+          <CardHeader>
+            <CardTitle>Password</CardTitle>
+            <CardDescription>
+              Change your password here. Use a strong, unique password.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="gap-4">
+            <View className="gap-2">
+              <Text className="text-sm font-medium">Current password</Text>
+              <TextInput
+                className="h-10 rounded-md border border-input bg-background px-3"
+                secureTextEntry
+              />
+            </View>
+            <Button label="Save password" />
+          </CardContent>
+        </Card>
+      </TabsContent>
+    </Tabs>
+  )
+}
+```
+
+## Props API
+
+### Tabs Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `defaultValue` | `string` | required | The initially active tab value |
+| `onValueChange` | `(value: string) => void` | - | Callback when the active tab changes |
+| `className` | `string` | - | Additional CSS classes |
+
+### TabsList Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### TabsTrigger Props
+
+Extends `React.ComponentPropsWithoutRef<typeof Pressable>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | required | The value that identifies this tab |
+| `className` | `string` | - | Additional CSS classes |
+
+### TabsContent Props
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | required | The value that identifies this content panel |
+| `className` | `string` | - | Additional CSS classes |
+
+## Best Practices
+
+1. **Meaningful labels**: Tab labels should be short and descriptive — one or two words maximum
+
+2. **Default selection**: Always provide a `defaultValue` so one tab is active on mount
+
+3. **Consistent content depth**: Keep content panels at similar depth/complexity to avoid jarring switches
+
+4. **Don't overload**: If you have more than 5 tabs, consider a different navigation pattern
+
+5. **Pair with cards**: Wrap `TabsContent` children in `Card` for a polished look
+
+## Related Components
+
+- Use `Card` inside `TabsContent` for structured tab panels
+- Use `Accordion` for vertically stacked collapsible content
+- Use `Collapsible` for a single expand/collapse section

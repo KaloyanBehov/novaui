@@ -1,0 +1,240 @@
+---
+title: Navigation Menu
+description: A navigation component with trigger items that open dropdown content panels for site navigation.
+---
+
+The Navigation Menu component provides a horizontal navigation bar with items that can expand to show rich dropdown content. It supports trigger buttons with chevron indicators, positioned content panels, and navigation links. Built for site-level navigation patterns.
+
+## Preview
+
+<ComponentPreview>
+  <div className="relative z-10 flex flex-row max-w-max flex-1 items-center justify-center">
+    <div className="group flex-1 flex-row flex list-none items-center justify-center gap-1">
+      <div className="relative">
+        <button className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium">
+          <span className="text-sm font-medium text-foreground">Getting Started</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="relative top-[1px] ml-1 h-3 w-3 text-foreground"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+      </div>
+      <div className="relative">
+        <button className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium">
+          <span className="text-sm font-medium text-foreground">Components</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="relative top-[1px] ml-1 h-3 w-3 text-foreground"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+      </div>
+      <div className="relative">
+        <button className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium">
+          <span className="text-sm font-medium text-foreground">Documentation</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add navigation-menu
+```
+
+## Import
+
+```tsx
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuContent,
+  NavigationMenuTrigger,
+  NavigationMenuLink,
+  NavigationMenuIndicator,
+  NavigationMenuViewport,
+  navigationMenuTriggerStyle,
+} from 'novaui-components'
+```
+
+## Basic Usage
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="relative z-10 flex flex-row max-w-max flex-1 items-center justify-center">
+    <div className="group flex-1 flex-row flex list-none items-center justify-center gap-1">
+      <div className="relative">
+        <button className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium">
+          <span className="text-sm font-medium text-foreground">Getting Started</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="relative top-[1px] ml-1 h-3 w-3 text-foreground"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+      </div>
+      <div className="relative">
+        <button className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium">
+          <span className="text-sm font-medium text-foreground">Components</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="relative top-[1px] ml-1 h-3 w-3 text-foreground"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+      </div>
+      <div className="relative">
+        <button className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium">
+          <span className="text-sm font-medium text-foreground">Documentation</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuContent,
+  NavigationMenuTrigger,
+  NavigationMenuLink,
+  navigationMenuTriggerStyle,
+} from 'novaui-components'
+import { Text, View } from 'react-native'
+
+export function BasicNavigationMenu() {
+  return (
+    <NavigationMenu>
+      <NavigationMenuList>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger>Getting Started</NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <View className="gap-3 p-4 w-[300px]">
+              <NavigationMenuLink>
+                <Text className="text-sm font-medium">Introduction</Text>
+                <Text className="text-sm text-muted-foreground">
+                  Learn the basics of the framework.
+                </Text>
+              </NavigationMenuLink>
+              <NavigationMenuLink>
+                <Text className="text-sm font-medium">Installation</Text>
+                <Text className="text-sm text-muted-foreground">
+                  How to install and set up your project.
+                </Text>
+              </NavigationMenuLink>
+            </View>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger>Components</NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <View className="gap-3 p-4 w-[300px]">
+              <NavigationMenuLink>
+                <Text className="text-sm font-medium">Button</Text>
+                <Text className="text-sm text-muted-foreground">
+                  Interactive button component.
+                </Text>
+              </NavigationMenuLink>
+              <NavigationMenuLink>
+                <Text className="text-sm font-medium">Dialog</Text>
+                <Text className="text-sm text-muted-foreground">
+                  Modal dialog overlays.
+                </Text>
+              </NavigationMenuLink>
+            </View>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+            Documentation
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+      </NavigationMenuList>
+    </NavigationMenu>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## With Active Link
+
+Highlight the currently active navigation link:
+
+```tsx
+<NavigationMenuLink active>
+  <Text className="text-sm font-medium">Dashboard</Text>
+  <Text className="text-sm text-muted-foreground">
+    View your analytics and data.
+  </Text>
+</NavigationMenuLink>
+```
+
+## Props API
+
+### NavigationMenu
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | - | Controlled active item value |
+| `onValueChange` | `(value: string \| undefined) => void` | - | Callback when active item changes |
+| `className` | `string` | - | Additional CSS classes |
+
+### NavigationMenuList
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### NavigationMenuItem
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | auto-generated | Unique value to identify this item |
+
+### NavigationMenuTrigger
+
+Extends `React.ComponentPropsWithoutRef<typeof Pressable>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### NavigationMenuContent
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `align` | `'start' \| 'center' \| 'end'` | `'center'` | Alignment relative to trigger |
+| `sideOffset` | `number` | `4` | Offset from trigger in pixels |
+| `className` | `string` | - | Additional CSS classes |
+
+### NavigationMenuLink
+
+Extends `React.ComponentPropsWithoutRef<typeof Pressable>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `active` | `boolean` | `false` | Whether the link is currently active |
+| `className` | `string` | - | Additional CSS classes |
+
+### navigationMenuTriggerStyle
+
+A `cva` utility that returns the trigger button styling. Use on `NavigationMenuLink` to style plain links to match trigger items.
+
+## Best Practices
+
+1. **Use for site navigation**: Best suited for top-level site nav with rich dropdowns
+2. **Keep content focused**: Each trigger's dropdown should cover a single topic area
+3. **Use links for leaf items**: Use `NavigationMenuLink` with `navigationMenuTriggerStyle` for items without dropdowns
+4. **Mark the active link**: Set `active` on the current page's link for visual feedback
+5. **Limit trigger count**: Aim for 3–6 top-level navigation items
+
+## Related Components
+
+- [Menubar](/docs/components/menubar) - For application-level menu bars
+- [Tabs](/docs/components/tabs) - For in-page content switching
+- [Breadcrumb](/docs/components/breadcrumb) - For page-level navigation hierarchy

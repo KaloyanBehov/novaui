@@ -1,0 +1,290 @@
+---
+title: Menubar
+description: A horizontal menu bar with dropdown menus, commonly used for application-level navigation.
+---
+
+The Menubar component provides a horizontal strip of menu triggers that each open a dropdown menu. It supports items, checkbox items, radio items, sub-menus, labels, separators, and keyboard shortcuts — ideal for desktop-style app menus.
+
+## Preview
+
+<ComponentPreview>
+  <div className="flex flex-row h-10 items-center space-x-1 rounded-md border border-border bg-background p-1">
+    <div className="flex flex-row items-center rounded-sm px-3 py-1.5">
+      <span className="text-sm font-medium text-foreground">File</span>
+    </div>
+    <div className="flex flex-row items-center rounded-sm px-3 py-1.5">
+      <span className="text-sm font-medium text-foreground">Edit</span>
+    </div>
+    <div className="flex flex-row items-center rounded-sm px-3 py-1.5">
+      <span className="text-sm font-medium text-foreground">View</span>
+    </div>
+    <div className="flex flex-row items-center rounded-sm px-3 py-1.5">
+      <span className="text-sm font-medium text-foreground">Help</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add menubar
+```
+
+## Import
+
+```tsx
+import {
+  Menubar,
+  MenubarMenu,
+  MenubarTrigger,
+  MenubarContent,
+  MenubarItem,
+  MenubarCheckboxItem,
+  MenubarRadioItem,
+  MenubarLabel,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarGroup,
+  MenubarPortal,
+  MenubarSub,
+  MenubarSubContent,
+  MenubarSubTrigger,
+  MenubarRadioGroup,
+} from 'novaui-components'
+```
+
+## Basic Usage
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-col gap-4 items-start">
+    <div className="flex flex-row h-10 items-center space-x-1 rounded-md border border-border bg-background p-1">
+      <div className="flex flex-row items-center rounded-sm px-3 py-1.5">
+        <span className="text-sm font-medium text-foreground">File</span>
+      </div>
+      <div className="flex flex-row items-center rounded-sm px-3 py-1.5">
+        <span className="text-sm font-medium text-foreground">Edit</span>
+      </div>
+      <div className="flex flex-row items-center rounded-sm px-3 py-1.5">
+        <span className="text-sm font-medium text-foreground">View</span>
+      </div>
+    </div>
+    <div className="min-w-[12rem] overflow-hidden rounded-md border border-border bg-popover p-1 shadow-md">
+      <div className="relative flex flex-row cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm">
+        <span className="text-sm text-foreground">New Tab</span>
+        <span className="ml-auto text-xs tracking-widest text-muted-foreground">⌘T</span>
+      </div>
+      <div className="relative flex flex-row cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm">
+        <span className="text-sm text-foreground">New Window</span>
+        <span className="ml-auto text-xs tracking-widest text-muted-foreground">⌘N</span>
+      </div>
+      <div className="-mx-1 my-1 h-px bg-border" />
+      <div className="relative flex flex-row cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm">
+        <span className="text-sm text-foreground">Print</span>
+        <span className="ml-auto text-xs tracking-widest text-muted-foreground">⌘P</span>
+      </div>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import {
+  Menubar,
+  MenubarMenu,
+  MenubarTrigger,
+  MenubarContent,
+  MenubarItem,
+  MenubarSeparator,
+  MenubarShortcut,
+} from 'novaui-components'
+
+export function BasicMenubar() {
+  return (
+    <Menubar>
+      <MenubarMenu>
+        <MenubarTrigger>File</MenubarTrigger>
+        <MenubarContent>
+          <MenubarItem>
+            New Tab
+            <MenubarShortcut>⌘T</MenubarShortcut>
+          </MenubarItem>
+          <MenubarItem>
+            New Window
+            <MenubarShortcut>⌘N</MenubarShortcut>
+          </MenubarItem>
+          <MenubarSeparator />
+          <MenubarItem>
+            Print
+            <MenubarShortcut>⌘P</MenubarShortcut>
+          </MenubarItem>
+        </MenubarContent>
+      </MenubarMenu>
+      <MenubarMenu>
+        <MenubarTrigger>Edit</MenubarTrigger>
+        <MenubarContent>
+          <MenubarItem>
+            Undo
+            <MenubarShortcut>⌘Z</MenubarShortcut>
+          </MenubarItem>
+          <MenubarItem>
+            Redo
+            <MenubarShortcut>⇧⌘Z</MenubarShortcut>
+          </MenubarItem>
+        </MenubarContent>
+      </MenubarMenu>
+      <MenubarMenu>
+        <MenubarTrigger>View</MenubarTrigger>
+        <MenubarContent>
+          <MenubarItem>Zoom In</MenubarItem>
+          <MenubarItem>Zoom Out</MenubarItem>
+        </MenubarContent>
+      </MenubarMenu>
+    </Menubar>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## With Checkbox and Radio Items
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="min-w-[12rem] overflow-hidden rounded-md border border-border bg-popover p-1 shadow-md">
+    <span className="px-2 py-1.5 text-sm font-semibold text-foreground">Panels</span>
+    <div className="-mx-1 my-1 h-px bg-border" />
+    <div className="relative flex flex-row cursor-default select-none items-center rounded-sm px-2 py-1.5 pl-8 text-sm">
+      <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 text-foreground"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </span>
+      <span className="text-sm text-foreground">Sidebar</span>
+    </div>
+    <div className="relative flex flex-row cursor-default select-none items-center rounded-sm px-2 py-1.5 pl-8 text-sm">
+      <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center" />
+      <span className="text-sm text-foreground">Console</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { useState } from 'react'
+
+export function CheckboxMenubar() {
+  const [sidebar, setSidebar] = useState(true)
+  const [console, setConsole] = useState(false)
+
+  return (
+    <Menubar>
+      <MenubarMenu>
+        <MenubarTrigger>View</MenubarTrigger>
+        <MenubarContent>
+          <MenubarLabel>Panels</MenubarLabel>
+          <MenubarSeparator />
+          <MenubarCheckboxItem
+            checked={sidebar}
+            onPress={() => setSidebar(!sidebar)}
+          >
+            Sidebar
+          </MenubarCheckboxItem>
+          <MenubarCheckboxItem
+            checked={console}
+            onPress={() => setConsole(!console)}
+          >
+            Console
+          </MenubarCheckboxItem>
+        </MenubarContent>
+      </MenubarMenu>
+    </Menubar>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Props API
+
+### Menubar
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### MenubarMenu
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | MenubarTrigger and MenubarContent |
+
+### MenubarTrigger
+
+Extends `React.ComponentPropsWithoutRef<typeof Pressable>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Render as the child element |
+| `className` | `string` | - | Additional CSS classes |
+
+### MenubarContent
+
+Extends `React.ComponentPropsWithoutRef<typeof View>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `align` | `'start' \| 'center' \| 'end'` | `'start'` | Alignment relative to the trigger |
+| `sideOffset` | `number` | `8` | Offset from the trigger in pixels |
+| `className` | `string` | - | Additional CSS classes |
+
+### MenubarItem
+
+Extends `React.ComponentPropsWithoutRef<typeof Pressable>`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `inset` | `boolean` | `false` | Adds left padding for alignment |
+
+### MenubarCheckboxItem
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `checked` | `boolean` | `false` | Whether the checkbox is checked |
+
+### MenubarRadioItem
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `checked` | `boolean` | `false` | Whether the radio item is selected |
+| `value` | `string` | - | The value of the radio item |
+
+### MenubarLabel
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `inset` | `boolean` | `false` | Adds left padding for alignment |
+
+## Best Practices
+
+1. **Use for app-level menus**: Menubar is best suited for desktop-style application navigation
+2. **Keep triggers short**: Use single words or short phrases as trigger labels
+3. **Consistent structure**: Maintain similar item patterns across all menus
+4. **Group with separators**: Use `MenubarSeparator` and `MenubarLabel` for visual organization
+5. **Add shortcuts**: Use `MenubarShortcut` to show keyboard shortcuts for discoverability
+
+## Related Components
+
+- [Dropdown Menu](/docs/components/dropdown-menu) - For single-button triggered menus
+- [Context Menu](/docs/components/context-menu) - For long-press contextual menus
+- [Navigation Menu](/docs/components/navigation-menu) - For site navigation with content panels

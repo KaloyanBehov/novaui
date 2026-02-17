@@ -1,0 +1,242 @@
+---
+title: Switch
+description: A toggle switch control for binary on/off states with smooth animation.
+---
+
+The Switch component provides an animated toggle built with React Native's `Pressable` and `react-native-reanimated`. It supports controlled and uncontrolled modes, two size variants, disabled states, and smooth thumb translation animations.
+
+## Preview
+
+<ComponentPreview>
+  <div className="flex items-center gap-6">
+    <div className="flex items-center gap-2">
+      <div className="relative inline-flex h-[18px] w-8 shrink-0 rounded-full border border-transparent bg-primary shadow-xs">
+        <div className="absolute left-[16px] top-[1px] h-4 w-4 rounded-full bg-background" />
+      </div>
+      <span className="text-sm text-foreground">On</span>
+    </div>
+    <div className="flex items-center gap-2">
+      <div className="relative inline-flex h-[18px] w-8 shrink-0 rounded-full border border-transparent bg-input shadow-xs">
+        <div className="absolute left-[2px] top-[1px] h-4 w-4 rounded-full bg-background" />
+      </div>
+      <span className="text-sm text-foreground">Off</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add switch
+```
+
+## Import
+
+```tsx
+import { Switch } from 'novaui-components'
+```
+
+## Basic Usage
+
+A simple toggle switch with on/off states:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex items-center gap-2">
+    <div className="relative inline-flex h-[18px] w-8 shrink-0 rounded-full border border-transparent bg-input shadow-xs">
+      <div className="absolute left-[2px] top-[1px] h-4 w-4 rounded-full bg-background" />
+    </div>
+    <span className="text-sm text-foreground">Airplane mode</span>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { useState } from 'react'
+import { Switch } from 'novaui-components'
+import { Text, View } from 'react-native'
+
+export function BasicSwitch() {
+  const [checked, setChecked] = useState(false)
+
+  return (
+    <View className="flex-row items-center gap-2">
+      <Switch checked={checked} onCheckedChange={setChecked} />
+      <Text className="text-sm text-foreground">Airplane mode</Text>
+    </View>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## States
+
+### Checked (On)
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex items-center gap-2">
+    <div className="relative inline-flex h-[18px] w-8 shrink-0 rounded-full border border-transparent bg-primary shadow-xs">
+      <div className="absolute left-[16px] top-[1px] h-4 w-4 rounded-full bg-background" />
+    </div>
+    <span className="text-sm text-foreground">Notifications enabled</span>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<View className="flex-row items-center gap-2">
+  <Switch checked={true} onCheckedChange={setChecked} />
+  <Text className="text-sm text-foreground">Notifications enabled</Text>
+</View>
+```
+
+</Tab>
+</Tabs>
+
+### Unchecked (Off)
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex items-center gap-2">
+    <div className="relative inline-flex h-[18px] w-8 shrink-0 rounded-full border border-transparent bg-input shadow-xs">
+      <div className="absolute left-[2px] top-[1px] h-4 w-4 rounded-full bg-background" />
+    </div>
+    <span className="text-sm text-foreground">Notifications disabled</span>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<View className="flex-row items-center gap-2">
+  <Switch checked={false} onCheckedChange={setChecked} />
+  <Text className="text-sm text-foreground">Notifications disabled</Text>
+</View>
+```
+
+</Tab>
+</Tabs>
+
+### Disabled
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-col gap-3">
+    <div className="flex items-center gap-2">
+      <div className="relative inline-flex h-[18px] w-8 shrink-0 rounded-full border border-transparent bg-primary shadow-xs opacity-50 cursor-not-allowed">
+        <div className="absolute left-[16px] top-[1px] h-4 w-4 rounded-full bg-background" />
+      </div>
+      <span className="text-sm text-muted-foreground">On & disabled</span>
+    </div>
+    <div className="flex items-center gap-2">
+      <div className="relative inline-flex h-[18px] w-8 shrink-0 rounded-full border border-transparent bg-input shadow-xs opacity-50 cursor-not-allowed">
+        <div className="absolute left-[2px] top-[1px] h-4 w-4 rounded-full bg-background" />
+      </div>
+      <span className="text-sm text-muted-foreground">Off & disabled</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Switch checked={true} disabled />
+<Switch checked={false} disabled />
+```
+
+</Tab>
+</Tabs>
+
+## Sizes
+
+### Default
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex items-center gap-2">
+    <div className="relative inline-flex h-[18px] w-8 shrink-0 rounded-full border border-transparent bg-primary shadow-xs">
+      <div className="absolute left-[16px] top-[1px] h-4 w-4 rounded-full bg-background" />
+    </div>
+    <span className="text-sm text-foreground">Default size</span>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Switch size="default" checked={true} onCheckedChange={setChecked} />
+```
+
+</Tab>
+</Tabs>
+
+### Small
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex items-center gap-2">
+    <div className="relative inline-flex h-3.5 w-6 shrink-0 rounded-full border border-transparent bg-primary shadow-xs">
+      <div className="absolute left-[12px] top-[1px] h-3 w-3 rounded-full bg-background" />
+    </div>
+    <span className="text-sm text-foreground">Small size</span>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<Switch size="sm" checked={true} onCheckedChange={setChecked} />
+```
+
+</Tab>
+</Tabs>
+
+## Props API
+
+### SwitchProps
+
+Extends `React.ComponentPropsWithoutRef<typeof Pressable>` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `checked` | `boolean` | - | Controlled checked state. When undefined, the switch manages its own state |
+| `onCheckedChange` | `(checked: boolean) => void` | - | Callback fired when the switch is toggled |
+| `disabled` | `boolean` | `false` | When `true`, the switch is non-interactive with reduced opacity |
+| `size` | `'default' \| 'sm'` | `'default'` | The size variant of the switch |
+| `className` | `string` | - | Additional CSS classes for custom styling |
+
+## Best Practices
+
+1. **Use for immediate actions**: Switches should toggle settings that take effect immediately (e.g., enabling notifications)
+2. **Provide a label**: Always include a text label describing what the switch controls
+3. **Controlled vs uncontrolled**: Use `checked` + `onCheckedChange` for form integration; omit `checked` for simple standalone toggles
+4. **Show current state**: The visual state should clearly indicate whether the feature is on or off
+
+## Related Components
+
+- Use `Checkbox` when the action requires explicit confirmation (e.g., form submission)
+- Pair with `Field` and `FieldLabel` for labeled form layouts
+- Use with `FieldDescription` to explain what the setting controls

@@ -1,0 +1,293 @@
+---
+title: Typography
+description: Semantic heading and paragraph components with built-in accessibility roles and typographic best practices.
+---
+
+The Typography components (H1–H5, P) provide semantic text elements with built-in accessibility roles. Each component is optimized with appropriate font sizes, weights, line heights, and letter spacing following typographic best practices for clear visual hierarchy and readability.
+
+## Preview
+
+<ComponentPreview>
+  <div className="flex flex-col gap-4">
+    <span className="text-foreground text-4xl font-extrabold tracking-tight leading-tight">H1 — Main Title</span>
+    <span className="text-foreground text-3xl font-bold tracking-tight leading-tight">H2 — Section Heading</span>
+    <span className="text-foreground text-2xl font-semibold tracking-tight leading-snug">H3 — Subsection</span>
+    <span className="text-foreground text-xl font-semibold tracking-tight leading-snug">H4 — Minor Heading</span>
+    <span className="text-foreground text-lg font-medium tracking-normal leading-normal">H5 — Small Heading</span>
+    <span className="text-foreground text-base font-normal leading-relaxed tracking-normal">P — Body paragraph text with relaxed line height for comfortable reading across multiple lines.</span>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx novaui-cli add typography
+```
+
+## Import
+
+```tsx
+import { H1, H2, H3, H4, H5, P } from 'novaui-components'
+```
+
+## Basic Usage
+
+Each typography component renders as a styled `Text` element with the appropriate variant and accessibility role:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-col gap-3">
+    <span className="text-foreground text-4xl font-extrabold tracking-tight leading-tight">Welcome to NovaUI</span>
+    <span className="text-foreground text-base font-normal leading-relaxed tracking-normal">A beautiful and accessible component library for React Native.</span>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { H1, P } from 'novaui-components'
+
+export function BasicTypography() {
+  return (
+    <>
+      <H1>Welcome to NovaUI</H1>
+      <P>A beautiful and accessible component library for React Native.</P>
+    </>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Heading Components
+
+### H1 — Main Page Title
+
+The largest heading, ideal for primary page titles:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <span className="text-foreground text-4xl font-extrabold tracking-tight leading-tight">Page Title</span>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<H1>Page Title</H1>
+```
+
+</Tab>
+</Tabs>
+
+Classes: `text-4xl font-extrabold tracking-tight leading-tight lg:text-5xl`
+
+### H2 — Section Heading
+
+For major section divisions:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <span className="text-foreground text-3xl font-bold tracking-tight leading-tight">Section Heading</span>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<H2>Section Heading</H2>
+```
+
+</Tab>
+</Tabs>
+
+Classes: `text-3xl font-bold tracking-tight leading-tight`
+
+### H3 — Subsection Heading
+
+For subsections within a section:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <span className="text-foreground text-2xl font-semibold tracking-tight leading-snug">Subsection Heading</span>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<H3>Subsection Heading</H3>
+```
+
+</Tab>
+</Tabs>
+
+Classes: `text-2xl font-semibold tracking-tight leading-snug`
+
+### H4 — Minor Heading
+
+For minor divisions or card titles:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <span className="text-foreground text-xl font-semibold tracking-tight leading-snug">Card Title</span>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<H4>Card Title</H4>
+```
+
+</Tab>
+</Tabs>
+
+Classes: `text-xl font-semibold tracking-tight leading-snug`
+
+### H5 — Small Heading
+
+For small headings or emphasized text:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <span className="text-foreground text-lg font-medium tracking-normal leading-normal">Small Heading</span>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<H5>Small Heading</H5>
+```
+
+</Tab>
+</Tabs>
+
+Classes: `text-lg font-medium tracking-normal leading-normal`
+
+## Paragraph Component
+
+### P — Body Text
+
+For body text and descriptions with comfortable reading line height:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <span className="text-foreground text-base font-normal leading-relaxed tracking-normal">The quick brown fox jumps over the lazy dog. This paragraph text uses a relaxed line height for comfortable reading. Long-form content benefits from generous line spacing to reduce eye strain and improve comprehension.</span>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+<P>
+  The quick brown fox jumps over the lazy dog. This paragraph text uses a relaxed
+  line height for comfortable reading. Long-form content benefits from generous
+  line spacing to reduce eye strain and improve comprehension.
+</P>
+```
+
+</Tab>
+</Tabs>
+
+Classes: `text-base font-normal leading-relaxed tracking-normal`
+
+## Full Page Example
+
+Combine all typography components for a complete page layout:
+
+<Tabs items={['Preview', 'Code']}>
+<Tab value="Preview">
+
+<ComponentPreview>
+  <div className="flex flex-col gap-4 max-w-lg">
+    <span className="text-foreground text-4xl font-extrabold tracking-tight leading-tight">Getting Started</span>
+    <span className="text-foreground text-base font-normal leading-relaxed tracking-normal">Learn how to set up and use NovaUI components in your React Native project.</span>
+    <span className="text-foreground text-2xl font-semibold tracking-tight leading-snug">Installation</span>
+    <span className="text-foreground text-base font-normal leading-relaxed tracking-normal">Install the package using your preferred package manager. NovaUI supports npm, yarn, and pnpm.</span>
+    <span className="text-foreground text-2xl font-semibold tracking-tight leading-snug">Configuration</span>
+    <span className="text-foreground text-base font-normal leading-relaxed tracking-normal">After installation, configure your project to use NativeWind and set up the theme colors.</span>
+  </div>
+</ComponentPreview>
+
+</Tab>
+<Tab value="Code">
+
+```tsx
+import { H1, H3, P } from 'novaui-components'
+import { View } from 'react-native'
+
+export function PageLayout() {
+  return (
+    <View className="gap-4">
+      <H1>Getting Started</H1>
+      <P>Learn how to set up and use NovaUI components in your React Native project.</P>
+      <H3>Installation</H3>
+      <P>Install the package using your preferred package manager. NovaUI supports npm, yarn, and pnpm.</P>
+      <H3>Configuration</H3>
+      <P>After installation, configure your project to use NativeWind and set up the theme colors.</P>
+    </View>
+  )
+}
+```
+
+</Tab>
+</Tabs>
+
+## Props API
+
+### TypographyProps
+
+All typography components (H1–H5, P) share the same props interface. Extends `React.ComponentPropsWithoutRef<typeof Text>` and includes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes for custom styling |
+| `accessibilityRole` | `string` | `'header'` (H1–H5), none (P) | Accessibility role. Headings default to `'header'` |
+| `children` | `React.ReactNode` | - | The text content |
+
+### Typography Scale Reference
+
+| Component | Font Size | Weight | Tracking | Line Height |
+|-----------|-----------|--------|----------|-------------|
+| `H1` | `text-4xl` / `lg:text-5xl` | `font-extrabold` | `tracking-tight` | `leading-tight` |
+| `H2` | `text-3xl` | `font-bold` | `tracking-tight` | `leading-tight` |
+| `H3` | `text-2xl` | `font-semibold` | `tracking-tight` | `leading-snug` |
+| `H4` | `text-xl` | `font-semibold` | `tracking-tight` | `leading-snug` |
+| `H5` | `text-lg` | `font-medium` | `tracking-normal` | `leading-normal` |
+| `P` | `text-base` | `font-normal` | `tracking-normal` | `leading-relaxed` |
+
+## Best Practices
+
+1. **Use semantic hierarchy**: Always use headings in order (H1 > H2 > H3) for proper document structure and accessibility.
+
+2. **One H1 per screen**: Use only one H1 per screen or page for clear content hierarchy.
+
+3. **Accessibility built-in**: H1–H5 automatically set `accessibilityRole="header"`, ensuring screen readers announce them correctly.
+
+4. **Readable body text**: The P component uses `leading-relaxed` for comfortable reading — don't override this for long-form content.
+
+5. **Typography vs Text**: Use Typography components (H1–H5, P) when you need semantic accessibility roles. Use the `Text` component for general-purpose text with more variant options.
+
+## Related Components
+
+- Use `Text` for general-purpose text with additional variants like `lead`, `large`, `small`, `muted`, and `blockquote`
+- Combine with `Separator` to divide content sections
+- Pair with `Card` for structured content layouts
