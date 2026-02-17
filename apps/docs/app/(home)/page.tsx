@@ -42,7 +42,7 @@ export default function HomePage() {
             Get Started
           </Link>
           <Link
-            href="https://github.com/KaloyanBehov/native-ui"
+            href="https://github.com/KaloyanBehov/novaui"
             target="_blank"
             className="h-11 px-8 rounded-lg border border-border bg-background hover:bg-muted/50 font-medium flex items-center justify-center transition-all hover:scale-105 active:scale-95"
           >
@@ -258,7 +258,7 @@ export default function HomePage() {
               Get Started
             </Link>
             <Link
-              href="https://github.com/KaloyanBehov/native-ui"
+              href="https://github.com/KaloyanBehov/novaui"
               target="_blank"
               className="h-11 px-8 rounded-lg border border-border bg-background hover:bg-muted/50 font-medium flex items-center justify-center transition-all hover:scale-105 active:scale-95"
             >

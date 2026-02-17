@@ -219,10 +219,10 @@ NovaUI components use CSS variables for theming. Customize colors, spacing, and 
 
 ## Resources
 
-- 📖 [NovaUI Documentation](https://github.com/KaloyanBehov/native-ui) — Full component documentation
+- 📖 [NovaUI Documentation](https://github.com/KaloyanBehov/novaui) — Full component documentation
 - 🎨 [NativeWind Documentation](https://www.nativewind.dev/docs) — Learn more about NativeWind
-- 🐛 [GitHub Issues](https://github.com/KaloyanBehov/native-ui/issues) — Report bugs or request features
-- 💬 [GitHub Discussions](https://github.com/KaloyanBehov/native-ui/discussions) — Ask questions
+- 🐛 [GitHub Issues](https://github.com/KaloyanBehov/novaui/issues) — Report bugs or request features
+- 💬 [GitHub Discussions](https://github.com/KaloyanBehov/novaui/discussions) — Ask questions
 
 ## License
 

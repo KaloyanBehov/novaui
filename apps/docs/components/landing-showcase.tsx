@@ -65,7 +65,9 @@ export function LandingShowcase() {
       <div className="rounded-xl border border-border bg-card p-6 shadow-sm flex flex-col items-center justify-center text-center">
         <div className="flex -space-x-2 mb-4">
           <div className="h-10 w-10 rounded-full border-2 border-card overflow-hidden">
-            <img src="https://github.com/shadcn.png" alt="" className="h-full w-full object-cover" />
+            <div className="flex h-full w-full items-center justify-center rounded-full bg-primary/20">
+              <span className="text-xs font-medium text-primary">NV</span>
+            </div>
           </div>
           <div className="h-10 w-10 rounded-full border-2 border-card bg-muted flex items-center justify-center">
             <span className="text-xs font-medium text-muted-foreground">KJ</span>
