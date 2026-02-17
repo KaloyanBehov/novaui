@@ -1,6 +1,5 @@
 module.exports = {
   reactStrictMode: true,
-  bundler: 'webpack',
   webpack: (config) => {
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
