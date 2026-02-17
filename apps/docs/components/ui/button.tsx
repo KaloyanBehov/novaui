@@ -51,6 +51,7 @@ function Button({
   const Comp = asChild ? Slot.Root : "button"
 
   return (
+    // @ts-expect-error -- React 19 types vs radix-ui Slot types mismatch
     <Comp
       data-slot="button"
       data-variant={variant}
