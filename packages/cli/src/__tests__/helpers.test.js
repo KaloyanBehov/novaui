@@ -16,7 +16,12 @@ import {
   loadConfig,
   writeConfig,
   assertValidComponentConfig,
+  fetchWithTimeout,
   formatError,
+  getCliVersion,
+  getInstallHint,
+  init,
+  add,
 } from "../bin.js"
 
 // ─── Test helpers ───────────────────────────────────────────────────────────
@@ -368,5 +373,139 @@ describe("formatError", () => {
     expect(formatError("string error")).toBe("string error")
     expect(formatError(42)).toBe("42")
     expect(formatError(null)).toBe("null")
+  })
+})
+
+// ─── getCliVersion ──────────────────────────────────────────────────────────
+
+describe("getCliVersion", () => {
+  it("returns a valid semver-like version string", () => {
+    const version = getCliVersion()
+    expect(version).not.toBe("unknown")
+    expect(version).toMatch(/^\d+\.\d+\.\d+/)
+  })
+})
+
+// ─── getInstallHint ─────────────────────────────────────────────────────────
+
+describe("getInstallHint", () => {
+  const originalAgent = process.env.npm_config_user_agent
+
+  afterEach(() => {
+    if (originalAgent !== undefined) {
+      process.env.npm_config_user_agent = originalAgent
+    } else {
+      delete process.env.npm_config_user_agent
+    }
+  })
+
+  it("generates npm install hint", () => {
+    process.env.npm_config_user_agent = ""
+    const hint = getInstallHint(["react", "react-native"])
+    expect(hint).toBe("npm install react react-native")
+  })
+
+  it("generates yarn add hint", () => {
+    process.env.npm_config_user_agent = "yarn/1.22.0"
+    const hint = getInstallHint(["react"])
+    expect(hint).toBe("yarn add react")
+  })
+
+  it("generates pnpm add hint", () => {
+    process.env.npm_config_user_agent = "pnpm/8.0.0"
+    const hint = getInstallHint(["clsx", "tailwind-merge"])
+    expect(hint).toBe("pnpm add clsx tailwind-merge")
+  })
+
+  it("generates bun add hint", () => {
+    process.env.npm_config_user_agent = "bun/1.0.0"
+    const hint = getInstallHint(["react"])
+    expect(hint).toBe("bun add react")
+  })
+})
+
+// ─── fetchWithTimeout ───────────────────────────────────────────────────────
+
+describe("fetchWithTimeout", () => {
+  let originalFetch
+
+  beforeEach(() => {
+    originalFetch = globalThis.fetch
+  })
+
+  afterEach(() => {
+    globalThis.fetch = originalFetch
+  })
+
+  it("returns response on successful fetch", async () => {
+    globalThis.fetch = vi.fn(async () => ({
+      ok: true,
+      json: async () => ({ data: "test" }),
+    }))
+
+    const response = await fetchWithTimeout("https://example.com/data.json")
+    expect(response.ok).toBe(true)
+    expect(await response.json()).toEqual({ data: "test" })
+  })
+
+  it("passes the abort signal to fetch", async () => {
+    globalThis.fetch = vi.fn(async (url, options) => {
+      expect(options).toHaveProperty("signal")
+      expect(options.signal).toBeInstanceOf(AbortSignal)
+      return { ok: true }
+    })
+
+    await fetchWithTimeout("https://example.com/data.json")
+    expect(globalThis.fetch).toHaveBeenCalledTimes(1)
+  })
+
+  it("throws descriptive error on abort/timeout", async () => {
+    globalThis.fetch = vi.fn(async (url, options) => {
+      const err = new Error("The operation was aborted")
+      err.name = "AbortError"
+      throw err
+    })
+
+    await expect(fetchWithTimeout("https://example.com/slow")).rejects.toThrow(
+      /timed out/i
+    )
+  })
+
+  it("re-throws non-abort errors as-is", async () => {
+    globalThis.fetch = vi.fn(async () => {
+      throw new TypeError("fetch failed")
+    })
+
+    await expect(
+      fetchWithTimeout("https://example.com/fail")
+    ).rejects.toThrow("fetch failed")
+  })
+})
+
+// ─── Exports smoke test ─────────────────────────────────────────────────────
+
+describe("exports", () => {
+  it("exports all expected constants", () => {
+    expect(typeof DEFAULT_CONFIG).toBe("object")
+    expect(typeof CONFIG_FILENAME).toBe("string")
+    expect(typeof GLOBAL_CSS_CONTENT).toBe("string")
+    expect(typeof UTILS_CONTENT).toBe("string")
+  })
+
+  it("exports all expected functions", () => {
+    expect(typeof getTailwindConfigContent).toBe("function")
+    expect(typeof detectPackageManager).toBe("function")
+    expect(typeof ensureDir).toBe("function")
+    expect(typeof writeIfNotExists).toBe("function")
+    expect(typeof getMissingDeps).toBe("function")
+    expect(typeof loadConfig).toBe("function")
+    expect(typeof writeConfig).toBe("function")
+    expect(typeof assertValidComponentConfig).toBe("function")
+    expect(typeof fetchWithTimeout).toBe("function")
+    expect(typeof formatError).toBe("function")
+    expect(typeof getCliVersion).toBe("function")
+    expect(typeof getInstallHint).toBe("function")
+    expect(typeof init).toBe("function")
+    expect(typeof add).toBe("function")
   })
 })

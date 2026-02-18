@@ -552,6 +552,7 @@ export {
   fetchWithTimeout,
   formatError,
   getCliVersion,
+  getInstallHint,
   init,
   add,
 }
