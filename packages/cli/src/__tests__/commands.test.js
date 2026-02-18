@@ -340,11 +340,7 @@ describe("add command", () => {
     expect(fs.existsSync(path.join(uiDir, "b.tsx"))).toBe(true)
   })
 
-  it("exits when component is not found in registry", async () => {
-    const mockExit = vi.spyOn(process, "exit").mockImplementation(() => {
-      throw new Error("process.exit called")
-    })
-
+  it("throws when component is not found in registry", async () => {
     globalThis.fetch = vi.fn(async (url) => {
       if (url.endsWith("registry.json")) {
         return {
@@ -360,9 +356,12 @@ describe("add command", () => {
       return { ok: false, statusText: "Not Found" }
     })
 
-    await expect(add("nonexistent")).rejects.toThrow("process.exit called")
-    expect(mockExit).toHaveBeenCalledWith(1)
-    mockExit.mockRestore()
+    await expect(add("nonexistent")).rejects.toThrow(/not found in registry/)
+  })
+
+  it("throws when no component name is provided", async () => {
+    await expect(add()).rejects.toThrow(/Missing component name/)
+    await expect(add("")).rejects.toThrow(/Missing component name/)
   })
 
   it("skips dependency install when all deps are already present", async () => {
@@ -399,7 +398,7 @@ describe("add command", () => {
     expect(fs.existsSync(dest)).toBe(true)
   })
 
-  it("does not overwrite existing component files", async () => {
+  it("does not overwrite existing component files by default", async () => {
     const uiDir = path.join(tmp, DEFAULT_CONFIG.componentsUi)
     fs.mkdirSync(uiDir, { recursive: true })
     fs.writeFileSync(path.join(uiDir, "button.tsx"), "// custom code")
@@ -425,7 +424,35 @@ describe("add command", () => {
     await add("button")
 
     const content = fs.readFileSync(path.join(uiDir, "button.tsx"), "utf8")
-    // add() currently overwrites — this test documents that behavior
+    expect(content).toBe("// custom code")
+  })
+
+  it("overwrites existing component files with force option", async () => {
+    const uiDir = path.join(tmp, DEFAULT_CONFIG.componentsUi)
+    fs.mkdirSync(uiDir, { recursive: true })
+    fs.writeFileSync(path.join(uiDir, "button.tsx"), "// custom code")
+
+    globalThis.fetch = vi.fn(async (url) => {
+      if (url.endsWith("registry.json")) {
+        return {
+          ok: true,
+          json: async () => ({
+            button: {
+              files: ["src/components/ui/button.tsx"],
+              dependencies: [],
+            },
+          }),
+        }
+      }
+      if (url.endsWith("button.tsx")) {
+        return { ok: true, text: async () => "// new code from registry" }
+      }
+      return { ok: false, statusText: "Not Found" }
+    })
+
+    await add("button", { force: true })
+
+    const content = fs.readFileSync(path.join(uiDir, "button.tsx"), "utf8")
     expect(content).toBe("// new code from registry")
   })
 

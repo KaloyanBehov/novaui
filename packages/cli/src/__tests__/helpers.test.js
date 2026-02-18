@@ -261,10 +261,18 @@ describe("getTailwindConfigContent", () => {
     expect(content).toContain("./src/**/*.{js,jsx,ts,tsx}")
   })
 
-  it("includes custom componentsUi path in content array", () => {
+  it("does not duplicate paths when componentsUi is under src/", () => {
+    const content = getTailwindConfigContent(DEFAULT_CONFIG)
+    const matches = content.match(/\.\/src\//g)
+    expect(matches).toHaveLength(1)
+    expect(content).not.toContain("./src/components/ui/**/*.{js,jsx,ts,tsx}")
+  })
+
+  it("includes custom componentsUi path when outside src/", () => {
     const config = { ...DEFAULT_CONFIG, componentsUi: "app/ui" }
     const content = getTailwindConfigContent(config)
     expect(content).toContain("./app/ui/**/*.{js,jsx,ts,tsx}")
+    expect(content).toContain("./src/**/*.{js,jsx,ts,tsx}")
   })
 })
 
