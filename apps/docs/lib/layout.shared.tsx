@@ -1,12 +1,12 @@
-import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared'
-import { BookOpen, Component, Rocket } from 'lucide-react'
+import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
+import { Component, Rocket } from 'lucide-react';
 
 // fill this with your actual GitHub info, for example:
 export const gitConfig = {
   user: 'KaloyanBehov',
   repo: 'novaui',
   branch: 'main',
-}
+};
 
 export function baseOptions(): BaseLayoutProps {
   return {
@@ -14,12 +14,6 @@ export function baseOptions(): BaseLayoutProps {
       title: 'NovaUI',
     },
     links: [
-      {
-        text: 'Documentation',
-        url: '/docs',
-        icon: <BookOpen />,
-        active: 'nested-url',
-      },
       {
         text: 'Getting Started',
         url: '/docs/getting-started',
@@ -33,5 +27,5 @@ export function baseOptions(): BaseLayoutProps {
       },
     ],
     githubUrl: `https://github.com/${gitConfig.user}/${gitConfig.repo}`,
-  }
+  };
 }

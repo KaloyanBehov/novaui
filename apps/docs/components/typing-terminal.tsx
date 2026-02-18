@@ -73,22 +73,32 @@ export function TypingTerminal() {
   }, [started, lineIndex, charIndex, showOutput])
 
   return (
-    <div ref={ref} className="max-w-2xl mx-auto rounded-xl border border-border bg-card shadow-lg overflow-hidden">
-      <div className="flex items-center gap-2 px-4 py-2.5 border-b border-border bg-muted/40">
-        <Terminal className="w-4 h-4 text-muted-foreground" />
-        <span className="text-xs text-muted-foreground font-medium">Terminal</span>
+    <div ref={ref} className="max-w-3xl mx-auto rounded-2xl border border-border/50 bg-card/50 backdrop-blur-md shadow-2xl overflow-hidden group">
+      <div className="flex items-center justify-between px-5 py-3.5 border-b border-border/50 bg-muted/30">
+        <div className="flex items-center gap-4">
+          <div className="flex gap-1.5">
+            <div className="w-3 h-3 rounded-full bg-destructive/60" />
+            <div className="w-3 h-3 rounded-full bg-amber-500/60" />
+            <div className="w-3 h-3 rounded-full bg-green-500/60" />
+          </div>
+          <div className="flex items-center gap-2">
+            <Terminal className="w-3.5 h-3.5 text-muted-foreground" />
+            <span className="text-[11px] text-muted-foreground font-bold uppercase tracking-widest">NovaUI Shell</span>
+          </div>
+        </div>
       </div>
-      <div className="p-5 font-mono text-sm space-y-1.5 min-h-[120px]">
+      <div className="p-8 font-mono text-sm md:text-base space-y-3 min-h-[160px] bg-linear-to-b from-transparent to-primary/5">
         {/* Completed lines */}
         {completedLines.map((idx) => (
-          <div key={`done-${idx}`}>
-            <div className="flex items-center gap-2">
-              <span className="text-muted-foreground select-none">$</span>
-              <span className="text-foreground">{LINES[idx].text}</span>
+          <div key={`done-${idx}`} className="animate-in fade-in slide-in-from-left-2 duration-300">
+            <div className="flex items-center gap-3">
+              <span className="text-primary font-bold select-none">~</span>
+              <span className="text-foreground font-medium">{LINES[idx].text}</span>
             </div>
             {LINES[idx].output && (
-              <div className="flex items-center gap-2 ml-4 mt-0.5">
-                <span className="text-green-500 text-xs">{LINES[idx].output}</span>
+              <div className="flex items-center gap-3 ml-6 mt-1.5">
+                <span className="text-green-500 font-bold">✓</span>
+                <span className="text-green-500/90 text-sm font-medium">{LINES[idx].output}</span>
               </div>
             )}
           </div>
@@ -97,16 +107,17 @@ export function TypingTerminal() {
         {/* Currently typing line */}
         {started && lineIndex < LINES.length && (
           <div>
-            <div className="flex items-center gap-2">
-              <span className="text-muted-foreground select-none">$</span>
-              <span className="text-foreground">
+            <div className="flex items-center gap-3">
+              <span className="text-primary font-bold select-none">~</span>
+              <span className="text-foreground font-medium">
                 {LINES[lineIndex].text.slice(0, charIndex)}
               </span>
-              <span className="inline-block w-[7px] h-[18px] bg-foreground animate-pulse rounded-[1px]" />
+              <span className="inline-block w-2 h-5 bg-primary animate-pulse rounded-sm" />
             </div>
             {showOutput && LINES[lineIndex].output && (
-              <div className="flex items-center gap-2 ml-4 mt-0.5">
-                <span className="text-green-500 text-xs">{LINES[lineIndex].output}</span>
+              <div className="flex items-center gap-3 ml-6 mt-1.5 animate-in zoom-in-95 duration-200">
+                <span className="text-green-500 font-bold">✓</span>
+                <span className="text-green-500/90 text-sm font-medium">{LINES[lineIndex].output}</span>
               </div>
             )}
           </div>
@@ -114,9 +125,9 @@ export function TypingTerminal() {
 
         {/* Idle cursor after all lines are done */}
         {lineIndex >= LINES.length && (
-          <div className="flex items-center gap-2">
-            <span className="text-muted-foreground select-none">$</span>
-            <span className="inline-block w-[7px] h-[18px] bg-foreground animate-pulse rounded-[1px]" />
+          <div className="flex items-center gap-3">
+            <span className="text-primary font-bold select-none">~</span>
+            <span className="inline-block w-2 h-5 bg-primary/40 animate-pulse rounded-sm" />
           </div>
         )}
       </div>
