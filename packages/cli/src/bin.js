@@ -558,10 +558,14 @@ export {
 
 // ─── Main ───────────────────────────────────────────────────────────────────
 
-const isDirectRun =
-  process.argv[1] &&
-  (process.argv[1] === fileURLToPath(import.meta.url) ||
-    process.argv[1].endsWith("/bin.js"))
+const isDirectRun = (() => {
+  if (!process.argv[1]) return false
+  try {
+    return fs.realpathSync(process.argv[1]) === fileURLToPath(import.meta.url)
+  } catch {
+    return process.argv[1].endsWith("/bin.js")
+  }
+})()
 
 if (isDirectRun) {
   const command = process.argv[2]
