@@ -5,12 +5,10 @@
     "build": "turbo run build",
     "clean": "turbo run clean && rm -rf node_modules",
     "test": "turbo run test",
-    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\" --ignore-path .gitignore",
-    "prepare": "husky"
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\" --ignore-path .gitignore"
   },
   "devDependencies": {
     "@types/minimatch": "^6.0.0",
-    "husky": "^9.1.7",
     "prettier": "^3.1.1",
     "turbo": "^2.8.9"
   },
