@@ -39,9 +39,10 @@ function cleanTmpDir(dir) {
 describe("DEFAULT_CONFIG", () => {
   it("has the expected default paths", () => {
     expect(DEFAULT_CONFIG).toEqual({
-      globalCss: "src/global.css",
-      componentsUi: "src/components/ui",
-      lib: "src/lib",
+      globalCss: "global.css",
+      componentsUi: "components/ui",
+      lib: "lib",
+      theme: "default",
     })
   })
 })
