@@ -104,11 +104,14 @@ const GLOBAL_CSS_CONTENT = `@tailwind base;
 // ─── Tailwind Config ────────────────────────────────────────────────────────
 
 function getTailwindConfigContent(config) {
+  const normalized = config.componentsUi.replace(/^\.\//, "")
   const contentPaths = [
     '"./App.{js,jsx,ts,tsx}"',
     '"./src/**/*.{js,jsx,ts,tsx}"',
-    `"./${config.componentsUi}/**/*.{js,jsx,ts,tsx}"`,
   ]
+  if (!normalized.startsWith("src/")) {
+    contentPaths.push(`"./${normalized}/**/*.{js,jsx,ts,tsx}"`)
+  }
   return `/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -418,10 +421,11 @@ async function init() {
   console.log("")
 }
 
-async function add(componentName) {
+async function add(componentName, options = {}) {
+  const { force = false } = options
+
   if (!componentName) {
-    console.error("Usage: novaui add <component-name>")
-    process.exit(1)
+    throw new Error("Missing component name. Usage: novaui add <component-name>")
   }
 
   const cwd = process.cwd()
@@ -444,11 +448,10 @@ async function add(componentName) {
   }
 
   if (!registry[componentName]) {
-    console.error(`  ✗  Component "${componentName}" not found in registry.`)
-    console.log("")
-    console.log("  Available components:")
-    console.log("    " + Object.keys(registry).join(", "))
-    process.exit(1)
+    const available = Object.keys(registry).join(", ")
+    throw new Error(
+      `Component "${componentName}" not found in registry.\n\n  Available components:\n    ${available}`
+    )
   }
 
   const componentConfig = registry[componentName]
@@ -478,6 +481,11 @@ async function add(componentName) {
     const fileUrl = `${BASE_URL}/${file}`
     const fileName = path.basename(file)
     const destPath = path.join(targetBaseDir, fileName)
+
+    if (!force && fs.existsSync(destPath)) {
+      console.log(style(c.dim, `  ℹ  ${fileName} already exists, skipping. (use --force to overwrite)`))
+      continue
+    }
 
     console.log(`  Downloading ${fileName}...`)
     const fileResponse = await fetchWithTimeout(fileUrl)
@@ -519,9 +527,10 @@ function showHelp() {
   console.log(style(c.dim, `   Version: ${getCliVersion()}`))
   console.log("")
   console.log(style(c.bold, "   Usage"))
-  console.log(style(c.dim, "   novaui init              Set up NovaUI (config, Tailwind, global.css, utils)"))
-  console.log(style(c.dim, "   novaui add <component>  Add a component (e.g. button, card)"))
-  console.log(style(c.dim, "   novaui --version         Show CLI version"))
+  console.log(style(c.dim, "   novaui init                      Set up NovaUI (config, Tailwind, global.css, utils)"))
+  console.log(style(c.dim, "   novaui add <component>           Add a component (e.g. button, card)"))
+  console.log(style(c.dim, "   novaui add <component> --force   Overwrite existing component files"))
+  console.log(style(c.dim, "   novaui --version                 Show CLI version"))
   console.log("")
   console.log(style(c.bold, "   Examples"))
   console.log(style(c.cyan, "   npx novaui init"))
@@ -552,6 +561,7 @@ export {
   fetchWithTimeout,
   formatError,
   getCliVersion,
+  getInstallHint,
   init,
   add,
 }
@@ -569,7 +579,10 @@ const isDirectRun = (() => {
 
 if (isDirectRun) {
   const command = process.argv[2]
-  const arg = process.argv[3]
+  const restArgs = process.argv.slice(3)
+  const flags = new Set(restArgs.filter((a) => a.startsWith("--")))
+  const positional = restArgs.filter((a) => !a.startsWith("--"))
+  const force = flags.has("--force")
 
   async function main() {
     try {
@@ -578,7 +591,7 @@ if (isDirectRun) {
           await init()
           break
         case "add":
-          await add(arg)
+          await add(positional[0], { force })
           break
         case "--help":
         case "-h":
@@ -590,7 +603,7 @@ if (isDirectRun) {
           break
         default:
           if (command) {
-            await add(command)
+            await add(command, { force })
           } else {
             showHelp()
           }

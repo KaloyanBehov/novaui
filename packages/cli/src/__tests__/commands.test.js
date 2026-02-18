@@ -339,4 +339,152 @@ describe("add command", () => {
     expect(fs.existsSync(path.join(uiDir, "a.tsx"))).toBe(false)
     expect(fs.existsSync(path.join(uiDir, "b.tsx"))).toBe(true)
   })
+
+  it("throws when component is not found in registry", async () => {
+    globalThis.fetch = vi.fn(async (url) => {
+      if (url.endsWith("registry.json")) {
+        return {
+          ok: true,
+          json: async () => ({
+            button: {
+              files: ["src/components/ui/button.tsx"],
+              dependencies: [],
+            },
+          }),
+        }
+      }
+      return { ok: false, statusText: "Not Found" }
+    })
+
+    await expect(add("nonexistent")).rejects.toThrow(/not found in registry/)
+  })
+
+  it("throws when no component name is provided", async () => {
+    await expect(add()).rejects.toThrow(/Missing component name/)
+    await expect(add("")).rejects.toThrow(/Missing component name/)
+  })
+
+  it("skips dependency install when all deps are already present", async () => {
+    fs.writeFileSync(
+      path.join(tmp, "package.json"),
+      JSON.stringify({
+        name: "test-project",
+        dependencies: { "lucide-react-native": "^1.0.0" },
+      }),
+      "utf8"
+    )
+
+    globalThis.fetch = vi.fn(async (url) => {
+      if (url.endsWith("registry.json")) {
+        return {
+          ok: true,
+          json: async () => ({
+            icon: {
+              files: ["src/components/ui/icon.tsx"],
+              dependencies: ["lucide-react-native"],
+            },
+          }),
+        }
+      }
+      if (url.endsWith("icon.tsx")) {
+        return { ok: true, text: async () => "// icon component" }
+      }
+      return { ok: false, statusText: "Not Found" }
+    })
+
+    await add("icon")
+
+    const dest = path.join(tmp, DEFAULT_CONFIG.componentsUi, "icon.tsx")
+    expect(fs.existsSync(dest)).toBe(true)
+  })
+
+  it("does not overwrite existing component files by default", async () => {
+    const uiDir = path.join(tmp, DEFAULT_CONFIG.componentsUi)
+    fs.mkdirSync(uiDir, { recursive: true })
+    fs.writeFileSync(path.join(uiDir, "button.tsx"), "// custom code")
+
+    globalThis.fetch = vi.fn(async (url) => {
+      if (url.endsWith("registry.json")) {
+        return {
+          ok: true,
+          json: async () => ({
+            button: {
+              files: ["src/components/ui/button.tsx"],
+              dependencies: [],
+            },
+          }),
+        }
+      }
+      if (url.endsWith("button.tsx")) {
+        return { ok: true, text: async () => "// new code from registry" }
+      }
+      return { ok: false, statusText: "Not Found" }
+    })
+
+    await add("button")
+
+    const content = fs.readFileSync(path.join(uiDir, "button.tsx"), "utf8")
+    expect(content).toBe("// custom code")
+  })
+
+  it("overwrites existing component files with force option", async () => {
+    const uiDir = path.join(tmp, DEFAULT_CONFIG.componentsUi)
+    fs.mkdirSync(uiDir, { recursive: true })
+    fs.writeFileSync(path.join(uiDir, "button.tsx"), "// custom code")
+
+    globalThis.fetch = vi.fn(async (url) => {
+      if (url.endsWith("registry.json")) {
+        return {
+          ok: true,
+          json: async () => ({
+            button: {
+              files: ["src/components/ui/button.tsx"],
+              dependencies: [],
+            },
+          }),
+        }
+      }
+      if (url.endsWith("button.tsx")) {
+        return { ok: true, text: async () => "// new code from registry" }
+      }
+      return { ok: false, statusText: "Not Found" }
+    })
+
+    await add("button", { force: true })
+
+    const content = fs.readFileSync(path.join(uiDir, "button.tsx"), "utf8")
+    expect(content).toBe("// new code from registry")
+  })
+
+  it("does not create utils.ts if it already exists", async () => {
+    const utilsDir = path.join(tmp, DEFAULT_CONFIG.lib)
+    fs.mkdirSync(utilsDir, { recursive: true })
+    fs.writeFileSync(path.join(utilsDir, "utils.ts"), "// custom utils")
+
+    globalThis.fetch = vi.fn(async (url) => {
+      if (url.endsWith("registry.json")) {
+        return {
+          ok: true,
+          json: async () => ({
+            card: {
+              files: ["src/components/ui/card.tsx"],
+              dependencies: [],
+            },
+          }),
+        }
+      }
+      if (url.endsWith("card.tsx")) {
+        return { ok: true, text: async () => "// card" }
+      }
+      return { ok: false, statusText: "Not Found" }
+    })
+
+    await add("card")
+
+    const utilsContent = fs.readFileSync(
+      path.join(utilsDir, "utils.ts"),
+      "utf8"
+    )
+    expect(utilsContent).toBe("// custom utils")
+  })
 })
