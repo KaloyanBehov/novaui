@@ -69,6 +69,7 @@ describe("init command", () => {
     expect(config.globalCss).toBe(DEFAULT_CONFIG.globalCss)
     expect(config.componentsUi).toBe(DEFAULT_CONFIG.componentsUi)
     expect(config.lib).toBe(DEFAULT_CONFIG.lib)
+    expect(config.theme).toBe(DEFAULT_CONFIG.theme)
   })
 
   it("creates utils.ts in the lib directory", async () => {
@@ -126,8 +127,8 @@ describe("init command", () => {
   it("creates all expected directories", async () => {
     await init()
 
-    expect(fs.existsSync(path.join(tmp, "src", "lib"))).toBe(true)
-    expect(fs.existsSync(path.join(tmp, "src"))).toBe(true)
+    expect(fs.existsSync(path.join(tmp, path.dirname(DEFAULT_CONFIG.globalCss)))).toBe(true)
+    expect(fs.existsSync(path.join(tmp, DEFAULT_CONFIG.lib))).toBe(true)
   })
 
   it("preserves existing components.json on re-init (non-TTY defaults to no)", async () => {

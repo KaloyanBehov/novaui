@@ -33,5 +33,12 @@
   "homepage": "https://github.com/KaloyanBehov/novaui#readme",
   "bugs": {
     "url": "https://github.com/KaloyanBehov/novaui/issues"
+  },
+  "dependencies": {
+    "@clack/prompts": "^1.0.1",
+    "commander": "^14.0.3",
+    "ora": "^9.3.0",
+    "picocolors": "^1.1.1",
+    "zod": "^4.3.6"
   }
 }
