@@ -67,5 +67,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/KaloyanBehov/novaui"
+  },
+  "homepage": "https://github.com/KaloyanBehov/novaui#readme",
+  "bugs": {
+    "url": "https://github.com/KaloyanBehov/novaui/issues"
   }
 }

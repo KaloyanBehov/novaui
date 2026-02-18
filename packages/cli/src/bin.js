@@ -7,7 +7,7 @@ import { execFileSync } from "node:child_process"
 import { fileURLToPath } from "node:url"
 
 const BASE_URL =
-  "https://raw.githubusercontent.com/KaloyanBehov/native-ui/main"
+  "https://raw.githubusercontent.com/KaloyanBehov/novaui/main"
 
 const CONFIG_FILENAME = "components.json"
 const FETCH_TIMEOUT_MS = 15000
