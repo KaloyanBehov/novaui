@@ -3,6 +3,8 @@
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
+    "dev:docs": "turbo run dev --filter=@novaui/docs",
+    "build:docs": "turbo run build --filter=@novaui/docs",
     "clean": "turbo run clean && rm -rf node_modules",
     "test": "turbo run test",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\" --ignore-path .gitignore"
@@ -15,7 +17,7 @@
   "engines": {
     "node": ">=18"
   },
-  "name": "novaui-monorepo",
+  "name": "@novaui/monorepo",
   "packageManager": "npm@11.9.0",
   "workspaces": [
     "apps/*",

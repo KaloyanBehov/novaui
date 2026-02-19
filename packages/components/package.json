@@ -1,5 +1,5 @@
 {
-  "name": "novaui-components",
+  "name": "@novaui/components",
   "version": "1.0.0",
   "type": "module",
   "main": "./dist/index.js",
@@ -44,10 +44,18 @@
     "react-native-reanimated": ">=3"
   },
   "peerDependenciesMeta": {
-    "expo-linear-gradient": { "optional": true },
-    "lucide-react-native": { "optional": true },
-    "react-native-gifted-charts": { "optional": true },
-    "date-fns": { "optional": true }
+    "expo-linear-gradient": {
+      "optional": true
+    },
+    "lucide-react-native": {
+      "optional": true
+    },
+    "react-native-gifted-charts": {
+      "optional": true
+    },
+    "date-fns": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@repo/typescript-config": "*",

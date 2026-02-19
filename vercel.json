@@ -1,5 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "turbo run build --filter=novaui-docs",
+  "buildCommand": "turbo run build --filter=@novaui/docs",
   "outputDirectory": ".next"
 }
