@@ -1,10 +1,17 @@
 {
+  "name": "novaui-monorepo",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
-    "clean": "turbo run clean && rm -rf node_modules",
+    "clean": "turbo run clean && find . -name 'node_modules' -type d -prune -exec rm -rf '{}' + && rm -f package-lock.json",
     "test": "turbo run test",
+    "lint": "turbo run lint",
+    "type-check": "turbo run type-check",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\" --ignore-path .gitignore"
   },
   "devDependencies": {
@@ -15,10 +22,5 @@
   "engines": {
     "node": ">=18"
   },
-  "name": "novaui-monorepo",
-  "packageManager": "npm@11.9.0",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ]
+  "packageManager": "npm@11.9.0"
 }

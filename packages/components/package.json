@@ -1,5 +1,5 @@
 {
-  "name": "novaui-components",
+  "name": "@repo/ui",
   "version": "1.0.0",
   "type": "module",
   "main": "./dist/index.js",
@@ -26,6 +26,7 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
+    "type-check": "tsc --noEmit",
     "clean": "rm -rf dist"
   },
   "peerDependencies": {

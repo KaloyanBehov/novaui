@@ -1,22 +1,62 @@
 {
-  "$schema": "https://turborepo.dev/schema.json",
+  "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
+  "globalDependencies": [
+    "package.json",
+    "turbo.json",
+    "tsconfig.json",
+    "tailwind.config.{js,ts,mjs,cjs}",
+    ".env*"
+  ],
+  "globalPassThroughEnv": [
+    "NODE_ENV",
+    "VERCEL_ENV",
+    "GITHUB_TOKEN",
+    "CI"
+  ],
   "tasks": {
     "build": {
+      "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": ["dist/**", ".next/**", "!.next/cache/**"],
-      "dependsOn": ["^build"]
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "dist/**",
+        "bin/**",
+        "out/**",
+        ".expo/**",
+        ".source/**"
+      ]
     },
     "dev": {
       "cache": false,
       "persistent": true
     },
-    "test": {
-      "dependsOn": ["^build"]
+    "lint": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".eslintrc*", ".eslintconfig*", "eslint.config.*"]
     },
-    "lint": {},
+    "type-check": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", "tsconfig.json"]
+    },
+    "test": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", "src/__tests__/**", "vitest.config.*"]
+    },
+    "format": {
+      "inputs": ["$TURBO_DEFAULT$", ".prettierrc*", "prettier.config.*"]
+    },
     "clean": {
       "cache": false
+    },
+    "android": {
+      "cache": false,
+      "persistent": true
+    },
+    "ios": {
+      "cache": false,
+      "persistent": true
     }
   }
 }
