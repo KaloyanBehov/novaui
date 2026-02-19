@@ -25,7 +25,7 @@ npx novaui-cli add label
 ## Import
 
 ```tsx
-import { Label } from '@/components/ui/label'
+import { Label } from 'novaui-components'
 ```
 
 ## Basic Usage
@@ -43,7 +43,7 @@ The Label component renders styled text suitable for form field labels:
 <Tab value="Code">
 
 ```tsx
-import { Label } from '@/components/ui/label'
+import { Label } from 'novaui-components'
 
 export function BasicLabel() {
   return <Label>Username</Label>
@@ -74,8 +74,8 @@ Pair Label with an input field for an accessible form experience:
 
 ```tsx
 import { View } from 'react-native'
-import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
+import { Label } from 'novaui-components'
+import { Input } from 'novaui-components'
 
 export function LabelWithInput() {
   return (
@@ -110,8 +110,8 @@ Use the `onPress` prop to focus an associated input when the label is tapped:
 ```tsx
 import { useRef } from 'react'
 import { View, TextInput } from 'react-native'
-import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
+import { Label } from 'novaui-components'
+import { Input } from 'novaui-components'
 
 export function LabelWithPress() {
   const inputRef = useRef<TextInput>(null)

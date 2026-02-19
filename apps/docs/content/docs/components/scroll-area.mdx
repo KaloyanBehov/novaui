@@ -51,7 +51,7 @@ npx novaui-cli add scroll-area
 ## Import
 
 ```tsx
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
+import { ScrollArea, ScrollBar } from 'novaui-components'
 ```
 
 ## Basic Usage
@@ -103,8 +103,8 @@ The ScrollArea is a compound component with these parts:
 
 ```tsx
 import { View, Text } from 'react-native'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { Separator } from '@/components/ui/separator'
+import { ScrollArea } from 'novaui-components'
+import { Separator } from 'novaui-components'
 
 const tags = [
   'v1.0.0-beta.1',
@@ -183,7 +183,7 @@ Use `horizontal` on the `ScrollArea` and add a horizontal `ScrollBar`:
 
 ```tsx
 import { View, Text } from 'react-native'
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
+import { ScrollArea, ScrollBar } from 'novaui-components'
 
 const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']
 
@@ -257,7 +257,7 @@ Use ScrollArea for any overflowing content such as a chat log or settings list:
 
 ```tsx
 import { View, Text } from 'react-native'
-import { ScrollArea } from '@/components/ui/scroll-area'
+import { ScrollArea } from 'novaui-components'
 
 export function ChatScrollArea() {
   return (

@@ -27,7 +27,7 @@ npx novaui-cli add input
 ## Import
 
 ```tsx
-import { Input } from '@/components/ui/input'
+import { Input } from 'novaui-components'
 ```
 
 ## Basic Usage
@@ -51,7 +51,7 @@ A simple text input with a placeholder:
 <Tab value="Code">
 
 ```tsx
-import { Input } from '@/components/ui/input'
+import { Input } from 'novaui-components'
 
 export function BasicInput() {
   return <Input placeholder="Enter your name" />
@@ -139,7 +139,7 @@ export function BasicInput() {
 
 ```tsx
 import { useState } from 'react'
-import { Input } from '@/components/ui/input'
+import { Input } from 'novaui-components'
 
 export function ControlledInput() {
   const [value, setValue] = useState('John Doe')

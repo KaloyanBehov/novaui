@@ -27,7 +27,7 @@ npx novaui-cli add textarea
 ## Import
 
 ```tsx
-import { Textarea } from '@/components/ui/textarea'
+import { Textarea } from 'novaui-components'
 ```
 
 ## Basic Usage
@@ -51,7 +51,7 @@ A multiline text input with placeholder text:
 <Tab value="Code">
 
 ```tsx
-import { Textarea } from '@/components/ui/textarea'
+import { Textarea } from 'novaui-components'
 
 export function BasicTextarea() {
   return <Textarea placeholder="Type your message..." />
@@ -138,7 +138,7 @@ Control the initial height with `numberOfLines`:
 
 ```tsx
 import { useState } from 'react'
-import { Textarea } from '@/components/ui/textarea'
+import { Textarea } from 'novaui-components'
 
 export function ControlledTextarea() {
   const [value, setValue] = useState(

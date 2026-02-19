@@ -31,7 +31,7 @@ npx novaui-cli add toggle-group
 ## Import
 
 ```tsx
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+import { ToggleGroup, ToggleGroupItem } from 'novaui-components'
 ```
 
 ## Basic Usage
@@ -60,7 +60,7 @@ A single-select toggle group where only one item can be active:
 
 ```tsx
 import { useState } from 'react'
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+import { ToggleGroup, ToggleGroupItem } from 'novaui-components'
 
 export function BasicToggleGroup() {
   const [value, setValue] = useState('left')
@@ -141,7 +141,7 @@ Multiple items can be active simultaneously:
 
 ```tsx
 import { useState } from 'react'
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+import { ToggleGroup, ToggleGroupItem } from 'novaui-components'
 
 export function MultipleToggleGroup() {
   const [values, setValues] = useState(['bold', 'italic'])

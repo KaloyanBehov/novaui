@@ -21,7 +21,7 @@ The Accordion component is a vertically stacked set of collapsible sections. It 
 
 ## Installation
 
-The Accordion component is installed via the CLI into your `@/components/ui` folder. Make sure you have the required peer dependencies installed:
+The Accordion component is part of the `novaui-components` package. Make sure you have the required peer dependencies installed:
 
 ```bash
 npx novaui-cli add accordion
@@ -37,7 +37,7 @@ The Accordion requires the following peer dependencies:
 ## Import
 
 ```tsx
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion'
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from 'novaui-components'
 ```
 
 ## Basic Usage
@@ -66,7 +66,7 @@ The Accordion is a compound component consisting of four parts:
 <Tab value="Code">
 
 ```tsx
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion'
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from 'novaui-components'
 
 export function BasicAccordion() {
   return (
@@ -246,7 +246,7 @@ Build an FAQ section with the Accordion:
 <Tab value="Code">
 
 ```tsx
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion'
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from 'novaui-components'
 import { Text } from 'react-native'
 
 export function FAQ() {

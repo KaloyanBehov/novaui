@@ -34,7 +34,7 @@ npx novaui-cli add progress
 ## Import
 
 ```tsx
-import { Progress } from '@/components/ui/progress'
+import { Progress } from 'novaui-components'
 ```
 
 ## Basic Usage
@@ -56,7 +56,7 @@ Pass a `value` prop to set the current progress. By default, the max is 100:
 <Tab value="Code">
 
 ```tsx
-import { Progress } from '@/components/ui/progress'
+import { Progress } from 'novaui-components'
 
 export function BasicProgress() {
   return <Progress value={60} />
@@ -193,7 +193,7 @@ Display a progress bar with a text label showing the percentage:
 
 ```tsx
 import { View, Text } from 'react-native'
-import { Progress } from '@/components/ui/progress'
+import { Progress } from 'novaui-components'
 
 export function ProgressWithLabel() {
   const value = 72

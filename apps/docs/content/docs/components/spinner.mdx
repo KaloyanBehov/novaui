@@ -40,7 +40,7 @@ npx novaui-cli add spinner
 ## Import
 
 ```tsx
-import { Spinner } from '@/components/ui/spinner'
+import { Spinner } from 'novaui-components'
 ```
 
 ## Basic Usage
@@ -63,7 +63,7 @@ The Spinner renders a spinning activity indicator with the primary theme color:
 <Tab value="Code">
 
 ```tsx
-import { Spinner } from '@/components/ui/spinner'
+import { Spinner } from 'novaui-components'
 
 export function BasicSpinner() {
   return <Spinner />
@@ -103,7 +103,7 @@ Control the spinner size using React Native's `size` prop:
 <Tab value="Code">
 
 ```tsx
-import { Spinner } from '@/components/ui/spinner'
+import { Spinner } from 'novaui-components'
 import { View } from 'react-native'
 
 export function SpinnerSizes() {
@@ -147,7 +147,7 @@ Override the default primary color with the `color` prop:
 <Tab value="Code">
 
 ```tsx
-import { Spinner } from '@/components/ui/spinner'
+import { Spinner } from 'novaui-components'
 import { View } from 'react-native'
 
 export function ColoredSpinners() {
@@ -186,7 +186,7 @@ Combine Spinner with conditional rendering for loading states:
 
 ```tsx
 import { View, Text } from 'react-native'
-import { Spinner } from '@/components/ui/spinner'
+import { Spinner } from 'novaui-components'
 
 export function LoadingState({ isLoading, children }) {
   if (isLoading) {

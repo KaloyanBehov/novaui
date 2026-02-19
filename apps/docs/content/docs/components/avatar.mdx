@@ -28,7 +28,7 @@ The Avatar component is a compound component system for displaying user profile 
 
 ## Installation
 
-The Avatar component is installed via the CLI into your `@/components/ui` folder. Make sure you have the required peer dependencies installed:
+The Avatar component is part of the `novaui-components` package. Make sure you have the required peer dependencies installed:
 
 ```bash
 npx novaui-cli add avatar
@@ -37,7 +37,7 @@ npx novaui-cli add avatar
 ## Import
 
 ```tsx
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
+import { Avatar, AvatarImage, AvatarFallback } from 'novaui-components'
 ```
 
 ## Basic Usage
@@ -61,7 +61,7 @@ The Avatar component is a compound component that consists of three parts:
 <Tab value="Code">
 
 ```tsx
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
+import { Avatar, AvatarImage, AvatarFallback } from 'novaui-components'
 
 export function BasicAvatar() {
   return (
@@ -189,7 +189,7 @@ For more control, use the standard React Native `source` prop:
 You can also use local image assets:
 
 ```tsx
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
+import { Avatar, AvatarImage, AvatarFallback } from 'novaui-components'
 import avatarImage from './assets/avatar.png'
 
 <Avatar>
@@ -255,7 +255,7 @@ The text size automatically adjusts based on the Avatar's size:
 You can use any React component as fallback content:
 
 ```tsx
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
+import { Avatar, AvatarImage, AvatarFallback } from 'novaui-components'
 import { User } from 'lucide-react-native'
 
 <Avatar>
@@ -271,7 +271,7 @@ import { User } from 'lucide-react-native'
 Use icons from lucide-react-native or other icon libraries:
 
 ```tsx
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
+import { Avatar, AvatarImage, AvatarFallback } from 'novaui-components'
 import { UserCircle } from 'lucide-react-native'
 
 <Avatar size="lg">
@@ -374,7 +374,7 @@ Customize the fallback appearance:
 Display avatars in a user list:
 
 ```tsx
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
+import { Avatar, AvatarImage, AvatarFallback } from 'novaui-components'
 import { View, Text } from 'react-native'
 
 const users = [
@@ -422,7 +422,7 @@ Combine Avatar with badges or status indicators:
 <Tab value="Code">
 
 ```tsx
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
+import { Avatar, AvatarImage, AvatarFallback } from 'novaui-components'
 import { View } from 'react-native'
 
 export function AvatarWithBadge() {
@@ -478,7 +478,7 @@ Create a group of avatars:
 <Tab value="Code">
 
 ```tsx
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
+import { Avatar, AvatarImage, AvatarFallback } from 'novaui-components'
 import { View } from 'react-native'
 
 export function AvatarGroup() {
@@ -530,7 +530,7 @@ Use Avatar in a profile header layout:
 <Tab value="Code">
 
 ```tsx
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
+import { Avatar, AvatarImage, AvatarFallback } from 'novaui-components'
 import { View, Text } from 'react-native'
 
 export function ProfileHeader() {
