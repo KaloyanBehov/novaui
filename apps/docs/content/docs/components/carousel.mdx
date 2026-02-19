@@ -45,7 +45,7 @@ import {
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
-} from 'novaui-components'
+} from '@/components/ui/carousel'
 ```
 
 ## Basic Usage
@@ -97,7 +97,7 @@ import {
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
-} from 'novaui-components'
+} from '@/components/ui/carousel'
 import { View, Text } from 'react-native'
 
 export function BasicCarousel() {
@@ -185,7 +185,7 @@ Use the `setApi` callback for programmatic carousel control:
 
 ```tsx
 import { useState } from 'react'
-import { type CarouselApi } from 'novaui-components'
+import { type CarouselApi } from '@/components/ui/carousel'
 
 export function ControlledCarousel() {
   const [api, setApi] = useState<CarouselApi>()

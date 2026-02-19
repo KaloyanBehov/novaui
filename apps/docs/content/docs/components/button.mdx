@@ -21,7 +21,7 @@ The Button component is a flexible and accessible button built with React Native
 
 ## Installation
 
-The Button component is part of the `novaui-components` package. Make sure you have the required peer dependencies installed:
+The Button component is installed via the CLI into your `@/components/ui` folder. Make sure you have the required peer dependencies installed:
 
 ```bash
 npx novaui-cli add button
@@ -30,7 +30,7 @@ npx novaui-cli add button
 ## Import
 
 ```tsx
-import { Button } from 'novaui-components'
+import { Button } from '@/components/ui/button'
 ```
 
 ## Basic Usage
@@ -38,7 +38,7 @@ import { Button } from 'novaui-components'
 The Button component accepts `label` prop or `children` for the button text:
 
 ```tsx
-import { Button } from 'novaui-components'
+import { Button } from '@/components/ui/button'
 
 export function MyComponent() {
   return (
@@ -288,7 +288,7 @@ Display a loading indicator while an action is in progress:
 
 ```tsx
 import { useState } from 'react'
-import { Button } from 'novaui-components'
+import { Button } from '@/components/ui/button'
 
 export function LoadingButton() {
   const [isLoading, setIsLoading] = useState(false)
@@ -356,7 +356,7 @@ Style the button label separately using `labelClasses`:
 Combine the Button with icons or other components:
 
 ```tsx
-import { Button } from 'novaui-components'
+import { Button } from '@/components/ui/button'
 import { Heart } from 'lucide-react-native'
 
 export function IconButton() {

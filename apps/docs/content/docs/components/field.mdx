@@ -42,7 +42,7 @@ import {
   FieldSet,
   FieldLegend,
   FieldSeparator,
-} from 'novaui-components'
+} from '@/components/ui/field'
 ```
 
 ## Basic Usage
@@ -70,8 +70,8 @@ A simple labeled field with an input and description:
 <Tab value="Code">
 
 ```tsx
-import { Field, FieldLabel, FieldContent, FieldDescription } from 'novaui-components'
-import { Input } from 'novaui-components'
+import { Field, FieldLabel, FieldContent, FieldDescription } from '@/components/ui/field'
+import { Input } from '@/components/ui/input'
 
 export function BasicField() {
   return (
@@ -233,8 +233,8 @@ Organize multiple fields into logical groups:
 import {
   FieldSet, FieldLegend, FieldGroup,
   Field, FieldLabel, FieldContent,
-} from 'novaui-components'
-import { Input } from 'novaui-components'
+} from '@/components/ui/field'
+import { Input } from '@/components/ui/input'
 
 export function FieldSetExample() {
   return (
