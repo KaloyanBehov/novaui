@@ -45,8 +45,8 @@
     "tailwindcss": "^3.4.19"
   },
   "devDependencies": {
-    "@types/react": "~19.2.0",
-    "@types/react-dom": "~19.2.0",
+    "@types/react": "~19.1.10",
+    "@types/react-dom": "~19.1.7",
     "babel-preset-expo": "^54.0.10",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~10.0.0",
