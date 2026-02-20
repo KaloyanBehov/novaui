@@ -1,24 +1,9 @@
 {
   "$schema": "https://turborepo.dev/schema.json",
-  "ui": "tui",
-  "globalDependencies": [
-    "tsconfig.json"
-  ],
   "tasks": {
     "build": {
-      "inputs": [
-        "$TURBO_DEFAULT$",
-        "!**/*.test.*",
-        "!**/*.spec.*",
-        "!**/__tests__/**",
-        "!**/vitest.config.*"
-      ],
-      "outputs": [
-        "dist/**",
-        ".next/**",
-        "!.next/cache/**",
-        ".vercel/**"
-      ],
+      "inputs": ["$TURBO_DEFAULT$", "!**/*.test.*", "!**/*.spec.*", "!**/__tests__/**", "!**/vitest.config.*"],
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**", ".vercel/**"],
       "dependsOn": ["^build"]
     },
     "dev": {
@@ -35,36 +20,19 @@
         "**/vitest.config.*",
         "**/package.json"
       ],
-      "outputs": [
-        "coverage/**"
-      ]
+      "outputs": ["coverage/**"]
     },
     "lint": {
-      "inputs": [
-        "$TURBO_DEFAULT$",
-        "!**/*.md",
-        ".eslintrc*",
-        "eslint.config.*"
-      ],
+      "inputs": ["$TURBO_DEFAULT$", "!**/*.md", ".eslintrc*", "eslint.config.*"],
       "outputs": []
     },
     "types:check": {
-      "inputs": [
-        "$TURBO_DEFAULT$",
-        "!**/*.test.*",
-        "!**/*.spec.*",
-        "tsconfig.json",
-        "tsconfig.*.json"
-      ],
+      "inputs": ["$TURBO_DEFAULT$", "!**/*.test.*", "!**/*.spec.*", "tsconfig.json", "tsconfig.*.json"],
       "outputs": [],
       "dependsOn": ["^build"]
     },
     "format": {
-      "inputs": [
-        "**/*.{ts,tsx,js,jsx,json,md}",
-        ".prettierrc*",
-        "prettier.config.*"
-      ],
+      "inputs": ["**/*.{ts,tsx,js,jsx,json,md}", ".prettierrc*", "prettier.config.*"],
       "outputs": [],
       "cache": false
     },
