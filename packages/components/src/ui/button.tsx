@@ -1,7 +1,8 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 import * as React from 'react'
 import { useState } from 'react'
-import { ActivityIndicator, Pressable, Text, View } from 'react-native'
+import { ActivityIndicator, Pressable, View } from 'react-native'
+import { Text } from './text'
 import { cn } from '../../lib/utils'
 
 // Hit slop for the button to make it easier to tap on small devices
@@ -80,21 +81,24 @@ const Button = React.forwardRef<React.ElementRef<typeof Pressable>, ButtonProps>
   ({ className, variant, size, radius, label, labelClasses, children, isLoading, disabled, ...props }, ref) => {
     const isDisabled = disabled || isLoading
     const [isPressed, setIsPressed] = useState(false)
+    const childrenNode = typeof children === 'function' ? undefined : children
 
     return (
       <Pressable
-        className={cn(
-          buttonVariants({ variant, size, radius, className }),
-          isPressed && 'opacity-80',
-          isDisabled && 'opacity-50',
-        )}
-        ref={ref}
-        hitSlop={DEFAULT_HIT_SLOP}
-        role="button"
-        disabled={isDisabled}
-        onPressIn={() => setIsPressed(true)}
-        onPressOut={() => setIsPressed(false)}
-        {...props}
+        {...({
+          className: cn(
+            buttonVariants({ variant, size, radius, className }),
+            isPressed && 'opacity-80',
+            isDisabled && 'opacity-50',
+          ),
+          ref,
+          hitSlop: DEFAULT_HIT_SLOP,
+          role: "button",
+          disabled: isDisabled,
+          onPressIn: () => setIsPressed(true),
+          onPressOut: () => setIsPressed(false),
+          ...props,
+        } as React.ComponentPropsWithoutRef<typeof Pressable> & { className?: string })}
       >
         {isLoading && (
           <View style={label || children ? { marginRight: 8 } : undefined}>
@@ -104,7 +108,7 @@ const Button = React.forwardRef<React.ElementRef<typeof Pressable>, ButtonProps>
             />
           </View>
         )}
-        {label ? <Text className={cn(buttonTextVariants({ variant, size }), labelClasses)}>{label}</Text> : children}
+        {label ? <Text className={cn(buttonTextVariants({ variant, size }), labelClasses)}>{label}</Text> : childrenNode}
       </Pressable>
     )
   },

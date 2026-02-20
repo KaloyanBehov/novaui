@@ -10,6 +10,7 @@ import { ensureDir } from '../utils/fs-helpers.js'
 import { getMissingDeps, installPackages, getInstallHint } from '../utils/deps.js'
 import { fetchWithTimeout } from '../utils/fetch.js'
 import { assertValidComponentConfig } from '../utils/validate.js'
+import { REGISTRY } from '@novaui/registry'
 
 /**
  * Fetch the component registry and present an interactive multi-select for
@@ -17,24 +18,10 @@ import { assertValidComponentConfig } from '../utils/validate.js'
  * Only called in TTY mode.
  */
 export async function pickComponentsInteractively() {
-  const spinner = ora({ text: '  Fetching registry...', stream: process.stderr }).start()
-
-  let registry
-  try {
-    const res = await fetchWithTimeout(`${BASE_URL}/registry.json`)
-    if (!res.ok) {
-      spinner.fail(pc.red(`  Failed to fetch registry: ${res.statusText}`))
-      throw new Error(`Failed to fetch registry: ${res.statusText}`)
-    }
-    registry = await res.json()
-    spinner.succeed('  Registry loaded')
-  } catch (err) {
-    spinner.fail()
-    throw err
-  }
+  const registry = REGISTRY
 
   if (!registry || typeof registry !== 'object' || Array.isArray(registry)) {
-    throw new Error('Registry response is not a valid object.')
+    throw new Error('Registry is not a valid object.')
   }
 
   const selected = await multiselect({
@@ -70,26 +57,12 @@ export async function add(componentName, options = {}) {
   console.log(`  ◆  NovaUI – Adding "${componentName}"...`)
   console.log('')
 
-  // ─── 1. Fetch registry ─────────────────────────────────────────────────────
+  // ─── 1. Load registry ─────────────────────────────────────────────────────
 
-  const registrySpinner = ora({ text: '  Fetching registry...', stream: process.stderr }).start()
-
-  let registry
-  try {
-    const registryResponse = await fetchWithTimeout(`${BASE_URL}/registry.json`)
-    if (!registryResponse.ok) {
-      registrySpinner.fail(pc.red(`  Failed to fetch registry: ${registryResponse.statusText}`))
-      throw new Error(`Failed to fetch registry: ${registryResponse.statusText}`)
-    }
-    registry = await registryResponse.json()
-    registrySpinner.succeed(pc.green('  Registry loaded'))
-  } catch (err) {
-    registrySpinner.fail()
-    throw err
-  }
+  const registry = REGISTRY
 
   if (!registry || typeof registry !== 'object' || Array.isArray(registry)) {
-    throw new Error('Registry response is not a valid object.')
+    throw new Error('Registry is not a valid object.')
   }
 
   if (!registry[componentName]) {

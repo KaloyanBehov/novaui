@@ -10,7 +10,7 @@ import {
 } from "@clack/prompts";
 import pc from "picocolors";
 
-import { THEME_KEYS, getThemeCssContent } from "../../../themes/index.js";
+import { THEME_KEYS, getThemeCssContent } from "@novaui/themes";
 import { DEFAULT_CONFIG, UTILS_CONTENT } from "../constants.js";
 import { loadConfig, writeConfig } from "../utils/config.js";
 import { ensureDir, writeIfNotExists } from "../utils/fs-helpers.js";

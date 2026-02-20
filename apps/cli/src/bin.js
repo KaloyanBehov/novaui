@@ -22,7 +22,7 @@ import { getTailwindConfigContent } from "./utils/tailwind.js";
 import { assertValidComponentConfig } from "./utils/validate.js";
 import { init, askTheme, ASCII_BANNER } from "./commands/init.js";
 import { add, pickComponentsInteractively } from "./commands/add.js";
-import { getThemeCssContent } from "../../themes/index.js";
+import { getThemeCssContent } from "@novaui/themes";
 
 // ─── Derived constants ───────────────────────────────────────────────────────
 

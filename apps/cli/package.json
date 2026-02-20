@@ -47,6 +47,8 @@
   },
   "dependencies": {
     "@clack/prompts": "^1.0.1",
+    "@novaui/registry": "workspace:*",
+    "@novaui/themes": "workspace:*",
     "commander": "^14.0.3",
     "ora": "^9.3.0",
     "picocolors": "^1.1.1",

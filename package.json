@@ -13,8 +13,8 @@
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\" --ignore-path .gitignore"
   },
   "devDependencies": {
-    "prettier-plugin-tailwindcss": "^0.6.14",
     "prettier": "^3.1.1",
+    "prettier-plugin-tailwindcss": "^0.6.14",
     "turbo": "^2.8.9",
     "typescript": "^5.9.3"
   },
