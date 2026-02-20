@@ -1,0 +1,51 @@
+export const OCEAN_THEME_CSS = `@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 210 30% 16%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 30% 16%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 30% 16%;
+    --primary: 200 95% 46%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 197 46% 92%;
+    --secondary-foreground: 210 25% 24%;
+    --muted: 197 46% 92%;
+    --muted-foreground: 210 16% 42%;
+    --accent: 189 70% 88%;
+    --accent-foreground: 210 28% 20%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 197 30% 84%;
+    --input: 197 30% 84%;
+    --ring: 200 95% 46%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 212 48% 10%;
+    --foreground: 210 20% 94%;
+    --card: 212 45% 13%;
+    --card-foreground: 210 20% 94%;
+    --popover: 212 45% 13%;
+    --popover-foreground: 210 20% 94%;
+    --primary: 196 100% 60%;
+    --primary-foreground: 210 50% 12%;
+    --secondary: 212 30% 20%;
+    --secondary-foreground: 210 20% 94%;
+    --muted: 212 30% 20%;
+    --muted-foreground: 209 15% 68%;
+    --accent: 202 45% 24%;
+    --accent-foreground: 210 20% 94%;
+    --destructive: 0 65% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 212 28% 24%;
+    --input: 212 28% 24%;
+    --ring: 196 100% 60%;
+  }
+}
+`

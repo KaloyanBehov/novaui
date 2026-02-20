@@ -1,0 +1,15 @@
+node_modules/
+.turbo/
+*.test.*
+*.spec.*
+__tests__/
+.DS_Store
+*.log
+tsconfig.json
+tsup.config.ts
+vitest.config.*
+.vscode/
+.cursor/
+coverage/
+src/
+!dist/

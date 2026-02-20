@@ -1,14 +1,14 @@
-import * as React from "react"
-import { View, Pressable } from "react-native"
-import { ChevronRight, MoreHorizontal } from "lucide-react-native"
-import { cn } from "../../lib/utils"
-import { Text } from "./text"
+import { ChevronRight, MoreHorizontal } from 'lucide-react-native';
+import * as React from 'react';
+import { Pressable, View } from 'react-native';
+import { cn } from '../../lib/utils';
+import { Text } from './text';
 
 const Breadcrumb = React.forwardRef<
   React.ElementRef<typeof View>,
   React.ComponentPropsWithoutRef<typeof View>
->(({ ...props }, ref) => <View ref={ref} role="navigation" aria-label="breadcrumb" {...props} />)
-Breadcrumb.displayName = "Breadcrumb"
+>(({ ...props }, ref) => <View ref={ref} role="navigation" aria-label="breadcrumb" {...props} />);
+Breadcrumb.displayName = 'Breadcrumb';
 
 const BreadcrumbList = React.forwardRef<
   React.ElementRef<typeof View>,
@@ -16,14 +16,11 @@ const BreadcrumbList = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <View
     ref={ref}
-    className={cn(
-      "flex-row flex-wrap items-center gap-1.5 break-words sm:gap-2.5",
-      className
-    )}
+    className={cn('flex-row flex-wrap items-center gap-1.5 break-words sm:gap-2.5', className)}
     {...props}
   />
-))
-BreadcrumbList.displayName = "BreadcrumbList"
+));
+BreadcrumbList.displayName = 'BreadcrumbList';
 
 const BreadcrumbItem = React.forwardRef<
   React.ElementRef<typeof View>,
@@ -31,11 +28,11 @@ const BreadcrumbItem = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <View
     ref={ref}
-    className={cn("inline-flex flex-row items-center gap-1.5", className)}
+    className={cn('inline-flex flex-row items-center gap-1.5', className)}
     {...props}
   />
-))
-BreadcrumbItem.displayName = "BreadcrumbItem"
+));
+BreadcrumbItem.displayName = 'BreadcrumbItem';
 
 const BreadcrumbLink = React.forwardRef<
   React.ElementRef<typeof Pressable>,
@@ -44,24 +41,31 @@ const BreadcrumbLink = React.forwardRef<
   if (asChild && React.isValidElement(children)) {
     return React.cloneElement(children, {
       // @ts-ignore
-      className: cn("text-muted-foreground hover:text-foreground transition-colors", children.props.className, className),
+      className: cn(
+        'text-muted-foreground hover:text-foreground transition-colors',
+        children.props.className,
+        className
+      ),
       ...props,
-    })
+    });
   }
 
   return (
     <Pressable
       ref={ref}
-      className={cn("active:opacity-70 transition-colors", className)}
-      {...props}
-    >
-        {typeof children === 'string' ? (
-            <Text className="text-sm font-medium text-muted-foreground hover:text-foreground">{children}</Text>
-        ) : children}
+      className={cn('transition-colors active:opacity-70', className)}
+      {...props}>
+      {typeof children === 'string' ? (
+        <Text className="text-muted-foreground hover:text-foreground text-sm font-medium">
+          {children}
+        </Text>
+      ) : (
+        children
+      )}
     </Pressable>
-  )
-})
-BreadcrumbLink.displayName = "BreadcrumbLink"
+  );
+});
+BreadcrumbLink.displayName = 'BreadcrumbLink';
 
 const BreadcrumbPage = React.forwardRef<
   React.ElementRef<typeof Text>,
@@ -72,11 +76,11 @@ const BreadcrumbPage = React.forwardRef<
     role="link"
     aria-disabled={true}
     aria-current="page"
-    className={cn("text-sm font-normal text-foreground", className)}
+    className={cn('text-foreground text-sm font-normal', className)}
     {...props}
   />
-))
-BreadcrumbPage.displayName = "BreadcrumbPage"
+));
+BreadcrumbPage.displayName = 'BreadcrumbPage';
 
 const BreadcrumbSeparator = ({
   children,
@@ -86,13 +90,12 @@ const BreadcrumbSeparator = ({
   <View
     role="presentation"
     aria-hidden={true}
-    className={cn("[&>svg]:w-3.5 [&>svg]:h-3.5", className)}
-    {...props}
-  >
+    className={cn('[&>svg]:h-3.5 [&>svg]:w-3.5', className)}
+    {...props}>
     {children ?? <ChevronRight size={14} className="text-muted-foreground" />}
   </View>
-)
-BreadcrumbSeparator.displayName = "BreadcrumbSeparator"
+);
+BreadcrumbSeparator.displayName = 'BreadcrumbSeparator';
 
 const BreadcrumbEllipsis = ({
   className,
@@ -101,21 +104,20 @@ const BreadcrumbEllipsis = ({
   <View
     role="presentation"
     aria-hidden={true}
-    className={cn("flex h-9 w-9 items-center justify-center", className)}
-    {...props}
-  >
+    className={cn('flex h-9 w-9 items-center justify-center', className)}
+    {...props}>
     <MoreHorizontal size={16} className="text-muted-foreground" />
     <Text className="sr-only">More</Text>
   </View>
-)
-BreadcrumbEllipsis.displayName = "BreadcrumbElipssis"
+);
+BreadcrumbEllipsis.displayName = 'BreadcrumbElipssis';
 
 export {
   Breadcrumb,
-  BreadcrumbList,
+  BreadcrumbEllipsis,
   BreadcrumbItem,
   BreadcrumbLink,
+  BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-  BreadcrumbEllipsis,
-}
+};

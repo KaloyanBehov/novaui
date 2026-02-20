@@ -38,6 +38,25 @@
     },
     "clean": {
       "cache": false
+    },
+    "validate:registry": {
+      "inputs": [
+        "packages/components/src/ui/**",
+        "packages/registry/registry.json",
+        "packages/registry/scripts/validate.js"
+      ],
+      "outputs": [],
+      "cache": false
+    },
+    "publish:cli": {
+      "dependsOn": ["validate:registry", "test"],
+      "cache": false,
+      "inputs": [
+        "apps/cli/src/**",
+        "apps/cli/package.json",
+        "packages/registry/registry.json",
+        "packages/themes/*.js"
+      ]
     }
   }
 }

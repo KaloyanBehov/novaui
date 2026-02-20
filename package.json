@@ -10,7 +10,9 @@
     "clean:all": "rm -rf node_modules apps/*/node_modules packages/*/node_modules .pnpm-store .turbo",
     "clean:lock": "rm -rf pnpm-lock.yaml",
     "test": "turbo run test",
-    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\" --ignore-path .gitignore"
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\" --ignore-path .gitignore",
+    "validate:registry": "turbo run validate:registry",
+    "publish:cli": "turbo run publish:cli --filter=novaui-cli"
   },
   "devDependencies": {
     "prettier": "^3.1.1",

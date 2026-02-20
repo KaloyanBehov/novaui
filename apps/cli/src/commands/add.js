@@ -10,7 +10,9 @@ import { ensureDir } from '../utils/fs-helpers.js'
 import { getMissingDeps, installPackages, getInstallHint } from '../utils/deps.js'
 import { fetchWithTimeout } from '../utils/fetch.js'
 import { assertValidComponentConfig } from '../utils/validate.js'
-import { REGISTRY } from '@novaui/registry'
+import { runAddPreflightChecks } from '../utils/preflight.js'
+import { formatComponentNotFoundError } from '../utils/fuzzy.js'
+import REGISTRY from '../registry.json' with { type: 'json' }
 
 /**
  * Fetch the component registry and present an interactive multi-select for
@@ -52,6 +54,7 @@ export async function add(componentName, options = {}) {
   }
 
   const cwd = process.cwd()
+  runAddPreflightChecks(cwd)
 
   console.log('')
   console.log(`  ◆  NovaUI – Adding "${componentName}"...`)
@@ -66,8 +69,7 @@ export async function add(componentName, options = {}) {
   }
 
   if (!registry[componentName]) {
-    const available = Object.keys(registry).join(', ')
-    throw new Error(`Component "${componentName}" not found in registry.\n\n  Available components:\n    ${available}`)
+    throw new Error(formatComponentNotFoundError(componentName, Object.keys(registry)))
   }
 
   const componentConfig = registry[componentName]

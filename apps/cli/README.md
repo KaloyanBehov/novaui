@@ -224,6 +224,97 @@ NovaUI components use CSS variables for theming. Customize colors, spacing, and 
 - 🐛 [GitHub Issues](https://github.com/KaloyanBehov/novaui/issues) — Report bugs or request features
 - 💬 [GitHub Discussions](https://github.com/KaloyanBehov/novaui/discussions) — Ask questions
 
+## For Maintainers
+
+### Publishing Process
+
+The CLI is standalone and can be published independently to npm.
+
+#### Pre-publish Checklist
+
+1. **Validate registry**:
+   ```bash
+   pnpm validate:registry
+   ```
+
+2. **Run tests**:
+   ```bash
+   cd apps/cli
+   pnpm test
+   ```
+
+3. **Ensure no workspace dependencies**:
+   ```bash
+   cat package.json | grep "workspace:"
+   ```
+   Should return nothing.
+
+#### Publishing
+
+```bash
+cd apps/cli
+
+# Bump version (patch/minor/major)
+npm version patch
+
+# The prepublishOnly script automatically:
+# - Syncs registry.json from packages/registry/
+# - Syncs themes from packages/themes/
+# - Validates CLI is standalone
+
+# Publish to npm
+npm publish
+
+# Tag and push
+git tag cli-v1.1.3
+git push origin cli-v1.1.3
+```
+
+#### What's Included in the Published Package
+
+The CLI package includes:
+- `src/**/*.js` - All CLI source code
+- `src/registry.json` - Component registry (synced from packages/)
+- `src/themes/` - Theme CSS files (synced from packages/)
+- `README.md` - This documentation
+
+**Not included** (via `.npmignore`):
+- `__tests__/` - Test files
+- `node_modules/` - Dependencies
+- Development configs
+
+#### Prebuild Script
+
+The `scripts/prebuild.js` runs automatically before publish:
+
+1. Copies latest `registry.json` from packages/registry/
+2. Copies theme files from packages/themes/
+3. Validates no workspace dependencies remain
+4. Ensures all required files exist
+
+If validation fails, publish is aborted.
+
+### Version Compatibility
+
+The CLI checks for updates automatically (once per 24 hours) and warns users if they're running an outdated version.
+
+Version format: `MAJOR.MINOR.PATCH`
+- **Major**: Breaking changes
+- **Minor**: New features, new components
+- **Patch**: Bug fixes, improvements
+
+### Registry Sync
+
+The registry must be synced before every CLI publish:
+
+```bash
+# Manual sync (done automatically by prepublishOnly)
+cd apps/cli
+node scripts/prebuild.js
+```
+
+This ensures the CLI always has the latest component metadata.
+
 ## License
 
 MIT

@@ -10,8 +10,8 @@ import {
 } from "@clack/prompts";
 import pc from "picocolors";
 
-import { THEME_KEYS, getThemeCssContent } from "@novaui/themes";
-import { DEFAULT_CONFIG, UTILS_CONTENT } from "../constants.js";
+import { THEME_KEYS, getThemeCssContent } from "../themes/index.js";
+import { DEFAULT_CONFIG, UTILS_CONTENT, BABEL_CONFIG_CONTENT, METRO_CONFIG_CONTENT } from "../constants.js";
 import { loadConfig, writeConfig } from "../utils/config.js";
 import { ensureDir, writeIfNotExists } from "../utils/fs-helpers.js";
 import {
@@ -20,6 +20,7 @@ import {
   getInstallHint,
 } from "../utils/deps.js";
 import { getTailwindConfigContent } from "../utils/tailwind.js";
+import { runInitPreflightChecks } from "../utils/preflight.js";
 
 // ─── ASCII Banner ────────────────────────────────────────────────────────────
 
@@ -71,6 +72,9 @@ export async function askTheme(defaultTheme = DEFAULT_CONFIG.theme) {
 export async function init(options = {}) {
   const { yes = false } = options;
   const cwd = process.cwd();
+  
+  runInitPreflightChecks(cwd);
+  
   const existingConfig = loadConfig(cwd);
   const isInteractive = process.stdin.isTTY === true && !yes;
 
@@ -231,36 +235,73 @@ export async function init(options = {}) {
     "tailwind.config.js",
   );
 
+  writeIfNotExists(
+    path.join(cwd, "babel.config.js"),
+    BABEL_CONFIG_CONTENT,
+    "babel.config.js",
+  );
+
+  const metroContent = METRO_CONFIG_CONTENT(config.globalCss);
+  writeIfNotExists(
+    path.join(cwd, "metro.config.js"),
+    metroContent,
+    "metro.config.js",
+  );
+
   // ─── Dependencies ──────────────────────────────────────────────────────────
 
   const deps = [
     "nativewind",
-    "tailwindcss",
+    "react-native-reanimated",
+    "react-native-safe-area-context",
     "clsx",
     "tailwind-merge",
     "class-variance-authority",
   ];
+  const devDeps = [
+    "tailwindcss@^3.4.17",
+    "prettier-plugin-tailwindcss@^0.5.11",
+    "babel-preset-expo",
+  ];
   const missingDeps = getMissingDeps(cwd, deps);
+  const missingDevDeps = getMissingDeps(cwd, devDeps.map(d => d.split('@')[0]));
 
   console.log("");
   console.log(pc.blue("   📦 Dependencies"));
   console.log("");
 
-  if (missingDeps.length === 0) {
+  if (missingDeps.length === 0 && missingDevDeps.length === 0) {
     console.log(
       pc.dim(
         "   ✓  All required packages already in package.json, skipping install.",
       ),
     );
   } else {
-    console.log(pc.dim(`   Installing: ${missingDeps.join(", ")}`));
-    console.log("");
-    try {
-      installPackages(missingDeps);
-    } catch {
-      console.error("");
-      console.error(pc.yellow("   ✗  Install failed. Run manually:"));
-      console.error(pc.dim(`     ${getInstallHint(missingDeps)}`));
+    if (missingDeps.length > 0) {
+      console.log(pc.dim(`   Installing: ${missingDeps.join(", ")}`));
+      console.log("");
+      try {
+        installPackages(missingDeps);
+      } catch {
+        console.error("");
+        console.error(pc.yellow("   ✗  Install failed. Run manually:"));
+        console.error(pc.dim(`     ${getInstallHint(missingDeps)}`));
+      }
+    }
+
+    if (missingDevDeps.length > 0) {
+      const devDepsToInstall = devDeps.filter(d => 
+        missingDevDeps.includes(d.split('@')[0])
+      );
+      console.log(pc.dim(`   Installing dev dependencies: ${devDepsToInstall.join(", ")}`));
+      console.log("");
+      try {
+        installPackages(devDepsToInstall, { dev: true });
+      } catch {
+        console.error("");
+        console.error(pc.yellow("   ✗  Dev dependencies install failed. Run manually:"));
+        console.error(pc.dim(`     ${getInstallHint(devDepsToInstall, { dev: true })}`));
+      }
     }
   }
 

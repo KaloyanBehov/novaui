@@ -5,5 +5,11 @@
   "main": "./index.js",
   "exports": {
     ".": "./index.js"
+  },
+  "scripts": {
+    "validate": "node scripts/validate.js",
+    "validate:registry": "node scripts/validate.js",
+    "generate": "node scripts/generate.js",
+    "generate:dry-run": "node scripts/generate.js --dry-run"
   }
 }

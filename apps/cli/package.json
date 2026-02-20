@@ -7,7 +7,9 @@
     "novaui-cli": "./src/bin.js"
   },
   "files": [
-    "src",
+    "src/**/*.js",
+    "src/registry.json",
+    "src/themes/",
     "!src/__tests__",
     "README.md"
   ],
@@ -30,6 +32,7 @@
     "styling"
   ],
   "scripts": {
+    "prepublishOnly": "node scripts/prebuild.js",
     "test": "vitest run",
     "test:watch": "vitest"
   },
@@ -47,8 +50,6 @@
   },
   "dependencies": {
     "@clack/prompts": "^1.0.1",
-    "@novaui/registry": "workspace:*",
-    "@novaui/themes": "workspace:*",
     "commander": "^14.0.3",
     "ora": "^9.3.0",
     "picocolors": "^1.1.1",
