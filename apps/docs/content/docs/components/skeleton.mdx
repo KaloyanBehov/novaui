@@ -29,7 +29,7 @@ npx novaui-cli add skeleton
 ## Import
 
 ```tsx
-import { Skeleton } from 'novaui-components'
+import { Skeleton } from '@/components/ui/skeleton'
 ```
 
 ## Basic Usage
@@ -51,7 +51,7 @@ The Skeleton renders a pulsing `rounded-md bg-muted` block. Control its shape an
 <Tab value="Code">
 
 ```tsx
-import { Skeleton } from 'novaui-components'
+import { Skeleton } from '@/components/ui/skeleton'
 import { View } from 'react-native'
 
 export function BasicSkeleton() {
@@ -163,8 +163,8 @@ A loading placeholder for a card layout:
 <Tab value="Code">
 
 ```tsx
-import { Skeleton } from 'novaui-components'
-import { Card, CardHeader, CardContent, CardFooter } from 'novaui-components'
+import { Skeleton } from '@/components/ui/skeleton'
+import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card'
 import { View } from 'react-native'
 
 export function CardSkeleton() {
@@ -234,8 +234,8 @@ A loading state that transitions into a real `Avatar` once data is loaded. This 
 ```tsx
 import { useState, useEffect } from 'react'
 import { View, Text } from 'react-native'
-import { Skeleton } from 'novaui-components'
-import { Avatar, AvatarImage, AvatarFallback } from 'novaui-components'
+import { Skeleton } from '@/components/ui/skeleton'
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 
 export function ProfileWithSkeleton() {
   const [isLoading, setIsLoading] = useState(true)
@@ -313,7 +313,7 @@ A loading placeholder for a list of items:
 <Tab value="Code">
 
 ```tsx
-import { Skeleton } from 'novaui-components'
+import { Skeleton } from '@/components/ui/skeleton'
 import { View } from 'react-native'
 
 export function ListSkeleton() {
