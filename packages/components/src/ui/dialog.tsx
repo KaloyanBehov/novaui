@@ -80,7 +80,7 @@ const DialogOverlay = React.forwardRef<
   return (
     <Pressable
       ref={ref}
-      className={cn('absolute inset-0 z-50 bg-black/50', className)}
+      className={cn('absolute inset-0 z-50 bg-overlay', className)}
       onPress={() => onOpenChange(false)}
       {...props}
     />

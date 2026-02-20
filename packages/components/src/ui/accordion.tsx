@@ -4,7 +4,6 @@ import { Platform, Pressable, Text, UIManager, View } from 'react-native';
 import Animated, {
   useAnimatedRef,
   useAnimatedStyle,
-  useDerivedValue,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
@@ -91,7 +90,11 @@ const AccordionTrigger = React.forwardRef<
   const { value: itemValue } = React.useContext(AccordionItemContext)!;
 
   const isExpanded = Array.isArray(value) ? value.includes(itemValue) : value === itemValue;
-  const progress = useDerivedValue(() => withTiming(isExpanded ? 1 : 0));
+  const progress = useSharedValue(isExpanded ? 1 : 0);
+
+  React.useEffect(() => {
+    progress.value = withTiming(isExpanded ? 1 : 0, { duration: 250 });
+  }, [isExpanded]);
 
   const chevronStyle = useAnimatedStyle(() => ({
     transform: [{ rotate: `${progress.value * 180}deg` }],
@@ -129,9 +132,13 @@ const AccordionContent = React.forwardRef<
   const { value: itemValue } = React.useContext(AccordionItemContext)!;
 
   const isExpanded = Array.isArray(value) ? value.includes(itemValue) : value === itemValue;
-  const progress = useDerivedValue(() => withTiming(isExpanded ? 1 : 0));
+  const progress = useSharedValue(isExpanded ? 1 : 0);
   const bodyRef = useAnimatedRef<View>();
   const height = useSharedValue(0);
+
+  React.useEffect(() => {
+    progress.value = withTiming(isExpanded ? 1 : 0, { duration: 250 });
+  }, [isExpanded]);
 
   const style = useAnimatedStyle(() => ({
     height: height.value * progress.value + 1,

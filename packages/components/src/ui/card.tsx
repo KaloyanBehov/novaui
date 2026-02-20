@@ -9,7 +9,7 @@ const Card = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <View
     ref={ref}
-    className={cn('border-border bg-card rounded-xl border shadow-sm shadow-black/5', className)}
+    className={cn('border-border bg-card rounded-xl border shadow-sm', className)}
     {...props}
   />
 ));

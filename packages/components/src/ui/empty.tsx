@@ -50,7 +50,7 @@ const emptyMediaVariants = cva(
     variants: {
       variant: {
         default: 'border-0 bg-transparent',
-        icon: 'border-border bg-muted border shadow-sm shadow-black/5',
+        icon: 'border-border bg-muted border shadow-sm',
       },
       size: {
         sm: 'size-10',

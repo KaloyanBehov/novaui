@@ -33,10 +33,12 @@ module.exports = {
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))',
+          subtle: 'hsl(var(--destructive-subtle))',
         },
         muted: {
           DEFAULT: 'hsl(var(--muted))',
           foreground: 'hsl(var(--muted-foreground))',
+          subtle: 'hsl(var(--muted-subtle))',
         },
         accent: {
           DEFAULT: 'hsl(var(--accent))',
@@ -53,17 +55,26 @@ module.exports = {
         success: {
           DEFAULT: 'hsl(var(--success))',
           foreground: 'hsl(var(--success-foreground))',
+          subtle: 'hsl(var(--success-subtle))',
         },
         warning: {
           DEFAULT: 'hsl(var(--warning))',
           foreground: 'hsl(var(--warning-foreground))',
+          subtle: 'hsl(var(--warning-subtle))',
         },
         info: {
           DEFAULT: 'hsl(var(--info))',
           foreground: 'hsl(var(--info-foreground))',
+          subtle: 'hsl(var(--info-subtle))',
+        },
+        // Overlay uses rgb() channels — hsl() doesn't support alpha shorthand
+        overlay: {
+          DEFAULT: 'rgb(var(--overlay) / var(--overlay-opacity))',
+          strong: 'rgb(var(--overlay) / var(--overlay-strong-opacity))',
         },
       },
       borderRadius: {
+        xs: 'var(--radius-xs)',
         sm: 'calc(var(--radius) - 4px)',
         md: 'calc(var(--radius) - 2px)',
         lg: 'var(--radius)',
@@ -71,6 +82,10 @@ module.exports = {
         '2xl': 'var(--radius-xl)',
       },
       boxShadow: {
+        xs: 'var(--shadow-xs)',
+        sm: 'var(--shadow-sm)',
+        md: 'var(--shadow-md)',
+        lg: 'var(--shadow-lg)',
         card: 'var(--shadow-sm)',
         popover: 'var(--shadow-md)',
         dialog: 'var(--shadow-lg)',
@@ -78,9 +93,11 @@ module.exports = {
       transitionDuration: {
         fast: 'var(--duration-fast)',
         normal: 'var(--duration-normal)',
+        slow: 'var(--duration-slow)',
       },
       transitionTimingFunction: {
         'ease-out-expo': 'var(--ease-out)',
+        'ease-in-out-expo': 'var(--ease-in-out)',
       },
     },
   },

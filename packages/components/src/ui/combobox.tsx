@@ -125,7 +125,7 @@ const ComboboxContent = React.forwardRef<
         setSearch('');
       }}>
       <Pressable
-        className="flex-1 items-center justify-center bg-black/50 p-4"
+        className="flex-1 items-center justify-center bg-overlay p-4"
         onPress={() => {
           setOpen(false);
           setSearch('');

@@ -3,7 +3,6 @@ import { Pressable, View } from 'react-native';
 import Animated, {
   useAnimatedRef,
   useAnimatedStyle,
-  useDerivedValue,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
@@ -82,9 +81,13 @@ const CollapsibleContent = React.forwardRef<
 >(({ className, children, ...props }, ref) => {
   const { open } = React.useContext(CollapsibleContext)!;
 
-  const progress = useDerivedValue(() => withTiming(open ? 1 : 0));
+  const progress = useSharedValue(open ? 1 : 0);
   const bodyRef = useAnimatedRef<View>();
   const height = useSharedValue(0);
+
+  React.useEffect(() => {
+    progress.value = withTiming(open ? 1 : 0, { duration: 250 });
+  }, [open]);
 
   const style = useAnimatedStyle(() => {
     return {

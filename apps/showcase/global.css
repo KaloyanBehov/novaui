@@ -34,19 +34,30 @@
     /* ─── Muted ─────────────────────────────────────────────── */
     --muted: 210 40% 96%;
     --muted-foreground: 215 16% 47%;
+    --muted-subtle: 210 40% 96%; /* use as bg-muted-subtle/50 — base of muted at lower visual weight */
 
     /* ─── Feedback ──────────────────────────────────────────── */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
+    --destructive-subtle: 0 84% 96%;
 
     --success: 142 70% 35%;
     --success-foreground: 0 0% 100%;
+    --success-subtle: 142 70% 94%;
 
     --warning: 38 92% 44%;
     --warning-foreground: 0 0% 100%;
+    --warning-subtle: 38 92% 94%;
 
     --info: 217 91% 56%;
     --info-foreground: 0 0% 100%;
+    --info-subtle: 217 91% 94%;
+
+    /* ─── Overlay (modals, sheets, dialogs) ─────────────────── */
+    /* Uses rgb() so it works correctly — hsl() doesn't support / alpha */
+    --overlay: 0 0 0; /* rgb channel values only */
+    --overlay-opacity: 0.5;
+    --overlay-strong-opacity: 0.8;
 
     /* ─── Borders & Inputs ──────────────────────────────────── */
     --border: 214 18% 88%;
@@ -55,9 +66,10 @@
     --ring: 222 47% 30%;
 
     /* ─── Radius ────────────────────────────────────────────── */
-    --radius: 0.5rem;
-    --radius-lg: 0.75rem;
-    --radius-xl: 1rem;
+    --radius-xs: 0.25rem; /* 4px  — for chips, badges, inline tags  */
+    --radius: 0.5rem; /* 8px  — base radius (md)                */
+    --radius-lg: 0.75rem; /* 12px — cards, popovers                 */
+    --radius-xl: 1rem; /* 16px — sheets, dialogs                 */
 
     /* ─── Shadows ───────────────────────────────────────────── */
     --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.03);
@@ -68,7 +80,9 @@
     /* ─── Animation ─────────────────────────────────────────── */
     --duration-fast: 150ms;
     --duration-normal: 200ms;
+    --duration-slow: 1000ms; /* skeleton pulse, entrance animations  */
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
   }
 
   .dark,
@@ -101,19 +115,29 @@
     /* ─── Muted ─────────────────────────────────────────────── */
     --muted: 222 16% 18%;
     --muted-foreground: 215 16% 65%;
+    --muted-subtle: 222 16% 18%; /* use as bg-muted-subtle/50 — base of muted at lower visual weight */
 
     /* ─── Feedback ──────────────────────────────────────────── */
     --destructive: 0 84% 66%;
     --destructive-foreground: 0 0% 100%;
+    --destructive-subtle: 0 84% 12%;
 
     --success: 142 70% 45%;
     --success-foreground: 0 0% 100%;
+    --success-subtle: 142 70% 10%;
 
     --warning: 38 90% 56%;
     --warning-foreground: 0 0% 100%;
+    --warning-subtle: 38 90% 10%;
 
     --info: 217 90% 66%;
     --info-foreground: 0 0% 100%;
+    --info-subtle: 217 90% 12%;
+
+    /* ─── Overlay (modals, sheets, dialogs) ─────────────────── */
+    --overlay: 0 0 0;
+    --overlay-opacity: 0.6;
+    --overlay-strong-opacity: 0.85;
 
     /* ─── Borders & Inputs ──────────────────────────────────── */
     --border: 222 16% 20%;

@@ -97,7 +97,7 @@ const SheetOverlay = React.forwardRef<
       style={{ ...StyleSheet.absoluteFillObject, zIndex: 0 }}>
       <Pressable
         ref={ref}
-        className={cn('flex-1 bg-black/80', className)}
+        className={cn('flex-1 bg-overlay-strong', className)}
         onPress={() => onOpenChange(false)}
         {...props}
       />

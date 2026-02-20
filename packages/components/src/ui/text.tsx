@@ -12,7 +12,7 @@ const textVariants = cva('text-foreground', {
       h3: 'text-2xl font-semibold tracking-tight',
       h4: 'text-xl font-semibold tracking-tight',
       p: 'leading-7',
-      blockquote: 'mt-6 border-l-2 pl-6 italic',
+      blockquote: 'mt-6 border-l-2 border-border pl-6 italic',
       lead: 'text-muted-foreground text-xl',
       large: 'text-lg font-semibold',
       small: 'text-sm leading-none font-medium',

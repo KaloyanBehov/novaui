@@ -8,7 +8,6 @@ import { View } from 'react-native';
 import 'react-native-reanimated';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { cn } from '@/lib/utils';
 import '../global.css';
 
 // Register all Lucide icons with NativeWind for className support
@@ -33,16 +32,19 @@ export default function RootLayout() {
   const { isDark } = useColorScheme();
 
   return (
-    <ThemeProvider value={isDark ? DarkTheme : DefaultTheme}>
-      <SafeAreaProvider>
-        <View className={cn('flex-1', isDark ? 'dark' : 'light')}>
+    // The theme class must sit on the outermost View so that all descendants
+    // receive the correct NativeWind dark-mode context. flex-1 ensures the
+    // view fills the screen so no unstyled edges appear during transitions.
+    <View className={isDark ? 'dark flex-1' : 'flex-1'} style={{ flex: 1 }}>
+      <ThemeProvider value={isDark ? DarkTheme : DefaultTheme}>
+        <SafeAreaProvider>
           <StatusBar style={isDark ? 'light' : 'dark'} />
           <Stack>
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
             <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
           </Stack>
-        </View>
-      </SafeAreaProvider>
-    </ThemeProvider>
+        </SafeAreaProvider>
+      </ThemeProvider>
+    </View>
   );
 }

@@ -89,7 +89,7 @@ const AlertDialogContent = React.forwardRef<
       visible={open}
       onRequestClose={() => onOpenChange(false)}
       statusBarTranslucent>
-      <View className="flex-1 items-center justify-center bg-black/50">
+      <View className="flex-1 items-center justify-center bg-overlay">
         <TouchableWithoutFeedback onPress={() => onOpenChange(false)}>
           <View style={StyleSheet.absoluteFill} />
         </TouchableWithoutFeedback>
