@@ -39,11 +39,12 @@ const BreadcrumbLink = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof Pressable> & { asChild?: boolean }
 >(({ asChild, className, children, ...props }, ref) => {
   if (asChild && React.isValidElement(children)) {
-    return React.cloneElement(children, {
+    const child = children as React.ReactElement<{ className?: string }>;
+    return React.cloneElement(child, {
       // @ts-ignore
       className: cn(
         'text-muted-foreground hover:text-foreground transition-colors',
-        children.props.className,
+        child.props.className,
         className
       ),
       ...props,

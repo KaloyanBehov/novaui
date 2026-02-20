@@ -23,10 +23,10 @@ const badgeVariants = cva(
 const badgeTextVariants = cva('text-xs font-semibold', {
   variants: {
     variant: {
-      default: 'text-primary-foreground',
-      secondary: 'text-secondary-foreground',
-      destructive: 'text-destructive-foreground',
-      outline: 'text-foreground',
+      default: 'dark:text-primary-foreground text-primary-foreground',
+      secondary: 'dark:text-secondary-foreground text-secondary-foreground',
+      destructive: 'dark:text-destructive-foreground text-destructive-foreground',
+      outline: 'dark:text-foreground text-foreground',
     },
   },
   defaultVariants: {
@@ -46,7 +46,9 @@ function Badge({ className, variant, label, labelClasses, children, ...props }: 
       {label ? (
         <Text className={cn(badgeTextVariants({ variant }), labelClasses)}>{label}</Text>
       ) : (
-        children
+        <View className={cn(badgeTextVariants({ variant }), labelClasses)}>
+          {typeof children === 'string' ? <Text>{children}</Text> : children}
+        </View>
       )}
     </View>
   );

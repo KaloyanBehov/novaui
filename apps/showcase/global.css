@@ -3,48 +3,128 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
+  :root,
+  .light,
+  [data-theme='light'] {
+    color-scheme: light;
+    /* ─── Surfaces ──────────────────────────────────────────── */
     --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
+    --foreground: 222 47% 11%;
+
+    --surface: 210 40% 98%;
+    --surface-2: 210 40% 96%;
+    --surface-3: 214 32% 93%;
+
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --card-foreground: 222 47% 11%;
+
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
+    --popover-foreground: 222 47% 11%;
+
+    /* ─── Interactive ───────────────────────────────────────── */
+    --primary: 222 47% 11%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 20%;
+
+    --accent: 210 40% 94%;
+    --accent-foreground: 222 47% 20%;
+
+    /* ─── Muted ─────────────────────────────────────────────── */
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    /* ─── Feedback ──────────────────────────────────────────── */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 70% 35%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 44%;
+    --warning-foreground: 0 0% 100%;
+
+    --info: 217 91% 56%;
+    --info-foreground: 0 0% 100%;
+
+    /* ─── Borders & Inputs ──────────────────────────────────── */
+    --border: 214 18% 88%;
+    --border-strong: 214 24% 82%;
+    --input: 214 18% 88%;
+    --ring: 222 47% 30%;
+
+    /* ─── Radius ────────────────────────────────────────────── */
     --radius: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+
+    /* ─── Shadows ───────────────────────────────────────────── */
+    --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.03);
+    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.04);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.06), 0 2px 4px -2px rgb(0 0 0 / 0.04);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.06), 0 4px 6px -4px rgb(0 0 0 / 0.04);
+
+    /* ─── Animation ─────────────────────────────────────────── */
+    --duration-fast: 150ms;
+    --duration-normal: 200ms;
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
+  .dark,
+  [data-theme='dark'] {
+    color-scheme: dark;
+    /* ─── Surfaces ──────────────────────────────────────────── */
+    --background: 222 20% 7%;
+    --foreground: 210 40% 98%;
+
+    --surface: 222 18% 10%;
+    --surface-2: 222 18% 13%;
+    --surface-3: 222 16% 16%;
+
+    --card: 222 18% 11%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 18% 12%;
+    --popover-foreground: 210 40% 98%;
+
+    /* ─── Interactive ───────────────────────────────────────── */
+    --primary: 210 40% 98%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 222 16% 18%;
+    --secondary-foreground: 210 40% 98%;
+
+    --accent: 222 16% 22%;
+    --accent-foreground: 210 40% 98%;
+
+    /* ─── Muted ─────────────────────────────────────────────── */
+    --muted: 222 16% 18%;
+    --muted-foreground: 215 16% 65%;
+
+    /* ─── Feedback ──────────────────────────────────────────── */
+    --destructive: 0 84% 66%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 70% 45%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 90% 56%;
+    --warning-foreground: 0 0% 100%;
+
+    --info: 217 90% 66%;
+    --info-foreground: 0 0% 100%;
+
+    /* ─── Borders & Inputs ──────────────────────────────────── */
+    --border: 222 16% 20%;
+    --border-strong: 222 16% 28%;
+    --input: 222 16% 24%;
+    --ring: 216 34% 64%;
+
+    /* ─── Shadows (darker, subtle) ──────────────────────────── */
+    --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.2);
+    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.26), 0 1px 2px -1px rgb(0 0 0 / 0.2);
+    --shadow-md: 0 8px 12px -6px rgb(0 0 0 / 0.32), 0 4px 6px -4px rgb(0 0 0 / 0.22);
+    --shadow-lg: 0 16px 24px -10px rgb(0 0 0 / 0.34), 0 8px 12px -8px rgb(0 0 0 / 0.24);
   }
 }
