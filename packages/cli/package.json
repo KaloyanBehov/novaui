@@ -4,7 +4,7 @@
   "description": "CLI for NovaUI - React Native component library with NativeWind",
   "type": "module",
   "bin": {
-    "novaui": "./src/bin.js"
+    "novaui-cli": "./src/bin.js"
   },
   "files": [
     "src",
@@ -13,10 +13,21 @@
   ],
   "keywords": [
     "novaui",
+    "novaui-cli",
     "react-native",
-    "cli",
+    "react native",
     "nativewind",
-    "ui-components"
+    "tailwind",
+    "cli",
+    "command-line",
+    "component-library",
+    "ui-library",
+    "design-system",
+    "react-native-ui",
+    "mobile",
+    "expo",
+    "components",
+    "styling"
   ],
   "scripts": {
     "test": "vitest run",
