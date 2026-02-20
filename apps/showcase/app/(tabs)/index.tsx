@@ -33,7 +33,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-  H2,
+  H1,
   H3,
   Input,
   Item,
@@ -129,11 +129,16 @@ export default function HomeScreen() {
     },
   ];
 
+  const contentPadding = 'px-6';
+  const sectionGap = 'gap-6';
+
   return (
     <SafeAreaView className="bg-background flex-1" edges={['top']}>
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContent}>
         {/* Top Navigation / Breadcrumbs */}
-        <View className="px-4 pt-4">
+        <View className={`${contentPadding} pt-6 pb-2`}>
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
@@ -147,91 +152,91 @@ export default function HomeScreen() {
           </Breadcrumb>
         </View>
 
-        {/* Header Section */}
-        <View className="flex-row items-center justify-between px-4 py-6">
-          <View>
-            <H2 className="text-3xl font-bold tracking-tight">Dashboard</H2>
-            <P className="text-muted-foreground">
-              Welcome back, Senior Designer. Here is your workspace pulse.
-            </P>
-          </View>
-          <View className="flex-row items-center gap-3">
-            <Button variant="outline" size="icon" className="h-10 w-10 rounded-full">
-              <Bell size={20} className="text-foreground" />
-              <View className="bg-destructive absolute right-2.5 top-2.5 h-2 w-2 rounded-full border border-white" />
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              className="h-10 w-10 rounded-full"
-              onPress={toggleColorScheme}>
-              {isDark ? (
-                <Sun size={20} className="text-foreground" />
-              ) : (
-                <Moon size={20} className="text-foreground" />
-              )}
-            </Button>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-10 w-10 rounded-full">
-                  <Avatar size="default" className="border-border border">
-                    <AvatarImage src="https://github.com/shadcn.png" />
-                    <AvatarFallback>JD</AvatarFallback>
-                  </Avatar>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56" align="end">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <User size={16} className="mr-2" />
-                  <Text>Profile</Text>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <CreditCard size={16} className="mr-2" />
-                  <Text>Billing</Text>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Settings size={16} className="mr-2" />
-                  <Text>Settings</Text>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <LogOut size={16} className="text-destructive mr-2" />
-                  <Text className="text-destructive">Log out</Text>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+        {/* Header Section — 24px horizontal rhythm, aligned with content */}
+        <View className={`${contentPadding} flex-col pb-6`}>
+          <View className="flex w-full flex-row items-center justify-between gap-3">
+            <View className="flex-1 min-w-0">
+              <H1 className="text-2xl font-bold tracking-tight text-foreground">
+                Dashboard
+              </H1>
+              <P className="mt-1 text-sm text-muted-foreground">Welcome back, Senior Designer.</P>
+            </View>
+            <View className="flex-row items-center gap-2">
+              <Button variant="outline" size="icon" className="h-10 w-10 rounded-full">
+                <Bell size={20} className="text-foreground" />
+                <View className="bg-destructive absolute right-2.5 top-2.5 h-2 w-2 rounded-full border border-white" />
+              </Button>
+              <Button
+                variant="outline"
+                size="icon"
+                className="h-10 w-10 rounded-full"
+                onPress={toggleColorScheme}>
+                {isDark ? (
+                  <Sun size={20} className="text-foreground" />
+                ) : (
+                  <Moon size={20} className="text-foreground" />
+                )}
+              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="relative h-10 w-10 rounded-full">
+                    <Avatar size="default" className="border-border border">
+                      <AvatarImage src="https://github.com/shadcn.png" />
+                      <AvatarFallback>JD</AvatarFallback>
+                    </Avatar>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56" align="end">
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>
+                    <User size={16} className="mr-2" />
+                    <Text>Profile</Text>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <CreditCard size={16} className="mr-2" />
+                    <Text>Billing</Text>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Settings size={16} className="mr-2" />
+                    <Text>Settings</Text>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>
+                    <LogOut size={16} className="text-destructive mr-2" />
+                    <Text className="text-destructive">Log out</Text>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </View>
           </View>
         </View>
 
         {/* Switcher + Highlights */}
-        <View className="gap-4 px-4 pb-6">
+        <View className={`${sectionGap} ${contentPadding} pb-6`}>
           <ButtonGroup className="w-full">
             <Button variant="outline" className="flex-1" label="Day" />
             <Button variant="default" className="flex-1" label="Week" />
             <Button variant="outline" className="flex-1" label="Month" />
           </ButtonGroup>
           <Card className="border-border/60 bg-muted/20">
-            <CardContent className="gap-3 p-4">
-              <View className="flex-row items-center justify-between">
-                <View className="flex-row items-center gap-2">
-                  <ShieldCheck size={18} className="text-emerald-500" />
-                  <Text className="text-sm font-semibold">Operations Stable</Text>
+            <CardContent className="gap-2.5 p-5">
+              <View className="flex-row items-center justify-between gap-3">
+                <View className="flex-row items-center gap-2 min-w-0 flex-1">
+                  <ShieldCheck size={18} className="text-emerald-500 shrink-0" />
+                  <Text className="text-sm font-semibold text-foreground">Operations Stable</Text>
                 </View>
                 <Badge variant="secondary">99.98% Uptime</Badge>
               </View>
-              <View className="flex-row items-center gap-2">
-                <Text className="text-muted-foreground text-sm">
-                  All core systems are in the green. No critical incidents in the last 7 days.
-                </Text>
-              </View>
+              <Text className="text-muted-foreground text-sm leading-relaxed">
+                All core systems are in the green. No critical incidents in the last 7 days.
+              </Text>
             </CardContent>
           </Card>
         </View>
 
         {/* Action Bar */}
-        <View className="flex-row items-center gap-2 px-4 pb-6">
+        <View className={`flex-row items-center gap-3 ${contentPadding} pb-6`}>
           <View className="relative flex-1">
             <View className="absolute bottom-0 left-3 top-0 z-10 flex items-center justify-center">
               <Search size={18} className="text-muted-foreground" />
@@ -278,8 +283,8 @@ export default function HomeScreen() {
           </Sheet>
         </View>
 
-        <Tabs defaultValue="overview" className="px-4">
-          <TabsList className="mb-6 w-full">
+        <Tabs defaultValue="overview" className={contentPadding}>
+          <TabsList className="mb-5 w-full">
             <TabsTrigger value="overview" className="flex-1">
               Overview
             </TabsTrigger>
@@ -291,28 +296,34 @@ export default function HomeScreen() {
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="overview" className="gap-6">
+          <TabsContent value="overview" className={sectionGap}>
             {/* Quick Alert */}
             <Alert variant="default" className="border-primary/20 bg-primary/5">
-              <Zap size={18} className="text-primary mr-2" />
+              <Zap size={18} className="text-primary mr-2.5 shrink-0" />
               <View className="flex-1">
-                <AlertTitle className="text-primary font-bold">Turbo Mode Active</AlertTitle>
-                <AlertDescription className="text-primary/80">
+                <AlertTitle className="text-primary text-sm font-bold">Turbo Mode Active</AlertTitle>
+                <AlertDescription className="text-primary/80 text-sm leading-relaxed">
                   Performance is currently optimized for your active workspace.
                 </AlertDescription>
               </View>
             </Alert>
 
-            {/* Stats Grid */}
+            {/* Stats Grid — 16px gap, 50% width with 8px gutter */}
             <View className="flex-row flex-wrap gap-4">
               {kpis.map((kpi) => (
-                <Card key={kpi.label} className={`w-[48%] border-none ${kpi.bg} shadow-none`}>
-                  <CardHeader className="p-4 pb-2">
-                    <CardDescription className={kpi.tone}>{kpi.label}</CardDescription>
-                    <CardTitle className="text-2xl font-bold">{kpi.value}</CardTitle>
+                <Card
+                  key={kpi.label}
+                  className={`border-border/40 w-[calc(50%-8px)] ${kpi.bg} shadow-sm overflow-hidden`}>
+                  <CardHeader className="p-5 pb-1">
+                    <CardDescription className={`text-xs font-medium uppercase tracking-wider ${kpi.tone}`}>
+                      {kpi.label}
+                    </CardDescription>
+                    <CardTitle className="text-xl font-bold tracking-tight mt-1">
+                      {kpi.value}
+                    </CardTitle>
                   </CardHeader>
-                  <CardContent className="p-4 pt-0">
-                    <Badge variant="secondary" className={`${kpi.tone} bg-foreground/5`}>
+                  <CardContent className="px-5 pb-5 pt-2">
+                    <Badge variant="secondary" className={`${kpi.tone} bg-foreground/5 w-fit`}>
                       {kpi.delta}
                     </Badge>
                   </CardContent>
@@ -321,46 +332,54 @@ export default function HomeScreen() {
             </View>
 
             {/* Momentum */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Quarter Momentum</CardTitle>
-                <CardDescription>Revenue goal tracking and activation mix.</CardDescription>
+            <Card className="border-border/50 shadow-sm">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-lg">Quarter Momentum</CardTitle>
+                <CardDescription className="mt-0.5">
+                  Revenue goal tracking and activation mix.
+                </CardDescription>
               </CardHeader>
-              <CardContent className="gap-6">
+              <CardContent className="gap-5 pt-2">
                 <View className="gap-2">
                   <View className="flex-row items-center justify-between">
-                    <Text className="text-sm font-medium">Revenue Goal</Text>
+                    <Text className="text-sm font-medium text-foreground">Revenue Goal</Text>
                     <Text className="text-muted-foreground text-sm">$248k / $320k</Text>
                   </View>
                   <Progress value={78} className="h-2" />
                 </View>
                 <View className="flex-row items-center gap-4">
-                  <Card className="flex-1 border-none bg-muted/40">
-                    <CardContent className="gap-2 p-4">
-                      <Text className="text-muted-foreground text-xs uppercase">Activation</Text>
-                      <Text className="text-2xl font-semibold">72%</Text>
-                      <Text className="text-muted-foreground text-xs">
-                        Onboarding completion
+                  <Card className="bg-muted/40 flex-1 border-none">
+                    <CardContent className="gap-1.5 p-4">
+                      <Text className="text-muted-foreground text-xs font-medium uppercase tracking-wider">
+                        Activation
                       </Text>
+                      <Text className="text-xl font-semibold tracking-tight text-foreground">
+                        72%
+                      </Text>
+                      <Text className="text-muted-foreground text-xs">Onboarding completion</Text>
                     </CardContent>
                   </Card>
-                  <Card className="flex-1 border-none bg-muted/40">
-                    <CardContent className="gap-2 p-4">
-                      <Text className="text-muted-foreground text-xs uppercase">Retention</Text>
-                      <Text className="text-2xl font-semibold">89%</Text>
-                      <Text className="text-muted-foreground text-xs">
-                        Weekly active teams
+                  <Card className="bg-muted/40 flex-1 border-none">
+                    <CardContent className="gap-1.5 p-4">
+                      <Text className="text-muted-foreground text-xs font-medium uppercase tracking-wider">
+                        Retention
                       </Text>
+                      <Text className="text-xl font-semibold tracking-tight text-foreground">
+                        89%
+                      </Text>
+                      <Text className="text-muted-foreground text-xs">Weekly active teams</Text>
                     </CardContent>
                   </Card>
                 </View>
               </CardContent>
             </Card>
 
-            {/* Recent Activity using Items */}
-            <View className="gap-4">
-              <H3 className="text-lg font-semibold">Recent Activity</H3>
-              <Card>
+            {/* Recent Activity */}
+            <View className={sectionGap}>
+              <H3 className="text-base font-semibold tracking-tight text-foreground">
+                Recent Activity
+              </H3>
+              <Card className="border-border/50 shadow-sm overflow-hidden">
                 <CardContent className="p-0">
                   <ItemGroup>
                     {[
@@ -387,19 +406,21 @@ export default function HomeScreen() {
                       },
                     ].map((item, i) => (
                       <React.Fragment key={i}>
-                        <Item variant="default" className="border-0">
+                        <Item variant="default" className="border-0 px-4 py-3">
                           <ItemMedia variant="icon" className={item.color}>
                             <Text className="text-xs font-bold text-white">{item.icon}</Text>
                           </ItemMedia>
                           <ItemContent>
-                            <ItemTitle className="font-semibold">{item.title}</ItemTitle>
-                            <ItemDescription>{item.description}</ItemDescription>
+                            <ItemTitle className="text-sm font-semibold">{item.title}</ItemTitle>
+                            <ItemDescription className="text-sm">
+                              {item.description}
+                            </ItemDescription>
                           </ItemContent>
-                          <Text variant="muted" className="text-xs">
+                          <Text variant="muted" className="text-xs tabular-nums">
                             {item.time}
                           </Text>
                         </Item>
-                        {i < 2 && <Separator className="mx-4" />}
+                        {i < 2 && <Separator className="mx-4 bg-border/60" />}
                       </React.Fragment>
                     ))}
                   </ItemGroup>
@@ -408,36 +429,47 @@ export default function HomeScreen() {
             </View>
 
             {/* Latest Transactions */}
-            <Card>
-              <CardHeader>
-                <View className="flex-row items-center justify-between">
-                  <View>
-                    <CardTitle>Latest Transactions</CardTitle>
+            <Card className="border-border/50 shadow-sm overflow-hidden">
+              <CardHeader className="pb-2">
+                <View className="flex-row items-center justify-between gap-3">
+                  <View className="min-w-0 flex-1">
+                    <CardTitle className="text-lg">Latest Transactions</CardTitle>
                     <CardDescription>Today’s billing highlights.</CardDescription>
                   </View>
-                  <ButtonGroupText className="rounded-md">USD</ButtonGroupText>
+                  <ButtonGroupText className="rounded-md shrink-0">USD</ButtonGroupText>
                 </View>
               </CardHeader>
               <CardContent className="p-0">
                 <Table>
                   <TableHeader>
-                    <TableRow>
-                      <TableHead className="w-[40%]">Client</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead className="text-right">Amount</TableHead>
+                    <TableRow className="border-b-border/40 hover:bg-transparent">
+                      <TableHead className="w-[40%] px-4 py-3 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                        Client
+                      </TableHead>
+                      <TableHead className="px-4 py-3 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                        Status
+                      </TableHead>
+                      <TableHead className="text-right px-4 py-3 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                        Amount
+                      </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {[
                       { name: 'Vela Studio', status: 'Paid', amount: '$4,250', tone: 'success' },
-                      { name: 'Nova Labs', status: 'Processing', amount: '$1,140', tone: 'pending' },
+                      {
+                        name: 'Nova Labs',
+                        status: 'Processing',
+                        amount: '$1,140',
+                        tone: 'pending',
+                      },
                       { name: 'Kiteworks', status: 'Overdue', amount: '$980', tone: 'overdue' },
                     ].map((row) => (
                       <TableRow key={row.name}>
-                        <TableCell className="w-[40%]">
-                          <Text className="font-medium">{row.name}</Text>
+                        <TableCell className="w-[40%] px-4 py-3">
+                          <Text className="font-medium text-foreground">{row.name}</Text>
                         </TableCell>
-                        <TableCell>
+                        <TableCell className="px-4 py-3">
                           <Badge
                             variant="secondary"
                             className={
@@ -450,7 +482,9 @@ export default function HomeScreen() {
                             {row.status}
                           </Badge>
                         </TableCell>
-                        <TableCell className="text-right">{row.amount}</TableCell>
+                        <TableCell className="text-right px-4 py-3 tabular-nums text-foreground">
+                          {row.amount}
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -459,73 +493,73 @@ export default function HomeScreen() {
             </Card>
 
             {/* Project Card */}
-            <Card className="overflow-hidden">
+            <Card className="border-border/50 overflow-hidden shadow-sm">
               <Image
                 source="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop"
                 style={{ height: 160, width: '100%' }}
                 contentFit="cover"
               />
-              <CardHeader>
-                <View className="flex-row items-center justify-between">
-                  <CardTitle>Design System Prototype</CardTitle>
-                  <Badge variant="outline">In Progress</Badge>
+              <CardHeader className="pb-2">
+                <View className="flex-row items-center justify-between gap-3">
+                  <CardTitle className="text-lg flex-1 min-w-0">Design System Prototype</CardTitle>
+                  <Badge variant="outline" className="shrink-0">In Progress</Badge>
                 </View>
-                <CardDescription>
+                <CardDescription className="mt-0.5">
                   A modern React Native UI library built with NativeWind.
                 </CardDescription>
               </CardHeader>
-              <CardFooter className="border-border border-t pt-4">
+              <CardFooter className="border-border border-t px-6 pb-6 pt-4">
                 <Button variant="default" className="flex-1" label="Continue Editing" />
               </CardFooter>
             </Card>
           </TabsContent>
 
-          <TabsContent value="analytics" className="gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>System Performance</CardTitle>
-                <CardDescription>Live health monitoring status.</CardDescription>
+          <TabsContent value="analytics" className={sectionGap}>
+            <Card className="border-border/50 shadow-sm">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-lg">System Performance</CardTitle>
+                <CardDescription className="mt-0.5">Live health monitoring status.</CardDescription>
               </CardHeader>
-              <CardContent className="gap-6">
+              <CardContent className="gap-5 pt-2">
                 <View className="gap-2">
-                  <View className="flex-row justify-between">
-                    <Text className="text-sm font-medium">Server Load</Text>
-                    <Text className="text-muted-foreground text-sm">42%</Text>
+                  <View className="flex-row justify-between items-center">
+                    <Text className="text-sm font-medium text-foreground">Server Load</Text>
+                    <Text className="text-muted-foreground text-sm tabular-nums">42%</Text>
                   </View>
                   <Progress value={42} className="h-2" />
                 </View>
                 <View className="gap-2">
-                  <View className="flex-row justify-between">
-                    <Text className="text-sm font-medium">Memory Usage</Text>
-                    <Text className="text-muted-foreground text-sm">1.2 GB / 2 GB</Text>
+                  <View className="flex-row justify-between items-center">
+                    <Text className="text-sm font-medium text-foreground">Memory Usage</Text>
+                    <Text className="text-muted-foreground text-sm tabular-nums">1.2 GB / 2 GB</Text>
                   </View>
                   <Progress value={60} className="h-2" />
                 </View>
                 <View className="gap-2">
-                  <View className="flex-row justify-between">
-                    <Text className="text-sm font-medium">Active Workers</Text>
-                    <Text className="text-muted-foreground text-sm">18 / 20</Text>
+                  <View className="flex-row justify-between items-center">
+                    <Text className="text-sm font-medium text-foreground">Active Workers</Text>
+                    <Text className="text-muted-foreground text-sm tabular-nums">18 / 20</Text>
                   </View>
                   <Progress value={90} className="h-2" />
                 </View>
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Deployment History</CardTitle>
+            <Card className="border-border/50 shadow-sm">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-lg">Deployment History</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="pt-2">
                 <Calendar
                   mode="single"
                   selected={date}
                   onSelect={setDate}
-                  className="border-border rounded-md border"
+                  className="border-border rounded-lg border"
                 />
               </CardContent>
-              <CardFooter className="border-border flex-col items-start gap-4 border-t pt-4">
+              <CardFooter className="border-border flex-col items-start gap-4 border-t px-6 pb-6 pt-4">
                 <View className="w-full gap-2">
-                  <Label>Select Environment</Label>
+                  <Label className="text-sm font-medium">Select Environment</Label>
                   <Select>
                     <SelectTrigger>
                       <SelectValue placeholder="Production" />
@@ -540,12 +574,14 @@ export default function HomeScreen() {
               </CardFooter>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Security Compliance</CardTitle>
-                <CardDescription>Latest audit outcomes across environments.</CardDescription>
+            <Card className="border-border/50 shadow-sm">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-lg">Security Compliance</CardTitle>
+                <CardDescription className="mt-0.5">
+                  Latest audit outcomes across environments.
+                </CardDescription>
               </CardHeader>
-              <CardContent className="gap-4">
+              <CardContent className="gap-4 pt-2">
                 {[
                   {
                     label: 'SOC 2 Controls',
@@ -559,12 +595,12 @@ export default function HomeScreen() {
                   },
                 ].map((item) => (
                   <View key={item.label} className="flex-row items-center gap-3">
-                    <View className="bg-muted h-9 w-9 items-center justify-center rounded-full">
+                    <View className="bg-muted h-9 w-9 shrink-0 items-center justify-center rounded-full">
                       {item.icon}
                     </View>
-                    <View className="flex-1">
-                      <Text className="text-sm font-medium">{item.label}</Text>
-                      <Text className="text-muted-foreground text-xs">{item.desc}</Text>
+                    <View className="flex-1 min-w-0">
+                      <Text className="text-sm font-medium text-foreground">{item.label}</Text>
+                      <Text className="text-muted-foreground text-xs mt-0.5">{item.desc}</Text>
                     </View>
                   </View>
                 ))}
@@ -572,22 +608,24 @@ export default function HomeScreen() {
             </Card>
           </TabsContent>
 
-          <TabsContent value="activity" className="gap-6">
+          <TabsContent value="activity" className={sectionGap}>
             {/* Skeleton Loading State Preview */}
-            <View className="gap-4">
-              <H3 className="text-lg font-semibold">Incoming Reports</H3>
-              <Card>
-                <CardContent className="gap-4 p-4">
+            <View className={sectionGap}>
+              <H3 className="text-base font-semibold tracking-tight text-foreground">
+                Incoming Reports
+              </H3>
+              <Card className="border-border/50 shadow-sm">
+                <CardContent className="gap-4 p-5">
                   <View className="flex-row items-center gap-4">
-                    <Skeleton className="h-12 w-12 rounded-full" />
-                    <View className="flex-1 gap-2">
+                    <Skeleton className="h-12 w-12 rounded-full shrink-0" />
+                    <View className="flex-1 gap-2 min-w-0">
                       <Skeleton className="h-4 w-[60%]" />
                       <Skeleton className="h-3 w-[40%]" />
                     </View>
                   </View>
                   <View className="flex-row items-center gap-4">
-                    <Skeleton className="h-12 w-12 rounded-full" />
-                    <View className="flex-1 gap-2">
+                    <Skeleton className="h-12 w-12 rounded-full shrink-0" />
+                    <View className="flex-1 gap-2 min-w-0">
                       <Skeleton className="h-4 w-[70%]" />
                       <Skeleton className="h-3 w-[30%]" />
                     </View>
@@ -599,10 +637,10 @@ export default function HomeScreen() {
             <Accordion type="single" collapsible className="w-full">
               <AccordionItem value="item-1">
                 <AccordionTrigger>
-                  <Text className="text-sm font-medium">System Health Details</Text>
+                  <Text className="text-sm font-medium text-foreground">System Health Details</Text>
                 </AccordionTrigger>
                 <AccordionContent>
-                  <P className="text-muted-foreground text-sm">
+                  <P className="text-muted-foreground text-sm leading-relaxed">
                     All core systems are operational. No critical failures detected in the last 24
                     hours. Backup systems are currently being verified.
                   </P>
@@ -610,10 +648,10 @@ export default function HomeScreen() {
               </AccordionItem>
               <AccordionItem value="item-2">
                 <AccordionTrigger>
-                  <Text className="text-sm font-medium">Accessibility Scorecard</Text>
+                  <Text className="text-sm font-medium text-foreground">Accessibility Scorecard</Text>
                 </AccordionTrigger>
                 <AccordionContent>
-                  <P className="text-muted-foreground text-sm">
+                  <P className="text-muted-foreground text-sm leading-relaxed">
                     Current accessibility score: 98/100. We identified minor color contrast issues
                     on secondary buttons in dark mode which are being addressed in the next release.
                   </P>
@@ -621,57 +659,64 @@ export default function HomeScreen() {
               </AccordionItem>
             </Accordion>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Quick Settings</CardTitle>
-                <CardDescription>Workspace preferences at a glance.</CardDescription>
+            <Card className="border-border/50 shadow-sm">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-lg">Quick Settings</CardTitle>
+                <CardDescription className="mt-0.5">
+                  Workspace preferences at a glance.
+                </CardDescription>
               </CardHeader>
-              <CardContent className="gap-6">
-                <View className="flex-row items-center justify-between">
-                  <View>
-                    <Label className="text-base">Push Notifications</Label>
-                    <Text variant="muted" className="text-xs">
+              <CardContent className="gap-5 pt-2">
+                <View className="flex-row items-center justify-between gap-4">
+                  <View className="flex-1 min-w-0">
+                    <Label className="text-sm font-medium text-foreground">
+                      Push Notifications
+                    </Label>
+                    <Text variant="muted" className="text-xs mt-0.5">
                       Instant alerts for system changes.
                     </Text>
                   </View>
                   <Switch
                     checked={isNotificationsEnabled}
                     onCheckedChange={setIsNotificationsEnabled}
+                    className="shrink-0"
                   />
                 </View>
-                <Separator />
-                <View className="flex-row items-center justify-between">
-                  <View>
-                    <Label className="text-base">Beta Access</Label>
-                    <Text variant="muted" className="text-xs">
+                <Separator className="bg-border/60" />
+                <View className="flex-row items-center justify-between gap-4">
+                  <View className="flex-1 min-w-0">
+                    <Label className="text-sm font-medium text-foreground">Beta Access</Label>
+                    <Text variant="muted" className="text-xs mt-0.5">
                       Try experimental UI components.
                     </Text>
                   </View>
-                  <Badge variant="secondary">Active</Badge>
+                  <Badge variant="secondary" className="shrink-0">Active</Badge>
                 </View>
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Team Availability</CardTitle>
-                <CardDescription>Design and engineering coverage.</CardDescription>
+            <Card className="border-border/50 shadow-sm">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-lg">Team Availability</CardTitle>
+                <CardDescription className="mt-0.5">
+                  Design and engineering coverage.
+                </CardDescription>
               </CardHeader>
-              <CardContent className="gap-4">
+              <CardContent className="gap-4 pt-2">
                 {[
                   { name: 'Evelyn Ward', role: 'Product Design', status: 'Online' },
                   { name: 'Marco Lee', role: 'Frontend', status: 'In a meeting' },
                   { name: 'Ava Patel', role: 'Research', status: 'Focus time' },
                 ].map((member) => (
                   <View key={member.name} className="flex-row items-center gap-3">
-                    <Avatar size="default" className="border-border border">
+                    <Avatar size="default" className="border-border border shrink-0">
                       <AvatarFallback>{member.name[0]}</AvatarFallback>
                     </Avatar>
-                    <View className="flex-1">
-                      <Text className="text-sm font-medium">{member.name}</Text>
-                      <Text className="text-muted-foreground text-xs">{member.role}</Text>
+                    <View className="flex-1 min-w-0">
+                      <Text className="text-sm font-medium text-foreground">{member.name}</Text>
+                      <Text className="text-muted-foreground text-xs mt-0.5">{member.role}</Text>
                     </View>
-                    <Badge variant="secondary">{member.status}</Badge>
+                    <Badge variant="secondary" className="shrink-0">{member.status}</Badge>
                   </View>
                 ))}
               </CardContent>
@@ -679,11 +724,13 @@ export default function HomeScreen() {
           </TabsContent>
         </Tabs>
 
-        {/* Generate Report Button */}
-        <View className="px-4 pb-12 pt-6">
+        {/* Generate Report Button — consistent horizontal padding, clear section separation */}
+        <View className={`${contentPadding} pt-8 pb-16`}>
           <Button size="lg" className="w-full">
-            <LayoutDashboard size={20} className="text-primary-foreground mr-2" />
-            <Text className="text-primary-foreground font-semibold">Generate Monthly Report</Text>
+            <LayoutDashboard size={20} className="text-primary-foreground mr-2.5 shrink-0" />
+            <Text className="text-primary-foreground text-base font-semibold">
+              Generate Monthly Report
+            </Text>
           </Button>
         </View>
       </ScrollView>
@@ -693,6 +740,6 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   scrollContent: {
-    paddingBottom: 40,
+    paddingBottom: 32,
   },
 });

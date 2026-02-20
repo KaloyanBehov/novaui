@@ -25,7 +25,7 @@ const Checkbox = React.forwardRef<React.ElementRef<typeof Pressable>, CheckboxPr
         {...props}>
         {checked && (
           <View className="flex h-full w-full items-center justify-center">
-            <Check size={12} className="text-primary-foreground" color="white" strokeWidth={3} />
+            <Check size={12} className="text-primary-foreground" strokeWidth={3} />
           </View>
         )}
       </Pressable>

@@ -117,7 +117,7 @@ const Button = React.forwardRef<React.ElementRef<typeof Pressable>, ButtonProps>
           <View style={label || children ? { marginRight: 8 } : undefined}>
             <ActivityIndicator
               size="small"
-              color={variant === 'default' || variant === 'destructive' ? '#ffffff' : undefined}
+              className={buttonTextVariants({ variant, size, className: 'opacity-80' })}
             />
           </View>
         )}
