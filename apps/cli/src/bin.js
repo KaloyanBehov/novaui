@@ -10,7 +10,7 @@ import pc from 'picocolors';
 import { getThemeCssContent } from './themes/index.js';
 import { add, pickComponentsInteractively } from './commands/add.js';
 import { ASCII_BANNER, askTheme, init } from './commands/init.js';
-import { CONFIG_FILENAME, DEFAULT_CONFIG, UTILS_CONTENT } from './constants.js';
+import { CONFIG_FILENAME, DEFAULT_CONFIG, DEFAULT_THEME_CSS, UTILS_CONTENT } from './constants.js';
 import { loadConfig, writeConfig } from './utils/config.js';
 import { detectPackageManager, getInstallHint, getMissingDeps } from './utils/deps.js';
 import { fetchWithTimeout, formatError } from './utils/fetch.js';
@@ -22,7 +22,8 @@ import { checkForUpdates } from './utils/version-check.js';
 
 // ─── Derived constants ───────────────────────────────────────────────────────
 
-export const GLOBAL_CSS_CONTENT = getThemeCssContent(DEFAULT_CONFIG.theme);
+// Export default theme CSS for backward compatibility (tests)
+export const GLOBAL_CSS_CONTENT = DEFAULT_THEME_CSS;
 
 // ─── Re-exports (backward compatibility for tests) ───────────────────────────
 

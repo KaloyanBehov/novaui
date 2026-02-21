@@ -12,6 +12,8 @@
     "clean:lock": "rm -rf pnpm-lock.yaml",
     "test": "turbo run test",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\" --ignore-path .gitignore",
+    "registry:validate": "pnpm --filter @novaui/registry validate",
+    "registry:generate": "pnpm --filter @novaui/registry generate",
     "validate:registry": "turbo run validate:registry",
     "publish:cli": "turbo run publish:cli --filter=novaui-cli"
   },

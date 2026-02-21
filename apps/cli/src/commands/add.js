@@ -4,7 +4,7 @@ import ora from 'ora'
 import { multiselect, isCancel, cancel } from '@clack/prompts'
 import pc from 'picocolors'
 
-import { DEFAULT_CONFIG, UTILS_CONTENT, BASE_URL } from '../constants.js'
+import { DEFAULT_CONFIG, UTILS_CONTENT, BASE_URL, REGISTRY_URL } from '../constants.js'
 import { loadConfig } from '../utils/config.js'
 import { ensureDir } from '../utils/fs-helpers.js'
 import { getMissingDeps, installPackages, getInstallHint } from '../utils/deps.js'
@@ -12,7 +12,29 @@ import { fetchWithTimeout } from '../utils/fetch.js'
 import { assertValidComponentConfig } from '../utils/validate.js'
 import { runAddPreflightChecks } from '../utils/preflight.js'
 import { formatComponentNotFoundError } from '../utils/fuzzy.js'
-import REGISTRY from '../registry.json' with { type: 'json' }
+
+/**
+ * Fetch the registry from GitHub.
+ * Always gets the latest registry from the main branch.
+ */
+async function fetchRegistry() {
+  const spinner = ora({ text: 'Loading component registry...', stream: process.stderr }).start()
+  
+  try {
+    const response = await fetchWithTimeout(REGISTRY_URL)
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch registry: ${response.status} ${response.statusText}`)
+    }
+    
+    const registry = await response.json()
+    spinner.stop()
+    return registry
+  } catch (error) {
+    spinner.fail('Failed to load registry')
+    throw new Error(`Could not fetch registry from GitHub: ${error.message}`)
+  }
+}
 
 /**
  * Fetch the component registry and present an interactive multi-select for
@@ -20,7 +42,7 @@ import REGISTRY from '../registry.json' with { type: 'json' }
  * Only called in TTY mode.
  */
 export async function pickComponentsInteractively() {
-  const registry = REGISTRY
+  const registry = await fetchRegistry()
 
   if (!registry || typeof registry !== 'object' || Array.isArray(registry)) {
     throw new Error('Registry is not a valid object.')
@@ -60,9 +82,9 @@ export async function add(componentName, options = {}) {
   console.log(`  ◆  NovaUI – Adding "${componentName}"...`)
   console.log('')
 
-  // ─── 1. Load registry ─────────────────────────────────────────────────────
+  // ─── 1. Fetch registry ────────────────────────────────────────────────────
 
-  const registry = REGISTRY
+  const registry = await fetchRegistry()
 
   if (!registry || typeof registry !== 'object' || Array.isArray(registry)) {
     throw new Error('Registry is not a valid object.')

@@ -221,7 +221,7 @@ export async function init(options = {}) {
 
   const globalCssDir = path.dirname(path.join(cwd, config.globalCss));
   ensureDir(globalCssDir);
-  const themeCssContent = getThemeCssContent(normalizeTheme(config.theme));
+  const themeCssContent = await getThemeCssContent(normalizeTheme(config.theme));
   writeIfNotExists(
     path.join(cwd, config.globalCss),
     themeCssContent,

@@ -258,9 +258,9 @@ cd apps/cli
 npm version patch
 
 # The prepublishOnly script automatically:
-# - Syncs registry.json from packages/registry/
 # - Syncs themes from packages/themes/
 # - Validates CLI is standalone
+# Note: Registry is fetched from GitHub at runtime (not bundled)
 
 # Publish to npm
 npm publish
@@ -274,9 +274,12 @@ git push origin cli-v1.1.3
 
 The CLI package includes:
 - `src/**/*.js` - All CLI source code
-- `src/registry.json` - Component registry (synced from packages/)
 - `src/themes/` - Theme CSS files (synced from packages/)
 - `README.md` - This documentation
+
+**Fetched at runtime** (not bundled):
+- Component registry from GitHub (`packages/registry/registry.json`)
+- Component source files from GitHub (`packages/components/src/ui/`)
 
 **Not included** (via `.npmignore`):
 - `__tests__/` - Test files
@@ -287,12 +290,29 @@ The CLI package includes:
 
 The `scripts/prebuild.js` runs automatically before publish:
 
-1. Copies latest `registry.json` from packages/registry/
-2. Copies theme files from packages/themes/
-3. Validates no workspace dependencies remain
-4. Ensures all required files exist
+1. Copies theme files from packages/themes/
+2. Validates no workspace dependencies remain
+3. Ensures all required files exist
 
 If validation fails, publish is aborted.
+
+#### Architecture: Runtime Fetch (like shadcn/ui)
+
+The CLI fetches components and registry from GitHub at runtime:
+
+**Benefits:**
+- ✅ Users always get latest components without updating CLI
+- ✅ Smaller package size (no bundled JSON)
+- ✅ Can support multiple versions via branches/tags
+
+**Environment Variables:**
+```bash
+# Override GitHub branch (default: main)
+NOVAUI_BRANCH=dev novaui-cli add button
+
+# Useful for testing or using beta components
+NOVAUI_BRANCH=beta novaui-cli add card
+```
 
 ### Version Compatibility
 
