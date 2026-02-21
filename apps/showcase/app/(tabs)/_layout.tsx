@@ -4,21 +4,35 @@ import React from 'react';
 import { HapticTab } from '@/components/haptic-tab';
 import { HomeIcon, Library, UserIcon } from 'lucide-react-native';
 
+import TabsHeader from '@/components/tabs-header';
+import useThemeStore from '@/store/theme-store';
 import { BlurView } from 'expo-blur';
 import { StyleSheet, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function TabLayout() {
-  const insets = useSafeAreaInsets();
-  const activeTintColor = '#000000';
-  const inactiveTintColor = 'rgba(0,0,0,0.6)';
+  const { theme } = useThemeStore();
+  const isDark = theme === 'dark';
+
+  const activeTintColor = isDark ? '#ffffff' : '#000000';
+  const inactiveTintColor = isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)';
 
   const tabBarStyle = [styles.tabBar];
+
+  const blurContainerStyle = [
+    styles.blurContainer,
+    { backgroundColor: isDark ? 'rgba(0,0,0,0.35)' : 'rgba(255,255,255,0.35)' },
+  ];
+
+  const activeIconBackgroundStyle = {
+    backgroundColor: isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.08)',
+  };
+
+  const blurTint = isDark ? 'systemChromeMaterialDark' : 'systemChromeMaterialLight';
 
   return (
     <Tabs
       screenOptions={{
-        headerShown: false,
+        header: ({ route, options }) => <TabsHeader title={options.title as string} />,
         tabBarButton: HapticTab,
         tabBarActiveTintColor: activeTintColor,
         tabBarInactiveTintColor: inactiveTintColor,
@@ -26,21 +40,17 @@ export default function TabLayout() {
         tabBarStyle,
         tabBarItemStyle: styles.tabBarItem,
         tabBarBackground: () => (
-          <View style={styles.blurContainer}>
-            <BlurView
-              tint="systemChromeMaterialLight"
-              intensity={90}
-              style={StyleSheet.absoluteFill}
-            />
+          <View style={blurContainerStyle}>
+            <BlurView tint={blurTint} intensity={90} style={StyleSheet.absoluteFill} />
           </View>
         ),
       }}>
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
+          title: 'Discover',
           tabBarIcon: ({ color, focused }) => (
-            <View style={[styles.iconContainer, focused && styles.activeIconContainer]}>
+            <View style={[styles.iconContainer, focused && activeIconBackgroundStyle]}>
               <HomeIcon size={24} color={color} strokeWidth={focused ? 2.5 : 2} />
             </View>
           ),
@@ -51,7 +61,7 @@ export default function TabLayout() {
         options={{
           title: 'Library',
           tabBarIcon: ({ color, focused }) => (
-            <View style={[styles.iconContainer, focused && styles.activeIconContainer]}>
+            <View style={[styles.iconContainer, focused && activeIconBackgroundStyle]}>
               <Library size={24} color={color} strokeWidth={focused ? 2.5 : 2} />
             </View>
           ),
@@ -62,7 +72,7 @@ export default function TabLayout() {
         options={{
           title: 'Profile',
           tabBarIcon: ({ color, focused }) => (
-            <View style={[styles.iconContainer, focused && styles.activeIconContainer]}>
+            <View style={[styles.iconContainer, focused && activeIconBackgroundStyle]}>
               <UserIcon size={24} color={color} strokeWidth={focused ? 2.5 : 2} />
             </View>
           ),
@@ -96,7 +106,6 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: 32,
     overflow: 'hidden',
-    backgroundColor: 'rgba(255,255,255,0.35)',
   },
   iconContainer: {
     width: 44,
@@ -104,8 +113,5 @@ const styles = StyleSheet.create({
     borderRadius: 22,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  activeIconContainer: {
-    backgroundColor: 'rgba(255,255,255,0.2)',
   },
 });

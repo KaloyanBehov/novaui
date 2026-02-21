@@ -1,10 +1,12 @@
 import { useColorScheme } from '@/hooks/use-color-scheme';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { cn } from '@/lib/utils';
+import useThemeStore from '@/store/theme-store';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { useEffect } from 'react';
+import { View } from 'react-native';
 import 'react-native-reanimated';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-
 import '../global.css';
 
 export const unstable_settings = {
@@ -12,16 +14,28 @@ export const unstable_settings = {
 };
 
 export default function RootLayout() {
-  const { isDark } = useColorScheme();
+  const { theme } = useThemeStore();
+  const { setColorScheme } = useColorScheme();
+
+  // Sync persisted theme to NativeWind so `dark:` classes and CSS variables resolve correctly
+  useEffect(() => {
+    setColorScheme(theme);
+  }, [theme, setColorScheme]);
+
+  const themeClass = theme === 'dark' ? 'dark' : 'light';
 
   return (
-    <ThemeProvider value={isDark ? DarkTheme : DefaultTheme}>
-      <SafeAreaProvider>
+    <SafeAreaProvider>
+      <View className={cn('flex-1', themeClass)}>
         <StatusBar hidden />
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="screens/book-screen"
+            options={{ headerShown: false, presentation: 'modal' }}
+          />
         </Stack>
-      </SafeAreaProvider>
-    </ThemeProvider>
+      </View>
+    </SafeAreaProvider>
   );
 }

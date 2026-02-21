@@ -34,6 +34,7 @@ import {
   SkipForward,
   Star,
 } from 'lucide-react-native';
+import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Image, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -53,6 +54,7 @@ const bookData = {
 };
 
 export default function BookScreen() {
+  const router = useRouter();
   const { colorScheme } = useColorScheme();
   const theme = colorScheme === 'dark' ? 'dark' : 'light';
   const iconColor = Colors[theme].icon;
@@ -73,7 +75,7 @@ export default function BookScreen() {
             setIsPlaying(false);
             return 0;
           }
-          return prev + 0.1; // Slow increment for smooth preview
+          return prev + 0.05; // Even slower for better visual stability
         });
       }, 100);
     }
@@ -94,16 +96,18 @@ export default function BookScreen() {
   };
 
   return (
-    <SafeAreaView className="bg-background flex-1" edges={['top']}>
+    <SafeAreaView className="flex-1 bg-background" edges={['top']}>
       {/* Header */}
-      <View className="flex-row items-center justify-between px-4 pb-4 pt-2">
+      <View className="flex-row items-center justify-between px-6 pb-2 pt-2">
         <Button
           size="icon"
           variant="ghost"
-          className="h-10 w-10 rounded-full transition-transform active:scale-95">
-          <ChevronDown size={24} color={iconColor} strokeWidth={2} />
+          radius="full"
+          onPress={() => router.back()}
+          className="h-11 w-11 transition-transform active:scale-90">
+          <ChevronDown size={28} color={iconColor} strokeWidth={2} />
         </Button>
-        <P className="text-foreground text-[11px] font-bold uppercase tracking-[0.2em] opacity-80">
+        <P className="text-foreground text-[10px] font-bold uppercase tracking-[0.25em] opacity-60">
           Now Playing
         </P>
         <DropdownMenu>
@@ -111,19 +115,20 @@ export default function BookScreen() {
             <Button
               size="icon"
               variant="ghost"
-              className="h-10 w-10 rounded-full transition-transform active:scale-95">
+              radius="full"
+              className="h-11 w-11 transition-transform active:scale-90">
               <MoreHorizontal size={24} color={iconColor} strokeWidth={2} />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-48">
-            <DropdownMenuItem className="flex-row items-center gap-3 py-3">
+          <DropdownMenuContent className="w-52">
+            <DropdownMenuItem className="flex-row items-center gap-3 py-3.5">
               <Download size={18} color={iconColor} strokeWidth={2} />
-              <Label className="text-base">Download</Label>
+              <Label className="text-base font-semibold">Download</Label>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="flex-row items-center gap-3 py-3">
+            <DropdownMenuItem className="flex-row items-center gap-3 py-3.5">
               <Info size={18} color={iconColor} strokeWidth={2} />
-              <Label className="text-base">View Details</Label>
+              <Label className="text-base font-semibold">View Details</Label>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -131,20 +136,12 @@ export default function BookScreen() {
 
       <ScrollView
         className="flex-1"
-        contentContainerStyle={{ paddingBottom: 40 }}
+        contentContainerStyle={{ paddingBottom: 60 }}
         showsVerticalScrollIndicator={false}>
         {/* Artwork */}
-        <View className="w-full items-center px-10 py-6">
-          <View
-            className="w-full rounded-3xl"
-            style={{
-              shadowColor: '#000',
-              shadowOffset: { width: 0, height: 20 },
-              shadowOpacity: 0.15,
-              shadowRadius: 30,
-              elevation: 20,
-            }}>
-            <AspectRatio ratio={1} className="overflow-hidden rounded-3xl">
+        <View className="items-center px-10 py-8">
+          <View className="w-full shadow-2xl shadow-brand/20">
+            <AspectRatio ratio={1} className="overflow-hidden rounded-[40px] border-4 border-surface">
               <Image
                 source={require('@/assets/cover.png')}
                 className="h-full w-full"
@@ -155,86 +152,85 @@ export default function BookScreen() {
         </View>
 
         {/* Title & Metadata */}
-        <View className="mt-4 items-center px-10">
+        <View className="mt-2 items-center px-8">
           <H1
-            className="text-foreground mb-1.5 text-center text-3xl font-bold tracking-tight"
+            className="mb-1 text-center text-[32px] font-extrabold tracking-tight text-foreground"
             numberOfLines={1}>
             1984
           </H1>
           <P
-            className="text-muted-foreground mb-3 text-center text-lg font-medium"
+            className="mb-4 text-center text-lg font-semibold text-muted-foreground/80"
             numberOfLines={1}>
             George Orwell
           </P>
 
           {/* Rating */}
-          <View className="mb-5 mt-1 flex-row items-center justify-center gap-1.5">
-            <Star size={18} color="#FF8A00" fill="#FF8A00" />
-            <P className="text-foreground text-base font-bold">4.5</P>
-            <P className="text-muted-foreground text-sm font-medium">(120 reviews)</P>
+          <View className="mb-8 flex-row items-center justify-center gap-2 rounded-full bg-surface-2 px-4 py-1.5">
+            <Star size={16} color="#FF8A00" fill="#FF8A00" />
+            <P className="text-[15px] font-bold text-foreground">4.5</P>
+            <View className="h-3 w-[1px] bg-border mx-1" />
+            <P className="text-sm font-semibold text-muted-foreground">120 reviews</P>
           </View>
         </View>
 
         {/* Book Info Chips */}
-        <View className="mb-6 flex-row flex-wrap items-center justify-center gap-3 px-6">
-          <View className="bg-secondary/40 flex-row items-center gap-2 rounded-full px-3.5 py-1.5">
-            <Clock size={14} color={iconColor} strokeWidth={2.5} />
-            <P className="text-foreground text-xs font-semibold">3h 45m</P>
+        <View className="mb-8 flex-row flex-wrap items-center justify-center gap-3 px-6">
+          <View className="flex-row items-center gap-2 rounded-2xl bg-surface px-4 py-2.5">
+            <Clock size={16} color={iconColor} strokeWidth={2} />
+            <P className="text-xs font-bold text-foreground">3h 45m</P>
           </View>
-          <View className="bg-secondary/40 flex-row items-center gap-2 rounded-full px-3.5 py-1.5">
-            <BookOpen size={14} color={iconColor} strokeWidth={2.5} />
-            <P className="text-foreground text-xs font-semibold">7 Chapters</P>
+          <View className="flex-row items-center gap-2 rounded-2xl bg-surface px-4 py-2.5">
+            <BookOpen size={16} color={iconColor} strokeWidth={2} />
+            <P className="text-xs font-bold text-foreground">7 Chapters</P>
           </View>
-          <View className="bg-secondary/40 flex-row items-center gap-2 rounded-full px-3.5 py-1.5">
-            <Globe size={14} color={iconColor} strokeWidth={2.5} />
-            <P className="text-foreground text-xs font-semibold">English</P>
+          <View className="flex-row items-center gap-2 rounded-2xl bg-surface px-4 py-2.5">
+            <Globe size={16} color={iconColor} strokeWidth={2} />
+            <P className="text-xs font-bold text-foreground">English</P>
           </View>
         </View>
 
         {/* Summary */}
-        <View className="mb-8 px-8">
+        <View className="mb-10 px-10">
           <P
-            className="text-muted-foreground/80 text-center text-sm font-medium leading-relaxed"
+            className="text-center text-[15px] font-medium leading-relaxed text-muted-foreground/70"
             numberOfLines={3}>
             Among the seminal texts of the 20th century, Nineteen Eighty-Four is a rare work that
-            grows more haunting as its futuristic purgatory becomes more real. Follow Winston Smith
-            as he rebels against a totalitarian regime.
+            grows more haunting as its futuristic purgatory becomes more real.
           </P>
         </View>
 
         {/* Progress */}
-        <View className="mt-2 gap-3 px-8">
-          <Progress className="h-1.5 w-full rounded-full" value={progress} />
+        <View className="mb-8 gap-3.5 px-10">
+          <Progress className="h-2 w-full rounded-full bg-surface-2" value={progress} />
           <View className="flex-row items-center justify-between">
-            <P className="text-muted-foreground/80 text-left text-xs font-semibold tabular-nums tracking-wider">
+            <P className="text-left font-bold tabular-nums tracking-wider text-muted-foreground/60 text-[11px]">
               {formatTime(currentSeconds)}
             </P>
-            <P className="text-muted-foreground/80 text-right text-xs font-semibold tabular-nums tracking-wider">
+            <P className="text-right font-bold tabular-nums tracking-wider text-muted-foreground/60 text-[11px]">
               -{formatTime(remainingSeconds)}
             </P>
           </View>
         </View>
 
         {/* Primary Controls */}
-        <View className="mt-4 flex-row items-center justify-center gap-8 px-8">
+        <View className="mb-12 flex-row items-center justify-center gap-8 px-8">
           <Button
             size="icon"
             variant="ghost"
             radius="full"
-            className="h-16 w-16 bg-transparent transition-transform active:scale-95">
-            <SkipBack size={24} color={iconColor} strokeWidth={1.5} fill={iconColor} />
+            className="h-16 w-16 transition-transform active:scale-90">
+            <SkipBack size={32} color={iconColor} strokeWidth={1.5} fill={iconColor} />
           </Button>
 
           <Button
             size="icon"
             radius="full"
-            className="h-16 w-16 shadow-xl transition-transform active:scale-95"
-            style={{ backgroundColor: '#FF8A00', shadowColor: '#FF8A00' }}
+            className="h-20 w-20 shadow-xl shadow-brand/40 transition-transform active:scale-95 bg-brand"
             onPress={() => setIsPlaying(!isPlaying)}>
             {isPlaying ? (
-              <Pause size={36} color="#fff" fill="#fff" />
+              <Pause size={40} color="#fff" fill="#fff" />
             ) : (
-              <Play size={36} color="#fff" fill="#fff" style={{ marginLeft: 4 }} />
+              <Play size={40} color="#fff" fill="#fff" style={{ marginLeft: 6 }} />
             )}
           </Button>
 
@@ -242,21 +238,21 @@ export default function BookScreen() {
             size="icon"
             variant="ghost"
             radius="full"
-            className="h-16 w-16 bg-transparent transition-transform active:scale-95">
-            <SkipForward size={24} color={iconColor} strokeWidth={1.5} fill={iconColor} />
+            className="h-16 w-16 transition-transform active:scale-90">
+            <SkipForward size={32} color={iconColor} strokeWidth={1.5} fill={iconColor} />
           </Button>
         </View>
 
         {/* Secondary controls */}
-        <View className="mb-10 mt-10 flex-row items-center justify-between px-12">
+        <View className="mb-12 flex-row items-center justify-between px-16">
           <Button
             variant="ghost"
             size="icon"
             radius="full"
-            className="h-12 w-12 bg-transparent opacity-70 transition-transform active:scale-90 active:opacity-100"
+            className="h-14 w-14 transition-transform active:scale-90"
             onPress={() => setIsLiked(!isLiked)}>
             <Heart
-              size={26}
+              size={28}
               color={isLiked ? '#ef4444' : iconColor}
               fill={isLiked ? '#ef4444' : 'transparent'}
               strokeWidth={isLiked ? 0 : 2}
@@ -267,12 +263,12 @@ export default function BookScreen() {
             variant="ghost"
             size="icon"
             radius="full"
-            className="h-12 w-12 bg-transparent opacity-70 transition-transform active:scale-90 active:opacity-100"
+            className="h-14 w-14 transition-transform active:scale-90"
             onPress={() => setIsBookmarked(!isBookmarked)}>
             <Bookmark
-              size={26}
-              color={isBookmarked ? '#000000' : iconColor}
-              fill={isBookmarked ? '#000000' : 'transparent'}
+              size={28}
+              color={isBookmarked ? '#FF8A00' : iconColor}
+              fill={isBookmarked ? '#FF8A00' : 'transparent'}
               strokeWidth={isBookmarked ? 0 : 2}
             />
           </Button>
@@ -283,8 +279,8 @@ export default function BookScreen() {
                 variant="ghost"
                 size="icon"
                 radius="full"
-                className="h-12 w-12 bg-transparent opacity-70 transition-transform active:scale-90 active:opacity-100">
-                <Share size={26} color={iconColor} strokeWidth={2} />
+                className="h-14 w-14 transition-transform active:scale-90">
+                <Share size={28} color={iconColor} strokeWidth={2} />
               </Button>
             </DrawerTrigger>
             <SharePreview
@@ -300,3 +296,4 @@ export default function BookScreen() {
     </SafeAreaView>
   );
 }
+

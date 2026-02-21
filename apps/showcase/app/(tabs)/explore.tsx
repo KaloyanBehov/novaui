@@ -1,10 +1,8 @@
 import { LibraryCard } from '@/components/cards/library-card';
 import { bestSellers, recentPlays } from '@/mock/data';
-import { Label, Select, SelectContent, SelectItem, SelectTrigger, Text } from '@novaui/components';
-import { ArrowLeft, Search } from 'lucide-react-native';
+import { Label, Select, SelectContent, SelectItem, SelectTrigger } from '@novaui/components';
 import React from 'react';
-import { ScrollView, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { ScrollView, View } from 'react-native';
 
 export default function MyLibraryScreen() {
   // Use mock data to populate list
@@ -41,26 +39,7 @@ export default function MyLibraryScreen() {
   };
 
   return (
-    <SafeAreaView className="bg-background flex-1" edges={['top']}>
-      {/* Header bar */}
-      <View className="flex-row items-center justify-between px-6 py-4">
-        <View className="flex-1 items-start">
-          <TouchableOpacity className="border-border h-[42px] w-[42px] items-center justify-center rounded-full border bg-transparent">
-            <ArrowLeft size={20} className="text-foreground" />
-          </TouchableOpacity>
-        </View>
-
-        <View className="flex-2 items-center justify-center">
-          <Text className="text-foreground text-[17px] font-bold">My Library</Text>
-        </View>
-
-        <View className="flex-1 flex-row items-center justify-end">
-          <TouchableOpacity>
-            <Search size={22} className="text-foreground" />
-          </TouchableOpacity>
-        </View>
-      </View>
-
+    <View className="bg-background flex-1">
       <ScrollView
         contentContainerStyle={{ paddingBottom: 60 }}
         showsVerticalScrollIndicator={false}>
@@ -115,6 +94,6 @@ export default function MyLibraryScreen() {
           ))}
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }

@@ -2,14 +2,14 @@ import { cn } from '@/lib/utils';
 import { chapters } from '@/mock/data';
 import {
   Button,
-  H1,
+  H3,
   Item,
   ItemContent,
   ItemDescription,
   ItemGroup,
   ItemMedia,
   ItemTitle,
-  P,
+  Text,
 } from '@novaui/components';
 import { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
@@ -26,14 +26,19 @@ const ChaptersSection = ({
 
   const handleChapterPress = (chapterId: number) => {
     setActiveChapter(chapterId);
-    setIsPlaying(!isPlaying);
+    if (activeChapter !== chapterId) {
+      setIsPlaying(true);
+    } else {
+      setIsPlaying(!isPlaying);
+    }
   };
+
   return (
-    <View className="mb-8 px-6">
-      <View className="mb-4 flex-row items-center justify-between">
-        <H1 className="text-xl font-bold">Chapters</H1>
+    <View className="mb-10 px-8">
+      <View className="mb-6 flex-row items-end justify-between px-1">
+        <H3 className="text-foreground text-2xl font-bold tracking-tight">Chapters</H3>
         <Button variant="ghost" size="sm" className="h-8 bg-transparent px-2">
-          <P className="text-sm font-semibold text-[#FF8A00]">See all</P>
+          <Text className="text-brand text-sm font-bold">See all</Text>
         </Button>
       </View>
 
@@ -49,38 +54,44 @@ const ChaptersSection = ({
               <Item
                 variant={isActive ? 'muted' : 'default'}
                 className={cn(
-                  'rounded-xl border border-transparent p-3',
-                  isActive && 'border-[#FF8A00]/30 bg-[#FF8A00]/5'
+                  'rounded-2xl border border-transparent p-4',
+                  isActive && 'border-brand/20 bg-brand/5'
                 )}>
-                <ItemMedia className="bg-secondary/50 h-12 w-12 items-center justify-center rounded-lg">
+                <ItemMedia className="bg-surface-2 h-12 w-12 items-center justify-center rounded-xl">
                   {isActive && isPlaying ? (
-                    <View className="h-4 flex-row items-end justify-center gap-[2px]">
-                      <View className="h-full w-1 rounded-full bg-[#FF8A00]" />
-                      <View className="h-2/3 w-1 rounded-full bg-[#FF8A00]" />
-                      <View className="h-3/4 w-1 rounded-full bg-[#FF8A00]" />
+                    <View className="h-5 flex-row items-end justify-center gap-[2px]">
+                      <View className="bg-brand h-full w-[3px] rounded-full" />
+                      <View className="bg-brand h-3/5 w-[3px] rounded-full" />
+                      <View className="bg-brand h-4/5 w-[3px] rounded-full" />
                     </View>
                   ) : (
-                    <P
+                    <Text
                       className={cn(
-                        'text-lg font-bold',
-                        isActive ? 'text-[#FF8A00]' : 'text-muted-foreground'
+                        'text-lg font-bold tabular-nums',
+                        isActive ? 'text-brand' : 'text-muted-foreground/60'
                       )}>
                       {chapter.id}
-                    </P>
+                    </Text>
                   )}
                 </ItemMedia>
-                <ItemContent className="ml-3">
+                <ItemContent className="ml-4">
                   <ItemTitle>
-                    <P className={cn('text-base font-bold', isActive && 'text-[#FF8A00]')}>
+                    <Text
+                      className={cn(
+                        'text-base font-bold leading-none',
+                        isActive ? 'text-brand' : 'text-foreground'
+                      )}>
                       {chapter.title}
-                    </P>
+                    </Text>
                   </ItemTitle>
-                  <ItemDescription className="mt-0.5 text-xs">
+                  <ItemDescription className="text-muted-foreground/60 mt-1 text-xs font-medium">
                     {chapter.description}
                   </ItemDescription>
                 </ItemContent>
                 <View className="ml-2 items-end justify-center">
-                  <P className="text-muted-foreground text-xs font-semibold">{chapter.duration}</P>
+                  <Text className="text-muted-foreground/50 text-[11px] font-bold tabular-nums">
+                    {chapter.duration}
+                  </Text>
                 </View>
               </Item>
             </TouchableOpacity>

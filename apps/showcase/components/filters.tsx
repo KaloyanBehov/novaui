@@ -77,10 +77,11 @@ const Filters = () => {
           variant="ghost"
           size="icon"
           radius="full"
-          className="h-10 w-10 rounded-full bg-transparent opacity-70 transition-transform active:scale-90 active:opacity-100">
+          className="h-11 w-11 transition-transform active:scale-90">
           <SlidersHorizontal size={22} className="text-foreground" />
         </Button>
       </SheetTrigger>
+
 
       <SheetContent
         className="border-border w-[340px]"

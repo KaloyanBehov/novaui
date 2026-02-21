@@ -26,6 +26,9 @@
     --primary: 222 47% 11%;
     --primary-foreground: 210 40% 98%;
 
+    --brand: 32 100% 50%; /* #FF8A00 */
+    --brand-foreground: 0 0% 100%;
+
     --secondary: 210 40% 96%;
     --secondary-foreground: 222 47% 20%;
 
@@ -199,6 +202,9 @@
     /* ─── Interactive ───────────────────────────────────────── */
     --primary: 210 40% 98%;
     --primary-foreground: 222 47% 11%;
+
+    --brand: 32 100% 50%; /* #FF8A00 */
+    --brand-foreground: 0 0% 100%;
 
     --secondary: 222 16% 18%;
     --secondary-foreground: 210 40% 98%;

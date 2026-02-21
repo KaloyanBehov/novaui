@@ -154,7 +154,7 @@ const SelectTrigger = React.forwardRef<
       )}
       {...props}>
       {children}
-      <ChevronDown size={16} className="text-muted-foreground shrink-0 opacity-50" />
+      <ChevronDown size={16} fill="currentColor" className="text-foreground shrink-0 opacity-50" />
     </Pressable>
   );
 });
