@@ -1,46 +1,41 @@
+import React from 'react';
+
 const FeatureCard = ({
   icon,
   title,
   description,
-  gradient,
-  iconColor,
+  children,
+  className = '',
 }: {
-  icon: React.ReactNode
-  title: string
-  description: string
-  gradient?: string
-  iconColor?: string
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  children?: React.ReactNode;
+  className?: string;
 }) => {
   return (
-    <div className="group h-full p-8 rounded-2xl border border-border bg-card/50 backdrop-blur-sm hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 relative overflow-hidden flex flex-col items-start">
+    <div
+      className={`group relative rounded-3xl border border-border/50 bg-card/20 overflow-hidden transition-all duration-500 hover:border-border hover:bg-card/40 hover:shadow-2xl hover:shadow-primary/5 flex flex-col ${className}`}
+    >
       {/* Dynamic Background Glow */}
-      <div
-        className={`absolute -right-8 -top-8 w-24 h-24 bg-primary/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700`}
-      />
-      
-      {/* Subtle gradient on hover */}
-      <div
-        className={`absolute inset-0 bg-linear-to-br ${gradient || 'from-primary/5 via-transparent to-transparent'} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
-      />
+      <div className="absolute -right-20 -top-20 w-40 h-40 bg-primary/10 rounded-full blur-[50px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
-      <div className="relative z-10 w-full">
-        <div
-          className={`w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center ${iconColor || 'text-primary'} mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-sm border border-primary/5`}
-        >
+      <div className="p-8 flex flex-col h-full relative z-10">
+        <div className="w-10 h-10 rounded-xl bg-muted/50 border border-border/50 flex items-center justify-center text-foreground mb-6 shadow-sm group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
           {icon}
         </div>
-        <h3 className="text-xl font-semibold mb-3 tracking-tight group-hover:text-primary transition-colors duration-300">
-          {title}
-        </h3>
-        <p className="text-muted-foreground leading-relaxed font-normal">
-          {description}
-        </p>
+
+        {children && <div className="mt-2 mb-8 flex-1 w-full">{children}</div>}
+
+        <div className={children ? 'mt-auto' : 'flex-1 flex flex-col justify-end'}>
+          <h3 className="text-lg font-semibold tracking-tight text-foreground mb-2 group-hover:text-primary transition-colors">
+            {title}
+          </h3>
+          <p className="text-sm text-muted-foreground leading-relaxed font-normal">{description}</p>
+        </div>
       </div>
-
-      {/* Bottom accent line */}
-      <div className="absolute bottom-0 left-0 w-0 h-1 bg-linear-to-r from-primary/50 to-primary rounded-full transition-all duration-500 group-hover:w-1/3" />
     </div>
-  )
-}
+  );
+};
 
-export default FeatureCard
+export default FeatureCard;

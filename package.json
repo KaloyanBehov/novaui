@@ -32,8 +32,9 @@
       "react-dom": "19.1.0",
       "@types/react": "~19.1.10",
       "@types/react-dom": "~19.1.7",
-      "tailwindcss": "^3.4.19",
-      "@novaui/docs>tailwindcss": "^4.1.18"
+      "@novaui/showcase>tailwindcss": "^3.4.19",
+      "@novaui/docs>tailwindcss": "^4.1.18",
+      "@novaui/docs>@tailwindcss/postcss": "^4.2.0"
     },
     "peerDependencyRules": {
       "ignoreMissing": [

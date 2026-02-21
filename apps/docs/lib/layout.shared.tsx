@@ -11,7 +11,14 @@ export const gitConfig = {
 export function baseOptions(): BaseLayoutProps {
   return {
     nav: {
-      title: 'NovaUI',
+      title: (
+        <div className="flex items-center gap-2.5 font-semibold text-base">
+          <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center shadow-md shadow-primary/20">
+            <span className="text-primary-foreground text-xs font-bold">N</span>
+          </div>
+          <span className="tracking-tight">NovaUI</span>
+        </div>
+      ),
     },
     links: [
       {
