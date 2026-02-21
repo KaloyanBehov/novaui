@@ -1,0 +1,11 @@
+node_modules/
+.turbo/
+*.test.js
+__tests__/
+.DS_Store
+*.log
+tsconfig.json
+vitest.config.js
+.vscode/
+.cursor/
+coverage/

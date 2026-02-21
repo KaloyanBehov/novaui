@@ -1,0 +1,65 @@
+{
+  "name": "novaui-cli",
+  "version": "1.1.2",
+  "description": "CLI for NovaUI - React Native component library with NativeWind",
+  "type": "module",
+  "bin": {
+    "novaui-cli": "./src/bin.js"
+  },
+  "files": [
+    "src/**/*.js",
+    "!src/__tests__",
+    "README.md"
+  ],
+  "keywords": [
+    "novaui",
+    "novaui-cli",
+    "react-native",
+    "react native",
+    "nativewind",
+    "tailwind",
+    "cli",
+    "command-line",
+    "component-library",
+    "ui-library",
+    "design-system",
+    "react-native-ui",
+    "mobile",
+    "expo",
+    "components",
+    "styling"
+  ],
+  "scripts": {
+    "prepublishOnly": "node scripts/prebuild.js",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KaloyanBehov/novaui"
+  },
+  "homepage": "https://github.com/KaloyanBehov/novaui#readme",
+  "bugs": {
+    "url": "https://github.com/KaloyanBehov/novaui/issues"
+  },
+  "dependencies": {
+    "@clack/prompts": "^1.0.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "commander": "^14.0.3",
+    "nativewind": "^4.2.2",
+    "ora": "^9.3.0",
+    "picocolors": "^1.1.1",
+    "react-native-reanimated": "~4.1.1",
+    "react-native-safe-area-context": "~5.6.0",
+    "tailwind-merge": "^3.5.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "babel-preset-expo": "^54.0.10",
+    "prettier-plugin-tailwindcss": "^0.5.11",
+    "tailwindcss": "^3.4.17",
+    "vitest": "^3.0.0"
+  }
+}

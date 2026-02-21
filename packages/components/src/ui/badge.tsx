@@ -1,59 +1,57 @@
-import * as React from "react"
-import { View, Text } from "react-native"
-import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "../../lib/utils"
+import { cva, type VariantProps } from 'class-variance-authority';
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import { cn } from '../../lib/utils';
 
 const badgeVariants = cva(
-  "inline-flex items-center rounded-full border px-2.5 py-0.5 web:transition-colors web:focus:outline-none web:focus:ring-2 web:focus:ring-ring web:focus:ring-offset-2",
+  'web:transition-colors web:focus:outline-none web:focus:ring-2 web:focus:ring-ring web:focus:ring-offset-2 inline-flex items-center rounded-full border px-2.5 py-0.5',
   {
     variants: {
       variant: {
-        default:
-          "border-transparent bg-primary shadow web:hover:bg-primary/80",
-        secondary:
-          "border-transparent bg-secondary web:hover:bg-secondary/80",
-        destructive:
-          "border-transparent bg-destructive shadow web:hover:bg-destructive/80",
-        outline: "text-foreground",
+        default: 'bg-primary web:hover:bg-primary/80 border-transparent',
+        secondary: 'bg-secondary web:hover:bg-secondary/80 border-transparent',
+        destructive: 'bg-destructive web:hover:bg-destructive/80 border-transparent',
+        outline: 'text-foreground',
       },
     },
     defaultVariants: {
-      variant: "default",
+      variant: 'default',
     },
   }
-)
+);
 
-const badgeTextVariants = cva("text-xs font-semibold", {
+const badgeTextVariants = cva('flex flex-row items-center gap-2 text-xs font-semibold', {
   variants: {
     variant: {
-      default: "text-primary-foreground",
-      secondary: "text-secondary-foreground",
-      destructive: "text-destructive-foreground",
-      outline: "text-foreground",
+      default: 'dark:text-primary-foreground text-primary-foreground',
+      secondary: 'dark:text-secondary-foreground text-secondary-foreground',
+      destructive: 'dark:text-destructive-foreground text-destructive-foreground',
+      outline: 'dark:text-foreground text-foreground',
     },
   },
   defaultVariants: {
-    variant: "default",
+    variant: 'default',
   },
-})
+});
 
 export interface BadgeProps
-  extends React.ComponentPropsWithoutRef<typeof View>,
-    VariantProps<typeof badgeVariants> {
-    label?: string
-    labelClasses?: string
+  extends React.ComponentPropsWithoutRef<typeof View>, VariantProps<typeof badgeVariants> {
+  label?: string;
+  labelClasses?: string;
 }
 
 function Badge({ className, variant, label, labelClasses, children, ...props }: BadgeProps) {
   return (
     <View className={cn(badgeVariants({ variant }), className)} {...props}>
       {label ? (
-         <Text className={cn(badgeTextVariants({ variant }), labelClasses)}>{label}</Text>
+        <Text className={cn(badgeTextVariants({ variant }), labelClasses)}>{label}</Text>
       ) : (
-        children
+        <View className={cn(badgeTextVariants({ variant }), labelClasses)}>
+          {typeof children === 'string' ? <Text>{children}</Text> : children}
+        </View>
       )}
     </View>
-  )
+  );
 }
 
-export { Badge, badgeVariants }
+export { Badge, badgeVariants };

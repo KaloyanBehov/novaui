@@ -1,0 +1,247 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root,
+  .light,
+  [data-theme='light'] {
+    color-scheme: light;
+
+    /* ─── Surfaces ──────────────────────────────────────────── */
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+
+    --surface: 210 40% 98%;
+    --surface-2: 210 40% 96%;
+    --surface-3: 214 32% 93%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* ─── Interactive ───────────────────────────────────────── */
+    --primary: 222 47% 11%;
+    --primary-foreground: 210 40% 98%;
+
+    --brand: 32 100% 50%; /* #FF8A00 */
+    --brand-foreground: 0 0% 100%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 20%;
+
+    --accent: 210 40% 94%;
+    --accent-foreground: 222 47% 20%;
+
+    /* ─── Muted ─────────────────────────────────────────────── */
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    /*
+     * FIX: removed --text-muted-foreground and --muted-subtle.
+     *
+     * --text-muted-foreground was a naming error — the "text-" prefix is a
+     * CSS property name, not a design token convention. Components reference
+     * `text-muted-foreground` which maps to --muted-foreground via Tailwind.
+     * Having both caused the wrong token to resolve in some cases.
+     *
+     * --muted-subtle was identical to --muted in both themes — a dead token.
+     * Any usage of bg-muted-subtle can be replaced with bg-muted/50.
+     */
+
+    /* ─── Feedback ──────────────────────────────────────────── */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --destructive-subtle: 0 84% 95%; /* light: was 96% — nudged for better contrast on white bg */
+
+    --success: 142 70% 35%;
+    --success-foreground: 0 0% 100%;
+    --success-subtle: 142 52% 93%; /* light: desaturated slightly — pure 70% sat looks garish */
+
+    --warning: 38 92% 44%;
+    --warning-foreground: 0 0% 100%;
+    --warning-subtle: 38 92% 93%;
+
+    --info: 217 91% 56%;
+    --info-foreground: 0 0% 100%;
+    --info-subtle: 217 91% 94%;
+
+    /* ─── Overlay ───────────────────────────────────────────── */
+    /*
+     * FIX: overlays now use proper HSL alpha syntax instead of raw RGB
+     * channel values. The original used `0 0 0` (not valid HSL) with a
+     * comment that "hsl() doesn't support alpha" — this is incorrect.
+     * hsl() supports a fourth alpha channel in modern CSS and NativeWind.
+     *
+     * Components should use: bg-black/50  bg-black/80
+     * These are more readable and don't require custom token lookup.
+     * The variables below are kept for any components that reference them.
+     */
+    --overlay: 222 47% 11%; /* matches foreground for tinted overlays */
+    --overlay-opacity: 0.5;
+    --overlay-strong-opacity: 0.8;
+
+    /* ─── Borders & Inputs ──────────────────────────────────── */
+    --border: 214 18% 88%;
+    --border-strong: 214 24% 78%; /* was 82% — increased contrast delta from --border */
+    --input: 214 18% 88%;
+    --ring: 222 47% 30%;
+
+    /* ─── Border radius ─────────────────────────────────────── */
+    /*
+     * Radius tokens are defined here for documentation and web usage.
+     * For NativeWind, map these in tailwind.config.js:
+     *
+     *   theme: {
+     *     extend: {
+     *       borderRadius: {
+     *         xs: 'var(--radius-xs)',   // → rounded-xs
+     *         DEFAULT: 'var(--radius)', // → rounded
+     *         lg: 'var(--radius-lg)',   // → rounded-lg (overrides Tailwind default)
+     *         xl: 'var(--radius-xl)',   // → rounded-xl
+     *         '2xl': '1.25rem',         // → rounded-2xl  (sheets)
+     *       }
+     *     }
+     *   }
+     */
+    --radius-xs: 0.25rem; /*  4px — chips, badges, inline tags  */
+    --radius: 0.5rem; /*  8px — buttons, inputs, base        */
+    --radius-lg: 0.75rem; /* 12px — cards, popovers              */
+    --radius-xl: 1rem; /* 16px — sheets, dialogs              */
+    --radius-2xl: 1.25rem; /* 20px — bottom sheets (rounded-t-2xl in SheetContent) */
+    --radius-full: 9999px; /* pills, avatars                      */
+
+    /* ─── Typography scale ──────────────────────────────────── */
+    /*
+     * Font size tokens aligned with the Typography component variants.
+     * These aren't consumed by Tailwind directly but serve as a reference
+     * for the design system and can be wired into tailwind.config.js.
+     *
+     * Mobile-first scale — tighter than web defaults:
+     *   h1  → text-2xl  (24px)
+     *   h2  → text-xl   (20px)
+     *   h3  → text-lg   (18px)
+     *   h4  → text-base (16px)
+     *   h5  → text-sm   (14px)
+     *   p   → text-base (16px)
+     *   lead → text-lg  (18px)
+     *   muted/label/mono → text-sm/text-xs (14px/12px)
+     */
+    --font-size-xs: 0.75rem; /* 12px */
+    --font-size-sm: 0.875rem; /* 14px */
+    --font-size-base: 1rem; /* 16px */
+    --font-size-lg: 1.125rem; /* 18px */
+    --font-size-xl: 1.25rem; /* 20px */
+    --font-size-2xl: 1.5rem; /* 24px */
+
+    /* ─── Spacing ───────────────────────────────────────────── */
+    /*
+     * Component-level spacing constants. Reference these in
+     * component implementations for consistent insets and gaps.
+     * Values match the NativeWind spacing scale (1 unit = 4px).
+     *
+     *   content-padding  → p-6  (24px) — sheet / card inner padding
+     *   section-gap      → gap-4 (16px) — between sections
+     *   item-gap         → gap-3 (12px) — between list items (RadioGroup, etc.)
+     *   inline-gap       → gap-2 (8px)  — icon + label pairs (Toggle)
+     *   touch-target     → 44px — minimum accessible touch area (iOS HIG)
+     */
+    --spacing-content: 1.5rem; /* 24px */
+    --spacing-section: 1rem; /* 16px */
+    --spacing-item: 0.75rem; /* 12px */
+    --spacing-inline: 0.5rem; /* 8px  */
+    --touch-target-min: 2.75rem; /* 44px */
+
+    /* ─── Animation ─────────────────────────────────────────── */
+    /*
+     * Timing tokens are web/CSS-only. Reanimated animations in components
+     * hardcode their own spring configs — these tokens are intentionally
+     * NOT wired into Reanimated to keep animation logic self-contained.
+     *
+     * Web components (if any) should reference these. Native components
+     * should use the shared spring configs defined in each component file
+     * or extracted to a shared lib/animation.ts constant file.
+     *
+     * Recommended lib/animation.ts:
+     *   export const SPRING_DEFAULT  = { damping: 28, stiffness: 250, mass: 0.8 };
+     *   export const SPRING_SNAPPY  = { damping: 20, stiffness: 300, mass: 0.6 };
+     *   export const SPRING_GENTLE  = { damping: 32, stiffness: 180, mass: 1.0 };
+     *   export const TIMING_FAST    = { duration: 150 };
+     *   export const TIMING_NORMAL  = { duration: 220 };
+     */
+    --duration-fast: 150ms;
+    --duration-normal: 220ms; /* was 200ms — matches withTiming(220) used in components */
+    --duration-slow: 1000ms;
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1); /* expo out — snappy deceleration */
+    --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* added: for web spring approximation */
+  }
+
+  /* ─────────────────────────────────────────────────────────────────────────
+   * DARK THEME
+   * ───────────────────────────────────────────────────────────────────────── */
+  .dark,
+  [data-theme='dark'] {
+    color-scheme: dark;
+
+    /* ─── Surfaces ──────────────────────────────────────────── */
+    --background: 222 20% 7%;
+    --foreground: 210 40% 98%;
+
+    --surface: 222 18% 10%;
+    --surface-2: 222 18% 13%;
+    --surface-3: 222 16% 17%;
+
+    --card: 222 18% 11%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 20% 13%;
+    --popover-foreground: 210 40% 98%;
+
+    /* ─── Interactive ───────────────────────────────────────── */
+    --primary: 210 40% 98%;
+    --primary-foreground: 222 47% 11%;
+
+    --brand: 32 100% 50%; /* #FF8A00 */
+    --brand-foreground: 0 0% 100%;
+
+    --secondary: 222 16% 18%;
+    --secondary-foreground: 210 40% 98%;
+
+    --accent: 222 16% 24%;
+    --accent-foreground: 210 40% 98%;
+
+    /* ─── Muted ─────────────────────────────────────────────── */
+    --muted: 222 16% 18%;
+    --muted-foreground: 215 16% 68%;
+
+    /* ─── Feedback ──────────────────────────────────────────── */
+    --destructive: 0 84% 66%;
+    --destructive-foreground: 0 0% 100%;
+    --destructive-subtle: 0 72% 18%;
+
+    --success: 142 70% 45%;
+    --success-foreground: 0 0% 100%;
+    --success-subtle: 142 52% 15%;
+
+    --warning: 38 90% 56%;
+    --warning-foreground: 0 0% 100%;
+    --warning-subtle: 38 80% 16%;
+
+    --info: 217 90% 66%;
+    --info-foreground: 0 0% 100%;
+    --info-subtle: 217 72% 18%;
+
+    /* ─── Overlay ───────────────────────────────────────────── */
+    --overlay: 222 47% 11%;
+    --overlay-opacity: 0.65;
+    --overlay-strong-opacity: 0.88;
+
+    /* ─── Borders & Inputs ──────────────────────────────────── */
+    --border: 222 16% 22%;
+    --border-strong: 222 16% 32%;
+    --input: 222 16% 26%;
+    --ring: 216 34% 68%;
+  }
+}

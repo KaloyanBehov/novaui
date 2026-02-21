@@ -1,0 +1,21 @@
+{
+  "$schema": "https://turborepo.dev/schema.json",
+  "extends": ["//"],
+  "tasks": {
+    "build": {
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "!**/*.test.*",
+        "!**/*.spec.*",
+        "src/**",
+        "lib/**",
+        "tailwind.ts",
+        "tsup.config.*"
+      ],
+      "outputs": [
+        "dist/**"
+      ],
+      "dependsOn": ["^build"]
+    }
+  }
+}

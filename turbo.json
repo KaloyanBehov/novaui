@@ -1,10 +1,9 @@
 {
   "$schema": "https://turborepo.dev/schema.json",
-  "ui": "tui",
   "tasks": {
     "build": {
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": ["dist/**", ".next/**", "!.next/cache/**"],
+      "inputs": ["$TURBO_DEFAULT$", "!**/*.test.*", "!**/*.spec.*", "!**/__tests__/**", "!**/vitest.config.*"],
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**", ".vercel/**"],
       "dependsOn": ["^build"]
     },
     "dev": {
@@ -12,11 +11,52 @@
       "persistent": true
     },
     "test": {
+      "inputs": [
+        "src/**",
+        "!src/**/*.md",
+        "**/*.test.*",
+        "**/*.spec.*",
+        "**/__tests__/**",
+        "**/vitest.config.*",
+        "**/package.json"
+      ],
+      "outputs": ["coverage/**"]
+    },
+    "lint": {
+      "inputs": ["$TURBO_DEFAULT$", "!**/*.md", ".eslintrc*", "eslint.config.*"],
+      "outputs": []
+    },
+    "types:check": {
+      "inputs": ["$TURBO_DEFAULT$", "!**/*.test.*", "!**/*.spec.*", "tsconfig.json", "tsconfig.*.json"],
+      "outputs": [],
       "dependsOn": ["^build"]
     },
-    "lint": {},
+    "format": {
+      "inputs": ["**/*.{ts,tsx,js,jsx,json,md}", ".prettierrc*", "prettier.config.*"],
+      "outputs": [],
+      "cache": false
+    },
     "clean": {
       "cache": false
+    },
+    "validate:registry": {
+      "inputs": [
+        "packages/components/src/ui/**",
+        "packages/registry/registry.json",
+        "packages/registry/scripts/validate.js"
+      ],
+      "outputs": [],
+      "cache": false
+    },
+    "publish:cli": {
+      "dependsOn": ["validate:registry", "test"],
+      "cache": false,
+      "inputs": [
+        "apps/cli/src/**",
+        "apps/cli/package.json",
+        "packages/registry/registry.json",
+        "packages/themes/*.js"
+      ]
     }
   }
 }

@@ -1,6 +1,6 @@
 {
-  "extends": "@repo/typescript-config/react-native-library.json",
-  "include": ["src", "lib", "tailwind.ts"],
+  "extends": "@novaui/typescript-config/react-native-library.json",
+  "include": ["src", "lib", "tailwind.ts", "nativewind-env.d.ts"],
   "exclude": ["dist", "build", "node_modules"],
   "compilerOptions": {
     "strict": true,

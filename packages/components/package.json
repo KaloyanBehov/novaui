@@ -1,20 +1,37 @@
 {
-  "name": "novaui-components",
+  "name": "@novaui/components",
   "version": "1.0.0",
   "type": "module",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "main": "./src/index.ts",
+  "module": "./src/index.ts",
+  "types": "./src/index.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "types": "./src/index.ts",
+      "import": "./src/index.ts",
+      "require": "./src/index.ts"
     },
     "./tailwind": {
-      "types": "./dist/tailwind.d.ts",
-      "import": "./dist/tailwind.mjs",
-      "require": "./dist/tailwind.js"
+      "types": "./tailwind.ts",
+      "import": "./tailwind.ts",
+      "require": "./tailwind.ts"
+    }
+  },
+  "publishConfig": {
+    "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.js"
+      },
+      "./tailwind": {
+        "types": "./dist/tailwind.d.ts",
+        "import": "./dist/tailwind.mjs",
+        "require": "./dist/tailwind.js"
+      }
     }
   },
   "files": [
@@ -29,29 +46,39 @@
     "clean": "rm -rf dist"
   },
   "peerDependencies": {
-    "react": ">=18",
-    "react-native": ">=0.72",
-    "nativewind": ">=4",
-    "tailwindcss": ">=3",
     "class-variance-authority": ">=0.7",
     "clsx": ">=2",
-    "tailwind-merge": ">=3",
     "date-fns": ">=4",
-    "expo-linear-gradient": ">=13",
+    "expo-linear-gradient": ">=15.0.0",
     "lucide-react-native": ">=0.300",
+    "nativewind": ">=4",
+    "react": ">=19.0.0",
+    "react-dom": ">=19.0.0",
+    "react-native": ">=0.80.0",
     "react-native-gesture-handler": ">=2",
     "react-native-gifted-charts": ">=1",
-    "react-native-reanimated": ">=3"
+    "react-native-reanimated": ">=3",
+    "tailwind-merge": ">=3",
+    "tailwindcss": ">=3"
   },
   "peerDependenciesMeta": {
-    "expo-linear-gradient": { "optional": true },
-    "lucide-react-native": { "optional": true },
-    "react-native-gifted-charts": { "optional": true },
-    "date-fns": { "optional": true }
+    "expo-linear-gradient": {
+      "optional": true
+    },
+    "lucide-react-native": {
+      "optional": true
+    },
+    "react-native-gifted-charts": {
+      "optional": true
+    },
+    "date-fns": {
+      "optional": true
+    }
   },
   "devDependencies": {
-    "@repo/typescript-config": "*",
-    "@types/react": "^18.2.14",
+    "@novaui/typescript-config": "workspace:*",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
     "tsup": "^8.0.1",
     "typescript": "5.5.4"
   },
@@ -71,5 +98,8 @@
   "homepage": "https://github.com/KaloyanBehov/novaui#readme",
   "bugs": {
     "url": "https://github.com/KaloyanBehov/novaui/issues"
+  },
+  "dependencies": {
+    "expo-haptics": "~15.0.8"
   }
 }

@@ -1,0 +1,6 @@
+{
+  "globalCss": "global.css",
+  "componentsUi": "components/ui",
+  "lib": "lib",
+  "theme": "default"
+}
