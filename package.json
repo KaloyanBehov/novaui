@@ -50,5 +50,5 @@
     }
   },
   "name": "@novaui/monorepo",
-  "packageManager": "pnpm@9.12.3"
+  "packageManager": "pnpm@9.9.0"
 }
