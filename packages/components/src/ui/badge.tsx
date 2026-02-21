@@ -8,9 +8,9 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-primary web:hover:bg-primary/80 border-transparent shadow',
+        default: 'bg-primary web:hover:bg-primary/80 border-transparent',
         secondary: 'bg-secondary web:hover:bg-secondary/80 border-transparent',
-        destructive: 'bg-destructive web:hover:bg-destructive/80 border-transparent shadow',
+        destructive: 'bg-destructive web:hover:bg-destructive/80 border-transparent',
         outline: 'text-foreground',
       },
     },
@@ -20,7 +20,7 @@ const badgeVariants = cva(
   }
 );
 
-const badgeTextVariants = cva('text-xs font-semibold', {
+const badgeTextVariants = cva('flex flex-row items-center gap-2 text-xs font-semibold', {
   variants: {
     variant: {
       default: 'dark:text-primary-foreground text-primary-foreground',

@@ -12,8 +12,8 @@
     "lint": "expo lint"
   },
   "dependencies": {
-    "@novaui/components": "workspace:*",
     "@expo/vector-icons": "^15.0.3",
+    "@novaui/components": "workspace:*",
     "@react-navigation/bottom-tabs": "^7.4.0",
     "@react-navigation/elements": "^2.6.3",
     "@react-navigation/native": "^7.1.8",
@@ -21,6 +21,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "expo": "~54.0.33",
+    "expo-blur": "~15.0.8",
     "expo-constants": "~18.0.13",
     "expo-font": "~14.0.11",
     "expo-haptics": "~15.0.8",

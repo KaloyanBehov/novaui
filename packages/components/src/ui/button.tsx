@@ -22,8 +22,8 @@ const buttonVariants = cva(
       },
       size: {
         default: 'native:h-12 native:px-5 native:py-3 h-10 px-4 py-2',
-        sm: 'h-9 rounded-md px-3',
-        lg: 'native:h-14 h-11 rounded-md px-8',
+        sm: 'h-9 rounded px-3',
+        lg: 'native:h-14 h-11 rounded px-8',
         icon: 'h-10 w-10',
       },
       radius: {
@@ -58,6 +58,7 @@ const buttonTextVariants = cva('web:transition-colors text-center text-sm font-m
     size: {
       default: 'text-base',
       sm: 'text-sm',
+      md: 'text-base',
       lg: 'text-xl',
       icon: 'text-base',
     },
