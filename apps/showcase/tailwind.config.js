@@ -26,10 +26,6 @@ module.exports = {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
         },
-        brand: {
-          DEFAULT: 'hsl(var(--brand))',
-          foreground: 'hsl(var(--brand-foreground))',
-        },
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
           foreground: 'hsl(var(--secondary-foreground))',
@@ -42,7 +38,6 @@ module.exports = {
         muted: {
           DEFAULT: 'hsl(var(--muted))',
           foreground: 'hsl(var(--muted-foreground))',
-          subtle: 'hsl(var(--muted-subtle))',
         },
         accent: {
           DEFAULT: 'hsl(var(--accent))',
@@ -71,45 +66,33 @@ module.exports = {
           foreground: 'hsl(var(--info-foreground))',
           subtle: 'hsl(var(--info-subtle))',
         },
-        // Overlay uses rgb() channels — hsl() doesn't support alpha shorthand
         overlay: {
-          DEFAULT: 'rgb(var(--overlay) / var(--overlay-opacity))',
-          strong: 'rgb(var(--overlay) / var(--overlay-strong-opacity))',
+          DEFAULT: 'hsl(var(--overlay) / var(--overlay-opacity))',
+          strong: 'hsl(var(--overlay) / var(--overlay-strong-opacity))',
         },
       },
+
+      // Static values — var() and calc() not supported in React Native
       borderRadius: {
-        xs: 'var(--radius-xs)',
-        sm: 'calc(var(--radius) - 4px)',
-        md: 'calc(var(--radius) - 2px)',
-        lg: 'var(--radius)',
-        xl: 'var(--radius-lg)',
-        '2xl': 'var(--radius-xl)',
+        xs: 4,
+        sm: 6,
+        md: 8,
+        lg: 12,
+        xl: 16,
+        '2xl': 20,
+        full: 9999,
       },
-      boxShadow: {
-        xs: 'var(--shadow-xs)',
-        sm: 'var(--shadow-sm)',
-        md: 'var(--shadow-md)',
-        lg: 'var(--shadow-lg)',
-        card: 'var(--shadow-sm)',
-        popover: 'var(--shadow-md)',
-        dialog: 'var(--shadow-lg)',
-      },
+
+      // Static font sizes — var() not supported in React Native
       fontSize: {
-        xs: 'var(--font-size-xs)',
-        sm: 'var(--font-size-sm)',
-        base: 'var(--font-size-base)',
-        lg: 'var(--font-size-lg)',
-        xl: 'var(--font-size-xl)',
-        '2xl': 'var(--font-size-2xl)',
-      },
-      transitionDuration: {
-        fast: 'var(--duration-fast)',
-        normal: 'var(--duration-normal)',
-        slow: 'var(--duration-slow)',
-      },
-      transitionTimingFunction: {
-        'ease-out-expo': 'var(--ease-out)',
-        'ease-in-out-expo': 'var(--ease-in-out)',
+        xs: 12,
+        sm: 14,
+        base: 16,
+        lg: 18,
+        xl: 20,
+        '2xl': 24,
+        '3xl': 30,
+        '4xl': 36,
       },
     },
   },

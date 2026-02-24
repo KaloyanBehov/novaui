@@ -58,6 +58,7 @@
     "react-native-gesture-handler": ">=2",
     "react-native-gifted-charts": ">=1",
     "react-native-reanimated": ">=3",
+    "react-native-safe-area-context": ">=5.0.0",
     "tailwind-merge": ">=3",
     "tailwindcss": ">=3"
   },
@@ -70,6 +71,9 @@
     },
     "react-native-gifted-charts": {
       "optional": true
+    },
+    "react-native-safe-area-context": {
+      "optional": false
     },
     "date-fns": {
       "optional": true
@@ -98,8 +102,5 @@
   "homepage": "https://github.com/KaloyanBehov/novaui#readme",
   "bugs": {
     "url": "https://github.com/KaloyanBehov/novaui/issues"
-  },
-  "dependencies": {
-    "expo-haptics": "~15.0.8"
   }
 }

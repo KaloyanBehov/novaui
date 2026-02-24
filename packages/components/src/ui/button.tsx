@@ -17,7 +17,7 @@ const buttonVariants = cva(
         destructive: 'bg-destructive active:opacity-90',
         outline: 'border-input bg-background active:bg-accent border',
         secondary: 'bg-secondary active:opacity-80',
-        ghost: 'active:bg-accent',
+        ghost: 'hover:bg-accent/20',
         /**
          * FIX: link variant had only web-only underline classes — no visual
          * distinction on native at all. Added padding-bottom for a native
@@ -48,7 +48,16 @@ const buttonVariants = cva(
     },
   }
 );
-
+// ─── Pressed overlay colors per variant ──────────────────────────────────────
+// Driven via JS instead of active: CSS classes, which get stuck on native.
+const PRESSED_OVERLAY: Record<string, string> = {
+  default: 'bg-primary/80',
+  destructive: 'bg-destructive/80',
+  outline: 'bg-accent',
+  secondary: 'bg-secondary/70',
+  ghost: 'bg-accent',
+  link: '',
+};
 /**
  * Text variants — kept in sync with buttonVariants sizes.
  * FIX: removed the orphaned `md` size that had no matching buttonVariants entry.
