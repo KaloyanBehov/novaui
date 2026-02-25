@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import { AspectRatio, Badge, Card, Text } from '@novaui/components';
 import { BookOpen, Headphones, Star, Timer } from 'lucide-react-native';
 import React from 'react';
@@ -11,6 +12,7 @@ interface BookCardProps {
   duration: string;
   isEbook?: boolean;
   onPress?: () => void;
+  className?: string;
 }
 
 export function BookCard({
@@ -21,10 +23,14 @@ export function BookCard({
   duration,
   isEbook,
   onPress,
+  className,
 }: BookCardProps) {
   return (
-    <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
-      <Card className="w-[160px] gap-3 border-0 bg-transparent p-0 shadow-none">
+    <TouchableOpacity
+      activeOpacity={0.8}
+      onPress={onPress}
+      className={cn('w-[160px]', className)}>
+      <Card className="w-full gap-3 border-0 bg-transparent p-0 shadow-none">
         <View className="shadow-lg shadow-black/15">
           <AspectRatio ratio={1} className="relative w-full overflow-hidden rounded-2xl">
             <Image source={{ uri: image }} className="h-full w-full" resizeMode="cover" />

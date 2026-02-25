@@ -40,6 +40,8 @@ const HoverCardTrigger = React.forwardRef<
   const { onOpenChange, setPosition, open } = React.useContext(HoverCardContext)!;
   const triggerRef = React.useRef<View>(null);
 
+  React.useImperativeHandle(ref, () => triggerRef.current as any);
+
   const handlePress = (e: any) => {
     triggerRef.current?.measure((x, y, width, height, pageX, pageY) => {
       setPosition({ x: pageX, y: pageY, width, height });
@@ -50,6 +52,7 @@ const HoverCardTrigger = React.forwardRef<
 
   if (asChild && React.isValidElement(children)) {
     return React.cloneElement(children as React.ReactElement<any>, {
+      ref: triggerRef,
       // @ts-ignore
       onPress: handlePress,
       ...props,

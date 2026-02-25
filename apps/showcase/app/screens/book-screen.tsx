@@ -4,6 +4,9 @@ import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import {
   AspectRatio,
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
   Button,
   Drawer,
   DrawerTrigger,
@@ -13,14 +16,19 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
   H1,
+  H4,
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
   Label,
   P,
   Progress,
 } from '@novaui/components';
-import { useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import {
   Bookmark,
   BookOpen,
+  CalendarDays,
   ChevronDown,
   Clock,
   Download,
@@ -60,6 +68,7 @@ export default function BookScreen() {
   const iconColor = Colors[theme].icon;
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const { id } = useLocalSearchParams<{ id: string }>();
 
   // Audio Player State
   const [isPlaying, setIsPlaying] = useState(false);
@@ -156,11 +165,37 @@ export default function BookScreen() {
             numberOfLines={1}>
             1984
           </H1>
-          <P
-            className="text-muted-foreground/80 mb-4 text-center text-lg font-semibold"
-            numberOfLines={1}>
-            George Orwell
-          </P>
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <P
+                className="text-muted-foreground/80 mb-4 text-center text-lg font-semibold"
+                numberOfLines={1}>
+                George Orwell
+              </P>
+            </HoverCardTrigger>
+            <HoverCardContent className="w-80">
+              <View className="flex-row justify-between gap-4">
+                <Avatar>
+                  <AvatarImage
+                    source={{
+                      uri: 'https://upload.wikimedia.org/wikipedia/commons/7/7e/George_Orwell_press_photo.jpg',
+                    }}
+                  />
+                  <AvatarFallback>GO</AvatarFallback>
+                </Avatar>
+                <View className="flex-1 gap-2">
+                  <H4 className="text-sm font-semibold">@george_orwell</H4>
+                  <P className="text-sm">English novelist and essayist, journalist and critic.</P>
+                  <View className="flex-row items-center pt-2">
+                    <View className="mr-2">
+                      <CalendarDays size={16} className="text-muted-foreground opacity-70" />
+                    </View>
+                    <P className="text-muted-foreground text-xs">Born June 1903</P>
+                  </View>
+                </View>
+              </View>
+            </HoverCardContent>
+          </HoverCard>
 
           {/* Rating */}
           <View className="bg-surface-2 mb-8 flex-row items-center justify-center gap-2 rounded-full px-4 py-1.5">

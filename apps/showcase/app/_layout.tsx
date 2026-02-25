@@ -34,6 +34,9 @@ export default function RootLayout() {
             name="screens/book-screen"
             options={{ headerShown: false, presentation: 'modal' }}
           />
+          <Stack.Screen name="screens/most-popular" options={{ headerShown: false }} />
+          <Stack.Screen name="screens/new-releases" options={{ headerShown: false }} />
+          <Stack.Screen name="screens/trending" options={{ headerShown: false }} />
         </Stack>
       </View>
     </SafeAreaProvider>

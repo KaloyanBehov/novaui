@@ -18,9 +18,9 @@ export default function HomeScreen() {
   const trending = bestSellers.slice(8, 12);
 
   const navigateToBook = (id: string) => {
-    // In a real app we would pass the ID, but for the showcase we have a single screen
     router.push({
       pathname: '/screens/book-screen',
+      params: { id: id.toString() },
     });
   };
 
@@ -56,7 +56,7 @@ export default function HomeScreen() {
         </View>
 
         {/* Sections */}
-        <Section title="New releases" onSeeAll={() => {}}>
+        <Section title="New releases" onSeeAll={() => router.push('/screens/new-releases')}>
           {newReleases.map((book, i) => (
             <BookCard
               key={book.id}
@@ -71,7 +71,7 @@ export default function HomeScreen() {
           ))}
         </Section>
 
-        <Section title="Most popular" onSeeAll={() => {}}>
+        <Section title="Most popular" onSeeAll={() => router.push('/screens/most-popular')}>
           {mostPopular.map((book, i) => (
             <BookCard
               key={book.id}
@@ -86,7 +86,7 @@ export default function HomeScreen() {
           ))}
         </Section>
 
-        <Section title="Trending" onSeeAll={() => {}}>
+        <Section title="Trending" onSeeAll={() => router.push('/screens/trending')}>
           {trending.map((book, i) => (
             <BookCard
               key={book.id}
