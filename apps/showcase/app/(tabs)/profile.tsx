@@ -87,7 +87,7 @@ export default function ProfileScreen() {
 
   return (
     <SafeAreaView className="bg-background flex-1" edges={['top']}>
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 40 }}>
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }}>
         {/* Header Section */}
         <View className="items-center px-6 pt-6 pb-8">
           <Avatar className="h-24 w-24 border-4 border-background shadow-xl mb-4">
@@ -96,11 +96,11 @@ export default function ProfileScreen() {
           </Avatar>
           <H1 className="text-2xl font-bold text-center">Kaloyan Behov</H1>
           <Muted className="text-center mb-4">@kaloyan</Muted>
-          <View className="flex-row gap-3">
-            <Button size="sm" variant="outline" className="rounded-full px-6">
+          <View className="flex-row items-center gap-3">
+            <Button size="sm" variant="outline" className="rounded-full px-6 h-9">
               <Text>Edit Profile</Text>
             </Button>
-            <Button size="icon" variant="ghost" className="rounded-full">
+            <Button size="icon" variant="ghost" className="rounded-full h-9 w-9">
               <Settings size={20} color={iconColor} />
             </Button>
           </View>
@@ -109,10 +109,10 @@ export default function ProfileScreen() {
         {/* Tabs Section */}
         <Tabs defaultValue="overview" className="w-full">
           <View className="px-6 mb-6">
-            <TabsList className="w-full">
-              <TabsTrigger value="overview" className="flex-1">Overview</TabsTrigger>
-              <TabsTrigger value="reading" className="flex-1">Reading</TabsTrigger>
-              <TabsTrigger value="settings" className="flex-1">Settings</TabsTrigger>
+            <TabsList className="w-full bg-muted/20 p-1 gap-2 rounded-xl h-12">
+              <TabsTrigger value="overview" className="flex-1 rounded-lg shadow-none">Overview</TabsTrigger>
+              <TabsTrigger value="reading" className="flex-1 rounded-lg shadow-none">Reading</TabsTrigger>
+              <TabsTrigger value="settings" className="flex-1 rounded-lg shadow-none">Settings</TabsTrigger>
             </TabsList>
           </View>
 
@@ -121,8 +121,8 @@ export default function ProfileScreen() {
             {/* Stats Cards */}
             <View className="flex-row gap-3">
               {readingStats.map((stat, index) => (
-                <Card key={index} className="flex-1 items-center p-4 bg-card/50 border-border/50">
-                  <stat.icon size={20} className="text-primary mb-2" />
+                <Card key={index} className="flex-1 items-center p-4 bg-muted/20 border-0 shadow-none">
+                  <stat.icon size={20} color={isDark ? '#FFFFFF' : '#000000'} className="mb-2" />
                   <H2 className="text-xl font-bold">{stat.value}</H2>
                   <Muted className="text-xs">{stat.label}</Muted>
                 </Card>
@@ -234,14 +234,14 @@ export default function ProfileScreen() {
               <CardContent className="gap-6">
                 <View className="flex-row items-center justify-between">
                   <View className="flex-row items-center gap-3">
-                    <Moon size={20} className="text-muted-foreground" />
+                    <Moon size={20} color={iconColor} />
                     <Label className="text-base">Dark Mode</Label>
                   </View>
                   <Switch checked={isDark} onCheckedChange={toggleColorScheme} />
                 </View>
                 <View className="flex-row items-center justify-between">
                   <View className="flex-row items-center gap-3">
-                    <BarChart3 size={20} className="text-muted-foreground" />
+                    <BarChart3 size={20} color={iconColor} />
                     <Label className="text-base">Usage Stats</Label>
                   </View>
                   <Switch checked={true} />
@@ -258,7 +258,7 @@ export default function ProfileScreen() {
                   <AccordionItem value="subscription" className="border-b-0 px-4">
                     <AccordionTrigger>
                       <View className="flex-row items-center gap-3">
-                        <CreditCard size={18} className="text-muted-foreground" />
+                        <CreditCard size={18} color={iconColor} />
                         <Text className="font-medium">Subscription</Text>
                       </View>
                     </AccordionTrigger>
@@ -278,7 +278,7 @@ export default function ProfileScreen() {
                   <AccordionItem value="help" className="border-b-0 px-4">
                     <AccordionTrigger>
                       <View className="flex-row items-center gap-3">
-                        <HelpCircle size={18} className="text-muted-foreground" />
+                        <HelpCircle size={18} color={iconColor} />
                         <Text className="font-medium">Help & Support</Text>
                       </View>
                     </AccordionTrigger>
@@ -293,7 +293,7 @@ export default function ProfileScreen() {
             </Card>
 
             <Button variant="destructive" className="w-full mt-4">
-              <LogOut size={18} className="mr-2 text-destructive-foreground" />
+              <LogOut size={18} color="#FFFFFF" className="mr-2" />
               <Text>Log Out</Text>
             </Button>
           </TabsContent>

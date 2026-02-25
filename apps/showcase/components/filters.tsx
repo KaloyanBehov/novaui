@@ -1,3 +1,4 @@
+import { useColorScheme } from '@/hooks/use-color-scheme';
 import {
   Button,
   Checkbox,
@@ -51,6 +52,7 @@ const AUTHORS = [
 ];
 
 const Filters = () => {
+  const { isDark } = useColorScheme();
   const insets = useSafeAreaInsets();
 
   // State
@@ -78,7 +80,7 @@ const Filters = () => {
           size="icon"
           radius="full"
           className="h-11 w-11 transition-transform active:scale-90">
-          <SlidersHorizontal size={22} className="text-foreground" />
+          <SlidersHorizontal size={22} color={isDark ? '#FFFFFF' : '#000000'} />
         </Button>
       </SheetTrigger>
 

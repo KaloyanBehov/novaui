@@ -1,4 +1,5 @@
 import { Button, Item, ItemContent, ItemMedia, Progress, Text } from '@novaui/components';
+import { useColorScheme } from '@/hooks/use-color-scheme';
 import {
   ArrowDownToLine,
   BookOpen,
@@ -31,6 +32,10 @@ export function LibraryCard({
   isEbook,
   status = 'download',
 }: LibraryCardProps) {
+  const { colorScheme } = useColorScheme();
+  const isDark = colorScheme === 'dark';
+  const mutedIconColor = isDark ? '#9BA1A6' : '#687076';
+
   return (
     <Item className="bg-card border-border mb-4 flex-row items-start gap-4 rounded-2xl p-4 shadow-sm transition-transform active:scale-[0.98]">
       <ItemMedia className="bg-muted m-0 h-[120px] w-[80px] overflow-hidden rounded-lg">
@@ -46,7 +51,7 @@ export function LibraryCard({
               {name}
             </Text>
             <TouchableOpacity hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
-              <MoreHorizontal size={18} className="text-muted-foreground" />
+              <MoreHorizontal size={18} color={mutedIconColor} />
             </TouchableOpacity>
           </View>
           <Text className="text-muted-foreground mt-1 text-[13px]" numberOfLines={1}>
@@ -58,16 +63,16 @@ export function LibraryCard({
           <View className="flex-row items-center gap-4">
             <View className="flex-row items-center gap-1.5">
               {isEbook ? (
-                <BookOpen size={14} className="text-muted-foreground" color="#8b929e" />
+                <BookOpen size={14} color={mutedIconColor} />
               ) : (
-                <Headphones size={14} className="text-muted-foreground" color="#8b929e" />
+                <Headphones size={14} color={mutedIconColor} />
               )}
               <Text className="text-muted-foreground text-[12px] font-medium">
                 {isEbook ? 'Ebook' : 'Audiobook'}
               </Text>
             </View>
             <View className="flex-row items-center gap-1.5">
-              <Clock size={14} className="text-muted-foreground" color="#8b929e" />
+              <Clock size={14} color={mutedIconColor} />
               <Text className="text-muted-foreground text-[12px] font-medium">{duration}</Text>
             </View>
           </View>

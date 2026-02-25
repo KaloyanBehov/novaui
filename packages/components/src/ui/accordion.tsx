@@ -1,4 +1,5 @@
 import { ChevronDown } from 'lucide-react-native';
+import { useColorScheme } from 'nativewind';
 import * as React from 'react';
 import { Platform, Pressable, StyleSheet, UIManager, View } from 'react-native';
 import Animated, {
@@ -87,8 +88,15 @@ const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof Pressable>,
   React.ComponentPropsWithoutRef<typeof Pressable>
 >(({ className, children, ...props }, ref) => {
-  const { value } = React.useContext(AccordionContext)!;
+  const { value, onValueChange } = React.useContext(AccordionContext)!;
   const { value: itemValue } = React.useContext(AccordionItemContext)!;
+  const { colorScheme } = useColorScheme();
+  const iconColor = colorScheme === 'dark' ? '#FFFFFF' : '#71717A';
+
+  const handlePress = (e: any) => {
+    onValueChange?.(itemValue);
+    props.onPress?.(e);
+  };
 
   const isExpanded = Array.isArray(value) ? value.includes(itemValue) : value === itemValue;
 
@@ -107,12 +115,26 @@ const AccordionTrigger = React.forwardRef<
   return (
     <Pressable
       ref={ref}
+      onPress={handlePress}
       className={cn('flex-row items-center justify-between py-4', className)}
       {...props}>
-      {/* ... (Keep children logic) */}
-      <Animated.View style={chevronStyle}>
-        <ChevronDown size={18} className="text-muted-foreground" />
-      </Animated.View>
+      {typeof children === 'function' ? (
+        (state) => (
+          <>
+            {children(state)}
+            <Animated.View style={chevronStyle}>
+              <ChevronDown size={18} color={iconColor} />
+            </Animated.View>
+          </>
+        )
+      ) : (
+        <>
+          {children}
+          <Animated.View style={chevronStyle}>
+            <ChevronDown size={18} color={iconColor} />
+          </Animated.View>
+        </>
+      )}
     </Pressable>
   );
 });

@@ -3,6 +3,8 @@ import { AspectRatio, Badge, Card, Text } from '@novaui/components';
 import { BookOpen, Headphones, Star, Timer } from 'lucide-react-native';
 import React from 'react';
 import { Image, TouchableOpacity, View } from 'react-native';
+import { useColorScheme } from '@/hooks/use-color-scheme';
+import { Colors } from '@/constants/theme';
 
 interface BookCardProps {
   name: string;
@@ -25,6 +27,10 @@ export function BookCard({
   onPress,
   className,
 }: BookCardProps) {
+  const { colorScheme } = useColorScheme();
+  const isDark = colorScheme === 'dark';
+  const iconColor = isDark ? '#9BA1A6' : '#687076'; // Using muted colors for these icons
+
   return (
     <TouchableOpacity
       activeOpacity={0.8}
@@ -58,16 +64,16 @@ export function BookCard({
         <View className="mt-0.5 flex-row items-center justify-between px-0.5">
           <View className="flex-row items-center gap-1.5">
             {isEbook ? (
-              <BookOpen size={13} className="text-muted-foreground/60" />
+              <BookOpen size={13} color={iconColor} />
             ) : (
-              <Headphones size={13} className="text-muted-foreground/60" />
+              <Headphones size={13} color={iconColor} />
             )}
             <Text className="text-muted-foreground/80 text-[10px] font-semibold uppercase tracking-wider">
               {isEbook ? 'Ebook' : 'Audio'}
             </Text>
           </View>
           <View className="flex-row items-center gap-1">
-            <Timer size={13} className="text-muted-foreground/60" />
+            <Timer size={13} color={iconColor} />
             <Text className="text-muted-foreground/80 text-[10px] font-semibold tabular-nums">
               {duration}
             </Text>

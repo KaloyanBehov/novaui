@@ -13,9 +13,9 @@ const ThemeSwitcher = () => {
       radius="full"
       className="h-11 w-11 transition-transform active:scale-90">
       {theme === 'dark' ? (
-        <Sun size={22} className="text-foreground" />
+        <Sun size={22} color="#FFFFFF" />
       ) : (
-        <Moon size={22} className="text-foreground" />
+        <Moon size={22} color="#000000" />
       )}
     </Button>
 
