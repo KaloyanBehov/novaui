@@ -2,6 +2,7 @@ import ChaptersSection from '@/components/sections/chapters-section';
 import SharePreview from '@/components/share-preview';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { bestSellers } from '@/mock/data';
 import {
   AspectRatio,
   Avatar,
@@ -47,20 +48,6 @@ import { useEffect, useState } from 'react';
 import { Image, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const bookData = {
-  name: '1984',
-  author: 'George Orwell',
-  description:
-    'Among the seminal texts of the 20th century, Nineteen Eighty-Four is a rare work that grows more haunting as its futuristic purgatory becomes more real. Follow Winston Smith as he rebels against a totalitarian regime.',
-  image:
-    'https://images.unsplash.com/photo-1507839719874-92fa3f555525?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-  rating: 4.5,
-  reviews: 120,
-  duration: '3h 45m',
-  chapters: 7,
-  language: 'English',
-};
-
 export default function BookScreen() {
   const router = useRouter();
   const { colorScheme } = useColorScheme();
@@ -69,6 +56,7 @@ export default function BookScreen() {
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const { id } = useLocalSearchParams<{ id: string }>();
+  const bookData = bestSellers.find((book) => book.id === id) ?? undefined;
 
   // Audio Player State
   const [isPlaying, setIsPlaying] = useState(false);
@@ -107,22 +95,22 @@ export default function BookScreen() {
   return (
     <SafeAreaView className="bg-background flex-1" edges={['top']}>
       {/* Header */}
-      <View className="flex-row items-center justify-between px-6 pb-2 pt-2">
+      <View className="flex-row items-center justify-between px-5 py-3">
         <Button
           size="icon"
           variant="ghost"
           radius="full"
           onPress={() => router.back()}
-          className="h-11 w-11 ">
-          <ChevronDown size={28} color={iconColor} strokeWidth={2} />
+          className="h-11 w-11">
+          <ChevronDown size={26} color={iconColor} strokeWidth={2} />
         </Button>
-        <P className="text-foreground text-[10px] font-bold uppercase tracking-[0.25em] opacity-60">
+        <P className="text-foreground text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
           Now Playing
         </P>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button size="icon" variant="ghost" radius="full" className="h-11 w-11">
-              <MoreHorizontal size={24} color={iconColor} strokeWidth={2} />
+              <MoreHorizontal size={22} color={iconColor} strokeWidth={2} />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-52">
@@ -141,16 +129,16 @@ export default function BookScreen() {
 
       <ScrollView
         className="flex-1"
-        contentContainerStyle={{ paddingBottom: 60 }}
+        contentContainerStyle={{ paddingBottom: 120 }}
         showsVerticalScrollIndicator={false}>
         {/* Artwork */}
-        <View className="items-center px-10 py-8">
-          <View className="shadow-brand/20 w-full shadow-2xl">
+        <View className="items-center px-8 pt-4 pb-6">
+          <View className="w-full shadow-black/15 shadow-xl">
             <AspectRatio
               ratio={1}
-              className="border-surface overflow-hidden rounded-[40px] border-4">
+              className="border-border overflow-hidden rounded-[32px] border-2">
               <Image
-                source={require('@/assets/cover.png')}
+                source={{ uri: bookData?.image }}
                 className="h-full w-full"
                 resizeMode="cover"
               />
@@ -159,18 +147,18 @@ export default function BookScreen() {
         </View>
 
         {/* Title & Metadata */}
-        <View className="mt-2 items-center px-8">
+        <View className="items-center px-8">
           <H1
-            className="text-foreground mb-1 text-center text-[32px] font-extrabold tracking-tight"
-            numberOfLines={1}>
-            1984
+            className="text-foreground mb-1.5 text-center text-[28px] font-bold leading-tight tracking-tight"
+            numberOfLines={2}>
+            {bookData?.name ?? '1984'}
           </H1>
           <HoverCard>
             <HoverCardTrigger asChild>
               <P
-                className="text-muted-foreground/80 mb-4 text-center text-lg font-semibold"
+                className="text-muted-foreground mb-5 text-center text-base font-medium"
                 numberOfLines={1}>
-                George Orwell
+                {bookData?.author}
               </P>
             </HoverCardTrigger>
             <HoverCardContent className="w-80">
@@ -178,13 +166,13 @@ export default function BookScreen() {
                 <Avatar>
                   <AvatarImage
                     source={{
-                      uri: 'https://upload.wikimedia.org/wikipedia/commons/7/7e/George_Orwell_press_photo.jpg',
+                      uri: bookData?.image,
                     }}
                   />
-                  <AvatarFallback>GO</AvatarFallback>
+                  <AvatarFallback>{bookData?.author.charAt(0)}</AvatarFallback>
                 </Avatar>
                 <View className="flex-1 gap-2">
-                  <H4 className="text-sm font-semibold">@george_orwell</H4>
+                  <H4 className="text-sm font-semibold">@{bookData?.author}</H4>
                   <P className="text-sm">English novelist and essayist, journalist and critic.</P>
                   <View className="flex-row items-center pt-2">
                     <View className="mr-2">
@@ -198,86 +186,86 @@ export default function BookScreen() {
           </HoverCard>
 
           {/* Rating */}
-          <View className="bg-surface-2 mb-8 flex-row items-center justify-center gap-2 rounded-full px-4 py-1.5">
+          <View className="bg-muted/30 mb-8 flex-row items-center justify-center gap-2.5 rounded-full px-5 py-2">
             <Star size={16} color="#FF8A00" fill="#FF8A00" />
-            <P className="text-foreground text-[15px] font-bold">4.5</P>
-            <View className="bg-border mx-1 h-3 w-[1px]" />
-            <P className="text-muted-foreground text-sm font-semibold">120 reviews</P>
+            <P className="text-foreground text-sm font-bold tabular-nums">4.5</P>
+            <View className="bg-border h-3.5 w-px" />
+            <P className="text-muted-foreground text-sm font-medium">120 reviews</P>
           </View>
         </View>
 
         {/* Book Info Chips */}
         <View className="mb-8 flex-row flex-wrap items-center justify-center gap-3 px-6">
-          <View className="bg-surface flex-row items-center gap-2 rounded-2xl px-4 py-2.5">
+          <View className="bg-muted/20 flex-row items-center gap-2 rounded-2xl px-4 py-3">
             <Clock size={16} color={iconColor} strokeWidth={2} />
-            <P className="text-foreground text-xs font-bold">3h 45m</P>
+            <P className="text-foreground text-sm font-semibold">3h 45m</P>
           </View>
-          <View className="bg-surface flex-row items-center gap-2 rounded-2xl px-4 py-2.5">
+          <View className="bg-muted/20 flex-row items-center gap-2 rounded-2xl px-4 py-3">
             <BookOpen size={16} color={iconColor} strokeWidth={2} />
-            <P className="text-foreground text-xs font-bold">7 Chapters</P>
+            <P className="text-foreground text-sm font-semibold">7 Chapters</P>
           </View>
-          <View className="bg-surface flex-row items-center gap-2 rounded-2xl px-4 py-2.5">
+          <View className="bg-muted/20 flex-row items-center gap-2 rounded-2xl px-4 py-3">
             <Globe size={16} color={iconColor} strokeWidth={2} />
-            <P className="text-foreground text-xs font-bold">English</P>
+            <P className="text-foreground text-sm font-semibold">English</P>
           </View>
         </View>
 
         {/* Summary */}
-        <View className="mb-10 px-10">
+        <View className="mb-10 px-8">
           <P
-            className="text-muted-foreground/70 text-center text-[15px] font-medium leading-relaxed"
-            numberOfLines={3}>
-            Among the seminal texts of the 20th century, Nineteen Eighty-Four is a rare work that
-            grows more haunting as its futuristic purgatory becomes more real.
+            className="text-muted-foreground text-center text-[15px] font-medium leading-[1.5]"
+            numberOfLines={4}>
+            {bookData?.description ??
+              'Among the seminal texts of the 20th century, Nineteen Eighty-Four is a rare work that grows more haunting as its futuristic purgatory becomes more real.'}
           </P>
         </View>
 
         {/* Progress */}
-        <View className="mb-8 gap-3.5 px-10">
-          <Progress className="bg-surface-2 h-2 w-full rounded-full" value={progress} />
+        <View className="mb-10 gap-3 px-8">
+          <Progress className="bg-muted/30 h-2.5 w-full rounded-full" value={progress} />
           <View className="flex-row items-center justify-between">
-            <P className="text-muted-foreground/60 text-left text-[11px] font-bold tabular-nums tracking-wider">
+            <P className="text-muted-foreground text-xs font-semibold tabular-nums">
               {formatTime(currentSeconds)}
             </P>
-            <P className="text-muted-foreground/60 text-right text-[11px] font-bold tabular-nums tracking-wider">
+            <P className="text-muted-foreground text-xs font-semibold tabular-nums">
               -{formatTime(remainingSeconds)}
             </P>
           </View>
         </View>
 
         {/* Primary Controls */}
-        <View className="mb-12 flex-row items-center justify-center gap-8 px-8">
-          <Button size="icon" variant="ghost" radius="full" className="h-16 w-16">
-            <SkipBack size={32} color={iconColor} strokeWidth={1.5} fill={iconColor} />
+        <View className="mb-10 flex-row items-center justify-center gap-10 px-6">
+          <Button size="icon" variant="ghost" radius="full" className="h-14 w-14">
+            <SkipBack size={28} color={iconColor} strokeWidth={1.5} fill={iconColor} />
           </Button>
 
           <Button
             size="icon"
             radius="full"
-            className="shadow-brand/40 bg-brand h-20 w-20 shadow-xl"
+            className="h-[72px] w-[72px] bg-orange-500 shadow-lg shadow-orange-500/40"
             onPress={() => setIsPlaying(!isPlaying)}>
             {isPlaying ? (
-              <Pause size={40} color="#fff" fill="#fff" />
+              <Pause size={36} color="#fff" fill="#fff" />
             ) : (
-              <Play size={40} color="#fff" fill="#fff" style={{ marginLeft: 6 }} />
+              <Play size={36} color="#fff" fill="#fff" style={{ marginLeft: 4 }} />
             )}
           </Button>
 
-          <Button size="icon" variant="ghost" radius="full" className="h-16 w-16 ">
-            <SkipForward size={32} color={iconColor} strokeWidth={1.5} fill={iconColor} />
+          <Button size="icon" variant="ghost" radius="full" className="h-14 w-14">
+            <SkipForward size={28} color={iconColor} strokeWidth={1.5} fill={iconColor} />
           </Button>
         </View>
 
         {/* Secondary controls */}
-        <View className="mb-12 flex-row items-center justify-between px-16">
+        <View className="mb-12 flex-row items-center justify-between px-12">
           <Button
             variant="ghost"
             size="icon"
             radius="full"
-            className="h-14 w-14 "
+            className="h-12 w-12"
             onPress={() => setIsLiked(!isLiked)}>
             <Heart
-              size={28}
+              size={26}
               color={isLiked ? '#ef4444' : iconColor}
               fill={isLiked ? '#ef4444' : 'transparent'}
               strokeWidth={isLiked ? 0 : 2}
@@ -288,10 +276,10 @@ export default function BookScreen() {
             variant="ghost"
             size="icon"
             radius="full"
-            className="h-14 w-14"
+            className="h-12 w-12"
             onPress={() => setIsBookmarked(!isBookmarked)}>
             <Bookmark
-              size={28}
+              size={26}
               color={isBookmarked ? '#FF8A00' : iconColor}
               fill={isBookmarked ? '#FF8A00' : 'transparent'}
               strokeWidth={isBookmarked ? 0 : 2}
@@ -300,14 +288,14 @@ export default function BookScreen() {
 
           <Drawer>
             <DrawerTrigger asChild>
-              <Button variant="ghost" size="icon" radius="full" className="h-14 w-14 ">
-                <Share size={28} color={iconColor} strokeWidth={2} />
+              <Button variant="ghost" size="icon" radius="full" className="h-12 w-12">
+                <Share size={26} color={iconColor} strokeWidth={2} />
               </Button>
             </DrawerTrigger>
             <SharePreview
-              image={bookData.image}
-              title={bookData.name}
-              description={bookData.description}
+              image={bookData?.image ?? ''}
+              title={bookData?.name ?? ''}
+              description={bookData?.description ?? ''}
             />
           </Drawer>
         </View>

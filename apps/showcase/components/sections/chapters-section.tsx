@@ -34,11 +34,13 @@ const ChaptersSection = ({
   };
 
   return (
-    <View className="mb-10 px-8">
-      <View className="mb-6 flex-row items-end justify-between px-1">
-        <H3 className="text-foreground text-2xl font-bold tracking-tight">Chapters</H3>
-        <Button variant="ghost" size="sm" className="h-8 bg-transparent px-2">
-          <Text className="text-brand text-sm font-bold">See all</Text>
+    <View className="mb-12 px-8">
+      <View className="mb-4 flex-row items-center justify-between">
+        <H3 className="text-foreground text-2xl font-bold leading-tight tracking-tight">
+          Chapters
+        </H3>
+        <Button variant="ghost" size="sm" className="h-9 bg-transparent px-2">
+          <Text className="text-brand text-sm font-semibold">See all</Text>
         </Button>
       </View>
 

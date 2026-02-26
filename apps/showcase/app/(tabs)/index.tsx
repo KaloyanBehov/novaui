@@ -28,24 +28,28 @@ export default function HomeScreen() {
     <View className="bg-background flex-1">
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         {/* Categories horizontal scroll */}
-        <View className="mt-2">
+        <View className="px-6 pt-4 pb-2">
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ paddingHorizontal: 24, gap: 10 }}
-            className="mb-8">
+            contentContainerStyle={styles.categoryScroll}
+            className="flex-row">
             {CATEGORIES.map((pill, i) => {
               const isActive = activeCategory === i;
               return (
                 <TouchableOpacity
                   key={i}
                   onPress={() => setActiveCategory(i)}
-                  className={`rounded-full border px-5 py-2.5 transition-colors ${
-                    isActive ? 'border-brand bg-brand' : 'border-border bg-surface'
+                  activeOpacity={0.7}
+                  hitSlop={8}
+                  className={`rounded-full border px-5 py-3 ${
+                    isActive
+                      ? 'border-primary/40 bg-primary/10'
+                      : 'border-border bg-transparent'
                   }`}>
                   <Text
-                    className={`text-sm font-bold tracking-tight ${
-                      isActive ? 'text-brand-foreground' : 'text-muted-foreground'
+                    className={`text-sm font-semibold tracking-tight ${
+                      isActive ? 'text-foreground' : 'text-muted-foreground'
                     }`}>
                     {pill}
                   </Text>
@@ -65,8 +69,8 @@ export default function HomeScreen() {
               image={book.image}
               rating={book.rating}
               duration={book.duration}
-              isEbook={i % 2 !== 0} // just for demo variety
-              onPress={() => navigateToBook(book.id)}
+              id={book.id}
+              isEbook={i % 2 !== 0}
             />
           ))}
         </Section>
@@ -81,7 +85,7 @@ export default function HomeScreen() {
               rating={book.rating}
               duration={book.duration}
               isEbook={i % 2 === 0}
-              onPress={() => navigateToBook(book.id)}
+              id={book.id}
             />
           ))}
         </Section>
@@ -92,6 +96,7 @@ export default function HomeScreen() {
               key={book.id}
               name={book.name}
               author={book.author}
+              id={book.id}
               image={book.image}
               rating={book.rating}
               duration={book.duration}
@@ -107,7 +112,11 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   scrollContent: {
-    paddingBottom: 100, // Extra padding for the floating tab bar
-    paddingTop: 12,
+    paddingBottom: 120,
+    paddingTop: 8,
+  },
+  categoryScroll: {
+    paddingRight: 24,
+    gap: 12,
   },
 });

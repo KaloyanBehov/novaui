@@ -1,13 +1,14 @@
+import { useColorScheme } from '@/hooks/use-color-scheme';
 import { cn } from '@/lib/utils';
 import { AspectRatio, Badge, Card, Text } from '@novaui/components';
+import { useRouter } from 'expo-router';
 import { BookOpen, Headphones, Star, Timer } from 'lucide-react-native';
 import React from 'react';
 import { Image, TouchableOpacity, View } from 'react-native';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-import { Colors } from '@/constants/theme';
 
 interface BookCardProps {
   name: string;
+  id: string;
   author: string;
   image: string;
   rating: number;
@@ -24,17 +25,24 @@ export function BookCard({
   rating,
   duration,
   isEbook,
-  onPress,
   className,
+  id,
 }: BookCardProps) {
   const { colorScheme } = useColorScheme();
   const isDark = colorScheme === 'dark';
   const iconColor = isDark ? '#9BA1A6' : '#687076'; // Using muted colors for these icons
+  const router = useRouter();
 
+  const handlePress = () => {
+    router.push({
+      pathname: '/screens/book-screen',
+      params: { id },
+    });
+  };
   return (
     <TouchableOpacity
       activeOpacity={0.8}
-      onPress={onPress}
+      onPress={handlePress}
       className={cn('w-[160px]', className)}>
       <Card className="w-full gap-3 border-0 bg-transparent p-0 shadow-none">
         <View className="shadow-lg shadow-black/15">

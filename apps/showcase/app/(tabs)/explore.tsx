@@ -41,44 +41,50 @@ export default function MyLibraryScreen() {
   return (
     <View className="bg-background flex-1">
       <ScrollView
-        contentContainerStyle={{ paddingBottom: 60 }}
+        contentContainerStyle={{ paddingBottom: 120, paddingTop: 8 }}
         showsVerticalScrollIndicator={false}>
         {/* Filter and Sort bar */}
-        <View className="mb-6 mt-2 flex-row items-center justify-between px-6">
-          <Select value="in-progress" onValueChange={(value) => console.log(value)}>
-            <SelectTrigger className="border-border h-[40px] gap-2 rounded-xl bg-transparent px-4">
-              <Label>In Progress</Label>
-            </SelectTrigger>
-            <SelectContent className="border-border w-[150px]">
-              <SelectItem value="in-progress">In Progress</SelectItem>
-              <SelectItem value="completed">Completed</SelectItem>
-              <SelectItem value="favorites">Favorites</SelectItem>
-              <SelectItem value="recently-added">Recently Added</SelectItem>
-              <SelectItem value="recently-played">Recently Played</SelectItem>
-              <SelectItem value="recently-downloaded">Recently Downloaded</SelectItem>
-              <SelectItem value="recently-updated">Recently Updated</SelectItem>
-              <SelectItem value="recently-viewed">Recently Viewed</SelectItem>
-              <SelectItem value="recently-listened">Recently Listened</SelectItem>
-            </SelectContent>
-          </Select>
+        <View className="px-6 pb-4 pt-4">
+          <View className="bg-muted/20 flex-row items-center gap-3 rounded-2xl p-2">
+            <View className="flex-1">
+              <Select value="in-progress" onValueChange={(value) => console.log(value)}>
+                <SelectTrigger className="border-border bg-background/60 h-11 gap-2 rounded-xl px-4">
+                  <Label className="text-sm font-semibold tracking-tight">In Progress</Label>
+                </SelectTrigger>
+                <SelectContent className="border-border w-[150px]">
+                  <SelectItem value="in-progress">In Progress</SelectItem>
+                  <SelectItem value="completed">Completed</SelectItem>
+                  <SelectItem value="favorites">Favorites</SelectItem>
+                  <SelectItem value="recently-added">Recently Added</SelectItem>
+                  <SelectItem value="recently-played">Recently Played</SelectItem>
+                  <SelectItem value="recently-downloaded">Recently Downloaded</SelectItem>
+                  <SelectItem value="recently-updated">Recently Updated</SelectItem>
+                  <SelectItem value="recently-viewed">Recently Viewed</SelectItem>
+                  <SelectItem value="recently-listened">Recently Listened</SelectItem>
+                </SelectContent>
+              </Select>
+            </View>
 
-          <Select value="in-progress" onValueChange={(value) => console.log(value)}>
-            <SelectTrigger className="border-border h-[40px] gap-2 rounded-xl bg-transparent px-4">
-              <Label>Sort By</Label>
-            </SelectTrigger>
-            <SelectContent className="border-border w-[150px]">
-              <SelectItem value="name">Name</SelectItem>
-              <SelectItem value="author">Author</SelectItem>
-              <SelectItem value="date">Date</SelectItem>
-              <SelectItem value="duration">Duration</SelectItem>
-              <SelectItem value="progress">Progress</SelectItem>
-              <SelectItem value="status">Status</SelectItem>
-            </SelectContent>
-          </Select>
+            <View className="flex-1">
+              <Select value="in-progress" onValueChange={(value) => console.log(value)}>
+                <SelectTrigger className="border-border bg-background/60 h-11 gap-2 rounded-xl px-4">
+                  <Label className="text-sm font-semibold tracking-tight">Sort By</Label>
+                </SelectTrigger>
+                <SelectContent className="border-border w-[150px]">
+                  <SelectItem value="name">Name</SelectItem>
+                  <SelectItem value="author">Author</SelectItem>
+                  <SelectItem value="date">Date</SelectItem>
+                  <SelectItem value="duration">Duration</SelectItem>
+                  <SelectItem value="progress">Progress</SelectItem>
+                  <SelectItem value="status">Status</SelectItem>
+                </SelectContent>
+              </Select>
+            </View>
+          </View>
         </View>
 
         {/* List of library items */}
-        <View className="px-6">
+        <View className="px-6 pb-2">
           {allItems.map((item) => (
             <LibraryCard
               key={item.id}

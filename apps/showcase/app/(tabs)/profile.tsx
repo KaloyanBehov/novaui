@@ -1,3 +1,5 @@
+import { Colors } from '@/constants/theme';
+import { useColorScheme } from '@/hooks/use-color-scheme';
 import {
   Accordion,
   AccordionContent,
@@ -18,7 +20,6 @@ import {
   H4,
   Label,
   Muted,
-  P,
   Progress,
   Switch,
   Table,
@@ -46,14 +47,12 @@ import {
 } from 'lucide-react-native';
 import React from 'react';
 import { ScrollView, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-import { Colors } from '@/constants/theme';
 
 export default function ProfileScreen() {
   const { colorScheme, toggleColorScheme } = useColorScheme();
   const isDark = colorScheme === 'dark';
   const iconColor = Colors[isDark ? 'dark' : 'light'].icon;
+  const tintColor = Colors[isDark ? 'dark' : 'light'].tint;
 
   // Mock Data
   const readingStats = [
@@ -86,219 +85,238 @@ export default function ProfileScreen() {
   ];
 
   return (
-    <SafeAreaView className="bg-background flex-1" edges={['top']}>
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }}>
-        {/* Header Section */}
-        <View className="items-center px-6 pt-6 pb-8">
-          <Avatar className="h-24 w-24 border-4 border-background shadow-xl mb-4">
-            <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback>KB</AvatarFallback>
-          </Avatar>
-          <H1 className="text-2xl font-bold text-center">Kaloyan Behov</H1>
-          <Muted className="text-center mb-4">@kaloyan</Muted>
-          <View className="flex-row items-center gap-3">
-            <Button size="sm" variant="outline" className="rounded-full px-6 h-9">
-              <Text>Edit Profile</Text>
-            </Button>
-            <Button size="icon" variant="ghost" className="rounded-full h-9 w-9">
-              <Settings size={20} color={iconColor} />
-            </Button>
-          </View>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={{ paddingBottom: 120, paddingTop: 8 }}
+      className="bg-background flex-1">
+      {/* Header Section */}
+      <View className="items-center px-6 pb-10 pt-8">
+        <Avatar className="border-background mb-4 h-24 w-24 border-4 shadow-black/10 shadow-xl">
+          <AvatarImage src="https://d8j0ntlcm91z4.cloudfront.net/user_38F35ZDZF7qi9WI3rwhizX30MKH/hf_20260225_010438_703dc6c2-5456-42c1-a1df-b1d34a10e635_min.webp" />
+          <AvatarFallback>KB</AvatarFallback>
+        </Avatar>
+        <H1 className="text-center text-2xl font-bold leading-tight tracking-tight">
+          Kaloyan Behov
+        </H1>
+        <Muted className="mb-5 text-center text-sm">@kaloyan</Muted>
+        <View className="flex-row items-center gap-3">
+          <Button size="sm" variant="outline" className="h-10 rounded-full px-5">
+            <Text className="text-sm font-semibold">Edit Profile</Text>
+          </Button>
+          <Button size="icon" variant="ghost" className="bg-muted/20 h-10 w-10 rounded-full">
+            <Settings size={20} color={iconColor} />
+          </Button>
+        </View>
+      </View>
+
+      {/* Tabs Section */}
+      <Tabs defaultValue="overview" className="w-full">
+        <View className="mb-6 px-6">
+          <TabsList className="bg-muted/30 h-12 w-full gap-2 rounded-2xl p-1">
+            <TabsTrigger value="overview" className="flex-1 rounded-xl shadow-none">
+              Overview
+            </TabsTrigger>
+            <TabsTrigger value="reading" className="flex-1 rounded-xl shadow-none">
+              Reading
+            </TabsTrigger>
+            <TabsTrigger value="settings" className="flex-1 rounded-xl shadow-none">
+              Settings
+            </TabsTrigger>
+          </TabsList>
         </View>
 
-        {/* Tabs Section */}
-        <Tabs defaultValue="overview" className="w-full">
-          <View className="px-6 mb-6">
-            <TabsList className="w-full bg-muted/20 p-1 gap-2 rounded-xl h-12">
-              <TabsTrigger value="overview" className="flex-1 rounded-lg shadow-none">Overview</TabsTrigger>
-              <TabsTrigger value="reading" className="flex-1 rounded-lg shadow-none">Reading</TabsTrigger>
-              <TabsTrigger value="settings" className="flex-1 rounded-lg shadow-none">Settings</TabsTrigger>
-            </TabsList>
+        {/* Overview Tab */}
+        <TabsContent value="overview" className="gap-6 px-6 pb-2">
+          {/* Stats Cards */}
+          <View className="flex-row gap-3">
+            {readingStats.map((stat, index) => (
+              <Card
+                key={index}
+                className="bg-muted/20 flex-1 items-center justify-center border-0 p-4 shadow-none">
+                <View className="bg-primary/10 mb-3 h-10 w-10 items-center justify-center rounded-full">
+                  <stat.icon size={20} color={tintColor} />
+                </View>
+                <H2 className="text-xl font-bold leading-7 tracking-tight">{stat.value}</H2>
+                <Muted className="text-xs font-medium">{stat.label}</Muted>
+              </Card>
+            ))}
           </View>
 
-          {/* Overview Tab */}
-          <TabsContent value="overview" className="px-6 gap-6">
-            {/* Stats Cards */}
-            <View className="flex-row gap-3">
-              {readingStats.map((stat, index) => (
-                <Card key={index} className="flex-1 items-center p-4 bg-muted/20 border-0 shadow-none">
-                  <stat.icon size={20} color={isDark ? '#FFFFFF' : '#000000'} className="mb-2" />
-                  <H2 className="text-xl font-bold">{stat.value}</H2>
-                  <Muted className="text-xs">{stat.label}</Muted>
-                </Card>
-              ))}
-            </View>
-
-            {/* Activity Chart (Bar Chart) */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Weekly Activity</CardTitle>
-                <CardDescription>Pages read per day</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <View className="h-40 flex-row items-end justify-between gap-2 pt-4">
-                  {weeklyActivity.map((item, index) => (
-                    <View key={index} className="items-center gap-2 flex-1">
-                      <View 
-                        className="w-full bg-primary/20 rounded-t-sm overflow-hidden" 
-                        style={{ height: `${item.value}%` }}
-                      >
-                         <View className="w-full bg-primary absolute bottom-0" style={{ height: '100%', opacity: 0.8 }} />
-                      </View>
-                      <Text className="text-xs text-muted-foreground">{item.day}</Text>
+          {/* Activity Chart (Bar Chart) */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Weekly Activity</CardTitle>
+              <CardDescription>Pages read per day</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <View className="h-40 flex-row items-end justify-between gap-2 pt-4">
+                {weeklyActivity.map((item, index) => (
+                  <View key={index} className="flex-1 items-center gap-2">
+                    <View
+                      className="bg-primary/15 w-full overflow-hidden rounded-md"
+                      style={{ height: `${item.value}%` }}>
+                      <View
+                        className="bg-primary absolute bottom-0 w-full"
+                        style={{ height: '100%', opacity: 0.85 }}
+                      />
                     </View>
-                  ))}
-                </View>
-              </CardContent>
-            </Card>
-
-            {/* Genre Distribution */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Favorite Genres</CardTitle>
-              </CardHeader>
-              <CardContent className="gap-4">
-                {genres.map((genre, index) => (
-                  <View key={index} className="gap-2">
-                    <View className="flex-row justify-between">
-                      <Text className="text-sm font-medium">{genre.name}</Text>
-                      <Text className="text-sm text-muted-foreground">{genre.value}%</Text>
-                    </View>
-                    <Progress value={genre.value} className="h-2" />
+                    <Text className="text-muted-foreground text-xs font-medium">{item.day}</Text>
                   </View>
                 ))}
-              </CardContent>
-            </Card>
-          </TabsContent>
+              </View>
+            </CardContent>
+          </Card>
 
-          {/* Reading Tab */}
-          <TabsContent value="reading" className="px-6 gap-6">
-             {/* Current Read */}
-             <Card className="bg-primary/5 border-primary/20">
-              <CardHeader className="flex-row gap-4 items-center">
-                <View className="h-16 w-12 bg-muted rounded shadow-sm overflow-hidden">
-                   {/* Placeholder for book cover */}
-                   <View className="flex-1 bg-primary/20" />
-                </View>
-                <View className="flex-1 gap-1">
-                  <Badge variant="outline" className="self-start border-primary/30 text-primary">Current Read</Badge>
-                  <H4>1984</H4>
-                  <Muted>George Orwell</Muted>
-                </View>
-              </CardHeader>
-              <CardContent>
-                <View className="gap-2">
+          {/* Genre Distribution */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Favorite Genres</CardTitle>
+            </CardHeader>
+            <CardContent className="gap-4">
+              {genres.map((genre, index) => (
+                <View key={index} className="gap-2">
                   <View className="flex-row justify-between">
-                    <Text className="text-xs text-muted-foreground">Progress</Text>
-                    <Text className="text-xs font-medium">33%</Text>
+                    <Text className="text-sm font-medium tracking-tight">{genre.name}</Text>
+                    <Text className="text-muted-foreground text-sm font-medium tabular-nums">
+                      {genre.value}%
+                    </Text>
                   </View>
-                  <Progress value={33} className="h-1.5" />
+                  <Progress value={genre.value} className="h-2" />
                 </View>
-              </CardContent>
-            </Card>
+              ))}
+            </CardContent>
+          </Card>
+        </TabsContent>
 
-            {/* Recent History Table */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Recent History</CardTitle>
-              </CardHeader>
-              <CardContent className="p-0">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="w-[140px]">Book</TableHead>
-                      <TableHead>Date</TableHead>
-                      <TableHead className="text-right">Rating</TableHead>
+        {/* Reading Tab */}
+        <TabsContent value="reading" className="gap-6 px-6 pb-2">
+          {/* Current Read */}
+          <Card className="bg-primary/5 border-primary/20">
+            <CardHeader className="flex-row items-center gap-4 pb-3">
+              <View className="bg-muted h-16 w-12 overflow-hidden rounded-md shadow-black/5 shadow-sm">
+                {/* Placeholder for book cover */}
+                <View className="bg-primary/20 flex-1" />
+              </View>
+              <View className="flex-1 gap-1">
+                <Badge variant="outline" className="border-primary/30 text-primary self-start">
+                  Current Read
+                </Badge>
+                <H4>1984</H4>
+                <Muted>George Orwell</Muted>
+              </View>
+            </CardHeader>
+            <CardContent>
+              <View className="gap-2">
+                <View className="flex-row justify-between">
+                  <Text className="text-muted-foreground text-xs">Progress</Text>
+                  <Text className="text-xs font-medium tabular-nums">33%</Text>
+                </View>
+                <Progress value={33} className="h-1.5" />
+              </View>
+            </CardContent>
+          </Card>
+
+          {/* Recent History Table */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Recent History</CardTitle>
+            </CardHeader>
+            <CardContent className="p-0">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="w-[140px]">Book</TableHead>
+                    <TableHead>Date</TableHead>
+                    <TableHead className="text-right">Rating</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {recentBooks.map((book, index) => (
+                    <TableRow key={index}>
+                      <TableCell className="font-medium">{book.title}</TableCell>
+                      <TableCell>{book.date}</TableCell>
+                      <TableCell className="text-right tabular-nums">{book.rating}</TableCell>
                     </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {recentBooks.map((book, index) => (
-                      <TableRow key={index}>
-                        <TableCell className="font-medium">{book.title}</TableCell>
-                        <TableCell>{book.date}</TableCell>
-                        <TableCell className="text-right">{book.rating}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </CardContent>
-            </Card>
-          </TabsContent>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        </TabsContent>
 
-          {/* Settings Tab */}
-          <TabsContent value="settings" className="px-6 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Preferences</CardTitle>
-              </CardHeader>
-              <CardContent className="gap-6">
-                <View className="flex-row items-center justify-between">
-                  <View className="flex-row items-center gap-3">
-                    <Moon size={20} color={iconColor} />
-                    <Label className="text-base">Dark Mode</Label>
-                  </View>
-                  <Switch checked={isDark} onCheckedChange={toggleColorScheme} />
+        {/* Settings Tab */}
+        <TabsContent value="settings" className="gap-6 px-6 pb-2">
+          <Card>
+            <CardHeader>
+              <CardTitle>Preferences</CardTitle>
+            </CardHeader>
+            <CardContent className="gap-4">
+              <View className="flex-row items-center justify-between py-1">
+                <View className="flex-row items-center gap-3">
+                  <Moon size={20} color={iconColor} />
+                  <Label className="text-base">Dark Mode</Label>
                 </View>
-                <View className="flex-row items-center justify-between">
-                  <View className="flex-row items-center gap-3">
-                    <BarChart3 size={20} color={iconColor} />
-                    <Label className="text-base">Usage Stats</Label>
-                  </View>
-                  <Switch checked={true} />
+                <Switch checked={isDark} onCheckedChange={toggleColorScheme} />
+              </View>
+              <View className="flex-row items-center justify-between py-1">
+                <View className="flex-row items-center gap-3">
+                  <BarChart3 size={20} color={iconColor} />
+                  <Label className="text-base">Usage Stats</Label>
                 </View>
-              </CardContent>
-            </Card>
+                <Switch checked={true} />
+              </View>
+            </CardContent>
+          </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Account</CardTitle>
-              </CardHeader>
-              <CardContent className="p-0">
-                <Accordion type="single" collapsible className="w-full">
-                  <AccordionItem value="subscription" className="border-b-0 px-4">
-                    <AccordionTrigger>
-                      <View className="flex-row items-center gap-3">
-                        <CreditCard size={18} color={iconColor} />
-                        <Text className="font-medium">Subscription</Text>
+          <Card>
+            <CardHeader>
+              <CardTitle>Account</CardTitle>
+            </CardHeader>
+            <CardContent className="p-0">
+              <Accordion type="single" collapsible className="w-full">
+                <AccordionItem value="subscription" className="border-b-0 px-4">
+                  <AccordionTrigger>
+                    <View className="flex-row items-center gap-3">
+                      <CreditCard size={18} color={iconColor} />
+                      <Text className="font-medium">Subscription</Text>
+                    </View>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <View className="bg-muted/30 gap-2 rounded-lg p-3">
+                      <View className="flex-row justify-between">
+                        <Text className="text-sm">Plan</Text>
+                        <Badge variant="secondary">Pro</Badge>
                       </View>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <View className="p-2 bg-muted/30 rounded-md gap-2">
-                        <View className="flex-row justify-between">
-                          <Text className="text-sm">Plan</Text>
-                          <Badge variant="secondary">Pro</Badge>
-                        </View>
-                        <View className="flex-row justify-between">
-                          <Text className="text-sm">Next billing</Text>
-                          <Text className="text-sm text-muted-foreground">Mar 25, 2026</Text>
-                        </View>
+                      <View className="flex-row justify-between">
+                        <Text className="text-sm">Next billing</Text>
+                        <Text className="text-muted-foreground text-sm tabular-nums">Mar 25, 2026</Text>
                       </View>
-                    </AccordionContent>
-                  </AccordionItem>
-                  <AccordionItem value="help" className="border-b-0 px-4">
-                    <AccordionTrigger>
-                      <View className="flex-row items-center gap-3">
-                        <HelpCircle size={18} color={iconColor} />
-                        <Text className="font-medium">Help & Support</Text>
-                      </View>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <Text className="text-sm text-muted-foreground p-2">
-                        Need help? Contact our support team at support@novaui.com
-                      </Text>
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              </CardContent>
-            </Card>
+                    </View>
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="help" className="border-b-0 px-4">
+                  <AccordionTrigger>
+                    <View className="flex-row items-center gap-3">
+                      <HelpCircle size={18} color={iconColor} />
+                      <Text className="font-medium">Help & Support</Text>
+                    </View>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <Text className="text-muted-foreground p-3 text-sm leading-5">
+                      Need help? Contact our support team at support@novaui.com
+                    </Text>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </CardContent>
+          </Card>
 
-            <Button variant="destructive" className="w-full mt-4">
-              <LogOut size={18} color="#FFFFFF" className="mr-2" />
-              <Text>Log Out</Text>
-            </Button>
-          </TabsContent>
-        </Tabs>
-      </ScrollView>
-    </SafeAreaView>
+          <Button variant="destructive" className="mt-2 h-12 w-full rounded-xl">
+            <LogOut size={18} color="#FFFFFF" className="mr-2" />
+            <Text className="font-semibold">Log Out</Text>
+          </Button>
+        </TabsContent>
+      </Tabs>
+    </ScrollView>
   );
 }

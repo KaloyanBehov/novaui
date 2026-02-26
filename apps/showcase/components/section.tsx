@@ -11,16 +11,18 @@ interface SectionProps {
 
 export function Section({ title, children, onSeeAll }: SectionProps) {
   return (
-    <View className="mb-10">
-      <View className="mb-5 flex-row items-end justify-between px-6">
-        <H3 className="text-foreground text-2xl font-bold tracking-tight">{title}</H3>
+    <View className="mb-12">
+      <View className="mb-4 flex-row items-center justify-between px-6">
+        <H3 className="text-foreground flex-1 text-2xl font-bold leading-tight tracking-tight">
+          {title}
+        </H3>
         {onSeeAll && (
           <TouchableOpacity
             onPress={onSeeAll}
             hitSlop={12}
             activeOpacity={0.7}
-            className="flex-row items-center">
-            <Text className="text-brand mr-1 text-sm font-bold">See all</Text>
+            className="flex-row items-center py-2 pr-1">
+            <Text className="text-brand mr-1.5 text-sm font-semibold">See all</Text>
             <ArrowRight size={16} className="text-brand" />
           </TouchableOpacity>
         )}
@@ -28,7 +30,7 @@ export function Section({ title, children, onSeeAll }: SectionProps) {
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ paddingHorizontal: 24, gap: 16 }}>
+        contentContainerStyle={{ paddingHorizontal: 24, paddingRight: 24, gap: 20 }}>
         {children}
       </ScrollView>
     </View>
